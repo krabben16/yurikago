@@ -6,7 +6,7 @@
  */
 
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -22,10 +22,14 @@ const Bio = () => {
   const { author } = data.site.siteMetadata
   return (
     <div>
-      <p>ゆりかごから墓場まで</p>
-      {author}<br />
-      Osaka, Japan<br/>
-      Icon by <a href="https://icooon-mono.com/" target="_blank">ICOOON MONO</a><br />
+      <div>
+        ゆりかごから墓場まで
+      </div>
+      <div>
+        <Link to="/about">
+          About
+        </Link>
+      </div>
     </div>
   )
 }
