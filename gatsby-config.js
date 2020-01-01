@@ -3,7 +3,7 @@ module.exports = {
     title: `Yurikago Blog`,
     author: `Hiroki Kawaguchi`,
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    siteUrl: `https://yurikago-blog.netlify.com/`,
     social: {
       github: `w9uZDFEYnT`,
     },
