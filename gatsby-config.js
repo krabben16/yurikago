@@ -27,14 +27,14 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          'gatsby-remark-code-titles',
-          `gatsby-remark-prismjs`,
           {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 590,
             },
           },
+          'gatsby-remark-code-titles',
+          `gatsby-remark-prismjs`,
         ],
       },
     },
@@ -67,6 +67,7 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
+    `gatsby-plugin-sitemap`
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
