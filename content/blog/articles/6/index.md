@@ -22,7 +22,7 @@ HeidiSQLで接続しようとすると以下のエラーが発生
 
 ### 接続できるホストを追加する
 
-```conf
+```conf:title=pg_hba.conf
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
 :
 host    homestead       homestead       192.168.10.1/32         md5
