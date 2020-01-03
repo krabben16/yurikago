@@ -23,12 +23,12 @@ const Bio = () => {
   return (
     <div>
       <div>
-        ゆりかごから墓場まで
-      </div>
-      <div>
         <Link to="/about">
           About
         </Link>
+      </div>
+      <div>
+        ゆりかごから墓場まで
       </div>
     </div>
   )
