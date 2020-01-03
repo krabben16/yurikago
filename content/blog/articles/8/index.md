@@ -6,15 +6,13 @@ description: ""
 
 ## 概要
 
-サイトに画像の遅延読み込みを導入したとき、クローラーが遅延読み込みを認識できるかどうかはページの評価に関わるため重要です。
+クローラーが遅延読み込みを認識できない場合、本来の評価より低い評価をページが受ける可能性があるため対策が必要です。
 
 認識の可否をどうやって検証するかというと、検証のためのスクリプトをPuppeteer公式が提供してくれています。
 
 [puppeteer/examples](https://github.com/puppeteer/examples)
 
 > lazyimages\_without\_scroll\_events.js
-
-> Determine if your lazy loaded images will be seen correctly by Google Search.
 
 また、Googleのドキュメントには上記のスクリプトを使ったテスト方法の記述があります。
 
@@ -134,18 +132,16 @@ const browser = await puppeteer.launch({
 
 ## 結果
 
-スクリプトを実行するとHTMLが出力されます。
+テストするURLはスクロールイベントによる遅延読み込みが実装されています。
 
-もし遅延読み込みを認識できない場合は "FAILED" と表示されます。
+スクリプトを実行するとHTMLが出力され "FAILED" と表示されました。
 
 ![result.png](./result.png)
 
-対応方法として
+HTMLには以下の対応方法が記述されています。
 
 1. スクロール以外のイベントで遅延読み込みするライブラリを使う
 2. Intersection ObserverとPolyfillを使う
-
-などがあります。
 
 ## 補足：スマホ表示の検証
 
