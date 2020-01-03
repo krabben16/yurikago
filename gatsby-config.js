@@ -33,8 +33,11 @@ module.exports = {
               maxWidth: 590,
             },
           },
+          // タイトルをコードブロックに表示する
           'gatsby-remark-code-titles',
           `gatsby-remark-prismjs`,
+          // 外部リンクを別タブで開く
+          `gatsby-remark-external-links`,
         ],
       },
     },
