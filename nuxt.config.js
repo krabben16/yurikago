@@ -1,3 +1,4 @@
+import articleList from './assets/json/articleList.json'
 
 export default {
   mode: 'universal',
@@ -57,6 +58,14 @@ export default {
         loader: 'raw-loader',
         exclude: /(node_modules)/,
       });
+    }
+  },
+  // generateコマンドを実行するとき動的なパラメーターを用いたルートを生成
+  generate: {
+    routes () {
+      return articleList.map(v => {
+        return '/articles/' + v.id
+      })
     }
   }
 }
