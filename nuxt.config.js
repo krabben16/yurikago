@@ -66,6 +66,8 @@ export default {
       return articleList.map(v => {
         return '/articles/' + v.id
       })
-    }
+    },
+    // エラー発生時に 200.html ではなく 404.html を表示する
+    fallback: true
   }
 }
