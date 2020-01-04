@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      {{ getDate }}
+      <div>{{ getDate }}</div>
       <h2>{{ getTitle }}</h2>
     </div>
     <div v-html="compiledMarkdown"></div>
@@ -52,7 +52,7 @@ export default {
     articleList[6].content = article7
     articleList[7].content = article8
     return {
-      article: articleList.filter((v, k) => v.id == params.id).shift()
+      article: articleList.filter(v => v.id == params.id).shift()
     }
   },
   head () {
@@ -63,7 +63,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style>
 @import "highlight.js/styles/github-gist.css";
 
 pre {
