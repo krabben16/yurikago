@@ -46,7 +46,7 @@ export default {
     }],
     ['@nuxtjs/sitemap', {
       path: '/sitemap.xml',
-      hostname: 'https://example.com',
+      hostname: 'https://yurikago-blog.netlify.com',
       routes () {
         return articleList.map(v => {
           return '/articles/' + v.id
