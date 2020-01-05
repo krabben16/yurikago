@@ -94,12 +94,13 @@ export default {
         }
 
         const escape = this.helpers.escape(href)
+        const className = 'markdown'
         let out
 
         if (escape.slice(0, 1) === '/') {
-          out = `<a href=${escape}>${text}</a>`
+          out = `<a href="${escape}" class="${className}">${text}</a>`
         } else {
-          out = `<a href=${escape} target="_blank">${text}</a>`
+          out = `<a href="${escape}" class="${className}" target="_blank">${text}</a>`
         }
 
         return out
@@ -110,3 +111,9 @@ export default {
   },
 }
 </script>
+
+<style>
+a.markdown {
+  text-decoration: underline;
+}
+</style>
