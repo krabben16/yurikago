@@ -18,8 +18,9 @@ export default {
     'markdownContent'
   ],
   computed: {
-    htmlContent () {
-      const helpers = {
+    helpers () {
+      return {
+        // https://github.com/markedjs/marked/blob/master/lib/marked.js#L145-L171
         cleanUrl: (sanitize, base, href) => {
           if (sanitize) {
             let prot
@@ -48,11 +49,12 @@ export default {
           return href
         }
       }
-
+    },
+    htmlContent () {
       // デフォルトのメソッドをオーバーライドしてWebP画像を表示する
       const renderer = new marked.Renderer()
       renderer.image = (href, title, text) => {
-        href = helpers.cleanUrl(renderer.options.sanitize, renderer.options.baseUrl, href)
+        href = this.helpers.cleanUrl(renderer.options.sanitize, renderer.options.baseUrl, href)
 
         if (href === null) {
           return text
