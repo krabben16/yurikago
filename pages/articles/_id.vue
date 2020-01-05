@@ -78,7 +78,7 @@ export default {
         }
 
         const out = `<picture>
-  <source srcset="${href}.webp" type="image/webp" alt="${text}">
+  <source srcset="${href}.webp" type="image/webp">
   <img src="${href}.png" alt="${text}">
 </picture>`
 
