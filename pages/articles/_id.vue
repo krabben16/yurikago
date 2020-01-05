@@ -10,7 +10,7 @@
 
 <script>
 import marked from 'marked'
-import hljs from 'highlight.js';
+import hljs from 'highlight.js'
 
 import article1 from '~/assets/markdown/articles/1.md'
 import article2 from '~/assets/markdown/articles/2.md'
@@ -20,6 +20,7 @@ import article5 from '~/assets/markdown/articles/5.md'
 import article6 from '~/assets/markdown/articles/6.md'
 import article7 from '~/assets/markdown/articles/7.md'
 import article8 from '~/assets/markdown/articles/8.md'
+import article9 from '~/assets/markdown/articles/9.md'
 
 import articleList from '~/assets/json/articleList.json'
 
@@ -29,7 +30,7 @@ export default {
       highlight: (code, lang) => {
         return hljs.highlightAuto(code, [lang]).value
       }
-    });
+    })
   },
   computed: {
     getDate() {
@@ -42,47 +43,47 @@ export default {
       const helpers = {
         cleanUrl: (sanitize, base, href) => {
           if (sanitize) {
-            var prot;
+            var prot
 
             try {
-              prot = decodeURIComponent(unescape(href)).replace(nonWordAndColonTest, '').toLowerCase();
+              prot = decodeURIComponent(unescape(href)).replace(nonWordAndColonTest, '').toLowerCase()
             } catch (e) {
-              return null;
+              return null
             }
 
             if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0 || prot.indexOf('data:') === 0) {
-              return null;
+              return null
             }
           }
 
           if (base && !originIndependentUrl.test(href)) {
-            href = resolveUrl(base, href);
+            href = resolveUrl(base, href)
           }
 
           try {
-            href = encodeURI(href).replace(/%25/g, '%');
+            href = encodeURI(href).replace(/%25/g, '%')
           } catch (e) {
-            return null;
+            return null
           }
 
-          return href;
+          return href
         }
       }
-      // webp画像を表示する
+      // デフォルトのメソッドをオーバーライドしてWebP画像を表示する
       const renderer = new marked.Renderer()
       renderer.image = (href, title, text) => {
-        href = helpers.cleanUrl(renderer.options.sanitize, renderer.options.baseUrl, href);
+        href = helpers.cleanUrl(renderer.options.sanitize, renderer.options.baseUrl, href)
 
         if (href === null) {
-          return text;
+          return text
         }
 
         const out = `<picture>
-  <source srcset="${href}.webp" type="image/webp" alt="${text}">
+  <source srcset="${href}.webp" type="image/webp">
   <img src="${href}.png" alt="${text}">
 </picture>`
 
-        return out;
+        return out
       }
       return marked(this.article.content, { renderer: renderer })
     }
@@ -96,6 +97,7 @@ export default {
     articleList[5].content = article6
     articleList[6].content = article7
     articleList[7].content = article8
+    articleList[8].content = article9
     return {
       article: articleList.filter(v => v.id == params.id).shift()
     }
