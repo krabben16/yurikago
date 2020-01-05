@@ -26,7 +26,7 @@ import articleList from '~/assets/json/articleList.json'
 export default {
   created () {
     marked.setOptions({
-      highlight: function(code, lang) {
+      highlight: (code, lang) => {
         return hljs.highlightAuto(code, [lang]).value
       }
     });
@@ -39,7 +39,52 @@ export default {
       return this.article.title
     },
     compiledMarkdown () {
-      return marked(this.article.content)
+      const helpers = {
+        cleanUrl: (sanitize, base, href) => {
+          if (sanitize) {
+            var prot;
+
+            try {
+              prot = decodeURIComponent(unescape(href)).replace(nonWordAndColonTest, '').toLowerCase();
+            } catch (e) {
+              return null;
+            }
+
+            if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0 || prot.indexOf('data:') === 0) {
+              return null;
+            }
+          }
+
+          if (base && !originIndependentUrl.test(href)) {
+            href = resolveUrl(base, href);
+          }
+
+          try {
+            href = encodeURI(href).replace(/%25/g, '%');
+          } catch (e) {
+            return null;
+          }
+
+          return href;
+        }
+      }
+      // webp画像を表示する
+      const renderer = new marked.Renderer()
+      renderer.image = (href, title, text) => {
+        href = helpers.cleanUrl(renderer.options.sanitize, renderer.options.baseUrl, href);
+
+        if (href === null) {
+          return text;
+        }
+
+        const out = `<picture>
+  <source srcset="${href}.webp" type="image/webp" alt="${text}">
+  <img src="${href}.png" alt="${text}">
+</picture>`
+
+        return out;
+      }
+      return marked(this.article.content, { renderer: renderer })
     }
   },
   asyncData ({ params }) {
