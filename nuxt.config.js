@@ -43,6 +43,15 @@ export default {
   modules: [
     ['@nuxtjs/google-analytics', {
       id: 'UA-155216702-1'
+    }],
+    ['@nuxtjs/sitemap', {
+      path: '/sitemap.xml',
+      hostname: 'https://example.com',
+      routes () {
+        return articleList.map(v => {
+          return '/articles/' + v.id
+        })
+      }
     }]
   ],
   /*
