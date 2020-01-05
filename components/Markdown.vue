@@ -47,12 +47,29 @@ export default {
           }
 
           return href
+        },
+        // https://github.com/markedjs/marked/blob/master/lib/marked.js#L93-L105
+        escape : (html, encode) => {
+          const escapeTest = /[&<>"']/
+          const escapeTestNoEncode = /[<>"']|&(?!#?\w+;)/
+          if (encode) {
+            if (escapeTest.test(html)) {
+              return html.replace(escapeReplace, getEscapeReplacement)
+            }
+          } else {
+            if (escapeTestNoEncode.test(html)) {
+              return html.replace(escapeReplaceNoEncode, getEscapeReplacement)
+            }
+          }
+
+          return html;
         }
       }
     },
     htmlContent () {
-      // デフォルトのメソッドをオーバーライドしてWebP画像を表示する
       const renderer = new marked.Renderer()
+      
+      // WebP画像を表示する
       renderer.image = (href, title, text) => {
         href = this.helpers.cleanUrl(renderer.options.sanitize, renderer.options.baseUrl, href)
 
@@ -68,8 +85,35 @@ export default {
         return out
       }
 
+      // 外部リンクを別タブで開く
+      renderer.link = (href, title, text) => {
+        href = this.helpers.cleanUrl(renderer.options.sanitize, renderer.options.baseUrl, href)
+
+        if (href === null) {
+          return text
+        }
+
+        const escape = this.helpers.escape(href)
+        const className = 'markdown'
+        let out
+
+        if (escape.slice(0, 1) === '/') {
+          out = `<a href="${escape}" class="${className}">${text}</a>`
+        } else {
+          out = `<a href="${escape}" class="${className}" target="_blank">${text}</a>`
+        }
+
+        return out
+      }
+
       return marked(this.markdownContent, { renderer: renderer })
     }
   },
 }
 </script>
+
+<style>
+a.markdown {
+  text-decoration: underline;
+}
+</style>

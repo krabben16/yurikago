@@ -21,7 +21,14 @@
 
 <script>
 export default {
-  props: ['error']
+  props: [
+    'error'
+  ],
+  head () {
+    return {
+      title: 'Error'
+    }
+  }
 }
 </script>
 
