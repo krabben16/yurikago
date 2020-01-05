@@ -1,21 +1,19 @@
 <template>
-  <div v-html="compiledMarkdown"></div>
+  <Markdown :markdownContent="profileContent"></Markdown>
 </template>
 
 <script>
-import marked from 'marked'
+import Markdown from '~/components/Markdown.vue'
 
-import profile from '~/assets/markdown/about/profile.md'
+import content from '~/assets/markdown/about/profile.md'
 
 export default {
-  computed: {
-    compiledMarkdown () {
-      return marked(this.markdownText)
-    }
+  components: {
+    Markdown
   },
-  asyncData ({ context }) {
-    return {
-      markdownText: profile
+  computed: {
+    profileContent () {
+      return content
     }
   },
   head () {
