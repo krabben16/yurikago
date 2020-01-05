@@ -18,7 +18,7 @@ export default {
   },
   head () {
     return {
-      title: "Top"
+      titleTemplate: 'Yurikago Blog'
     }
   }
 }
