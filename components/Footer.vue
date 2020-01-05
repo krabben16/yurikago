@@ -2,8 +2,8 @@
   <footer>
     <hr>
     <div>
-      <nuxt-link to="/about">About</nuxt-link>
-      <nuxt-link to="/arigato" class="arigato">&#x1f64f;</nuxt-link>
+      <nuxt-link :to="{ name: 'about' }">About</nuxt-link>
+      <nuxt-link :to="{ name: 'arigato' }" class="arigato">&#x1f64f;</nuxt-link>
     </div>
     <div>ゆりかごから墓場まで</div>
     <div>

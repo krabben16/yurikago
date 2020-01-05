@@ -49,7 +49,7 @@ export default {
       hostname: 'https://yurikago-blog.netlify.com',
       routes () {
         return articleList.map(v => {
-          return '/articles/' + v.id
+          return `/articles/${v.id}/`
         })
       }
     }]
@@ -73,10 +73,14 @@ export default {
   generate: {
     routes () {
       return articleList.map(v => {
-        return '/articles/' + v.id
+        return `/articles/${v.id}/`
       })
     },
     // エラー発生時に 200.html ではなく 404.html を表示する
     fallback: true
+  },
+  router: {
+    // URL末尾にスラッシュを付与する
+    trailingSlash: true
   }
 }
