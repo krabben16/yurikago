@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="article in articles" :key="article.id" class="article-wrapper">
+    <div v-for="article in articles" :key="article.id" class="article__wrapper">
       <div>{{ article.date }}</div>
       <nuxt-link :to="{ name: 'articles-id', params: {id: article.id} }">{{ article.title }}</nuxt-link>
     </div>
@@ -24,8 +24,10 @@ export default {
 }
 </script>
 
-<style>
-.article-wrapper:nth-child(n+2) {
-  margin-top: 1rem
+<style lang="scss" scoped>
+.article {
+  &__wrapper:nth-child(n+2) {
+    margin-top: 1rem
+  }
 }
 </style>

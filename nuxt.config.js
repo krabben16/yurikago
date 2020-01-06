@@ -25,7 +25,7 @@ export default {
   ** Global CSS
   */
   css: [
-    '~/assets/css/markdown.css'
+    'highlight.js/styles/github-gist.css'
   ],
   /*
   ** Plugins to load before mounting the App

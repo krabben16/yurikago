@@ -9,10 +9,6 @@
       <a href="https://highlightjs.org/" target="_blank">highlight.js</a>
     </div>
     <div>
-      <h2>CSS</h2>
-      <a href="https://github.com/simonlc/Markdown-CSS" target="_blank">simonlc/Markdown-CSS</a>
-    </div>
-    <div>
       <h2>Favicon</h2>
       <a href="https://icooon-mono.com/" target="_blank">ICOOON MONO</a>
     </div>

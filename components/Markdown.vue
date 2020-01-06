@@ -1,5 +1,5 @@
 <template>
-  <div v-html="htmlContent"></div>
+  <div class="markdown__wrapper" v-html="htmlContent"></div>
 </template>
 
 <script>
@@ -94,13 +94,12 @@ export default {
         }
 
         const escape = this.helpers.escape(href)
-        const className = 'markdown'
         let out
 
         if (escape.slice(0, 1) === '/') {
-          out = `<a href="${escape}" class="${className}">${text}</a>`
+          out = `<a href="${escape}">${text}</a>`
         } else {
-          out = `<a href="${escape}" class="${className}" target="_blank">${text}</a>`
+          out = `<a href="${escape}" target="_blank">${text}</a>`
         }
 
         return out
@@ -112,8 +111,31 @@ export default {
 }
 </script>
 
-<style>
-a.markdown {
-  text-decoration: underline;
+<style lang="scss" scoped>
+.markdown {
+  &__wrapper {
+    /deep/ img {
+      max-width: 100%;
+    }
+
+    /deep/ pre {
+      white-space: pre-wrap;
+      background-color: ghostwhite;
+      padding: 1.5em;
+    }
+
+    /deep/ blockquote {
+      color: grey;
+    }
+
+    /deep/ th, /deep/ td {
+      border: solid 1px;
+      padding: 0.8em;
+    }
+
+    /deep/ table {
+      border-collapse: collapse;
+    }
+  }
 }
 </style>
