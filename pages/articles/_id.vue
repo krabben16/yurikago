@@ -94,12 +94,3 @@ export default {
   }
 }
 </script>
-
-<style>
-@import "highlight.js/styles/github-gist.css";
-
-pre {
-  border: solid thin;
-  padding: 1rem;
-}
-</style>

@@ -2,7 +2,7 @@
   <footer>
     <hr>
     <div>
-      <nuxt-link :to="{ name: 'about' }">About</nuxt-link>
+      
       <nuxt-link :to="{ name: 'arigato' }" class="arigato">&#x1f64f;</nuxt-link>
     </div>
     <div>ゆりかごから墓場まで</div>
@@ -12,8 +12,12 @@
   </footer>
 </template>
 
-<style>
+<style scoped>
 .arigato {
   float: right;
+}
+
+footer {
+  margin-top: 1.5em;
 }
 </style>
