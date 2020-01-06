@@ -10,6 +10,7 @@
 
 <script>
 import Markdown from '~/components/Markdown.vue'
+import { mapGetters, mapActions } from 'vuex'
 
 import content1 from '~/assets/markdown/articles/1.md'
 import content2 from '~/assets/markdown/articles/2.md'
@@ -36,6 +37,15 @@ export default {
     },
     articleContent () {
       return this.article.content
+    },
+    ...mapGetters('articles', ['landingArticleID'])
+  },
+  methods: {
+    ...mapActions('articles', ['changeLandingArticleID'])
+  },
+  created () {
+    if (!this.landingArticleID) {
+      this.changeLandingArticleID(this.id)
     }
   },
   asyncData ({ params }) {
@@ -73,6 +83,7 @@ export default {
       }
     })
     return {
+      id: params.id,
       article: articleList.filter(v => v.id == params.id).shift()
     }
   },
