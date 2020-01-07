@@ -1,18 +1,30 @@
 <template>
   <header>
-    <h1><nuxt-link :to="{ name: 'index' }">Yurikago Blog</nuxt-link></h1>
-    <div>
+    <div class="wrapper">
+      <h1><nuxt-link :to="{ name: 'index' }">Yurikago Blog</nuxt-link></h1>
       <nuxt-link :to="{ name: 'about' }">About</nuxt-link>
+      <nuxt-link :to="{ name: 'arigato' }" class="arigato">&#x1f64f;</nuxt-link>
     </div>
   </header>
 </template>
 
-<style scoped>
-a {
-  text-decoration: none;
-}
+<style lang="scss" scoped>
+.wrapper {
+  width: 400px;
+  height: 10vh;
 
-header {
-  margin-bottom: 1.5em;
+  margin-left: 12em;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    font-weight: lighter;
+  }
+
+  a {
+    text-decoration: none;
+  }
 }
 </style>

@@ -25,6 +25,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '~/assets/css/default.css',
     'highlight.js/styles/zenburn.css'
   ],
   /*

@@ -1,7 +1,11 @@
 <template>
-  <div>
+  <div class="container">
     <Header />
-    <nuxt />
+    <div class="wrapper">
+      <div class="inner">
+        <nuxt />
+      </div>
+    </div>
     <Footer />
   </div>
 </template>
@@ -19,8 +23,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div {
-  width: 1000px;
+.container {
+  // 背景色
+  background-color: ghostwhite;
+}
+
+header {
+  width: 100%;
+  height: 10vh;
+
+  margin-bottom: 5vh;
+
+  // 背景色
+  background-color: lightsteelblue;
+}
+
+.wrapper {
+  width: 60%;
+  min-height: 75vh;
+
   margin: 0 auto;
+
+  // 背景色
+  background-color: white;
+
+  .inner {
+    padding: 3em 5em;
+  }
+}
+
+footer {
+  width: 100%;
+  height: 10vh;
+
+  // 中央寄せ
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

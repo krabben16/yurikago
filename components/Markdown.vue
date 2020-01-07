@@ -1,5 +1,5 @@
 <template>
-  <div class="markdown__wrapper" v-html="htmlContent"></div>
+  <div class="wrapper" v-html="htmlContent"></div>
 </template>
 
 <script>
@@ -113,28 +113,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.markdown {
-  &__wrapper {
-    /deep/ img {
-      max-width: 100%;
-    }
+.wrapper {
+  /deep/ img {
+    width: 100%;
+  }
 
-    /deep/ pre {
-      white-space: pre-wrap;
-    }
+  /deep/ pre {
+    white-space: pre-wrap;
+  }
 
-    /deep/ blockquote {
-      color: grey;
-    }
+  /deep/ blockquote {
+    color: grey;
+  }
 
-    /deep/ th, /deep/ td {
-      border: solid 1px;
-      padding: 0.8em;
-    }
+  // テーブル
+  /deep/ th, /deep/ td {
+    border: 1px dashed;
+    padding: 0.8em 1.2em;
+  }
 
-    /deep/ table {
-      border-collapse: collapse;
-    }
+  /deep/ table {
+    border-collapse: collapse;
+    margin: 0 auto;
   }
 }
 </style>
