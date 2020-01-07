@@ -27,7 +27,7 @@ export default {
 <style lang="scss" scoped>
 .article {
   &__wrapper:nth-child(n+2) {
-    margin-top: 2em
+    margin-top: 30px;
   }
 }
 </style>

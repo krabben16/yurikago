@@ -30,9 +30,9 @@ export default {
 
 header {
   width: 100%;
-  height: 10vh;
+  height: 100px;
 
-  margin-bottom: 5vh;
+  margin-bottom: 50px;
 
   // 背景色
   background-color: lightsteelblue;
@@ -40,7 +40,7 @@ header {
 
 .main {
   width: 60%;
-  min-height: 75vh;
+  min-height: 600px;
 
   margin: 0 auto;
 
@@ -48,13 +48,13 @@ header {
   background-color: white;
 
   &__wrapper {
-    padding: 3em 5em;
+    padding: 50px 80px;
   }
 }
 
 footer {
   width: 100%;
-  height: 10vh;
+  height: 100px;
 
   // 中央寄せ
   display: flex;
