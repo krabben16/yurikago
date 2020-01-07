@@ -130,7 +130,7 @@ export default {
     // テーブル
     /deep/ th, /deep/ td {
       border: 1px dashed;
-      padding: 0.8em 1.2em;
+      padding: 15px 30px;
     }
 
     /deep/ table {

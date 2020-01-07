@@ -12,9 +12,9 @@
 .navigation {
   &__wrapper {
     width: 400px;
-    height: 10vh;
+    height: 100px;
 
-    margin-left: 12em;
+    margin-left: 200px;
 
     display: flex;
     align-items: center;
