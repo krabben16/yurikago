@@ -25,7 +25,8 @@ export default {
   ** Global CSS
   */
   css: [
-    'highlight.js/styles/github-gist.css'
+    '~/assets/css/default.css',
+    'highlight.js/styles/zenburn.css'
   ],
   /*
   ** Plugins to load before mounting the App
