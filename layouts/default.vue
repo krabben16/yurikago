@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <Header />
-    <div class="wrapper">
-      <div class="inner">
+    <div class="main">
+      <div class="main__wrapper">
         <nuxt />
       </div>
     </div>
@@ -38,7 +38,7 @@ header {
   background-color: lightsteelblue;
 }
 
-.wrapper {
+.main {
   width: 60%;
   min-height: 75vh;
 
@@ -47,7 +47,7 @@ header {
   // 背景色
   background-color: white;
 
-  .inner {
+  &__wrapper {
     padding: 3em 5em;
   }
 }
