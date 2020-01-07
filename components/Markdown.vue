@@ -9,6 +9,7 @@ import hljs from 'highlight.js'
 export default {
   created () {
     marked.setOptions({
+      langPrefix: 'hljs ',
       highlight: (code, lang) => {
         return hljs.highlightAuto(code, [lang]).value
       }
@@ -120,8 +121,6 @@ export default {
 
     /deep/ pre {
       white-space: pre-wrap;
-      background-color: ghostwhite;
-      padding: 1.5em;
     }
 
     /deep/ blockquote {
