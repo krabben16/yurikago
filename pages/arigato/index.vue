@@ -17,10 +17,19 @@
 
 <script>
 export default {
-  head () {
+  data () {
     return {
       title: 'Arigato'
     }
-  }
+  },
+  head () {
+    return {
+      title: this.title
+    }
+  },
+  mounted () {
+    // パンくず
+    this.$nuxt.$emit('setPageName', this.title)
+  },
 }
 </script>

@@ -7,17 +7,6 @@ import marked from 'marked'
 import hljs from 'highlight.js'
 
 export default {
-  created () {
-    marked.setOptions({
-      langPrefix: 'hljs ',
-      highlight: (code, lang) => {
-        return hljs.highlightAuto(code, [lang]).value
-      }
-    })
-  },
-  props: [
-    'markdownContent'
-  ],
   computed: {
     helpers () {
       return {
@@ -106,6 +95,17 @@ export default {
       return marked(this.markdownContent, { renderer: renderer })
     }
   },
+  props: [
+    'markdownContent'
+  ],
+  created () {
+    marked.setOptions({
+      langPrefix: 'hljs ',
+      highlight: (code, lang) => {
+        return hljs.highlightAuto(code, [lang]).value
+      }
+    })
+  }
 }
 </script>
 
