@@ -25,8 +25,9 @@ export default {
   ** Global CSS
   */
   css: [
-    '~/assets/css/default.css',
-    'highlight.js/styles/zenburn.css'
+    'bootstrap/dist/css/bootstrap.min.css',
+    'highlight.js/styles/zenburn.css',
+    'assets/css/default.css'
   ],
   /*
   ** Plugins to load before mounting the App

@@ -37,15 +37,12 @@ export default {
 <style lang="scss" scoped>
 .error {
   &__wrapper {
-    min-height: 600px;
-
     // 中央寄せ
     display: flex;
     align-items: center;
     justify-content: center;
 
     pre {
-      font-size: 150%;
       line-height: 1.2em;
     }
   }

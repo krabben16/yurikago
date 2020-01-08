@@ -94,3 +94,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+h2 {
+  margin: 30px 0;
+}
+</style>
