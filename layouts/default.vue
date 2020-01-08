@@ -38,6 +38,14 @@ export default {
       this.pageName = pageName || ''
     }
   },
+  watch: {
+    $route: {
+      async handler () {
+        this.isRoot = this.$route.name == 'index'
+      },
+      immediate: true
+    }
+  },
   created () {
     // イベントリスナー
     this.$nuxt.$on('setPageName', this.setPageName)
@@ -47,10 +55,6 @@ export default {
       pageName: '',
       isRoot: false
     }
-  },
-  updated () {
-    // ページ遷移するときに判定する
-    this.isRoot = this.$route.name == 'index'
   }
 }
 </script>
@@ -59,6 +63,7 @@ export default {
 .container-fluid {
   // デフォルトのパディングをリセット
   padding-left: 0;
+  padding-right: 0;
 }
 
 .column {
