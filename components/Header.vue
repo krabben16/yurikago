@@ -12,6 +12,7 @@
     <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
       <div class="navbar-nav">
         <nuxt-link :to="{ name: 'about' }" class="nav-item nav-link">About</nuxt-link>
+        <nuxt-link :to="{ name: 'profile' }" class="nav-item nav-link">Profile</nuxt-link>
         <nuxt-link :to="{ name: 'arigato' }" class="nav-item nav-link">&#x1f64f;</nuxt-link>
       </div>
     </div>
