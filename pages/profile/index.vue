@@ -4,7 +4,7 @@
 
 <script>
 import Markdown from '~/components/Markdown.vue'
-import content from '~/assets/markdown/about.md'
+import content from '~/assets/markdown/profile.md'
 
 export default {
   components: {
@@ -17,7 +17,7 @@ export default {
   },
   data () {
     return {
-      title: 'このサイトについて'
+      title: 'プロフィール'
     }
   },
   head () {

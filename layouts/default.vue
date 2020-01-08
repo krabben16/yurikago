@@ -1,14 +1,14 @@
 <template>
   <div class="container-fluid">
     <Header />
-    <div class="row">
+    <div class="row no-gutters">
       <div class="col-10 col-sm-6 mx-auto">
         <div class="column__content">
           <nuxt />
         </div>
       </div>
     </div>
-    <div v-if="!isRoot" class="row">
+    <div v-if="!isRoot" class="row no-gutters">
       <div class="col-10 col-sm-6 mx-auto">
         <div class="column__breadcrumb">
           <Breadcrumb :pageName="pageName" />
