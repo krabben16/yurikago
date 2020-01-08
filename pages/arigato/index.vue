@@ -19,7 +19,7 @@
 export default {
   data () {
     return {
-      title: 'Arigato'
+      title: 'ありがとうございます'
     }
   },
   head () {

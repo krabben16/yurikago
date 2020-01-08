@@ -2,7 +2,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <nuxt-link :to="{ name: 'index' }" class="breadcrumb-item">トップページ</nuxt-link>
+        <nuxt-link :to="{ name: 'index' }" class="breadcrumb-item">サイトトップ</nuxt-link>
       </li>
       <li v-if="pageName" class="breadcrumb-item active" aria-current="page">{{ pageName }}</li>
     </ol>
