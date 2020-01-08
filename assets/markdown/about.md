@@ -6,8 +6,9 @@
 
 ### 開発言語
 
-- Node.js 12.14.0
-- Nuxt.js 2.0.0
+- Node.js
+- Nuxt.js
+- Sass
 
 ### ホスティングサーバー
 
