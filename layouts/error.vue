@@ -30,7 +30,11 @@ export default {
     return {
       title: 'Error'
     }
-  }
+  },
+  mounted () {
+    // パンくず
+    this.$nuxt.$emit('setPageName', 'エラー')
+  },
 }
 </script>
 
