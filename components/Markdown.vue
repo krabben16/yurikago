@@ -78,10 +78,7 @@ export default {
           return text
         }
 
-        const out = `<picture>
-  <source srcset="${href}.webp" type="image/webp">
-  <img src="${href}.png" alt="${text}">
-</picture>`
+        const out = `<picture><source srcset="${href}.webp" type="image/webp"><img src="${href}.png" alt="${text}"></picture>`
 
         return out
       }
@@ -112,28 +109,37 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .markdown {
   &__wrapper {
-    /deep/ img {
+    // 見出し
+    h2, h3, h4, h5, h6 {
+      margin: 30px 0;
+    }
+
+    li {
+      padding: 10px 0;
+    }
+
+    img {
       width: 100%;
     }
 
-    /deep/ pre {
+    pre {
       white-space: pre-wrap;
     }
 
-    /deep/ blockquote {
+    blockquote {
       color: grey;
     }
 
     // テーブル
-    /deep/ th, /deep/ td {
+    th, td {
       border: 1px dashed;
       padding: 15px 30px;
     }
 
-    /deep/ table {
+    table {
       border-collapse: collapse;
       margin: 0 auto;
     }

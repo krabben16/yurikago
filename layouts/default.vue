@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <Header />
-    <div class="row mt-5">
+    <div class="row">
       <div class="col-10 col-sm-6 mx-auto">
         <div class="column__content">
           <nuxt />
@@ -32,12 +32,13 @@ export default {
 <style lang="scss" scoped>
 .container-fluid {
   // デフォルトのパディングをリセット
-  padding-left: 0px;
+  padding-left: 0;
 }
 
 .column {
   &__content {
     background-color: white;
+    margin: 50px 0 0 0;
     padding: 60px 50px;
   }
 }
