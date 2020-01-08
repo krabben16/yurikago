@@ -11,7 +11,6 @@
 <script>
 import Markdown from '~/components/Markdown.vue'
 import { mapGetters, mapActions } from 'vuex'
-
 import content1 from '~/assets/markdown/articles/1.md'
 import content2 from '~/assets/markdown/articles/2.md'
 import content3 from '~/assets/markdown/articles/3.md'
@@ -21,7 +20,6 @@ import content6 from '~/assets/markdown/articles/6.md'
 import content7 from '~/assets/markdown/articles/7.md'
 import content8 from '~/assets/markdown/articles/8.md'
 import content9 from '~/assets/markdown/articles/9.md'
-
 import articleList from '~/assets/json/articleList.json'
 
 export default {
@@ -41,12 +39,7 @@ export default {
     ...mapGetters('articles', ['landingArticleID'])
   },
   methods: {
-    ...mapActions('articles', ['changeLandingArticleID'])
-  },
-  created () {
-    if (!this.landingArticleID) {
-      this.changeLandingArticleID(this.id)
-    }
+    ...mapActions('articles', ['changeLandingArticleID']),
   },
   asyncData ({ params }) {
     articleList.map(v => {
@@ -87,10 +80,19 @@ export default {
       article: articleList.filter(v => v.id == params.id).shift()
     }
   },
+  created () {
+    if (!this.landingArticleID) {
+      this.changeLandingArticleID(this.id)
+    }
+  },
   head () {
     return {
       title: this.article.title
     }
+  },
+  mounted () {
+    // パンくず
+    this.$nuxt.$emit('setPageName', this.article.title)
   }
 }
 </script>

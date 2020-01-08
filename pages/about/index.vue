@@ -16,10 +16,19 @@ export default {
       return content
     }
   },
+  data () {
+    return {
+      title: 'About'
+    }
+  },
   head () {
     return {
-      title: "About"
+      title: this.title
     }
-  }
+  },
+  mounted () {
+    // パンくず
+    this.$nuxt.$emit('setPageName', this.title)
+  },
 }
 </script>

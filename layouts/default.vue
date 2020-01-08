@@ -8,6 +8,13 @@
         </div>
       </div>
     </div>
+    <div v-if="!isRoot" class="row">
+      <div class="col-10 col-sm-6 mx-auto">
+        <div class="column__breadcrumb">
+          <Breadcrumb :pageName="pageName" />
+        </div>
+      </div>
+    </div>
     <Footer />
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -25,6 +32,29 @@ export default {
     Header,
     Footer,
     Breadcrumb
+  },
+  methods: {
+    setPageName (pageName) {
+      this.pageName = pageName || ''
+    }
+  },
+  watch: {
+    $route: {
+      async handler () {
+        this.isRoot = this.$route.name == 'index'
+      },
+      immediate: true
+    }
+  },
+  created () {
+    // イベントリスナー
+    this.$nuxt.$on('setPageName', this.setPageName)
+  },
+  data () {
+    return {
+      pageName: '',
+      isRoot: false
+    }
   }
 }
 </script>
@@ -33,6 +63,7 @@ export default {
 .container-fluid {
   // デフォルトのパディングをリセット
   padding-left: 0;
+  padding-right: 0;
 }
 
 .column {

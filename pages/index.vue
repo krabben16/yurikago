@@ -20,7 +20,11 @@ export default {
     return {
       titleTemplate: 'Yurikago Blog'
     }
-  }
+  },
+  mounted () {
+    // パンくずをリセットする
+    this.$nuxt.$emit('setPageName', '')
+  },
 }
 </script>
 
