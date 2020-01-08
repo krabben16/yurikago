@@ -1,32 +1,25 @@
 <template>
-  <header>
-    <div class="navigation__wrapper">
-      <h1><nuxt-link :to="{ name: 'index' }">Yurikago Blog</nuxt-link></h1>
-      <nuxt-link :to="{ name: 'about' }">About</nuxt-link>
-      <nuxt-link :to="{ name: 'arigato' }" class="arigato">&#x1f64f;</nuxt-link>
+  <nav class="navbar navbar-expand-sm navbar-dark">
+    <nuxt-link :to="{ name: 'index' }" class="navbar-brand">Yurikago Blog</nuxt-link>
+    <button class="navbar-toggler" type="button"
+        data-toggle="collapse"
+        data-target="#navbarToggleExternalContent"
+        aria-controls="navbarToggleExternalContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+      <div class="navbar-nav">
+        <nuxt-link :to="{ name: 'about' }" class="nav-item nav-link">About</nuxt-link>
+        <nuxt-link :to="{ name: 'arigato' }" class="nav-item nav-link">&#x1f64f;</nuxt-link>
+      </div>
     </div>
-  </header>
+  </nav>
 </template>
 
 <style lang="scss" scoped>
-.navigation {
-  &__wrapper {
-    width: 400px;
-    height: 100px;
-
-    margin-left: 200px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    h1 {
-      font-weight: lighter;
-    }
-
-    a {
-      text-decoration: none;
-    }
-  }
+nav {
+  background-color: lightslategray;
 }
 </style>

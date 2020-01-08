@@ -1,64 +1,44 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <Header />
-    <div class="main">
-      <div class="main__wrapper">
-        <nuxt />
+    <div class="row mt-5">
+      <div class="col-10 col-sm-6 mx-auto">
+        <div class="column__content">
+          <nuxt />
+        </div>
       </div>
     </div>
     <Footer />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </div>
 </template>
 
 <script>
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
+import Breadcrumb from '~/components/Breadcrumb.vue'
 
 export default {
   components: {
     Header,
-    Footer
+    Footer,
+    Breadcrumb
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.container {
-  // 背景色
-  background-color: ghostwhite;
+.container-fluid {
+  // デフォルトのパディングをリセット
+  padding-left: 0px;
 }
 
-header {
-  width: 100%;
-  height: 100px;
-
-  margin-bottom: 50px;
-
-  // 背景色
-  background-color: lightsteelblue;
-}
-
-.main {
-  width: 60%;
-  min-height: 600px;
-
-  margin: 0 auto;
-
-  // 背景色
-  background-color: white;
-
-  &__wrapper {
-    padding: 50px 80px;
+.column {
+  &__content {
+    background-color: white;
+    padding: 60px 50px;
   }
-}
-
-footer {
-  width: 100%;
-  height: 100px;
-
-  // 中央寄せ
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 </style>
