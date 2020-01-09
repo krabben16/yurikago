@@ -33,12 +33,20 @@ import articleList from '~/assets/json/articleList.json'
 
 export default {
   data () {
+    // タグ一覧
     const tags = articleList.reduce((pre, current) => {
       pre.push(...current.tags)
       return pre
     }, [])
-    // ユニークなタグを取得
-    const uniqTags = Array.from(new Set(tags))
+    
+    // タグの重複を削除
+    let uniqTags = []
+    tags.map(tag => {
+      if (uniqTags.filter(v => v.id == tag.id).length == 0) {
+        uniqTags.push(tag)
+      }
+    })
+
     return {
       tags: uniqTags
     }
