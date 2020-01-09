@@ -66,11 +66,25 @@ export default {
   padding-right: 0;
 }
 
-.column {
-  &__content {
-    background-color: white;
-    margin: 50px 0 0 0;
-    padding: 60px 50px;
+// SP
+@media screen and (max-width: 575px) {
+  .column {
+    &__content {
+      background-color: white;
+      margin: 50px 0 0 0;
+      padding: 30px 20px;
+    }
+  }
+}
+
+// PC
+@media screen and (min-width: 576px) {
+  .column {
+    &__content {
+      background-color: white;
+      margin: 50px 0 0 0;
+      padding: 60px 50px;
+    }
   }
 }
 </style>
