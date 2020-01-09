@@ -2,14 +2,14 @@
   <div class="container-fluid">
     <Header />
     <div class="row no-gutters">
-      <div class="col-10 col-sm-6 mx-auto">
+      <div class="col-12 col-sm-6 mx-auto">
         <div class="column__content">
           <nuxt />
         </div>
       </div>
     </div>
     <div v-if="!isRoot" class="row no-gutters">
-      <div class="col-10 col-sm-6 mx-auto">
+      <div class="col-12 col-sm-6 mx-auto">
         <div class="column__breadcrumb">
           <Breadcrumb :pageName="pageName" />
         </div>
@@ -72,7 +72,7 @@ export default {
     &__content {
       background-color: white;
       margin: 50px 0 0 0;
-      padding: 30px 20px;
+      padding: 40px 20px;
     }
   }
 }
@@ -83,7 +83,7 @@ export default {
     &__content {
       background-color: white;
       margin: 50px 0 0 0;
-      padding: 60px 50px;
+      padding: 40px 40px;
     }
   }
 }
