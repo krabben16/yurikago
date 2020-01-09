@@ -50,9 +50,26 @@ export default {
       path: '/sitemap.xml',
       hostname: 'https://yurikago-blog.netlify.com',
       routes () {
-        return articleList.map(v => {
+        let path = []
+
+        // 記事一覧
+        path.push(...articleList.map(v => {
           return `/articles/${v.id}/`
-        })
+        }))
+  
+        // タグ一覧
+        const tags = articleList.reduce((pre, current) => {
+          pre.push(...current.tags)
+          return pre
+        }, [])
+  
+        // ユニークなタグを取得
+        const uniqTags = Array.from(new Set(tags))
+        path.push(...uniqTags.map(tag => {
+          return `/tags/${tag}/`
+        }))
+  
+        return path
       }
     }]
   ],
@@ -74,9 +91,26 @@ export default {
   // generateコマンドを実行するとき動的なパラメーターを用いたルートを生成
   generate: {
     routes () {
-      return articleList.map(v => {
+      let path = []
+
+      // 記事一覧
+      path.push(...articleList.map(v => {
         return `/articles/${v.id}/`
-      })
+      }))
+
+      // タグ一覧
+      const tags = articleList.reduce((pre, current) => {
+        pre.push(...current.tags)
+        return pre
+      }, [])
+
+      // ユニークなタグを取得
+      const uniqTags = Array.from(new Set(tags))
+      path.push(...uniqTags.map(tag => {
+        return `/tags/${tag}/`
+      }))
+
+      return path
     },
     // エラー発生時に 200.html ではなく 404.html を表示する
     fallback: true
