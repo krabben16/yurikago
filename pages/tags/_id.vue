@@ -12,20 +12,31 @@ import articleList from '~/assets/json/articleList.json'
 
 export default {
   asyncData ({ params }) {
-    const matchList = articleList.filter(v => v.tags.indexOf(params.tag) > -1)
+    const getTag = (tags, id) => {
+      let tag = null
+      tags.forEach(v => {
+        if (v.id == id) {
+          tag = v
+        }
+      })
+      return tag
+    }
+    const matchList = articleList.filter(article => {
+      return getTag(article.tags, params.id)
+    })
     return {
-      tag: params.tag,
+      tag: getTag(matchList[0].tags, params.id),
       matchList: matchList.reverse()
     }
   },
   head () {
     return {
-      title: this.tag
+      title: this.tag.name
     }
   },
   mounted () {
     // パンくず
-    this.$nuxt.$emit('setPageName', this.tag)
+    this.$nuxt.$emit('setPageName', this.tag.name)
   }
 }
 </script>

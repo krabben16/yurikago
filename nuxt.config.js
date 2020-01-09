@@ -66,7 +66,7 @@ export default {
         // ユニークなタグを取得
         const uniqTags = Array.from(new Set(tags))
         path.push(...uniqTags.map(tag => {
-          return `/tags/${tag}/`
+          return `/tags/${tag.id}/`
         }))
   
         return path
@@ -107,7 +107,7 @@ export default {
       // ユニークなタグを取得
       const uniqTags = Array.from(new Set(tags))
       path.push(...uniqTags.map(tag => {
-        return `/tags/${tag}/`
+        return `/tags/${tag.id}/`
       }))
 
       return path

@@ -17,7 +17,7 @@
             Tags
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <nuxt-link v-for="(tag, k) in tags" :key="k" class="dropdown-item" :to="{ name: 'tags-tag', params: { tag: tag } }">{{ tag }}</nuxt-link>
+            <nuxt-link v-for="tag in tags" :key="tag.id" class="dropdown-item" :to="{ name: 'tags-id', params: { id: tag.id } }">{{ tag.name }}</nuxt-link>
           </div>
         </li>
         <li class="nav-item">
@@ -40,7 +40,7 @@ export default {
     // ユニークなタグを取得
     const uniqTags = Array.from(new Set(tags))
     return {
-      tags: uniqTags.sort()
+      tags: uniqTags
     }
   }
 }
