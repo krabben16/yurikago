@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="article in articles" :key="article.id" class="article__wrapper">
+    <div v-for="article in matchList" :key="article.id" class="article__wrapper">
       <div>{{ article.date }}</div>
       <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">{{ article.title }}</nuxt-link>
     </div>
@@ -12,19 +12,17 @@ import articleList from '~/assets/json/articleList.json'
 
 export default {
   asyncData ({ params }) {
+    const matchList = articleList.filter(v => v.tags.indexOf(params.tag) > -1)
     return {
-      articles: articleList.slice().reverse()
+      tag: params.tag,
+      matchList: matchList.reverse()
     }
   },
   head () {
     return {
-      titleTemplate: 'Yurikago Blog'
+      title: this.tag
     }
-  },
-  mounted () {
-    // パンくずをリセットする
-    this.$nuxt.$emit('setPageName', '')
-  },
+  }
 }
 </script>
 

@@ -2,46 +2,55 @@
   {
     "id": 1,
     "date": "2018-07-09",
-    "title": "CentOS7 tesseract3.04をビルドして実行する"
+    "title": "CentOS7 Tesseract3.04をビルドして実行する",
+    "tags": ["CentOS", "Tesseract"]
   },
   {
     "id": 2,
     "date": "2018-12-20",
-    "title": "CentOS7 Puppeteerを実行してスクリーンショット画像を作成する"
+    "title": "CentOS7 Puppeteerを実行してスクリーンショット画像を作成する",
+    "tags": ["CentOS", "Chromium", "NodeJS", "Puppeteer"]
   },
   {
     "id": 3,
     "date": "2019-03-14",
-    "title": "Chrome SeleniumIDE 配列を定義してループする"
+    "title": "Chrome SeleniumIDE 配列を定義してループする",
+    "tags": ["GoogleChrome", "Selenium"]
   },
   {
     "id": 4,
     "date": "2019-07-28",
-    "title": "CentOS7 CLIでLighthouseを実行する"
+    "title": "CentOS7 CLIでLighthouseを実行する",
+    "tags": ["CentOS", "Lighthouse", "NodeJS", "Puppeteer"]
   },
   {
     "id": 5,
     "date": "2019-12-19",
-    "title": "Alpine Linux 3.10.3 Python3 NLTKを実行する"
+    "title": "Alpine Linux 3.10.3 Python3 NLTKを実行する",
+    "tags": ["Alpine Linux", "NLTK", "Python"]
   },
   {
     "id": 6,
     "date": "2019-12-30",
-    "title": "Homestead PostgreSQLにHeidiSQLで接続する"
+    "title": "Homestead PostgreSQLにHeidiSQLで接続する",
+    "tags": ["Homestead", "HeidiSQL", "PostgreSQL"]
   },
   {
     "id": 7,
     "date": "2020-01-01",
-    "title": "CentOS6 Xdebug+VSCodeでPHP5.3をデバッグする"
+    "title": "CentOS6 Xdebug+VSCodeでPHP5.3をデバッグする",
+    "tags": ["CentOS", "PHP", "VSCode", "Xdebug"]
   },
   {
     "id": 8,
     "date": "2020-01-03",
-    "title": "Googleクローラーが画像の遅延読み込みを認識できるかどうか検証する"
+    "title": "Googleクローラーが画像の遅延読み込みを認識できるかどうか検証する",
+    "tags": ["Chromium", "NodeJS", "Puppeteer"]
   },
   {
     "id": 9,
     "date": "2020-01-05",
-    "title": "記事ページにWebP画像を表示する"
+    "title": "記事ページにWebP画像を表示する",
+    "tags": ["MarkedJS", "NuxtJS"]
   }
 ]

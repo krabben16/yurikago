@@ -136,7 +136,7 @@ export default {
     // テーブル
     th, td {
       border: 1px dashed;
-      padding: 15px 30px;
+      padding: 10px 20px;
     }
 
     table {
