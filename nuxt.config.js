@@ -63,8 +63,13 @@ export default {
           return pre
         }, [])
   
-        // ユニークなタグを取得
-        const uniqTags = Array.from(new Set(tags))
+        // タグの重複を削除
+        let uniqTags = []
+        tags.map(tag => {
+          if (uniqTags.filter(v => v.id == tag.id).length == 0) {
+            uniqTags.push(tag)
+          }
+        })
         path.push(...uniqTags.map(tag => {
           return `/tags/${tag.id}/`
         }))
@@ -104,8 +109,13 @@ export default {
         return pre
       }, [])
 
-      // ユニークなタグを取得
-      const uniqTags = Array.from(new Set(tags))
+      // タグの重複を削除
+      let uniqTags = []
+      tags.map(tag => {
+        if (uniqTags.filter(v => v.id == tag.id).length == 0) {
+          uniqTags.push(tag)
+        }
+      })
       path.push(...uniqTags.map(tag => {
         return `/tags/${tag.id}/`
       }))
