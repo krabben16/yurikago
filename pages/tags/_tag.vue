@@ -22,6 +22,10 @@ export default {
     return {
       title: this.tag
     }
+  },
+  mounted () {
+    // パンくず
+    this.$nuxt.$emit('setPageName', this.tag)
   }
 }
 </script>
