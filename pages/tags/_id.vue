@@ -8,24 +8,31 @@
 </template>
 
 <script>
-import articleList from '~/assets/json/articleList.json'
+import { tagList } from '~/const/tagList'
+import { articleList } from '~/const/articleList'
 
 export default {
   asyncData ({ params }) {
-    const getTag = (tags, id) => {
-      let tag = null
-      tags.forEach(v => {
-        if (v.id == id) {
-          tag = v
+    // キーを削除
+    const tagValues = Object.values(tagList)
+
+    let tag = null
+    tagValues.map(v => {
+      if (params.id == v.id) {
+        tag = v
+      }
+    })
+    
+    let matchList = []
+    articleList.map(article => {
+      article.tags.map(v => {
+        if (params.id == v.id) {
+          matchList.push(article)
         }
       })
-      return tag
-    }
-    const matchList = articleList.filter(article => {
-      return getTag(article.tags, params.id)
     })
     return {
-      tag: getTag(matchList[0].tags, params.id),
+      tag: tag,
       matchList: matchList.reverse()
     }
   },

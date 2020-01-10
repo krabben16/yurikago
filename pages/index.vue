@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import articleList from '~/assets/json/articleList.json'
+import { articleList } from '~/const/articleList'
 
 export default {
   asyncData ({ params }) {

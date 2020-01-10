@@ -1,4 +1,5 @@
-import articleList from './assets/json/articleList.json'
+import { tagList } from './const/tagList'
+import { articleList } from './const/articleList'
 
 export default {
   mode: 'universal',
@@ -58,19 +59,8 @@ export default {
         }))
   
         // タグ一覧
-        const tags = articleList.reduce((pre, current) => {
-          pre.push(...current.tags)
-          return pre
-        }, [])
-  
-        // タグの重複を削除
-        let uniqTags = []
-        tags.map(tag => {
-          if (uniqTags.filter(v => v.id == tag.id).length == 0) {
-            uniqTags.push(tag)
-          }
-        })
-        path.push(...uniqTags.map(tag => {
+        const tagValues = Object.values(tagList)
+        path.push(...tagValues.map(tag => {
           return `/tags/${tag.id}/`
         }))
   
@@ -104,19 +94,8 @@ export default {
       }))
 
       // タグ一覧
-      const tags = articleList.reduce((pre, current) => {
-        pre.push(...current.tags)
-        return pre
-      }, [])
-
-      // タグの重複を削除
-      let uniqTags = []
-      tags.map(tag => {
-        if (uniqTags.filter(v => v.id == tag.id).length == 0) {
-          uniqTags.push(tag)
-        }
-      })
-      path.push(...uniqTags.map(tag => {
+      const tagValues = Object.values(tagList)
+      path.push(...tagValues.map(tag => {
         return `/tags/${tag.id}/`
       }))
 

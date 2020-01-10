@@ -17,7 +17,9 @@
             Tags
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <nuxt-link v-for="tag in tags" :key="tag.id" class="dropdown-item" :to="{ name: 'tags-id', params: { id: tag.id } }">{{ tag.name }}</nuxt-link>
+            <nuxt-link v-for="(tag, k) in tags" :key="k" class="dropdown-item" :to="{ name: 'tags-id', params: { id: tag.id } }">
+              {{ tag.name }} ({{ tag.count }})
+            </nuxt-link>
           </div>
         </li>
         <li class="nav-item">
@@ -29,26 +31,31 @@
 </template>
 
 <script>
-import articleList from '~/assets/json/articleList.json'
+import { tagList } from '~/const/tagList'
+import { articleList } from '~/const/articleList'
 
 export default {
   data () {
-    // タグ一覧
-    const tags = articleList.reduce((pre, current) => {
-      pre.push(...current.tags)
-      return pre
-    }, [])
-    
-    // タグの重複を削除
-    let uniqTags = []
-    tags.map(tag => {
-      if (uniqTags.filter(v => v.id == tag.id).length == 0) {
-        uniqTags.push(tag)
-      }
+    // キーを削除
+    const tagValues = Object.values(tagList)
+
+    // タグに紐付いた記事の数を集計
+    tagValues.map(tag => {
+      tag.count = 0
+    })
+
+    articleList.map(article => {
+      article.tags.map(articleTag => {
+        tagValues.map(tag => {
+          if (tag.id == articleTag.id) {
+            tag.count++
+          }
+        })
+      })
     })
 
     return {
-      tags: uniqTags
+      tags: tagValues
     }
   }
 }
