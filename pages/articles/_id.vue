@@ -11,6 +11,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Markdown from '~/components/Markdown.vue'
+import { articleList } from '~/const/articleList'
+import { contentList } from '~/const/contentList'
 
 export default {
   components: {
@@ -31,10 +33,17 @@ export default {
   methods: {
     ...mapActions('articles', ['changeLandingArticleID'])
   },
-  asyncData (context) {
+  asyncData ({ params }) {
+    let article = null
+    articleList.map(v => {
+      if (params.id == v.id) {
+        article = v
+      }
+    })
+    article.content = contentList[params.id]
     return {
-      id: context.params.id,
-      article: context.app.getArticleWithContent(context.params.id)
+      id: params.id,
+      article: article
     }
   },
   created () {

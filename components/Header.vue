@@ -37,16 +37,16 @@ import { articleList } from '~/const/articleList'
 export default {
   data () {
     // キーを削除
-    const values = Object.values(tagList)
+    const tagValues = Object.values(tagList)
 
     // タグに紐付いた記事の数を集計
-    values.map(tag => {
+    tagValues.map(tag => {
       tag.count = 0
     })
 
     articleList.map(article => {
       article.tags.map(articleTag => {
-        values.map(tag => {
+        tagValues.map(tag => {
           if (tag.id == articleTag.id) {
             tag.count++
           }
@@ -55,7 +55,7 @@ export default {
     })
 
     return {
-      tags: values
+      tags: tagValues
     }
   }
 }
