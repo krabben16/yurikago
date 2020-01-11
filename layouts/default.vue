@@ -57,12 +57,12 @@ export default {
     return {
       // 構造化マークアップ
       script: [{
-        uid,
+        hid: 'breadcrumbSchema',
         innerHTML: this.$getBreadcrumbSchema(this.pageName, this.$route.path),
         type: 'application/ld+json'
       }],
       __dangerouslyDisableSanitizersByTagID: {
-        [uid]: 'innerHTML'
+        breadcrumbSchema: ['innerHTML']
       }
     }
   }
