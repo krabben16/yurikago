@@ -9,7 +9,7 @@ Vue.prototype.$getBreadcrumbSchema = (pageName, path) => {
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "Yurikago Blog",
+          "name": "${pageName}",
           "item": "https://yurikago-blog.netlify.com/"
         }
       ]

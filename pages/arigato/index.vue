@@ -22,7 +22,16 @@ export default {
   },
   head () {
     return {
-      title: this.title
+      title: this.title,
+      // 構造化マークアップ
+      script: [{
+        hid: 'breadcrumbSchema',
+        innerHTML: this.$getBreadcrumbSchema(this.title, this.$route.path),
+        type: 'application/ld+json'
+      }],
+      __dangerouslyDisableSanitizersByTagID: {
+        breadcrumbSchema: ['innerHTML']
+      }
     }
   },
   mounted () {

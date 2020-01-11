@@ -53,7 +53,6 @@ export default {
     }
   },
   head () {
-    const uid = this._uid;
     return {
       // 構造化マークアップ
       script: [{

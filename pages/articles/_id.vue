@@ -53,7 +53,16 @@ export default {
   },
   head () {
     return {
-      title: this.article.title
+      title: this.article.title,
+      // 構造化マークアップ
+      script: [{
+        hid: 'breadcrumbSchema',
+        innerHTML: this.$getBreadcrumbSchema(this.article.title, this.$route.path),
+        type: 'application/ld+json'
+      }],
+      __dangerouslyDisableSanitizersByTagID: {
+        breadcrumbSchema: ['innerHTML']
+      }
     }
   },
   mounted () {

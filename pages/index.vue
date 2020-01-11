@@ -20,9 +20,23 @@ export default {
       articles: articleList.slice().reverse()
     }
   },
+  data () {
+    return {
+      title: 'Yurikago Blog'
+    }
+  },
   head () {
     return {
-      titleTemplate: 'Yurikago Blog'
+      titleTemplate: this.title,
+      // 構造化マークアップ
+      script: [{
+        hid: 'breadcrumbSchema',
+        innerHTML: this.$getBreadcrumbSchema(this.title, this.$route.path),
+        type: 'application/ld+json'
+      }],
+      __dangerouslyDisableSanitizersByTagID: {
+        breadcrumbSchema: ['innerHTML']
+      }
     }
   }
 }

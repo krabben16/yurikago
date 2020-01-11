@@ -42,7 +42,16 @@ export default {
   },
   head () {
     return {
-      title: this.tag.name
+      title: this.tag.name,
+      // 構造化マークアップ
+      script: [{
+        hid: 'breadcrumbSchema',
+        innerHTML: this.$getBreadcrumbSchema(this.tag.name, this.$route.path),
+        type: 'application/ld+json'
+      }],
+      __dangerouslyDisableSanitizersByTagID: {
+        breadcrumbSchema: ['innerHTML']
+      }
     }
   },
   mounted () {
