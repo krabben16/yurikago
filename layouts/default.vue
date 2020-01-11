@@ -8,7 +8,7 @@
         </div>
       </div>
     </div>
-    <div v-if="!isRoot" class="row no-gutters">
+    <div class="row no-gutters">
       <div class="col-12 col-sm-6 mx-auto">
         <div class="column__breadcrumb">
           <Breadcrumb :pageName="pageName" />
@@ -50,7 +50,20 @@ export default {
   data () {
     return {
       pageName: '',
-      isRoot: false
+    }
+  },
+  head () {
+    const uid = this._uid;
+    return {
+      // 構造化マークアップ
+      script: [{
+        uid,
+        innerHTML: this.$getBreadcrumbSchema(this.pageName, this.$route.path),
+        type: 'application/ld+json'
+      }],
+      __dangerouslyDisableSanitizersByTagID: {
+        [uid]: 'innerHTML'
+      }
     }
   }
 }

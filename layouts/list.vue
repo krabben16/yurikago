@@ -6,7 +6,7 @@
         <nuxt />
       </div>
     </div>
-    <div v-if="!isRoot" class="row no-gutters">
+    <div class="row no-gutters">
       <div class="col-12 col-sm-6 mx-auto">
         <Breadcrumb :pageName="pageName" />
       </div>
@@ -31,22 +31,27 @@ export default {
       this.pageName = pageName || ''
     }
   },
-  watch: {
-    $route: {
-      async handler () {
-        this.isRoot = this.$route.name == 'index'
-      },
-      immediate: true
-    }
-  },
   created () {
     // イベントリスナー
     this.$nuxt.$on('setPageName', this.setPageName)
   },
   data () {
     return {
-      pageName: '',
-      isRoot: false
+      pageName: ''
+    }
+  },
+  head () {
+    const uid = this._uid;
+    return {
+      // 構造化マークアップ
+      script: [{
+        uid,
+        innerHTML: this.$getBreadcrumbSchema(this.pageName, this.$route.path),
+        type: 'application/ld+json'
+      }],
+      __dangerouslyDisableSanitizersByTagID: {
+        [uid]: 'innerHTML'
+      }
     }
   }
 }
