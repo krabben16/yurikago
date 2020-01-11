@@ -92,6 +92,17 @@ export default {
         return out
       }
 
+      // テーブルにbootstrapのクラスを付与する
+      renderer.table = (header, body) => {
+        if (body) body = '<tbody>' + body + '</tbody>';
+        return `<div class="table-responsive"><table class="table"><thead>${header}</thead>${body}</table></div>`
+      };
+
+      renderer.tablecell = (content, flags) => {
+        var type = flags.header ? 'th' : 'td';
+        return `<${type}>${content}</${type}>`
+      };
+
       return marked(this.markdownContent, { renderer: renderer })
     }
   },
@@ -131,17 +142,6 @@ export default {
 
     blockquote {
       color: grey;
-    }
-
-    // テーブル
-    th, td {
-      border: 1px dashed;
-      padding: 10px 20px;
-    }
-
-    table {
-      border-collapse: collapse;
-      margin: 0 auto;
     }
   }
 }
