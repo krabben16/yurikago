@@ -1,10 +1,10 @@
 <template>
   <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+    <ol v-if="$route.path != '/'" class="breadcrumb">
       <li class="breadcrumb-item">
         <nuxt-link :to="{ name: 'index' }" class="breadcrumb-item">サイトトップ</nuxt-link>
       </li>
-      <li v-if="pageName" class="breadcrumb-item active" aria-current="page">{{ pageName }}</li>
+      <li class="breadcrumb-item active" aria-current="page">{{ pageName }}</li>
     </ol>
   </nav>
 </template>
