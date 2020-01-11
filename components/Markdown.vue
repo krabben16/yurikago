@@ -98,6 +98,7 @@ export default {
         return `<div class="table-responsive"><table class="table"><thead>${header}</thead>${body}</table></div>`
       };
 
+      // 中央寄せしないよう修正
       renderer.tablecell = (content, flags) => {
         var type = flags.header ? 'th' : 'td';
         return `<${type}>${content}</${type}>`
