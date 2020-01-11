@@ -3,16 +3,12 @@
     <Header />
     <div class="row no-gutters">
       <div class="col-12 col-sm-6 mx-auto">
-        <div class="column__content">
-          <nuxt />
-        </div>
+        <nuxt />
       </div>
     </div>
     <div v-if="!isRoot" class="row no-gutters">
       <div class="col-12 col-sm-6 mx-auto">
-        <div class="column__breadcrumb">
-          <Breadcrumb :pageName="pageName" />
-        </div>
+        <Breadcrumb :pageName="pageName" />
       </div>
     </div>
     <Footer />
@@ -61,27 +57,5 @@ export default {
   // デフォルトのパディングをリセット
   padding-left: 0;
   padding-right: 0;
-}
-
-// SP
-@media screen and (max-width: 575px) {
-  .column {
-    &__content {
-      background-color: white;
-      margin: 50px 0 0 0;
-      padding: 40px 20px;
-    }
-  }
-}
-
-// PC
-@media screen and (min-width: 576px) {
-  .column {
-    &__content {
-      background-color: white;
-      margin: 50px 0 0 0;
-      padding: 40px 40px;
-    }
-  }
 }
 </style>

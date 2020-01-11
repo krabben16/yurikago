@@ -1,16 +1,20 @@
 <template>
   <div>
     <div v-for="article in articles" :key="article.id" class="article__wrapper">
-      <div>{{ article.date }}</div>
-      <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">{{ article.title }}</nuxt-link>
+      <Article :article="article" />
     </div>
   </div>
 </template>
 
 <script>
 import { articleList } from '~/const/articleList'
+import Article from '~/components/Article.vue'
 
 export default {
+  components: {
+    Article
+  },
+  layout: 'list',
   asyncData ({ params }) {
     return {
       articles: articleList.slice().reverse()
@@ -30,8 +34,12 @@ export default {
 
 <style lang="scss" scoped>
 .article {
-  &__wrapper:nth-child(n+2) {
+  &__wrapper {
     margin-top: 30px;
+    
+    a {
+      text-decoration: none
+    }
   }
 }
 </style>
