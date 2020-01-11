@@ -51,19 +51,6 @@ export default {
     return {
       pageName: '',
     }
-  },
-  head () {
-    return {
-      // 構造化マークアップ
-      script: [{
-        hid: 'breadcrumbSchema',
-        innerHTML: this.$getBreadcrumbSchema(this.pageName, this.$route.path),
-        type: 'application/ld+json'
-      }],
-      __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ['innerHTML']
-      }
-    }
   }
 }
 </script>
