@@ -1,10 +1,13 @@
 <template>
   <div>
     <div>
-      <div>{{ articleDate }}</div>
-      <h2>{{ articleTitle }}</h2>
+      <div>{{ article.date }}</div>
+      <div>
+        <nuxt-link v-for="tag in article.tags" :key="tag.id" :to="{ name: 'tags-id', params: { id: tag.id } }" class="badge badge-info">{{ tag.name }}</nuxt-link>
+      </div>
+      <h2>{{ article.title }}</h2>
     </div>
-    <Markdown :markdownContent="articleContent"></Markdown>
+    <Markdown :markdownContent="article.content"></Markdown>
   </div>
 </template>
 
@@ -19,15 +22,6 @@ export default {
     Markdown
   },
   computed: {
-    articleDate () {
-      return this.article.date
-    },
-    articleTitle () {
-      return this.article.title
-    },
-    articleContent () {
-      return this.article.content
-    },
     ...mapGetters('articles', ['landingArticleID'])
   },
   methods: {
@@ -75,5 +69,9 @@ export default {
 <style lang="scss" scoped>
 h2 {
   margin: 30px 0;
+}
+
+.badge:nth-child(n+2) {
+  margin-left: 10px;
 }
 </style>
