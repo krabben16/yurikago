@@ -1,9 +1,17 @@
 <template>
   <div>
-    <div>
+    <div class="article__header">
       <div>{{ article.date }}</div>
-      <div>
-        <nuxt-link v-for="tag in article.tags" :key="tag.id" :to="{ name: 'tags-id', params: { id: tag.id } }" class="badge badge-light">{{ tag.name }}</nuxt-link>
+      <div class="clearfix">
+        <div class="tags">
+          <nuxt-link
+            v-for="tag in article.tags"
+            :key="tag.id"
+            :to="{ name: 'tags-id', params: { id: tag.id } }"
+            class="badge badge-light">
+            {{ tag.name }}
+          </nuxt-link>
+        </div>
       </div>
       <h2>{{ article.title }}</h2>
     </div>
@@ -67,11 +75,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h2 {
-  margin: 30px 0;
-}
+.article {
+  &__header {
+    h2 {
+      margin: 30px 0;
+    }
 
-.badge:nth-child(n+2) {
-  margin-left: 10px;
+    .clearfix::after {
+      display: block;
+      clear: both;
+    }
+    
+    .tags {
+      float: right;
+
+      .badge:nth-child(n+2) {
+        margin-left: 10px;
+      }
+    }
+  }
 }
 </style>
