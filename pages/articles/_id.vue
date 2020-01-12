@@ -3,7 +3,7 @@
     <div>
       <div>{{ article.date }}</div>
       <div>
-        <nuxt-link v-for="tag in article.tags" :key="tag.id" :to="{ name: 'tags-id', params: { id: tag.id } }" class="badge badge-info">{{ tag.name }}</nuxt-link>
+        <nuxt-link v-for="tag in article.tags" :key="tag.id" :to="{ name: 'tags-id', params: { id: tag.id } }" class="badge badge-light">{{ tag.name }}</nuxt-link>
       </div>
       <h2>{{ article.title }}</h2>
     </div>
