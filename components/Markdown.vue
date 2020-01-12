@@ -59,7 +59,7 @@ export default {
     htmlContent () {
       const renderer = new marked.Renderer()
       
-      // WebP画像を表示する
+      // WebP画像を表示
       renderer.image = (href, title, text) => {
         href = this.helpers.cleanUrl(renderer.options.sanitize, renderer.options.baseUrl, href)
 
@@ -92,17 +92,23 @@ export default {
         return out
       }
 
-      // テーブルにbootstrapのクラスを付与する
+      // テーブルにbootstrapのクラスを付与
       renderer.table = (header, body) => {
-        if (body) body = '<tbody>' + body + '</tbody>';
+        if (body) body = '<tbody>' + body + '</tbody>'
         return `<div class="table-responsive"><table class="table"><thead>${header}</thead>${body}</table></div>`
       };
 
-      // 中央寄せしないよう修正
+      // 中央寄せを解除
       renderer.tablecell = (content, flags) => {
-        var type = flags.header ? 'th' : 'td';
+        const type = flags.header ? 'th' : 'td'
         return `<${type}>${content}</${type}>`
-      };
+      }
+
+      // 引用に不等号を追加
+      renderer.blockquote = quote => {
+        const result = /\>(.+)\</.exec(quote)
+        return `<blockquote><p>&gt; ${result[1]}</p></blockquote>`
+      }
 
       return marked(this.markdownContent, { renderer: renderer })
     }
