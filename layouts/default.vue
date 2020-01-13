@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Spinner />
     <div class="container-fluid">
       <Header />
       <div class="row no-gutters">
@@ -22,14 +21,12 @@
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
-import Spinner from '~/components/Spinner.vue'
 
 export default {
   components: {
     Header,
     Footer,
-    Breadcrumb,
-    Spinner
+    Breadcrumb
   },
   methods: {
     setPageName (pageName) {
