@@ -25,17 +25,3 @@ body {
 .list {
   margin: 50px 0 0 0;
 }
-
-/* SP */
-@media screen and (max-width: 575px) {
-  .list {
-    padding: 0 20px;
-  }
-}
-
-/* PC */
-@media screen and (min-width: 576px) {
-  .list {
-    padding: 0 40px;
-  }
-}
