@@ -1,21 +1,20 @@
 <template>
-  <div class="container-fluid">
-    <Header />
-    <div class="row no-gutters">
-      <div class="col-12 col-sm-6 mx-auto">
-        <div class="column__content">
+  <div>
+    <Spinner />
+    <div class="container-fluid">
+      <Header />
+      <div class="row no-gutters">
+        <div class="col-12 col-sm-6 mx-auto">
           <nuxt />
         </div>
       </div>
-    </div>
-    <div class="row no-gutters">
-      <div class="col-12 col-sm-6 mx-auto">
-        <div class="column__breadcrumb">
+      <div class="row no-gutters">
+        <div class="col-12 col-sm-6 mx-auto">
           <Breadcrumb :pageName="pageName" />
         </div>
       </div>
+      <Footer />
     </div>
-    <Footer />
   </div>
 </template>
 
@@ -23,12 +22,14 @@
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
+import Spinner from '~/components/Spinner.vue'
 
 export default {
   components: {
     Header,
     Footer,
-    Breadcrumb
+    Breadcrumb,
+    Spinner
   },
   methods: {
     setPageName (pageName) {
@@ -60,27 +61,7 @@ export default {
   // デフォルトのパディングをリセット
   padding-left: 0;
   padding-right: 0;
-}
 
-// SP
-@media screen and (max-width: 575px) {
-  .column {
-    &__content {
-      background-color: white;
-      margin: 50px 0 0 0;
-      padding: 40px 20px;
-    }
-  }
-}
-
-// PC
-@media screen and (min-width: 576px) {
-  .column {
-    &__content {
-      background-color: white;
-      margin: 50px 0 0 0;
-      padding: 40px 40px;
-    }
-  }
+  display: none;
 }
 </style>

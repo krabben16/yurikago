@@ -1,5 +1,5 @@
 <template>
-  <div class="markdown__wrapper" v-html="htmlContent"></div>
+  <div class="markdown-wrapper" v-html="htmlContent"></div>
 </template>
 
 <script>
@@ -128,28 +128,26 @@ export default {
 </script>
 
 <style lang="scss">
-.markdown {
-  &__wrapper {
-    // 見出し
-    h2, h3, h4, h5, h6 {
-      margin: 30px 0;
-    }
+.markdown-wrapper {
+  // 見出し
+  h2, h3, h4, h5, h6 {
+    margin: 30px 0;
+  }
 
-    li {
-      margin: 10px 0;
-    }
+  li {
+    margin: 10px 0;
+  }
 
-    img {
-      width: 100%;
-    }
+  img {
+    width: 100%;
+  }
 
-    pre {
-      white-space: pre-wrap;
-    }
+  pre {
+    white-space: pre-wrap;
+  }
 
-    blockquote {
-      color: grey;
-    }
+  blockquote {
+    color: grey;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-for="article in matchList" :key="article.id" class="article__wrapper">
+  <div class="list">
+    <div v-for="article in matchList" :key="article.id" class="article-wrapper">
       <Article :article="article" />
     </div>
   </div>
@@ -15,7 +15,6 @@ export default {
   components: {
     Article
   },
-  layout: 'list',
   asyncData ({ params }) {
     // キーを削除
     const tagValues = Object.values(tagList)
@@ -62,13 +61,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.article {
-  &__wrapper {
-    margin-top: 30px;
-    
-    a {
-      text-decoration: none
-    }
+.article-wrapper {
+  margin-top: 30px;
+  
+  a {
+    text-decoration: none
   }
 }
 </style>
