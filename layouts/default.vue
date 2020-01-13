@@ -60,6 +60,6 @@ export default {
   padding-right: 0;
 
   // jsでフェードインする
-  display: none;
+  visibility: hidden;
 }
 </style>
