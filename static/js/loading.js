@@ -1,3 +1,7 @@
+$(document).on('DOMContentLoaded', () => {
+  $('.container-fluid').hide()
+})
+
 $(window).on('load', () => {
-  $('.spinner-wrapper').fadeOut(1000)
+  $('.container-fluid').fadeIn(1500)
 })
