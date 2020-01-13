@@ -9,7 +9,7 @@
 <style lang="scss" scoped>
 .spinner-wrapper {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   
   // 中央寄せ
   display: flex;
