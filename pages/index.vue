@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-for="article in articles" :key="article.id" class="article__wrapper">
+  <div class="list">
+    <div v-for="article in articles" :key="article.id" class="article-wrapper">
       <Article :article="article" />
     </div>
   </div>
@@ -14,7 +14,6 @@ export default {
   components: {
     Article
   },
-  layout: 'list',
   asyncData ({ params }) {
     return {
       articles: articleList.slice().reverse()
@@ -43,13 +42,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.article {
-  &__wrapper {
-    margin-top: 30px;
-    
-    a {
-      text-decoration: none
-    }
+.article-wrapper {
+  margin-top: 30px;
+  
+  a {
+    text-decoration: none
   }
 }
 </style>

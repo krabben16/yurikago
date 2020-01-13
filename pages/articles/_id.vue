@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="article__header">
+  <div class="content">
+    <div class="article-header">
       <div>{{ article.date }}</div>
       <div class="clearfix">
         <div class="tags">
@@ -15,7 +15,9 @@
       </div>
       <h2>{{ article.title }}</h2>
     </div>
-    <Markdown :markdownContent="article.content"></Markdown>
+    <div class="article-body">
+      <Markdown :markdownContent="article.content"></Markdown>
+    </div>
   </div>
 </template>
 
@@ -75,23 +77,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.article {
-  &__header {
-    h2 {
-      margin: 30px 0;
-    }
+.article-header {
+  h2 {
+    margin: 30px 0;
+  }
 
-    .clearfix::after {
-      display: block;
-      clear: both;
-    }
-    
-    .tags {
-      float: right;
+  .clearfix::after {
+    display: block;
+    clear: both;
+  }
+  
+  .tags {
+    float: right;
 
-      .badge:nth-child(n+2) {
-        margin-left: 10px;
-      }
+    .badge:nth-child(n+2) {
+      margin-left: 10px;
     }
   }
 }

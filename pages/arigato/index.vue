@@ -1,5 +1,7 @@
 <template>
-  <Markdown :markdownContent="arigatoContent"></Markdown>
+  <div class="content">
+    <Markdown :markdownContent="arigatoContent"></Markdown>
+  </div>
 </template>
 
 <script>

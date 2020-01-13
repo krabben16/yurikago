@@ -1,5 +1,7 @@
 <template>
-  <Markdown :markdownContent="profileContent"></Markdown>
+  <div class="content">
+    <Markdown :markdownContent="profileContent"></Markdown>
+  </div>
 </template>
 
 <script>
