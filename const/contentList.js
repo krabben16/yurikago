@@ -7,6 +7,7 @@ import content6 from '~/assets/markdown/articles/6.md'
 import content7 from '~/assets/markdown/articles/7.md'
 import content8 from '~/assets/markdown/articles/8.md'
 import content9 from '~/assets/markdown/articles/9.md'
+import content10 from '~/assets/markdown/articles/10.md'
 
 export const contentList = {
   1: content1,
@@ -17,5 +18,6 @@ export const contentList = {
   6: content6,
   7: content7,
   8: content8,
-  9: content9
+  9: content9,
+  10: content10
 }

@@ -17,5 +17,7 @@ export const tagList = {
   VSCode: { id: 16, name: 'VSCode' },
   Xdebug: { id: 17, name: 'Xdebug' },
   MarkedJS: { id: 18, name: 'Marked.js' },
-  NuxtJS: { id: 19, name: 'Nuxt.js' }
+  NuxtJS: { id: 19, name: 'Nuxt.js' },
+  JavaScript: { id: 20, name: 'JavaScript' },
+  HTML: { id: 21, name: 'HTML' }
 }

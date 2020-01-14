@@ -90,5 +90,15 @@ export const articleList = [
       tagList.MarkedJS,
       tagList.NuxtJS
     ]
+  },
+  {
+    id: 10,
+    date: '2020-01-14',
+    title: 'JavaScriptはDOMツリーの構築中に実行される',
+    tags: [
+      tagList.GoogleChrome,
+      tagList.JavaScript,
+      tagList.HTML
+    ]
   }
 ]

@@ -1,7 +1,7 @@
 {
   "name": "nuxt",
   "version": "1.0.0",
-  "description": "My remarkable Nuxt.js project",
+  "description": "技術ブログ",
   "author": "Hiroki Kawaguchi",
   "private": true,
   "scripts": {
