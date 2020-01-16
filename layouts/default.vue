@@ -33,10 +33,6 @@ export default {
       this.pageName = pageName || ''
     }
   },
-  asyncData () {
-    console.log('test')
-    return {}
-  },
   created () {
     // イベントリスナー
     this.$nuxt.$on('setPageName', this.setPageName)
