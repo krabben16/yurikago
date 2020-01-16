@@ -33,13 +33,9 @@ export default {
       this.pageName = pageName || ''
     }
   },
-  watch: {
-    $route: {
-      async handler () {
-        this.isRoot = this.$route.name == 'index'
-      },
-      immediate: true
-    }
+  asyncData () {
+    console.log('test')
+    return {}
   },
   created () {
     // イベントリスナー
