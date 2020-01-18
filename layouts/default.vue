@@ -33,14 +33,6 @@ export default {
       this.pageName = pageName || ''
     }
   },
-  watch: {
-    $route: {
-      async handler () {
-        this.isRoot = this.$route.name == 'index'
-      },
-      immediate: true
-    }
-  },
   created () {
     // イベントリスナー
     this.$nuxt.$on('setPageName', this.setPageName)
