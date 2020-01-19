@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   mode: 'universal',
   /*
@@ -69,7 +71,8 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/google-analytics',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/sitemap'
   ],
   axios: {
     baseURL: process.env.NODE_ENV == 'production' ? 'https://www.yurikago-blog.com' : 'http://localhost:3000'
@@ -83,6 +86,31 @@ export default {
       pathRewrite: {
         '^/api' : '/'
       }
+    }
+  },
+  sitemap: {
+    hostname: 'https://www.yurikago-blog.com',
+    async routes () {
+      let path = []
+
+      // axios ベースURLのデフォルト http://[HOST]:[PORT][PREFIX]
+      // ローカルで /sitemap.xml をリクエストするとベースURLは http://localhost:80 になるので結果を取得できない
+
+      const api = axios.create( {
+        baseURL: process.env.NODE_ENV == 'production' ? 'https://www.yurikago-blog.com' : 'http://localhost:3000'
+      })
+
+      const response1 = await api.get(`/api/articles`)
+      path.push(...response1.data.map(v => {
+        return `/articles/${v.id}`
+      }))
+
+      const response2 = await api.get(`/api/tags`)
+      path.push(...response2.data.map(v => {
+        return `/tags/${v.id}`
+      }))
+
+      return path
     }
   },
   /*
