@@ -74,7 +74,7 @@ export default {
     }],
     ['@nuxtjs/sitemap', {
       path: '/sitemap.xml',
-      hostname: 'https://yurikago-blog.netlify.com',
+      hostname: 'https://www.yurikago-blog.com',
       routes () {
         let path = []
 
