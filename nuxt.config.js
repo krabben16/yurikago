@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export default {
   mode: 'universal',
   /*
@@ -85,30 +83,6 @@ export default {
       }
     }
   },
-  sitemap: {
-    hostname: 'https://yurikago-blog.netlify.com',
-    routes () {
-      let path = []
-
-      // 記事一覧
-      axios.get('/api/articles')
-        .then(response => {
-          path.push(...response.data.map(v => {
-            return `/articles/${v.id}/`
-          }))
-        })
-
-      // タグ一覧
-      axios.get('/api/tags')
-        .then(response => {
-          path.push(...response.data.map(v => {
-            return `/tags/${v.id}/`
-          }))
-        })
-
-      return path
-    }
-  },
   /*
   ** Build configuration
   */
@@ -119,34 +93,4 @@ export default {
     extend (config, ctx) {
     }
   },
-  // generateコマンドを実行するとき動的なパラメーターを用いたルートを生成
-  generate: {
-    routes () {
-      let path = []
-
-      // 記事一覧
-      axios.get('/api/articles')
-        .then(response => {
-          path.push(...response.data.map(v => {
-            return `/articles/${v.id}/`
-          }))
-        })
-
-      // タグ一覧
-      axios.get('/api/tags')
-        .then(response => {
-          path.push(...response.data.map(v => {
-            return `/tags/${v.id}/`
-          }))
-        })
-
-      return path
-    },
-    // エラー発生時に 200.html ではなく 404.html を表示する
-    fallback: true
-  },
-  router: {
-    // URL末尾にスラッシュを付与する
-    trailingSlash: true
-  }
 }
