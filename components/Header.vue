@@ -40,7 +40,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('/api/tags')
+    axios.get(`/api/tags`)
       .then(response => {
         this.tags = response.data
       })

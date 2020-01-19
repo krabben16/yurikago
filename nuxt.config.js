@@ -71,14 +71,17 @@ export default {
     '@nuxtjs/google-analytics',
     '@nuxtjs/proxy'
   ],
+  axios: {
+    baseURL: process.env.NODE_ENV == 'production' ? 'https://yurikago-265609.appspot.com' : 'http://localhost:3000'
+  },
   googleAnalytics: {
     id: 'UA-155216702-1'
   },
   proxy: {
-    '/api/': {
+    '/api': {
       target: process.env.NODE_ENV == 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10',
       pathRewrite: {
-        '^/api/' : '/'
+        '^/api' : '/'
       }
     }
   },
@@ -91,5 +94,5 @@ export default {
     */
     extend (config, ctx) {
     }
-  },
+  }
 }
