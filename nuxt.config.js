@@ -72,7 +72,7 @@ export default {
     '@nuxtjs/proxy'
   ],
   axios: {
-    baseURL: process.env.NODE_ENV == 'production' ? 'https://yurikago-265609.appspot.com' : 'http://localhost:3000'
+    baseURL: process.env.NODE_ENV == 'production' ? 'https://www.yurikago-blog.com' : 'http://localhost:3000'
   },
   googleAnalytics: {
     id: 'UA-155216702-1'
