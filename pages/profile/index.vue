@@ -1,20 +1,20 @@
 <template>
   <div class="content">
-    <Markdown :markdownContent="profileContent"></Markdown>
+    <Markdown :markdownContent="profile.markdown"></Markdown>
   </div>
 </template>
 
 <script>
 import Markdown from '~/components/Markdown.vue'
-import content from '~/assets/markdown/profile.md'
 
 export default {
   components: {
     Markdown
   },
-  computed: {
-    profileContent () {
-      return content
+  async asyncData ({ app }) {
+    const { data } = await app.$axios.get(`/api/profile`)
+    return {
+      profile: data
     }
   },
   data () {

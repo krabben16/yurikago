@@ -1,20 +1,20 @@
 <template>
   <div class="content">
-    <Markdown :markdownContent="arigatoContent"></Markdown>
+    <Markdown :markdownContent="arigato.markdown"></Markdown>
   </div>
 </template>
 
 <script>
 import Markdown from '~/components/Markdown.vue'
-import content from '~/assets/markdown/arigato.md'
 
 export default {
   components: {
     Markdown
   },
-  computed: {
-    arigatoContent () {
-      return content
+  async asyncData ({ app }) {
+    const { data } = await app.$axios.get(`/api/arigato`)
+    return {
+      arigato: data
     }
   },
   data () {
