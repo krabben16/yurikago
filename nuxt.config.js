@@ -94,7 +94,8 @@ export default {
       let path = []
 
       // axios ベースURLのデフォルト http://[HOST]:[PORT][PREFIX]
-      // ローカルで /sitemap.xml をリクエストするとベースURLは http://localhost:80 になるので結果を取得できない
+      // develop server http://localhost:3000/sitemap.xml => OK ベースURL http://localhost:3000
+      // develop client http://localhost:3000/sitemap.xml => NG ベースURL http://localhost:80
 
       const api = axios.create( {
         baseURL: process.env.NODE_ENV == 'production' ? 'https://www.yurikago-blog.com' : 'http://localhost:3000'
