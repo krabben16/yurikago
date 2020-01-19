@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="article-header">
-      <div>{{ article.date }}</div>
+      <div>{{ article.posted_at }}</div>
       <div class="clearfix">
         <div class="tags">
           <nuxt-link
@@ -16,7 +16,7 @@
       <h2>{{ article.title }}</h2>
     </div>
     <div class="article-body">
-      <Markdown :markdownContent="article.content"></Markdown>
+      <Markdown :markdownContent="article.markdown"></Markdown>
     </div>
   </div>
 </template>
@@ -24,8 +24,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Markdown from '~/components/Markdown.vue'
-import { articleList } from '~/const/articleList'
-import { contentList } from '~/const/contentList'
 
 export default {
   components: {
@@ -37,17 +35,11 @@ export default {
   methods: {
     ...mapActions('articles', ['changeLandingArticleID'])
   },
-  asyncData ({ params }) {
-    let article = null
-    articleList.map(v => {
-      if (params.id == v.id) {
-        article = v
-      }
-    })
-    article.content = contentList[params.id]
+  async asyncData (context) {
+    const { data } = await context.app.$axios.get(`/api/articles/${context.params.id}`)
     return {
-      id: params.id,
-      article: article
+      id: context.params.id,
+      article: data
     }
   },
   created () {

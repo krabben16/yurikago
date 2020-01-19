@@ -1,5 +1,4 @@
-import { tagList } from './const/tagList'
-import { articleList } from './const/articleList'
+import axios from 'axios'
 
 export default {
   mode: 'universal',
@@ -31,7 +30,8 @@ export default {
         crossorigin: 'anonymous',
         body: true
       },
-      { src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
+      {
+        src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
         integrity: 'sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy',
         crossorigin: 'anonymous',
         body: true
@@ -69,30 +69,46 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-155216702-1'
-    }],
-    ['@nuxtjs/sitemap', {
-      path: '/sitemap.xml',
-      hostname: 'https://www.yurikago-blog.com',
-      routes () {
-        let path = []
-
-        // 記事一覧
-        path.push(...articleList.map(v => {
-          return `/articles/${v.id}/`
-        }))
-  
-        // タグ一覧
-        const tagValues = Object.values(tagList)
-        path.push(...tagValues.map(tag => {
-          return `/tags/${tag.id}/`
-        }))
-  
-        return path
-      }
-    }]
+    '@nuxtjs/axios',
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/proxy',
+    '@nuxtjs/sitemap'
   ],
+  googleAnalytics: {
+    id: 'UA-155216702-1'
+  },
+  proxy: {
+    '/api/': {
+      target: process.env.NODE_ENV == 'production' ? 'http://192.168.10.10' : 'http://192.168.10.10',
+      pathRewrite: {
+        '^/api/' : '/'
+      }
+    }
+  },
+  sitemap: {
+    hostname: 'https://yurikago-blog.netlify.com',
+    routes () {
+      let path = []
+
+      // 記事一覧
+      axios.get('/api/articles')
+        .then(response => {
+          path.push(...response.data.map(v => {
+            return `/articles/${v.id}/`
+          }))
+        })
+
+      // タグ一覧
+      axios.get('/api/tags')
+        .then(response => {
+          path.push(...response.data.map(v => {
+            return `/tags/${v.id}/`
+          }))
+        })
+
+      return path
+    }
+  },
   /*
   ** Build configuration
   */
@@ -114,15 +130,20 @@ export default {
       let path = []
 
       // 記事一覧
-      path.push(...articleList.map(v => {
-        return `/articles/${v.id}/`
-      }))
+      axios.get('/api/articles')
+        .then(response => {
+          path.push(...response.data.map(v => {
+            return `/articles/${v.id}/`
+          }))
+        })
 
       // タグ一覧
-      const tagValues = Object.values(tagList)
-      path.push(...tagValues.map(tag => {
-        return `/tags/${tag.id}/`
-      }))
+      axios.get('/api/tags')
+        .then(response => {
+          path.push(...response.data.map(v => {
+            return `/tags/${v.id}/`
+          }))
+        })
 
       return path
     },
