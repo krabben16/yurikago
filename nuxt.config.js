@@ -117,11 +117,6 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
-      config.module.rules.push({
-        test: /\.md$/,
-        loader: 'raw-loader',
-        exclude: /(node_modules)/,
-      });
     }
   },
   // generateコマンドを実行するとき動的なパラメーターを用いたルートを生成
