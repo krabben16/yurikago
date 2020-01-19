@@ -18,7 +18,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <nuxt-link v-for="(tag, k) in tags" :key="k" class="dropdown-item" :to="{ name: 'tags-id', params: { id: tag.id } }">
-              {{ tag.name }} ({{ tag.count }})
+              {{ tag.name }} ({{ tag.article_count }})
             </nuxt-link>
           </div>
         </li>
@@ -31,32 +31,19 @@
 </template>
 
 <script>
-import { tagList } from '~/const/tagList'
-import { articleList } from '~/const/articleList'
+import axios from 'axios'
 
 export default {
   data () {
-    // キーを削除
-    const tagValues = Object.values(tagList)
-
-    // タグに紐付いた記事の数を集計
-    tagValues.map(tag => {
-      tag.count = 0
-    })
-
-    articleList.map(article => {
-      article.tags.map(articleTag => {
-        tagValues.map(tag => {
-          if (tag.id == articleTag.id) {
-            tag.count++
-          }
-        })
-      })
-    })
-
     return {
-      tags: tagValues
+      tags: null
     }
+  },
+  mounted () {
+    axios.get('/api/tags')
+      .then(response => {
+        this.tags = response.data
+      })
   }
 }
 </script>

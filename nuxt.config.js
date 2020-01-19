@@ -1,6 +1,3 @@
-import { tagList } from './const/tagList'
-import { articleList } from './const/articleList'
-
 export default {
   mode: 'universal',
   /*
@@ -31,7 +28,8 @@ export default {
         crossorigin: 'anonymous',
         body: true
       },
-      { src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
+      {
+        src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
         integrity: 'sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy',
         crossorigin: 'anonymous',
         body: true
@@ -69,30 +67,21 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-155216702-1'
-    }],
-    ['@nuxtjs/sitemap', {
-      path: '/sitemap.xml',
-      hostname: 'https://www.yurikago-blog.com',
-      routes () {
-        let path = []
-
-        // 記事一覧
-        path.push(...articleList.map(v => {
-          return `/articles/${v.id}/`
-        }))
-  
-        // タグ一覧
-        const tagValues = Object.values(tagList)
-        path.push(...tagValues.map(tag => {
-          return `/tags/${tag.id}/`
-        }))
-  
-        return path
-      }
-    }]
+    '@nuxtjs/axios',
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/proxy'
   ],
+  googleAnalytics: {
+    id: 'UA-155216702-1'
+  },
+  proxy: {
+    '/api/': {
+      target: process.env.NODE_ENV == 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10',
+      pathRewrite: {
+        '^/api/' : '/'
+      }
+    }
+  },
   /*
   ** Build configuration
   */
@@ -101,36 +90,6 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
-      config.module.rules.push({
-        test: /\.md$/,
-        loader: 'raw-loader',
-        exclude: /(node_modules)/,
-      });
     }
   },
-  // generateコマンドを実行するとき動的なパラメーターを用いたルートを生成
-  generate: {
-    routes () {
-      let path = []
-
-      // 記事一覧
-      path.push(...articleList.map(v => {
-        return `/articles/${v.id}/`
-      }))
-
-      // タグ一覧
-      const tagValues = Object.values(tagList)
-      path.push(...tagValues.map(tag => {
-        return `/tags/${tag.id}/`
-      }))
-
-      return path
-    },
-    // エラー発生時に 200.html ではなく 404.html を表示する
-    fallback: true
-  },
-  router: {
-    // URL末尾にスラッシュを付与する
-    trailingSlash: true
-  }
 }

@@ -7,33 +7,18 @@
 </template>
 
 <script>
-import { tagList } from '~/const/tagList'
-import { articleList } from '~/const/articleList'
 import Article from '~/components/Article.vue'
 
 export default {
   components: {
     Article
   },
-  asyncData ({ params }) {
-    // キーを削除
-    const tagValues = Object.values(tagList)
-
-    let tag = null
-    tagValues.map(v => {
-      if (params.id == v.id) {
-        tag = v
-      }
-    })
-    
-    let matchList = []
-    articleList.map(article => {
-      article.tags.map(v => {
-        if (params.id == v.id) {
-          matchList.push(article)
-        }
-      })
-    })
+  async asyncData (context) {
+    let response = null
+    response = await context.app.$axios.get(`/api/articles/tag-${context.params.id}`)
+    const matchList = response.data
+    response = await context.app.$axios.get(`/api/tags/${context.params.id}`)
+    const tag = response.data
     return {
       tag: tag,
       matchList: matchList.reverse()

@@ -7,16 +7,16 @@
 </template>
 
 <script>
-import { articleList } from '~/const/articleList'
 import Article from '~/components/Article.vue'
 
 export default {
   components: {
     Article
   },
-  asyncData ({ params }) {
+  async asyncData ({ app }) {
+    const { data } = await app.$axios.get(`/api/articles`)
     return {
-      articles: articleList.slice().reverse()
+      articles: data.reverse()
     }
   },
   data () {
