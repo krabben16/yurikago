@@ -69,8 +69,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/google-analytics',
-    '@nuxtjs/proxy',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/proxy'
   ],
   googleAnalytics: {
     id: 'UA-155216702-1'
