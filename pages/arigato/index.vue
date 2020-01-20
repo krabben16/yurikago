@@ -12,7 +12,7 @@ export default {
     Markdown
   },
   async asyncData ({ app }) {
-    const { data } = await app.$axios.get(`/api/arigato`)
+    const { data } = await app.$axiosInstance.get(`/api/arigato`)
     return {
       arigato: data
     }
