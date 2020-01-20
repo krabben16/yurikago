@@ -50,8 +50,5 @@ export default {
   // デフォルトのパディングをリセット
   padding-left: 0;
   padding-right: 0;
-
-  // jsでフェードインする
-  visibility: hidden;
 }
 </style>
