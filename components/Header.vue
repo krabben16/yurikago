@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
@@ -40,7 +38,7 @@ export default {
     }
   },
   mounted () {
-    axios.get(`/api/tags`)
+    this.$axios.get('/api/tags')
       .then(response => {
         this.tags = response.data
       })

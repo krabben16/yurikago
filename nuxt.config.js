@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './plugins/axios'
 
 export default {
   mode: 'universal',
@@ -54,7 +54,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/breadcrumb.js'
+    '~/plugins/breadcrumb.js',
+    '~/plugins/axios.js'    
   ],
   /*
   ** Nuxt.js dev-modules
@@ -65,14 +66,10 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios',
     '@nuxtjs/google-analytics',
     '@nuxtjs/proxy',
     '@nuxtjs/sitemap'
   ],
-  axios: {
-    baseURL: process.env.NODE_ENV == 'production' ? 'https://www.yurikago-blog.com' : 'http://localhost:3000'
-  },
   googleAnalytics: {
     id: 'UA-155216702-1'
   },
@@ -86,23 +83,15 @@ export default {
   },
   sitemap: {
     hostname: 'https://www.yurikago-blog.com',
-    async routes () {
+    routes: async () => {
       let path = []
 
-      // axios ベースURLのデフォルト http://[HOST]:[PORT][PREFIX]
-      // develop server http://localhost:3000/sitemap.xml => OK ベースURL http://localhost:3000
-      // develop client http://localhost:3000/sitemap.xml => NG ベースURL http://localhost:80
-
-      const api = axios.create( {
-        baseURL: process.env.NODE_ENV == 'production' ? 'https://www.yurikago-blog.com' : 'http://localhost:3000'
-      })
-
-      const response1 = await api.get(`/api/articles`)
+      const response1 = await axios.get(`/api/articles`)
       path.push(...response1.data.map(v => {
         return `/articles/${v.id}`
       }))
 
-      const response2 = await api.get(`/api/tags`)
+      const response2 = await axios.get(`/api/tags`)
       path.push(...response2.data.map(v => {
         return `/tags/${v.id}`
       }))
