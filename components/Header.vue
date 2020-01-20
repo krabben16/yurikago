@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted () {
-    this.$axios.get('/api/tags')
+    this.$axiosInstance.get('/api/tags')
       .then(response => {
         this.tags = response.data
       })

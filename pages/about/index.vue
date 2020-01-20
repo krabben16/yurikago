@@ -12,7 +12,7 @@ export default {
     Markdown
   },
   async asyncData ({ app }) {
-    const { data } = await app.$axios.get(`/api/about`)
+    const { data } = await app.$axiosInstance.get(`/api/about`)
     return {
       about: data
     }
