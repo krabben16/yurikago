@@ -35,10 +35,6 @@ export default {
         integrity: 'sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy',
         crossorigin: 'anonymous',
         body: true
-      },
-      {
-        src: '/js/loading.js',
-        body: true
       }
     ]
   },
