@@ -1,4 +1,4 @@
-import axios from './plugins/axios'
+import { axiosInstance } from './plugins/axios'
 
 export default {
   mode: 'universal',
@@ -86,12 +86,12 @@ export default {
     routes: async () => {
       let path = []
 
-      const response1 = await axios.get(`/api/articles`)
+      const response1 = await axiosInstance.get(`/api/articles`)
       path.push(...response1.data.map(v => {
         return `/articles/${v.id}`
       }))
 
-      const response2 = await axios.get(`/api/tags`)
+      const response2 = await axiosInstance.get(`/api/tags`)
       path.push(...response2.data.map(v => {
         return `/tags/${v.id}`
       }))
