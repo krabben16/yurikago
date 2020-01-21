@@ -36,10 +36,10 @@ export default {
     ...mapActions('articles', ['changeLandingArticleID'])
   },
   async asyncData (context) {
-    const { data } = await context.app.$axiosInstance.get(`/api/articles/${context.params.id}`)
+    const res = await context.app.$axios.$get(`/api/articles/${context.params.id}`)
     return {
       id: context.params.id,
-      article: data
+      article: res
     }
   },
   created () {
