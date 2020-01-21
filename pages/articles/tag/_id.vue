@@ -17,8 +17,8 @@ export default {
     const matchList = await context.app.$axios.$get(`/api/articles/tag/${context.params.id}`)
     const tag = await context.app.$axios.$get(`/api/tags/${context.params.id}`)
     return {
-      tag: tag.data,
-      matchList: matchList.data.reverse()
+      tag: tag,
+      matchList: matchList.reverse()
     }
   },
   head () {
