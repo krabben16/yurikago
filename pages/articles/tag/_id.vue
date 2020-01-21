@@ -15,7 +15,7 @@ export default {
   },
   async asyncData (context) {
     let response = null
-    response = await context.app.$axiosInstance.get(`/api/articles/tag-${context.params.id}`)
+    response = await context.app.$axiosInstance.get(`/api/articles/tag/${context.params.id}`)
     const matchList = response.data
     response = await context.app.$axiosInstance.get(`/api/tags/${context.params.id}`)
     const tag = response.data

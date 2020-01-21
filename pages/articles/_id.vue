@@ -7,7 +7,7 @@
           <nuxt-link
             v-for="tag in article.tags"
             :key="tag.id"
-            :to="{ name: 'tags-id', params: { id: tag.id } }"
+            :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
             class="badge badge-light">
             {{ tag.name }}
           </nuxt-link>

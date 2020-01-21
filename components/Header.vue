@@ -17,7 +17,7 @@
             Tags
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <nuxt-link v-for="(tag, k) in tags" :key="k" class="dropdown-item" :to="{ name: 'tags-id', params: { id: tag.id } }">
+            <nuxt-link v-for="(tag, k) in tags" :key="k" class="dropdown-item" :to="{ name: 'articles-tag-id', params: { id: tag.id } }">
               {{ tag.name }} ({{ tag.article_count }})
             </nuxt-link>
           </div>

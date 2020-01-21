@@ -96,7 +96,7 @@ export default {
 
       const response2 = await axios.get(`${baseURL}/tags`)
       path.push(...response2.data.map(v => {
-        return `/tags/${v.id}`
+        return `/articles/tag/${v.id}`
       }))
 
       return path
