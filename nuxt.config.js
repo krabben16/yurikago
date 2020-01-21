@@ -1,4 +1,4 @@
-import { axiosInstance } from './plugins/axios'
+import axios from 'axios'
 
 export default {
   mode: 'universal',
@@ -54,8 +54,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/breadcrumb.js',
-    '~/plugins/axios.js'    
+    '~/plugins/breadcrumb.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -66,10 +65,14 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
     '@nuxtjs/google-analytics',
     '@nuxtjs/proxy',
     '@nuxtjs/sitemap'
   ],
+  axios: {
+    proxy: true
+  },
   googleAnalytics: {
     id: 'UA-155216702-1'
   },
@@ -86,14 +89,17 @@ export default {
     routes: async () => {
       let path = []
 
-      const response1 = await axiosInstance.get(`/api/articles`)
-      path.push(...response1.data.map(v => {
+      // この関数はサーバーサイドで実行されるのでAPIサーバーのURLはクライアントから見えない
+      const baseURL = process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10'
+
+      const articles = await axios.get(`${baseURL}/articles`)
+      path.push(...articles.data.map(v => {
         return `/articles/${v.id}`
       }))
 
-      const response2 = await axiosInstance.get(`/api/tags`)
-      path.push(...response2.data.map(v => {
-        return `/tags/${v.id}`
+      const tags = await axios.get(`${baseURL}/tags`)
+      path.push(...tags.data.map(v => {
+        return `/articles/tag/${v.id}`
       }))
 
       return path
