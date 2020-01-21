@@ -1,4 +1,5 @@
 import axios from 'axios'
+import fs from 'fs'
 
 export default {
   mode: 'universal',
@@ -54,8 +55,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/breadcrumb.js',
-    '~/plugins/axios.js'    
+    '~/plugins/breadcrumb.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -66,37 +66,33 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
     '@nuxtjs/google-analytics',
-    '@nuxtjs/proxy',
     '@nuxtjs/sitemap'
   ],
   googleAnalytics: {
     id: 'UA-155216702-1'
-  },
-  proxy: {
-    '/api': {
-      target: process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10',
-      pathRewrite: {
-        '^/api' : '/'
-      }
-    }
   },
   sitemap: {
     hostname: 'https://www.yurikago-blog.com',
     routes: async () => {
       let path = []
 
-      // この関数はサーバーサイドで実行されるのでAPIサーバーのURLはクライアントから見えない
-      const baseURL = process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10'
+      const instance = axios.create({
+        baseURL: process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10'
+      })
 
-      const response1 = await axios.get(`${baseURL}/articles`)
-      path.push(...response1.data.map(v => {
+      // データ取得
+      const articleList = await instance.get(`/articles`)
+      const tagList = await instance.get(`/tags`)
+      
+      // 動的なパラメーターを用いたルートを生成
+      path.push(...articleList.data.map(v => {
         return `/articles/${v.id}`
       }))
-
-      const response2 = await axios.get(`${baseURL}/tags`)
-      path.push(...response2.data.map(v => {
-        return `/tags/${v.id}`
+      
+      path.push(...tagList.data.map(v => {
+        return `/articles/tag/${v.id}`
       }))
 
       return path
@@ -111,5 +107,64 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  generate: {
+    routes: async () => {
+      let path = []
+
+      const instance = axios.create({
+        baseURL: process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10'
+      })
+
+      const dir = './static/query/'
+
+      // ディレクトリ存在チェック
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir)
+      if (!fs.existsSync(`${dir}articles/`)) fs.mkdirSync(`${dir}articles/`)
+      if (!fs.existsSync(`${dir}tags/`)) fs.mkdirSync(`${dir}tags/`)
+      if (!fs.existsSync(`${dir}articles/tag/`)) fs.mkdirSync(`${dir}articles/tag/`)
+
+      // データ取得
+      const articleList = await instance.get(`/articles`)
+      fs.writeFileSync(`${dir}articleList`, JSON.stringify(articleList.data))
+
+      articleList.data.map(async v => {
+        const article = await instance.get(`/articles/${v.id}`)
+        fs.writeFileSync(`${dir}articles/${v.id}`, JSON.stringify(article.data))
+      })
+
+      const tagList = await instance.get(`/tags`)
+      fs.writeFileSync(`${dir}tagList`, JSON.stringify(tagList.data))
+
+      tagList.data.map(async v => {
+        const tag = await instance.get(`/tags/${v.id}`)
+        fs.writeFileSync(`${dir}tags/${v.id}`, JSON.stringify(tag.data))
+
+        const articleList = await instance.get(`/articles/tag/${v.id}`)
+        fs.writeFileSync(`${dir}articles/tag/${v.id}`, JSON.stringify(articleList.data))
+      })
+
+      const about = await instance.get(`/about`)
+      fs.writeFileSync(`${dir}about`, JSON.stringify(about.data))
+
+      const profile = await instance.get(`/profile`)
+      fs.writeFileSync(`${dir}profile`, JSON.stringify(profile.data))
+
+      const arigato = await instance.get(`/arigato`)
+      fs.writeFileSync(`${dir}arigato`, JSON.stringify(arigato.data))
+
+      // 動的なパラメーターを用いたルートを生成
+      path.push(...articleList.data.map(v => {
+        return `/articles/${v.id}`
+      }))
+      
+      path.push(...tagList.data.map(v => {
+        return `/articles/tag/${v.id}`
+      }))
+
+      return path
+    },
+    // エラー発生時に 200.html ではなく 404.html を表示する
+    fallback: true
   }
 }

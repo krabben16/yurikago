@@ -7,7 +7,7 @@
           <nuxt-link
             v-for="tag in article.tags"
             :key="tag.id"
-            :to="{ name: 'tags-id', params: { id: tag.id } }"
+            :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
             class="badge badge-light">
             {{ tag.name }}
           </nuxt-link>
@@ -36,10 +36,10 @@ export default {
     ...mapActions('articles', ['changeLandingArticleID'])
   },
   async asyncData (context) {
-    const { data } = await context.app.$axiosInstance.get(`/api/articles/${context.params.id}`)
+    const article = await context.app.$axios.$get(`/query/articles/${context.params.id}`)
     return {
       id: context.params.id,
-      article: data
+      article: article
     }
   },
   created () {
