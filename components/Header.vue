@@ -32,16 +32,19 @@
 
 <script>
 export default {
+  methods: {
+    async fetchTags () {
+      const res = await this.$axios.$get('/api/tags')
+      this.tags = res
+    }
+  },
   data () {
     return {
       tags: null
     }
   },
   mounted () {
-    this.$axios.$get('/api/tags')
-      .then(response => {
-        this.tags = response.data
-      })
+    this.fetchTags()
   }
 }
 </script>

@@ -70,6 +70,9 @@ export default {
     '@nuxtjs/proxy',
     '@nuxtjs/sitemap'
   ],
+  axios: {
+    proxy: true
+  },
   googleAnalytics: {
     id: 'UA-155216702-1'
   },
