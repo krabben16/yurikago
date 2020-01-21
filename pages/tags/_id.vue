@@ -14,8 +14,11 @@ export default {
     Article
   },
   async asyncData (context) {
-    const matchList = await context.app.$axios.$get(`/query/articles/tag/${context.params.id}`)
-    const tag = await context.app.$axios.$get(`/query/tags/${context.params.id}`)
+    let response = null
+    response = await context.app.$axiosInstance.get(`/api/articles/tag-${context.params.id}`)
+    const matchList = response.data
+    response = await context.app.$axiosInstance.get(`/api/tags/${context.params.id}`)
+    const tag = response.data
     return {
       tag: tag,
       matchList: matchList.reverse()

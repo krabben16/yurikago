@@ -13,10 +13,10 @@ export default {
   components: {
     Article
   },
-  async asyncData ({ $axios }) {
-    const articleList = await $axios.$get('/query/articleList')
+  async asyncData ({ app }) {
+    const { data } = await app.$axiosInstance.get(`/api/articles`)
     return {
-      articles: articleList.reverse()
+      articles: data.reverse()
     }
   },
   data () {
