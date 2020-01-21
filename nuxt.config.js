@@ -1,4 +1,4 @@
-import { axiosInstance } from './plugins/axios'
+import axios from 'axios'
 
 export default {
   mode: 'universal',
@@ -86,12 +86,15 @@ export default {
     routes: async () => {
       let path = []
 
-      const response1 = await axiosInstance.get(`/api/articles`)
+      // この関数はサーバーサイドで実行されるのでAPIサーバーのURLはクライアントから見えない
+      const baseURL = process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10'
+
+      const response1 = await axios.get(`${baseURL}/articles`)
       path.push(...response1.data.map(v => {
         return `/articles/${v.id}`
       }))
 
-      const response2 = await axiosInstance.get(`/api/tags`)
+      const response2 = await axios.get(`${baseURL}/tags`)
       path.push(...response2.data.map(v => {
         return `/tags/${v.id}`
       }))
