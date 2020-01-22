@@ -22,6 +22,16 @@
             </nuxt-link>
           </div>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <nuxt-link v-for="(category, k) in categories" :key="k" class="dropdown-item" :to="{ name: 'articles-category-id', params: { id: category.id } }">
+              {{ category.name }} ({{ category.article_count }})
+            </nuxt-link>
+          </div>
+        </li>
         <li class="nav-item">
           <nuxt-link :to="{ name: 'arigato' }" class="nav-link">&#x1f64f;</nuxt-link>
         </li>
@@ -36,15 +46,21 @@ export default {
     async fetchTags () {
       const res = await this.$axios.$get('/api/tags')
       this.tags = res
+    },
+    async fetchCategories () {
+      const res = await this.$axios.$get('/api/categories')
+      this.categories = res
     }
   },
   data () {
     return {
-      tags: null
+      tags: null,
+      categories: null
     }
   },
   mounted () {
     this.fetchTags()
+    this.fetchCategories()
   }
 }
 </script>
