@@ -40,15 +40,19 @@ export default {
 <style lang="scss" scoped>
 /* SP */
 @media screen and (max-width: 575px) {
-  .column {
-    margin-top: 30px;
+  .column:nth-child(n+2) {
+    margin-top: 40px;
+  }
+
+  .row:nth-child(n+2) > .column:nth-child(1) {
+    margin-top: 40px;
   }
 }
 
 /* PC */
 @media screen and (min-width: 576px) {
-  .row {
-    margin-top: 30px;
+  .row:nth-child(n+2) {
+    margin-top: 40px;
   }
 }
 </style>

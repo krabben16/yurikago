@@ -52,6 +52,6 @@ export default {
 <style lang="scss" scoped>
 nav {
   background-color: lightslategray;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 </style>
