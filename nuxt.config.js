@@ -97,11 +97,6 @@ export default {
         return `/articles/${v.id}`
       }))
 
-      const categories = await axios.get(`${baseURL}/categories`)
-      path.push(...categories.data.map(v => {
-        return `/articles/category/${v.id}`
-      }))
-
       const tags = await axios.get(`${baseURL}/tags`)
       path.push(...tags.data.map(v => {
         return `/articles/tag/${v.id}`
