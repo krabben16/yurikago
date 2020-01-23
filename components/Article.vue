@@ -2,8 +2,8 @@
   <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">
     <div class="card">
       <picture v-if="hasImages">
-        <source :srcset="article.images[0].src + '.webp'" type="image/webp">
-        <img class="card-img-top" :src="article.images[0].src + '.png'" :alt="article.images[0].alt">
+        <source :srcset="article.images[0].src + '_t.webp'" type="image/webp">
+        <img class="card-img-top" :src="article.images[0].src + '_t.png'" :alt="article.images[0].alt">
       </picture>
       <div class="card-body">
         <h5 class="card-title">{{ article.title }}</h5>
