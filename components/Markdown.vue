@@ -130,7 +130,7 @@ export default {
 <style lang="scss">
 .markdown-wrapper {
   // 見出し
-  h3, h4, h5, h6 {
+  h2, h3, h4, h5, h6 {
     margin: 30px 0;
   }
 
