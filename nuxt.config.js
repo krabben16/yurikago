@@ -25,12 +25,6 @@ export default {
         body: true
       },
       {
-        src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js',
-        integrity: 'sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49',
-        crossorigin: 'anonymous',
-        body: true
-      },
-      {
         src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
         integrity: 'sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy',
         crossorigin: 'anonymous',
@@ -95,6 +89,11 @@ export default {
       const articles = await axios.get(`${baseURL}/articles`)
       path.push(...articles.data.map(v => {
         return `/articles/${v.id}`
+      }))
+
+      const categories = await axios.get(`${baseURL}/categories`)
+      path.push(...categories.data.map(v => {
+        return `/articles/category/${v.id}`
       }))
 
       const tags = await axios.get(`${baseURL}/tags`)
