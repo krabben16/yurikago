@@ -52,7 +52,7 @@ export default {
             }
           }
 
-          return html;
+          return html
         }
       }
     },
@@ -96,7 +96,7 @@ export default {
       renderer.table = (header, body) => {
         if (body) body = '<tbody>' + body + '</tbody>'
         return `<div class="table-responsive"><table class="table"><thead>${header}</thead>${body}</table></div>`
-      };
+      }
 
       // 中央寄せを解除
       renderer.tablecell = (content, flags) => {
@@ -130,7 +130,7 @@ export default {
 <style lang="scss">
 .markdown-wrapper {
   // 見出し
-  h2, h3, h4, h5, h6 {
+  h3, h4, h5, h6 {
     margin: 30px 0;
   }
 

@@ -1,6 +1,14 @@
 <template>
   <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">
     <div class="card">
+      <picture v-if="hasImages">
+        <source :srcset="article.images[0].src + '.webp'" type="image/webp">
+        <img class="card-img-top" :src="article.images[0].src + '.png'" :alt="article.images[0].alt">
+      </picture>
+      <picture v-else>
+        <source srcset="/images/articles/noImages.webp" type="image/webp">
+        <img class="card-img-top" src="/images/articles/noImages.png" alt="noImages">
+      </picture>
       <div class="card-body">
         <h5 class="card-title">{{ article.title }}</h5>
         <h6 class="card-subtitle text-muted">{{ article.posted_at }}</h6>
@@ -13,6 +21,17 @@
 export default {
   props: [
     'article'
-  ]
+  ],
+  computed:{
+    hasImages () {
+      return this.article.images.length > 0
+    }
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+a {
+  text-decoration: none;
+}
+</style>

@@ -5,7 +5,6 @@ body {
 
 .content {
   background-color: white;
-  margin: 50px 0 0 0;
 }
 
 /* SP */
@@ -20,8 +19,4 @@ body {
   .content {
     padding: 40px 40px;
   }
-}
-
-.list {
-  margin: 50px 0 0 0;
 }

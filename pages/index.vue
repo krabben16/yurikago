@@ -1,17 +1,15 @@
 <template>
-  <div class="list">
-    <div v-for="article in articles" :key="article.id" class="article-wrapper">
-      <Article :article="article" />
-    </div>
-  </div>
+  <ArticleList :articles="articles" />
 </template>
 
 <script>
 import Article from '~/components/Article.vue'
+import ArticleList from '~/components/ArticleList.vue'
 
 export default {
   components: {
-    Article
+    Article,
+    ArticleList
   },
   async asyncData ({ $axios }) {
     const res = await $axios.$get('/api/articles')
@@ -40,13 +38,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.article-wrapper {
-  margin-top: 30px;
-  
-  a {
-    text-decoration: none
-  }
-}
-</style>
