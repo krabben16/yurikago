@@ -40,7 +40,14 @@ export default {
 <style lang="scss" scoped>
 /* SP */
 @media screen and (max-width: 575px) {
+  .card {
+    // デフォルトのマージンをリセット
+    margin-bottom: 0;
+  }
 
+  .card:nth-child(n+2) {
+    margin-top: 40px;
+  }
 }
 
 /* PC */
