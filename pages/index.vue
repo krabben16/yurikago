@@ -3,12 +3,10 @@
 </template>
 
 <script>
-import Article from '~/components/Article.vue'
 import ArticleList from '~/components/ArticleList.vue'
 
 export default {
   components: {
-    Article,
     ArticleList
   },
   async asyncData ({ $axios }) {
