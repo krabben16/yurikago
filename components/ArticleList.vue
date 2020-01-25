@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <div class="row" v-for="row in splitArticlesArray" :key="row[0].id">
-      <Article class="column col-12 col-sm-4 mx-auto" v-for="article in row" :key="article.id" :article="article" />
+  <div>
+    <div class="card-deck" v-for="(row, k) in splitArticlesArray" :key="k">
+      <Article v-for="article in row" :key="article.id" :article="article" />
     </div>
   </div>
 </template>
@@ -40,18 +40,12 @@ export default {
 <style lang="scss" scoped>
 /* SP */
 @media screen and (max-width: 575px) {
-  .column:nth-child(n+2) {
-    margin-top: 40px;
-  }
 
-  .row:nth-child(n+2) > .column:nth-child(1) {
-    margin-top: 40px;
-  }
 }
 
 /* PC */
 @media screen and (min-width: 576px) {
-  .row:nth-child(n+2) {
+  .card-deck:nth-child(n+2) {
     margin-top: 40px;
   }
 }

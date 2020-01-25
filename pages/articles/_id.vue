@@ -18,6 +18,7 @@
     <div class="article-body">
       <Markdown :markdownContent="article.markdown"></Markdown>
     </div>
+    <div id="disqus_thread"></div>
   </div>
 </template>
 
