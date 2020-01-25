@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="content">
+    <div class="content-wrapper">
       <div class="article-header">
         <div>{{ article.posted_at }}</div>
         <div class="clearfix">

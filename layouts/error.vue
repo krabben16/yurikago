@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content-wrapper">
     <div class="error-wrapper">
       <h2 v-if="error.statusCode === 404">404 Not Found</h2>
       <h2 v-else>エラーが発生しました</h2>

@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content-wrapper">
     <Markdown :markdownContent="about.markdown"></Markdown>
   </div>
 </template>
