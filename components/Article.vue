@@ -45,15 +45,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-a {
-  text-decoration: none;
-}
-
 .card {
   cursor: pointer;
-}
 
-.card-title {
-  height: 80px;
+  .card-title {
+    height: 80px;
+  }
 }
 </style>
