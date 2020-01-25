@@ -1,8 +1,13 @@
 <template>
   <nav aria-label="breadcrumb">
-    <ol v-if="$route.path != '/'" class="breadcrumb">
+    <ol v-if="$route.path === '/'" class="breadcrumb">
+      <li class="breadcrumb-item" aria-current="page">
+        トップページ
+      </li>
+    </ol>
+    <ol v-else class="breadcrumb">
       <li class="breadcrumb-item">
-        <nuxt-link :to="{ name: 'index' }" class="breadcrumb-item">サイトトップ</nuxt-link>
+        <nuxt-link :to="{ name: 'index' }">トップページ</nuxt-link>
       </li>
       <li class="breadcrumb-item active" aria-current="page">{{ pageName }}</li>
     </ol>
@@ -19,8 +24,14 @@ export default {
 
 <style lang="scss" scoped>
 .breadcrumb {
-  background-color: inherit;
   // デフォルトのマージンをリセット
   margin-bottom: 0;
+  
+  background-color: inherit;
+  margin-top: 50px;
+
+  a {
+    text-decoration: none;
+  }
 }
 </style>

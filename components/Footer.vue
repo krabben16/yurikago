@@ -9,6 +9,5 @@
 <style lang="scss" scoped>
 nav {
   background-color: lightslategray;
-  margin-top: 50px;
 }
 </style>

@@ -35,6 +35,10 @@ export default {
         breadcrumbSchema: ['innerHTML']
       }
     }
+  },
+  mounted () {
+    // パンくず
+    this.$nuxt.$emit('clearPageName')
   }
 }
 </script>

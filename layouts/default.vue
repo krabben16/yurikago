@@ -7,11 +7,7 @@
           <nuxt />
         </div>
       </div>
-      <div class="row no-gutters">
-        <div class="col-12 col-sm-6 mx-auto">
-          <Breadcrumb :pageName="pageName" />
-        </div>
-      </div>
+      <Breadcrumb :pageName="pageName" />
       <Footer />
     </div>
   </div>
@@ -30,16 +26,20 @@ export default {
   },
   methods: {
     setPageName (pageName) {
-      this.pageName = pageName || ''
+      this.pageName = pageName
+    },
+    clearPageName () {
+      this.pageName = null
     }
   },
   created () {
     // イベントリスナー
     this.$nuxt.$on('setPageName', this.setPageName)
+    this.$nuxt.$on('clearPageName', this.clearPageName)
   },
   data () {
     return {
-      pageName: '',
+      pageName: null
     }
   }
 }
