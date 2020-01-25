@@ -101,7 +101,7 @@ export default {
 }
 
 .disqus-wrapper {
-  margin-top: 30px;
+  margin-top: 40px;
   background-color: white;
 }
 

@@ -1,13 +1,14 @@
 <template>
-  <footer class="d-flex justify-content-center align-items-center">
-    <div>
-      &copy; 2020 Hiroki Kawaguchi, Built with <a href="https://ja.nuxtjs.org/" target="_blank">Nuxt.js</a>
-    </div>
-  </footer>
+  <nav class="navbar navbar-expand-sm navbar-dark justify-content-center">
+    <span class="navbar-text">
+      &copy; 2020 Hiroki Kawaguchi, Built with Nuxt.js
+    </span>
+  </nav>
 </template>
 
 <style lang="scss" scoped>
-footer {
-  height: 10vh;
+nav {
+  background-color: lightslategray;
+  margin-top: 50px;
 }
 </style>
