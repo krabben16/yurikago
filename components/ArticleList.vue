@@ -1,7 +1,14 @@
 <template>
-  <div>
-    <div class="card-deck" v-for="(row, k) in splitArticlesArray" :key="k">
-      <Article v-for="article in row" :key="article.id" :article="article" />
+  <div class="container">
+    <div class="row">
+      <div class="column col-12">
+        <Article :article="firstArticle" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="column col-12 col-sm-4" v-for="article in otherArticles" :key="article.id">
+        <Article class="other" :article="article" />
+      </div>
     </div>
   </div>
 </template>
@@ -14,21 +21,11 @@ export default {
     Article
   },
   computed: {
-    splitArticlesArray () {
-      const column_count = 3
-      let table = []
-      let row = []
-      this.articles.map(v => {
-        if (row.length === column_count) {
-          table.push(row)
-          row = []
-        }
-        row.push(v)
-      })
-      if (row.length > 0) {
-        table.push(row)
-      }
-      return table
+    firstArticle () {
+      return this.articles[0]
+    },
+    otherArticles () {
+      return this.articles.slice(1)
     }
   },
   props: [
@@ -38,22 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/* SP */
-@media screen and (max-width: 575px) {
-  .card {
-    // デフォルトのマージンをリセット
-    margin-bottom: 0;
-  }
-
-  .card:nth-child(n+2) {
-    margin-top: 40px;
-  }
-}
-
-/* PC */
-@media screen and (min-width: 576px) {
-  .card-deck:nth-child(n+2) {
-    margin-top: 40px;
-  }
+.other {
+  margin-top: 40px;
 }
 </style>
