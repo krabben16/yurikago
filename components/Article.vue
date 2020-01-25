@@ -1,5 +1,11 @@
 <template>
-  <div class="card" @click="changeRoute(article.id)">
+  <div
+    class="card"
+    v-bind:class="{ shadow: isActive }"
+    @mouseenter="isActive = true"
+    @mouseleave="isActive = false"
+    @click="changeRoute(article.id)"
+  >
     <picture v-if="hasImages">
       <source :srcset="'/images/articles/' + article.id + '/thumbnail.webp'" type="image/webp">
       <img class="card-img-top" :src="'/images/articles/' + article.id + '/thumbnail.png'" alt="thumbnail">
@@ -29,6 +35,11 @@ export default {
     changeRoute (id) {
       this.$router.push(`/articles/${id}`)
     }
+  },
+  data () {
+    return {
+      isActive: false
+    }
   }
 }
 </script>
@@ -36,6 +47,10 @@ export default {
 <style lang="scss" scoped>
 a {
   text-decoration: none;
+}
+
+.card {
+  cursor: pointer;
 }
 
 .card-title {
