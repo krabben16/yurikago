@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="disqus-wrapper">
-      <div id="disqus_thread"></div>
+      <vue-disqus shortname='yurikago-blog' :identifier="$route.path" :url="'https://www.yurikago-blog.com' + $route.path"></vue-disqus>
     </div>
   </div>
 </template>
@@ -61,11 +61,6 @@ export default {
           hid: 'breadcrumbSchema',
           innerHTML: this.$getBreadcrumbSchema(this.article.title, this.$route.path),
           type: 'application/ld+json'
-        },
-        // コメントフォーム
-        {
-          src: '/js/disqus.js',
-          body: true
         }
       ],
       __dangerouslyDisableSanitizersByTagID: {
