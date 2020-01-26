@@ -6,11 +6,11 @@
         <div class="clearfix">
           <div class="tags">
             <nuxt-link
-              v-for="tag in article.tags"
-              :key="tag.id"
-              :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
+              v-for="articleTag in article.article_tags"
+              :key="articleTag.id"
+              :to="{ name: 'articles-tag-id', params: { id: articleTag.id } }"
               class="badge badge-light">
-              {{ tag.name }}
+              {{ articleTag.tag.name }}
             </nuxt-link>
           </div>
         </div>
