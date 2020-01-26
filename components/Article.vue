@@ -6,9 +6,9 @@
     @mouseleave="isActive = false"
     @click="changeRoute(article.id)"
   >
-    <picture v-if="hasThumbnail">
-      <source :srcset="'/images/articles/' + article.id + '/thumbnail.webp'" type="image/webp">
-      <img class="card-img-top" :src="'/images/articles/' + article.id + '/thumbnail.png'" alt="thumbnail">
+    <picture v-if="article.article_thumbnail">
+      <source :srcset="article.article_thumbnail.src + '.webp'" type="image/webp">
+      <img class="card-img-top" :src="article.article_thumbnail.src + '.png'" :alt="article.article_thumbnail.alt">
     </picture>
     <div class="card-body">
       <h5 class="card-title">{{ article.title }}</h5>
@@ -22,12 +22,6 @@ export default {
   props: [
     'article'
   ],
-  computed: {
-    hasThumbnail () {
-      // TODO バックエンドでサムネイル画像の存在を確認する
-      return this.article.images.length > 0
-    }
-  },
   methods: {
     changeRoute (id) {
       this.$router.push(`/articles/${id}`)
