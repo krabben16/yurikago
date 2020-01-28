@@ -3,8 +3,11 @@
     <div class="container-fluid">
       <Header />
       <div class="row no-gutters">
-        <div class="col-12 col-sm-6 mx-auto">
+        <div class="col-12 col-sm-6 ml-sm-auto">
           <nuxt />
+        </div>
+        <div class="col-12 col-sm-3 mx-sm-auto">
+          <Navigation />
         </div>
       </div>
       <Breadcrumb :pageName="pageName" />
@@ -17,12 +20,14 @@
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
 import Breadcrumb from '~/components/Breadcrumb.vue'
+import Navigation from '~/components/Navigation.vue'
 
 export default {
   components: {
     Header,
     Footer,
-    Breadcrumb
+    Breadcrumb,
+    Navigation
   },
   methods: {
     setPageName (pageName) {
