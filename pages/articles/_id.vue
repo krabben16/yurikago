@@ -29,6 +29,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Markdown from '~/components/Markdown.vue'
+import zenburn from 'highlight.js/styles/zenburn.css'
 
 export default {
   components: {
@@ -55,6 +56,13 @@ export default {
   head () {
     return {
       title: this.article.title,
+      link: [
+        {
+          rel: 'stylesheet',
+          innerHTML: '/css/articles/zenburn.css',
+          type: 'text/css'
+        }
+      ],
       script: [
         // 構造化マークアップ
         {

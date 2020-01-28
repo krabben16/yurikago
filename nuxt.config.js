@@ -41,7 +41,6 @@ export default {
   */
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
-    'highlight.js/styles/zenburn.css',
     'assets/css/default.css'
   ],
   /*
