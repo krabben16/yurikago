@@ -31,10 +31,6 @@ export default {
 
 <style lang="scss" scoped>
 .list-group {
-  .list-group-item {
-    border: none;
-  }
-
   .tag-link {
     padding: .75rem 2.25rem;
   }

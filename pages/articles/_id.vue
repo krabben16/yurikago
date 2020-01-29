@@ -106,6 +106,9 @@ export default {
 .disqus-wrapper {
   margin-top: 40px;
   background-color: white;
+
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
 }
 
 /* SP */
