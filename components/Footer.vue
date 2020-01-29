@@ -1,13 +1,17 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark justify-content-center">
-    <span class="navbar-text">
-      &copy; 2020 Hiroki Kawaguchi, Built with Nuxt.js
-    </span>
-  </nav>
+  <footer>
+    <div>&copy; 2020 Hiroki Kawaguchi, Built with Nuxt.js</div>
+  </footer>
 </template>
 
-<style lang="scss" scoped>
-nav {
+<style lang="scss" scope>
+footer {
   background-color: lightslategray;
+}
+
+footer div {
+  line-height: 50px;
+  text-align: center;
+  color: white;
 }
 </style>
