@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div class="text-light">&copy; 2020 Hiroki Kawaguchi, Built with Nuxt.js</div>
+    <div class="text-white">&copy; 2020 Hiroki Kawaguchi, Built with Nuxt.js</div>
   </footer>
 </template>
 
