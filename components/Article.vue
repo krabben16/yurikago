@@ -1,7 +1,7 @@
 <template>
   <div
     class="card"
-    v-bind:class="{ shadow: isActive }"
+    v-bind:class="{ 'shadow-sm': isActive }"
     @mouseenter="isActive = true"
     @mouseleave="isActive = false"
     @click="changeRoute(article.id)"

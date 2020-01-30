@@ -50,7 +50,5 @@ export default {
   // デフォルトのパディングをリセット
   padding-left: 0;
   padding-right: 0;
-
-  background-color: ghostwhite;
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
   <footer>
-    <div class="text-white">&copy; 2020 Hiroki Kawaguchi, Built with Nuxt.js</div>
+    <div class="text-dark">&copy; 2020 Hiroki Kawaguchi, Built with Nuxt.js</div>
   </footer>
 </template>
 
 <style lang="scss" scope>
 footer {
-  background-color: lightslategray;
+
 }
 
 footer div {

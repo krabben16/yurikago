@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
+  <nav class="navbar navbar-expand-sm navbar-light">
     <nuxt-link :to="{ name: 'index' }" class="navbar-brand">Yurikago Blog</nuxt-link>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -51,7 +51,6 @@ export default {
 
 <style lang="scss" scoped>
 nav {
-  background-color: lightslategray;
   margin-bottom: 50px;
 }
 </style>
