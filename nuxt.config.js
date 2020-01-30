@@ -105,7 +105,7 @@ export default {
     short_name: 'Yurikago Blog'
   },
   workbox: {
-    dev: true
+    dev: process.env.NODE_ENV === 'production' ? false : true
   },
   /*
   ** Build configuration

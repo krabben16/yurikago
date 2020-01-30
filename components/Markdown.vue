@@ -104,12 +104,6 @@ export default {
         return `<${type}>${content}</${type}>`
       }
 
-      // 引用に不等号を追加
-      renderer.blockquote = quote => {
-        const result = /\>(.+)\</.exec(quote)
-        return `<blockquote><p>&gt; ${result[1]}</p></blockquote>`
-      }
-
       return marked(this.markdownContent, { renderer: renderer })
     }
   },
@@ -132,6 +126,8 @@ export default {
   // 見出し
   h2, h3, h4, h5, h6 {
     margin: 30px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(0,0,0,.25);
   }
 
   li {
@@ -147,7 +143,20 @@ export default {
   }
 
   blockquote {
+    p {
+      // デフォルトのマージンをリセット
+      margin-bottom: 0;
+    }
+
     color: grey;
+    padding: 10px 20px;
+
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+
+    a {
+      color: grey;
+    }
   }
 }
 </style>

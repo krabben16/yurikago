@@ -104,24 +104,7 @@ export default {
 }
 
 .disqus-wrapper {
-  margin-top: 40px;
+  margin-top: 60px;
   background-color: white;
-
-  border: 1px solid rgba(0,0,0,.125);
-  border-radius: .25rem;
-}
-
-/* SP */
-@media screen and (max-width: 575px) {
-  .disqus-wrapper {
-    padding: 40px 20px;
-  }
-}
-
-/* PC */
-@media screen and (min-width: 576px) {
-  .disqus-wrapper {
-    padding: 40px 40px;
-  }
 }
 </style>
