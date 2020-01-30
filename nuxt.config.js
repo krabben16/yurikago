@@ -62,7 +62,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/google-analytics',
     '@nuxtjs/proxy',
-    '@nuxtjs/pwa',
     '@nuxtjs/sitemap'
   ],
   axios: {
@@ -99,13 +98,6 @@ export default {
 
       return path
     }
-  },
-  manifest: {
-    name: 'Yurikago Blog',
-    short_name: 'Yurikago Blog'
-  },
-  workbox: {
-    dev: process.env.NODE_ENV === 'production' ? false : true
   },
   /*
   ** Build configuration

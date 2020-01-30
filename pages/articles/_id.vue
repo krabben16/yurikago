@@ -29,7 +29,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Markdown from '~/components/Markdown.vue'
-import zenburn from 'highlight.js/styles/zenburn.css'
 
 export default {
   components: {
@@ -59,7 +58,7 @@ export default {
       link: [
         {
           rel: 'stylesheet',
-          innerHTML: '/css/articles/zenburn.css',
+          href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/zenburn.min.css',
           type: 'text/css'
         }
       ],
