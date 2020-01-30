@@ -101,7 +101,11 @@ export default {
     }
   },
   manifest: {
-    name: 'Yurikago Blog'
+    name: 'Yurikago Blog',
+    short_name: 'Yurikago Blog'
+  },
+  workbox: {
+    dev: true
   },
   /*
   ** Build configuration
