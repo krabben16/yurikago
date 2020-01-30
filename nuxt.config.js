@@ -100,6 +100,9 @@ export default {
       return path
     }
   },
+  manifest: {
+    name: 'Yurikago Blog'
+  },
   /*
   ** Build configuration
   */
