@@ -17,6 +17,7 @@
     "bootstrap": "^4.4.1",
     "highlight.js": "^9.18.0",
     "markdown-it": "^10.0.0",
+    "markdown-it-footnote": "^3.0.2",
     "node-sass": "^4.13.0",
     "nuxt": "^2.0.0",
     "sass-loader": "^8.0.0",

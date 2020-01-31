@@ -4,6 +4,7 @@
 
 <script>
 import mdit from 'markdown-it'
+import footnote from 'markdown-it-footnote'
 import hljs from 'highlight.js'
 
 export default {
@@ -25,7 +26,13 @@ export default {
         }
         return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
       }
-    })
+    }).use(footnote)
+
+    // デフォルトのhrタグを削除する
+    md.renderer.rules.footnote_block_open = () => {
+      return '<section class="footnotes"><ol class="footnotes-list">'
+    }
+
     this.htmlContent = md.render(this.markdownContent)
   }
 }
@@ -74,6 +81,10 @@ export default {
     a {
       color: gray;
     }
+  }
+
+  .footnotes {
+    margin-top: 60px;
   }
 }
 </style>
