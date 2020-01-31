@@ -1,15 +1,12 @@
 <template>
   <div
-    class="card"
-    v-bind:class="{ 'shadow-sm': isActive }"
+    class="link-wrapper"
     @mouseenter="isActive = true"
     @mouseleave="isActive = false"
     @click="changeRoute(article.id)"
   >
-    <div class="card-body">
-      <h5 class="card-title">{{ article.title }}</h5>
-      <h6 class="card-subtitle text-muted">{{ article.posted_at }}</h6>
-    </div>
+    <h5 v-bind:class="{ 'text-info': isActive }">{{ article.title }}</h5>
+    <h6 class="text-muted">{{ article.posted_at }}</h6>
   </div>
 </template>
 
@@ -32,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card {
+.link-wrapper {
   cursor: pointer;
 }
 </style>

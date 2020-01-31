@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row" v-for="article in articles" :key="article.id">
-      <div class="column col-12 col-sm-10 mx-sm-auto">
+      <div class="col-12 col-sm-10 mx-sm-auto">
         <Article :article="article" />
       </div>
     </div>

@@ -35,15 +35,11 @@ export default {
 .markdown-wrapper {
   h2, h3, h4, h5, h6 {
     margin-bottom: 30px;
-    padding-bottom: 10px;
   }
 
   h2, h3 {
-    border-bottom: 1px solid rgba(0,0,0,.25);
-  }
-
-  h4, h5, h6 {
-    border-bottom: 1px dashed rgba(0,0,0,.25);
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
   }
 
   h2:nth-child(n+2),
