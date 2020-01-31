@@ -7,7 +7,7 @@
     </ol>
     <ol v-else class="breadcrumb">
       <li class="breadcrumb-item">
-        <nuxt-link :to="{ name: 'index' }">トップページ</nuxt-link>
+        <nuxt-link :to="{ name: 'index' }" class="text-info">トップページ</nuxt-link>
       </li>
       <li class="breadcrumb-item active" aria-current="page">{{ pageName }}</li>
     </ol>
