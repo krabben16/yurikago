@@ -65,13 +65,13 @@ export default {
 
 <style lang="scss">
 .markdown-wrapper {
-  h2, h3, h4, h5, h6 {
-    margin-bottom: 30px;
-  }
-
   h2, h3 {
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  }
+
+  h2, h3, h4, h5, h6 {
+    margin-bottom: 30px;
   }
 
   h2:nth-child(n+2),
@@ -110,6 +110,15 @@ export default {
 
   .footnotes {
     margin-top: 60px;
+  }
+
+  // デフォルトのボーダーを削除
+  .table {
+    thead {
+      th {
+        border-bottom: none;
+      }
+    }
   }
 }
 </style>
