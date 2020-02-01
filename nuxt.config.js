@@ -76,6 +76,12 @@ export default {
       pathRewrite: {
         '^/api' : '/'
       }
+    },
+    '/cdn': {
+      target: process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10',
+      pathRewrite: {
+        '^/cdn' : '/'
+      }
     }
   },
   sitemap: {
