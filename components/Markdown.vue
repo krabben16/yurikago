@@ -28,7 +28,32 @@ export default {
       }
     }).use(footnote)
 
-    // デフォルトのhrタグを削除する
+  　// 外部リンクを別タブで開く
+    const defaultLinkOpen = md.renderer.rules.link_open || function(tokens, idx, options, env, self) {
+      return self.renderToken(tokens, idx, options)
+    }
+
+    md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+      const hrefIndex = tokens[idx].attrIndex('href')
+      const href = tokens[idx].attrs[hrefIndex][1]
+
+      if (href.slice(0, 1) !== '/') {
+        tokens[idx].attrPush(['target', '_blank'])
+      }
+
+      return defaultLinkOpen(tokens, idx, options, env, self)
+    }
+
+    // テーブルにbootstrapのクラスを付与
+    md.renderer.rules.table_open = () => {
+      return '<div class="table-responsive"><table class="table">'
+    }
+    
+    md.renderer.rules.table_close = () => {
+      return '</table></div>'
+    }
+
+    // 脚注 デフォルトのhrタグを削除する
     md.renderer.rules.footnote_block_open = () => {
       return '<section class="footnotes"><ol class="footnotes-list">'
     }
