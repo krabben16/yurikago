@@ -29,9 +29,5 @@ export default {
   
   background-color: inherit;
   margin-top: 50px;
-
-  a {
-    text-decoration: none;
-  }
 }
 </style>
