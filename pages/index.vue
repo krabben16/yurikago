@@ -1,18 +1,28 @@
 <template>
-  <ArticleList :articles="articles" />
+  <div>
+    <ArticleList :articles="articles" />
+    <Pagenation :activePage="activePage" :articleTotalCount="articleTotalCount" />
+  </div>
 </template>
 
 <script>
 import ArticleList from '~/components/ArticleList.vue'
+import Pagenation from '~/components/Pagenation.vue'
 
 export default {
   components: {
-    ArticleList
+    ArticleList,
+    Pagenation
   },
-  async asyncData ({ $axios }) {
-    const res = await $axios.$get('/api/articles')
+  async asyncData (context) {
+    // NaN => Not a Number
+    const p = isNaN(context.query.p) ? 1 : Number(context.query.p)
+    const articles = await context.app.$axios.$get('/api/articles?p=' + p)
+    const count = await context.app.$axios.$get('/api/articles/count')
     return {
-      articles: res.reverse()
+      articles: articles,
+      activePage: p,
+      articleTotalCount: count
     }
   },
   data () {
