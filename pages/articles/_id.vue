@@ -85,7 +85,7 @@ export default {
 <style lang="scss" scoped>
 .article-header {
   h2 {
-    margin: 30px 0;
+    margin: 40px 0;
   }
 
   .clearfix::after {

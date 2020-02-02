@@ -89,14 +89,14 @@ export default {
       let path = []
 
       // この関数はサーバーサイドで実行されるのでAPIサーバーのURLはクライアントから見えない
-      const baseURL = process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10'
+      const baseUrl = process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10'
 
-      const articles = await axios.get(`${baseURL}/articles`)
+      const articles = await axios.get(`${baseUrl}/articles`)
       path.push(...articles.data.map(v => {
         return `/articles/${v.id}`
       }))
 
-      const tags = await axios.get(`${baseURL}/tags`)
+      const tags = await axios.get(`${baseUrl}/tags`)
       path.push(...tags.data.map(v => {
         return `/articles/tag/${v.id}`
       }))

@@ -65,21 +65,21 @@ export default {
 
 <style lang="scss">
 .markdown-wrapper {
-  h2, h3 {
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  h3 {
+    background-color: #f8f9fa;
+    padding: 10px 10px 10px 20px;
+    border-left: 5px solid #17a2b8;
   }
 
-  h2, h3, h4, h5, h6 {
-    margin-bottom: 30px;
+  h3, h4, h5, h6 {
+    margin-bottom: 40px;
   }
 
-  h2:nth-child(n+2),
   h3:nth-child(n+2),
   h4:nth-child(n+2),
   h5:nth-child(n+2),
   h6:nth-child(n+2) {
-    margin-top: 30px;
+    margin-top: 40px;
   }
 
   li {
