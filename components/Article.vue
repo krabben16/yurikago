@@ -5,7 +5,7 @@
     @mouseleave="isActive = false"
     @click="changeRoute(article.id)"
   >
-    <h5 v-bind:class="{ 'text-info': isActive }">{{ article.title }}</h5>
+    <h5 v-bind:class="{ 'text-theme': isActive }">{{ article.title }}</h5>
     <h6 class="text-muted">{{ article.posted_at }}</h6>
   </div>
 </template>

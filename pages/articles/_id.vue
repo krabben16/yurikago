@@ -9,7 +9,7 @@
               v-for="articleTag in article.article_tags"
               :key="articleTag.tag_id"
               :to="{ name: 'articles-tag-id', params: { id: articleTag.tag_id } }"
-              class="badge badge-light">
+              class="badge badge-dark">
               {{ articleTag.tag.name }}
             </nuxt-link>
           </div>

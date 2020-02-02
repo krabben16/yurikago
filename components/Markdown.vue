@@ -68,7 +68,7 @@ export default {
   h3 {
     background-color: #f8f9fa;
     padding: 10px 10px 10px 20px;
-    border-left: 5px solid #17a2b8;
+    border-left: 3px solid lightseagreen;
   }
 
   h3, h4, h5, h6 {
