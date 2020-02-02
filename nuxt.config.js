@@ -61,7 +61,6 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/google-analytics',
-    '@nuxtjs/proxy',
     '@nuxtjs/sitemap'
   ],
   axios: {
