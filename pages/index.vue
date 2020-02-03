@@ -17,8 +17,8 @@ export default {
   async asyncData (context) {
     // NaN => Not a Number
     const p = isNaN(context.query.p) ? 1 : Number(context.query.p)
-    const articles = await context.app.$axios.$get('/api/articles?p=' + p)
-    const count = await context.app.$axios.$get('/api/articles/count')
+    const articles = await context.app.$axios.$get('/articles?p=' + p)
+    const count = await context.app.$axios.$get('/articles/count')
     return {
       articles: articles,
       activePage: p,

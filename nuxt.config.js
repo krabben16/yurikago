@@ -64,24 +64,10 @@ export default {
     '@nuxtjs/sitemap'
   ],
   axios: {
-    proxy: true
+    baseURL: process.env.NODE_ENV === 'production' ? 'https://api.yurikago-blog.com' : 'http://homestead.test'
   },
   googleAnalytics: {
     id: 'UA-155216702-1'
-  },
-  proxy: {
-    '/api': {
-      target: process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10',
-      pathRewrite: {
-        '^/api' : '/'
-      }
-    },
-    '/cdn': {
-      target: process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10',
-      pathRewrite: {
-        '^/cdn' : '/'
-      }
-    }
   },
   sitemap: {
     hostname: 'https://www.yurikago-blog.com',
@@ -89,7 +75,7 @@ export default {
       let path = []
 
       // この関数はサーバーサイドで実行されるのでAPIサーバーのURLはクライアントから見えない
-      const baseUrl = process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10'
+      const baseUrl = process.env.NODE_ENV === 'production' ? 'https://api.yurikago-blog.com' : 'http://homestead.test'
 
       const articles = await axios.get(`${baseUrl}/articles`)
       path.push(...articles.data.map(v => {
@@ -113,5 +99,27 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  generate: {
+    // 動的なパラメーターを用いたルートを生成
+    routes: async () => {
+      let path = []
+
+      const baseUrl = process.env.NODE_ENV === 'production' ? 'https://api.yurikago-blog.com' : 'http://homestead.test'
+
+      const articles = await axios.get(`${baseUrl}/articles`)
+      path.push(...articles.data.map(v => {
+        return `/articles/${v.id}`
+      }))
+
+      const tags = await axios.get(`${baseUrl}/tags`)
+      path.push(...tags.data.map(v => {
+        return `/articles/tag/${v.id}`
+      }))
+
+      return path
+    },
+    // エラー発生時に 200.html ではなく 404.html を表示する
+    fallback: true
   }
 }
