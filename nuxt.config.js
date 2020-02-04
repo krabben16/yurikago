@@ -87,6 +87,13 @@ export default {
         return `/articles/tag/${v.id}`
       }))
 
+      const totalArticleCount = await axios.get(`${baseUrl}/articles/count`)
+      const maxArticleCount = 10
+      const maxPageCount = Math.ceil(totalArticleCount.data / maxArticleCount)
+      path.push(...Array.from(Array(maxPageCount).keys()).map(v => {
+        return `/articles/list/${v + 1}`
+      }))
+
       return path
     }
   },
@@ -115,6 +122,13 @@ export default {
       const tags = await axios.get(`${baseUrl}/tags`)
       path.push(...tags.data.map(v => {
         return `/articles/tag/${v.id}`
+      }))
+
+      const totalArticleCount = await axios.get(`${baseUrl}/articles/count`)
+      const maxArticleCount = 10
+      const maxPageCount = Math.ceil(totalArticleCount.data / maxArticleCount)
+      path.push(...Array.from(Array(maxPageCount).keys()).map(v => {
+        return `/articles/list/${v + 1}`
       }))
 
       return path
