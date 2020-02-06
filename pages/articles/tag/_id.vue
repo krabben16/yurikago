@@ -1,5 +1,5 @@
 <template>
-  <ArticleList :articles="matchList" />
+  <ArticleList :articles="articles" />
 </template>
 
 <script>
@@ -10,11 +10,11 @@ export default {
     ArticleList
   },
   async asyncData (context) {
-    const matchList = await context.app.$axios.$get(`/articles/tag/${context.params.id}`)
-    const tag = await context.app.$axios.$get(`/tags/${context.params.id}`)
+    const articles = await context.app.$axios.get(`/articles/tag/${context.params.id}`)
+    const tag = await context.app.$axios.get(`/tags/${context.params.id}`)
     return {
-      tag: tag,
-      matchList: matchList.reverse()
+      tag: tag.data,
+      articles: articles.data.reverse()
     }
   },
   head () {

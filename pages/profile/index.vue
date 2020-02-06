@@ -12,9 +12,9 @@ export default {
     Markdown
   },
   async asyncData ({ $axios }) {
-    const res = await $axios.$get('/profile')
+    const profile = await $axios.get('/profile')
     return {
-      profile: res
+      profile: profile.data
     }
   },
   data () {

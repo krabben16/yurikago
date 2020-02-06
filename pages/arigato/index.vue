@@ -12,9 +12,9 @@ export default {
     Markdown
   },
   async asyncData ({ $axios }) {
-    const res = await $axios.$get('/arigato')
+    const arigato = await $axios.get('/arigato')
     return {
-      arigato: res
+      arigato: arigato.data
     }
   },
   data () {

@@ -16,12 +16,12 @@ export default {
   },
   async asyncData (context) {
     const page = 1
-    const articles = await context.app.$axios.$get('/articles?p=' + page)
-    const count = await context.app.$axios.$get('/articles/count')
+    const articles = await context.app.$axios.get(`/articles?p=${page}`)
+    const count = await context.app.$axios.get('/articles/count')
     return {
       activePage: page,
-      articles: articles,
-      totalArticleCount: count
+      articles: articles.data,
+      totalArticleCount: count.data
     }
   },
   data () {

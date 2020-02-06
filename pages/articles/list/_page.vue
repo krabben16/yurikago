@@ -18,12 +18,12 @@ export default {
     // NaN = Not a Number
     // typeof context.params.page => string
     const page = isNaN(context.params.page) ? 1 : parseInt(context.params.page)
-    const articles = await context.app.$axios.$get('/articles?p=' + page)
-    const count = await context.app.$axios.$get('/articles/count')
+    const articles = await context.app.$axios.get(`/articles?p=${page}`)
+    const count = await context.app.$axios.get('/articles/count')
     return {
       activePage: page,
-      articles: articles,
-      totalArticleCount: count
+      articles: articles.data,
+      totalArticleCount: count.data
     }
   },
   data() {

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './plugins/axios.js'
 
 export default {
   mode: 'universal',
@@ -53,7 +53,8 @@ export default {
   */
   plugins: [
     '~/plugins/breadcrumb.js',
-    '~/plugins/disqus.js'
+    '~/plugins/disqus.js',
+    '~/plugins/axios.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -64,13 +65,9 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios',
     '@nuxtjs/google-analytics',
     '@nuxtjs/sitemap'
   ],
-  axios: {
-    baseURL: process.env.NODE_ENV === 'production' ? 'https://api.yurikago-blog.com' : 'http://homestead.test'
-  },
   googleAnalytics: {
     id: 'UA-155216702-1'
   },
@@ -79,20 +76,17 @@ export default {
     routes: async () => {
       let path = []
 
-      // この関数はサーバーサイドで実行されるのでAPIサーバーのURLはクライアントから見えない
-      const baseUrl = process.env.NODE_ENV === 'production' ? 'https://api.yurikago-blog.com' : 'http://homestead.test'
-
-      const articles = await axios.get(`${baseUrl}/articles`)
+      const articles = await axios.get('/articles')
       path.push(...articles.data.map(v => {
         return `/articles/${v.id}`
       }))
 
-      const tags = await axios.get(`${baseUrl}/tags`)
+      const tags = await axios.get('/tags')
       path.push(...tags.data.map(v => {
         return `/articles/tag/${v.id}`
       }))
 
-      const totalArticleCount = await axios.get(`${baseUrl}/articles/count`)
+      const totalArticleCount = await axios.get('/articles/count')
       const maxArticleCount = 10
       const maxPageCount = Math.ceil(totalArticleCount.data / maxArticleCount)
       path.push(...Array.from(Array(maxPageCount).keys()).map(v => {
@@ -117,19 +111,17 @@ export default {
     routes: async () => {
       let path = []
 
-      const baseUrl = process.env.NODE_ENV === 'production' ? 'https://api.yurikago-blog.com' : 'http://homestead.test'
-
-      const articles = await axios.get(`${baseUrl}/articles`)
+      const articles = await axios.get('/articles')
       path.push(...articles.data.map(v => {
         return `/articles/${v.id}`
       }))
 
-      const tags = await axios.get(`${baseUrl}/tags`)
+      const tags = await axios.get('/tags')
       path.push(...tags.data.map(v => {
         return `/articles/tag/${v.id}`
       }))
 
-      const totalArticleCount = await axios.get(`${baseUrl}/articles/count`)
+      const totalArticleCount = await axios.get('/articles/count')
       const maxArticleCount = 10
       const maxPageCount = Math.ceil(totalArticleCount.data / maxArticleCount)
       path.push(...Array.from(Array(maxPageCount).keys()).map(v => {

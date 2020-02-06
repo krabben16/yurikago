@@ -41,10 +41,10 @@ export default {
     ...mapActions('articles', ['changeLandingArticleID'])
   },
   async asyncData (context) {
-    const res = await context.app.$axios.$get(`/articles/${context.params.id}`)
+    const article = await context.app.$axios.get(`/articles/${context.params.id}`)
     return {
       id: context.params.id,
-      article: res
+      article: article.data
     }
   },
   created () {

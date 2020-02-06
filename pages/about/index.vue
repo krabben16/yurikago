@@ -12,9 +12,9 @@ export default {
     Markdown
   },
   async asyncData ({ $axios }) {
-    const res = await $axios.$get('/about')
+    const about = await $axios.get('/about')
     return {
-      about: res
+      about: about.data
     }
   },
   data () {

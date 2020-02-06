@@ -34,7 +34,8 @@
 export default {
   methods: {
     async fetchTags () {
-      this.tags = await this.$axios.$get('/tags')
+      const tags = await this.$axios.get('/tags')
+      this.tags = tags.data
     }
   },
   data () {
