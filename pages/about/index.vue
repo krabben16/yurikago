@@ -11,8 +11,8 @@ export default {
   components: {
     Markdown
   },
-  async asyncData ({ $axios }) {
-    const about = await $axios.get('/about')
+  async asyncData (context) {
+    const about = await context.app.$axios.get('/about')
     return {
       about: about.data
     }

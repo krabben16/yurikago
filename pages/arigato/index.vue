@@ -11,8 +11,8 @@ export default {
   components: {
     Markdown
   },
-  async asyncData ({ $axios }) {
-    const arigato = await $axios.get('/arigato')
+  async asyncData (context) {
+    const arigato = await context.app.$axios.get('/arigato')
     return {
       arigato: arigato.data
     }

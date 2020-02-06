@@ -11,8 +11,8 @@ export default {
   components: {
     Markdown
   },
-  async asyncData ({ $axios }) {
-    const profile = await $axios.get('/profile')
+  async asyncData (context) {
+    const profile = await context.app.$axios.get('/profile')
     return {
       profile: profile.data
     }
