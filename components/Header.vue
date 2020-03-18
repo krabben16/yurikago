@@ -17,7 +17,7 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item nav-item-github">
           <a href="https://github.com/w9uZDFEYnT/yurikago" target="_blank">
             <picture>
               <source srcset="/images/common/GitHub-Mark-32px.webp" type="image/webp">
@@ -33,5 +33,11 @@
 <style lang="scss" scoped>
 nav {
   margin-bottom: 50px;
+
+  @media screen and (max-width: 575px) {
+    .nav-item-github {
+      display: none;
+    }
+  }
 }
 </style>
