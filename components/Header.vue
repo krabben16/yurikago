@@ -19,7 +19,10 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a href="https://github.com/w9uZDFEYnT/yurikago" target="_blank">
-            <img src="/images/common/GitHub-Mark-32px.png" alt="GitHub" />
+            <picture>
+              <source srcset="/images/common/GitHub-Mark-32px.webp" type="image/webp">
+              <img src="/images/common/GitHub-Mark-32px.png" alt="GitHub">
+            </picture>
           </a>
         </li>
       </ul>
