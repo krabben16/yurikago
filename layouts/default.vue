@@ -7,7 +7,7 @@
           <nuxt />
         </div>
       </div>
-      <Breadcrumb :pageName="pageName" />
+      <Breadcrumb />
       <Footer />
     </div>
   </div>
@@ -23,24 +23,6 @@ export default {
     Header,
     Footer,
     Breadcrumb
-  },
-  data() {
-    return {
-      pageName: null
-    }
-  },
-  created() {
-    // イベントリスナー
-    this.$nuxt.$on("setPageName", this.setPageName)
-    this.$nuxt.$on("clearPageName", this.clearPageName)
-  },
-  methods: {
-    setPageName(pageName) {
-      this.pageName = pageName
-    },
-    clearPageName() {
-      this.pageName = null
-    }
   }
 }
 </script>

@@ -1,22 +1,27 @@
 <template>
   <nav aria-label="breadcrumb">
-    <ol v-if="$route.path === '/'" class="breadcrumb">
-      <li class="breadcrumb-item" aria-current="page">
-        トップページ
+    <ol class="breadcrumb">
+      <li
+        v-for="(v, k) in breadcrumbItemList"
+        :key="k"
+        class="breadcrumb-item"
+        v-bind:class="{ active: k === breadcrumbItemList.length - 1 }"
+        :aria-current="k === breadcrumbItemList.length - 1 ? 'page' : ''"
+      >
+        <span v-if="k === breadcrumbItemList.length - 1">{{ v.name }}</span>
+        <nuxt-link v-else :to="v.path">{{ v.name }}</nuxt-link>
       </li>
-    </ol>
-    <ol v-else class="breadcrumb">
-      <li class="breadcrumb-item">
-        <nuxt-link :to="{ name: 'index' }">トップページ</nuxt-link>
-      </li>
-      <li class="breadcrumb-item active" aria-current="page">{{ pageName }}</li>
     </ol>
   </nav>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
-  props: ["pageName"]
+  computed: {
+    ...mapGetters("breadcrumb", ["breadcrumbItemList"])
+  }
 }
 </script>
 

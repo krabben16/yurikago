@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
 
@@ -26,16 +27,25 @@ export default {
   },
   data() {
     return {
-      title: "Yurikago Blog"
+      title: "トップページ"
     }
   },
   mounted() {
     // パンくず
-    this.$nuxt.$emit("clearPageName")
+    this.breadcrumbItemList = [
+      {
+        name: this.title,
+        path: "/"
+      }
+    ]
+    this.changeBreadcrumbItemList(this.breadcrumbItemList)
+  },
+  methods: {
+    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
   },
   head() {
     return {
-      titleTemplate: this.title,
+      title: this.title,
       // 構造化マークアップ
       script: [
         {
