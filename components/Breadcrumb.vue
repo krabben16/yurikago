@@ -16,18 +16,15 @@
 
 <script>
 export default {
-  props: [
-    'pageName'
-  ]
+  props: ["pageName"]
 }
 </script>
 
 <style lang="scss" scoped>
 .breadcrumb {
-  // デフォルトのマージンをリセット
-  margin-bottom: 0;
-  
   background-color: inherit;
   margin-top: 50px;
+  // デフォルトのマージンをリセット
+  margin-bottom: 0;
 }
 </style>

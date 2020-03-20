@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import Header from '~/components/Header.vue'
-import Footer from '~/components/Footer.vue'
-import Breadcrumb from '~/components/Breadcrumb.vue'
+import Header from "~/components/Header.vue"
+import Footer from "~/components/Footer.vue"
+import Breadcrumb from "~/components/Breadcrumb.vue"
 
 export default {
   components: {
@@ -24,22 +24,22 @@ export default {
     Footer,
     Breadcrumb
   },
-  methods: {
-    setPageName (pageName) {
-      this.pageName = pageName
-    },
-    clearPageName () {
-      this.pageName = null
-    }
-  },
-  created () {
-    // イベントリスナー
-    this.$nuxt.$on('setPageName', this.setPageName)
-    this.$nuxt.$on('clearPageName', this.clearPageName)
-  },
-  data () {
+  data() {
     return {
       pageName: null
+    }
+  },
+  created() {
+    // イベントリスナー
+    this.$nuxt.$on("setPageName", this.setPageName)
+    this.$nuxt.$on("clearPageName", this.clearPageName)
+  },
+  methods: {
+    setPageName(pageName) {
+      this.pageName = pageName
+    },
+    clearPageName() {
+      this.pageName = null
     }
   }
 }

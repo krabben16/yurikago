@@ -12,15 +12,13 @@
 
 <script>
 export default {
-  props: [
-    'article'
-  ],
+  props: ["article"],
   methods: {
-    changeRoute (id) {
+    changeRoute(id) {
       this.$router.push(`/articles/${id}`)
     }
   },
-  data () {
+  data() {
     return {
       isActive: false
     }

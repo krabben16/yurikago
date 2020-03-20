@@ -6,46 +6,48 @@
 </template>
 
 <script>
-import ArticleList from '~/components/ArticleList.vue'
-import Pagenation from '~/components/Pagenation.vue'
+import ArticleList from "~/components/ArticleList.vue"
+import Pagenation from "~/components/Pagenation.vue"
 
 export default {
   components: {
     ArticleList,
     Pagenation
   },
-  async asyncData (context) {
+  async asyncData(context) {
     const page = 1
     const articles = await context.app.$axios.get(`/articles?p=${page}`)
-    const count = await context.app.$axios.get('/articles/count')
+    const count = await context.app.$axios.get("/articles/count")
     return {
       activePage: page,
       articles: articles.data,
       totalArticleCount: count.data
     }
   },
-  data () {
+  data() {
     return {
-      title: 'Yurikago Blog'
+      title: "Yurikago Blog"
     }
   },
-  head () {
+  mounted() {
+    // パンくず
+    this.$nuxt.$emit("clearPageName")
+  },
+  head() {
     return {
       titleTemplate: this.title,
       // 構造化マークアップ
-      script: [{
-        hid: 'breadcrumbSchema',
-        innerHTML: this.$getBreadcrumbSchema(this.title, this.$route.path),
-        type: 'application/ld+json'
-      }],
+      script: [
+        {
+          hid: "breadcrumbSchema",
+          innerHTML: this.$getBreadcrumbSchema(this.title, this.$route.path),
+          type: "application/ld+json"
+        }
+      ],
       __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ['innerHTML']
+        breadcrumbSchema: ["innerHTML"]
       }
     }
-  },
-  mounted () {
-    // パンくず
-    this.$nuxt.$emit('clearPageName')
   }
 }
 </script>

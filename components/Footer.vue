@@ -6,11 +6,9 @@
 
 <style lang="scss" scope>
 footer {
-
-}
-
-footer div {
-  line-height: 50px;
-  text-align: center;
+  div {
+    line-height: 50px;
+    text-align: center;
+  }
 }
 </style>

@@ -3,13 +3,13 @@
 </template>
 
 <script>
-import ArticleList from '~/components/ArticleList.vue'
+import ArticleList from "~/components/ArticleList.vue"
 
 export default {
   components: {
     ArticleList
   },
-  async asyncData (context) {
+  async asyncData(context) {
     const articles = await context.app.$axios.get(`/articles/tag/${context.params.id}`)
     const tag = await context.app.$axios.get(`/tags/${context.params.id}`)
     return {
@@ -17,23 +17,25 @@ export default {
       articles: articles.data.reverse()
     }
   },
-  head () {
+  mounted() {
+    // パンくず
+    this.$nuxt.$emit("setPageName", this.tag.name)
+  },
+  head() {
     return {
       title: this.tag.name,
       // 構造化マークアップ
-      script: [{
-        hid: 'breadcrumbSchema',
-        innerHTML: this.$getBreadcrumbSchema(this.tag.name, this.$route.path),
-        type: 'application/ld+json'
-      }],
+      script: [
+        {
+          hid: "breadcrumbSchema",
+          innerHTML: this.$getBreadcrumbSchema(this.tag.name, this.$route.path),
+          type: "application/ld+json"
+        }
+      ],
       __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ['innerHTML']
+        breadcrumbSchema: ["innerHTML"]
       }
     }
-  },
-  mounted () {
-    // パンくず
-    this.$nuxt.$emit('setPageName', this.tag.name)
   }
 }
 </script>

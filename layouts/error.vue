@@ -5,18 +5,18 @@
       <h2 v-else>エラーが発生しました</h2>
       <div>
         <pre>
-          　　　　∧ ∧
-          　　　　ﾊ丿ﾊ丿
-          　　　／￣￣＼
-          　　 / ⌒　⌒ ヽ
-          　　｜ へ　へ　|
-          　　/　　　　　|
-          　 /　　　　　 |
-          　｜　　　　 　ヽ
-          　(＼＿＿＿/⌒) |
-          　｜　　　｜　ヽ|
-          　 ＼ ノ　 ＼ ノ|
-          ￣￣￣￣￣￣￣￣￣￣
+        ∧ ∧
+        ﾊ丿ﾊ丿
+      ／￣￣＼
+     / ⌒  ⌒ ヽ
+    ｜ へ  へ  |
+    /          |
+   /           |
+  ｜           ヽ
+  (＼＿＿＿/⌒) |
+  ｜      ｜  ヽ|
+   ＼ ノ   ＼ ノ|
+￣￣￣￣￣￣￣￣￣￣
         </pre>
       </div>
     </div>
@@ -25,18 +25,16 @@
 
 <script>
 export default {
-  props: [
-    'error'
-  ],
-  head () {
-    return {
-      title: 'Error'
-    }
-  },
-  mounted () {
+  props: ["error"],
+  mounted() {
     // パンくず
-    this.$nuxt.$emit('setPageName', 'エラー')
+    this.$nuxt.$emit("setPageName", "エラー")
   },
+  head() {
+    return {
+      title: "Error"
+    }
+  }
 }
 </script>
 

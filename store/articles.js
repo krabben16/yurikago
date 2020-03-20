@@ -10,7 +10,7 @@ export const mutations = {
 
 export const actions = {
   changeLandingArticleID({ commit }, landingArticleID) {
-    commit('setLandingArticleID', landingArticleID)
+    commit("setLandingArticleID", landingArticleID)
   }
 }
 

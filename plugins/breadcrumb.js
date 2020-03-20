@@ -1,7 +1,7 @@
-import Vue from 'vue'
+import Vue from "vue"
 
 Vue.prototype.$getBreadcrumbSchema = (pageName, path) => {
-  if (path === '/') {
+  if (path === "/") {
     return `{
       "@context": "http://schema.org",
       "@type": "BreadcrumbList",
