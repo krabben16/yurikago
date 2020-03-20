@@ -49,17 +49,27 @@ export default {
   computed: {
     ...mapGetters("articles", ["landingArticleID"])
   },
-  created() {
+  mounted() {
     if (!this.landingArticleID) {
       this.changeLandingArticleID(this.id)
     }
-  },
-  mounted() {
+
     // パンくず
-    this.$nuxt.$emit("setPageName", this.article.title)
+    this.breadcrumbItemList = [
+      {
+        name: "トップページ",
+        path: "/"
+      },
+      {
+        name: this.article.title,
+        path: this.$route.path
+      }
+    ]
+    this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
-    ...mapActions("articles", ["changeLandingArticleID"])
+    ...mapActions("articles", ["changeLandingArticleID"]),
+    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
   },
   head() {
     return {

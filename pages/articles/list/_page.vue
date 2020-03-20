@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
 
@@ -34,7 +35,20 @@ export default {
   },
   mounted() {
     // パンくず
-    this.$nuxt.$emit("setPageName", this.titlePrefix + this.activePage)
+    this.breadcrumbItemList = [
+      {
+        name: "トップページ",
+        path: "/"
+      },
+      {
+        name: this.titlePrefix + this.activePage,
+        path: this.$route.path
+      }
+    ]
+    this.changeBreadcrumbItemList(this.breadcrumbItemList)
+  },
+  methods: {
+    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
   },
   head() {
     return {

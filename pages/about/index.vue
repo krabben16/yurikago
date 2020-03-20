@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
 import Markdown from "~/components/Markdown.vue"
 
 export default {
@@ -24,7 +25,20 @@ export default {
   },
   mounted() {
     // パンくず
-    this.$nuxt.$emit("setPageName", this.title)
+    this.breadcrumbItemList = [
+      {
+        name: "トップページ",
+        path: "/"
+      },
+      {
+        name: this.title,
+        path: this.$route.path
+      }
+    ]
+    this.changeBreadcrumbItemList(this.breadcrumbItemList)
+  },
+  methods: {
+    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
   },
   head() {
     return {
