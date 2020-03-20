@@ -53,8 +53,8 @@
         <li class="nav-item nav-item-github">
           <a href="https://github.com/w9uZDFEYnT/yurikago" target="_blank">
             <picture>
-              <source srcset="/images/common/GitHub-Mark-32px.webp" type="image/webp" />
-              <img src="/images/common/GitHub-Mark-32px.png" alt="GitHub" />
+              <source srcset="~/assets/images/common/GitHub-Mark-32px.webp" type="image/webp" />
+              <img src="~/assets/images/common/GitHub-Mark-32px.png" alt="GitHub" />
             </picture>
           </a>
         </li>
