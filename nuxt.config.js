@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { axios } from './plugins/axios.js'
 
 export default {
   mode: 'universal',
@@ -15,18 +15,24 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:300&display=swap&subset=japanese' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+JP:300&display=swap&subset=japanese' },
+      {
+        rel: 'stylesheet',
+        href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css',
+        integrity: 'sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T',
+        crossorigin: 'anonymous'
+      }
     ],
     script: [
       {
-        src: 'https://code.jquery.com/jquery-3.3.1.min.js',
-        integrity: 'sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=',
+        src: 'https://code.jquery.com/jquery-3.4.1.min.js',
+        integrity: 'sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=',
         crossorigin: 'anonymous',
         body: true
       },
       {
-        src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
-        integrity: 'sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy',
+        src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
+        integrity: 'sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM',
         crossorigin: 'anonymous',
         body: true
       }
@@ -35,20 +41,20 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: 'lightseagreen' },
   /*
   ** Global CSS
   */
   css: [
-    'bootstrap/dist/css/bootstrap.min.css',
-    'highlight.js/styles/zenburn.css',
     'assets/css/default.css'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/breadcrumb.js'
+    '~/plugins/breadcrumb.js',
+    '~/plugins/disqus.js',
+    '~/plugins/axios.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -59,46 +65,32 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios',
     '@nuxtjs/google-analytics',
-    '@nuxtjs/proxy',
     '@nuxtjs/sitemap'
   ],
-  axios: {
-    proxy: true
-  },
   googleAnalytics: {
     id: 'UA-155216702-1'
-  },
-  proxy: {
-    '/api': {
-      target: process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10',
-      pathRewrite: {
-        '^/api' : '/'
-      }
-    }
   },
   sitemap: {
     hostname: 'https://www.yurikago-blog.com',
     routes: async () => {
       let path = []
 
-      // この関数はサーバーサイドで実行されるのでAPIサーバーのURLはクライアントから見えない
-      const baseURL = process.env.NODE_ENV === 'production' ? 'http://ec2-54-92-76-213.ap-northeast-1.compute.amazonaws.com' : 'http://192.168.10.10'
-
-      const articles = await axios.get(`${baseURL}/articles`)
+      const articles = await axios.get('/articles')
       path.push(...articles.data.map(v => {
         return `/articles/${v.id}`
       }))
 
-      const categories = await axios.get(`${baseURL}/categories`)
-      path.push(...categories.data.map(v => {
-        return `/articles/category/${v.id}`
-      }))
-
-      const tags = await axios.get(`${baseURL}/tags`)
+      const tags = await axios.get('/tags')
       path.push(...tags.data.map(v => {
         return `/articles/tag/${v.id}`
+      }))
+
+      const totalArticleCount = await axios.get('/articles/count')
+      const maxArticleCount = 10
+      const maxPageCount = Math.ceil(totalArticleCount.data / maxArticleCount)
+      path.push(...Array.from(Array(maxPageCount).keys()).map(v => {
+        return `/articles/list/${v + 1}`
       }))
 
       return path
@@ -113,5 +105,32 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  generate: {
+    // 動的なパラメーターを用いたルートを生成
+    routes: async () => {
+      let path = []
+
+      const articles = await axios.get('/articles')
+      path.push(...articles.data.map(v => {
+        return `/articles/${v.id}`
+      }))
+
+      const tags = await axios.get('/tags')
+      path.push(...tags.data.map(v => {
+        return `/articles/tag/${v.id}`
+      }))
+
+      const totalArticleCount = await axios.get('/articles/count')
+      const maxArticleCount = 10
+      const maxPageCount = Math.ceil(totalArticleCount.data / maxArticleCount)
+      path.push(...Array.from(Array(maxPageCount).keys()).map(v => {
+        return `/articles/list/${v + 1}`
+      }))
+
+      return path
+    },
+    // エラー発生時に 200.html ではなく 404.html を表示する
+    fallback: true
   }
 }

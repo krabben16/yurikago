@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content-wrapper">
     <Markdown :markdownContent="arigato.markdown"></Markdown>
   </div>
 </template>
@@ -11,10 +11,10 @@ export default {
   components: {
     Markdown
   },
-  async asyncData ({ $axios }) {
-    const res = await $axios.$get('/api/arigato')
+  async asyncData (context) {
+    const arigato = await context.app.$axios.get('/arigato')
     return {
-      arigato: res
+      arigato: arigato.data
     }
   },
   data () {

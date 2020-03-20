@@ -1,22 +1,25 @@
-# nuxt
+## 背景
 
-> My remarkable Nuxt.js project
+1. はてなブログやQiitaなどアウトプットの場所が分散していたので1箇所にまとめたかった
+1. Nuxt.jsやLaravelなど未経験の技術を勉強したかった
+1. インフラの環境構築をしたことがなかったので経験してみたかった
+1. Google Analyticsの動作を検証する場所が欲しかった
 
-## Build Setup
+## システム構成
 
-``` bash
-# install dependencies
-$ npm run install
+### フロントエンド
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+- Nuxt.js
+- bootstrap
+- Firebase
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+ページ遷移するとき表示するデータをバックエンドから取得して表示します。修正をGitHubのmasterブランチにマージするとCircleCIがFirebaseにデプロイします。このとき `nuxt generate` を実行して生成した静的HTMLをFirebaseに配置します。
 
-# generate static project
-$ npm run generate
-```
+### バックエンド（別リポジトリ）
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+- Laravel
+- Nginx
+- EC2（Amazon Linux 2）
+- RDS（MySQL）
+
+DBからデータを取得してフロントエンドにJSONを返します。DB負荷を軽減するため取得したデータをファイルにキャッシュします。（キャッシュの有効期限は1日）

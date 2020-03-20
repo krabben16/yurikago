@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content-wrapper">
     <Markdown :markdownContent="profile.markdown"></Markdown>
   </div>
 </template>
@@ -11,10 +11,10 @@ export default {
   components: {
     Markdown
   },
-  async asyncData ({ $axios }) {
-    const res = await $axios.$get('/api/profile')
+  async asyncData (context) {
+    const profile = await context.app.$axios.get('/profile')
     return {
-      profile: res
+      profile: profile.data
     }
   },
   data () {

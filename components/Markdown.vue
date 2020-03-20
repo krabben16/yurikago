@@ -3,135 +3,83 @@
 </template>
 
 <script>
-import marked from 'marked'
+import mdit from 'markdown-it'
+import footnote from 'markdown-it-footnote'
 import hljs from 'highlight.js'
 
 export default {
-  computed: {
-    helpers () {
-      return {
-        // https://github.com/markedjs/marked/blob/master/lib/marked.js#L145-L171
-        cleanUrl: (sanitize, base, href) => {
-          if (sanitize) {
-            let prot
-
-            try {
-              prot = decodeURIComponent(unescape(href)).replace(nonWordAndColonTest, '').toLowerCase()
-            } catch (e) {
-              return null
-            }
-
-            if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0 || prot.indexOf('data:') === 0) {
-              return null
-            }
-          }
-
-          if (base && !originIndependentUrl.test(href)) {
-            href = resolveUrl(base, href)
-          }
-
-          try {
-            href = encodeURI(href).replace(/%25/g, '%')
-          } catch (e) {
-            return null
-          }
-
-          return href
-        },
-        // https://github.com/markedjs/marked/blob/master/lib/marked.js#L93-L105
-        escape : (html, encode) => {
-          const escapeTest = /[&<>"']/
-          const escapeTestNoEncode = /[<>"']|&(?!#?\w+;)/
-          if (encode) {
-            if (escapeTest.test(html)) {
-              return html.replace(escapeReplace, getEscapeReplacement)
-            }
-          } else {
-            if (escapeTestNoEncode.test(html)) {
-              return html.replace(escapeReplaceNoEncode, getEscapeReplacement)
-            }
-          }
-
-          return html;
-        }
-      }
-    },
-    htmlContent () {
-      const renderer = new marked.Renderer()
-      
-      // WebP画像を表示
-      renderer.image = (href, title, text) => {
-        href = this.helpers.cleanUrl(renderer.options.sanitize, renderer.options.baseUrl, href)
-
-        if (href === null) {
-          return text
-        }
-
-        const out = `<picture><source srcset="${href}.webp" type="image/webp"><img src="${href}.png" alt="${text}"></picture>`
-
-        return out
-      }
-
-      // 外部リンクを別タブで開く
-      renderer.link = (href, title, text) => {
-        href = this.helpers.cleanUrl(renderer.options.sanitize, renderer.options.baseUrl, href)
-
-        if (href === null) {
-          return text
-        }
-
-        const escape = this.helpers.escape(href)
-        let out
-
-        if (escape.slice(0, 1) === '/') {
-          out = `<a href="${escape}">${text}</a>`
-        } else {
-          out = `<a href="${escape}" target="_blank">${text}</a>`
-        }
-
-        return out
-      }
-
-      // テーブルにbootstrapのクラスを付与
-      renderer.table = (header, body) => {
-        if (body) body = '<tbody>' + body + '</tbody>'
-        return `<div class="table-responsive"><table class="table"><thead>${header}</thead>${body}</table></div>`
-      };
-
-      // 中央寄せを解除
-      renderer.tablecell = (content, flags) => {
-        const type = flags.header ? 'th' : 'td'
-        return `<${type}>${content}</${type}>`
-      }
-
-      // 引用に不等号を追加
-      renderer.blockquote = quote => {
-        const result = /\>(.+)\</.exec(quote)
-        return `<blockquote><p>&gt; ${result[1]}</p></blockquote>`
-      }
-
-      return marked(this.markdownContent, { renderer: renderer })
+  data() {
+    return {
+      htmlContent: null
     }
   },
   props: [
     'markdownContent'
   ],
-  created () {
-    marked.setOptions({
-      langPrefix: 'hljs ',
-      highlight: (code, lang) => {
-        return hljs.highlightAuto(code, [lang]).value
+  mounted() {
+    const md = new mdit({
+      highlight: (str, lang) => {
+        if (lang && hljs.getLanguage(lang)) {
+          try {
+            return '<pre class="hljs"><code>' + hljs.highlight(lang, str, true).value + '</code></pre>'
+          } catch (__) {}
+        }
+        return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
       }
-    })
+    }).use(footnote)
+
+  　// 外部リンクを別タブで開く
+    const defaultLinkOpen = md.renderer.rules.link_open || function(tokens, idx, options, env, self) {
+      return self.renderToken(tokens, idx, options)
+    }
+
+    md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+      const hrefIndex = tokens[idx].attrIndex('href')
+      const href = tokens[idx].attrs[hrefIndex][1]
+
+      if (href.slice(0, 1) !== '/') {
+        tokens[idx].attrPush(['target', '_blank'])
+      }
+
+      return defaultLinkOpen(tokens, idx, options, env, self)
+    }
+
+    // テーブルにbootstrapのクラスを付与
+    md.renderer.rules.table_open = () => {
+      return '<div class="table-responsive"><table class="table">'
+    }
+    
+    md.renderer.rules.table_close = () => {
+      return '</table></div>'
+    }
+
+    // 脚注 デフォルトのhrタグを削除する
+    md.renderer.rules.footnote_block_open = () => {
+      return '<section class="footnotes"><ol class="footnotes-list">'
+    }
+
+    this.htmlContent = md.render(this.markdownContent)
   }
 }
 </script>
 
 <style lang="scss">
 .markdown-wrapper {
-  // 見出し
-  h2, h3, h4, h5, h6 {
-    margin: 30px 0;
+  h3 {
+    background-color: #f8f9fa;
+    padding: 10px 10px 10px 20px;
+    border-left: 3px solid lightseagreen;
+  }
+
+  h3, h4, h5, h6 {
+    margin-bottom: 40px;
+  }
+
+  h3:nth-child(n+2),
+  h4:nth-child(n+2),
+  h5:nth-child(n+2),
+  h6:nth-child(n+2) {
+    margin-top: 40px;
   }
 
   li {
@@ -147,7 +95,30 @@ export default {
   }
 
   blockquote {
-    color: grey;
+    p {
+      // デフォルトのマージンをリセット
+      margin-bottom: 0;
+    }
+
+    color: gray;
+    padding: 10px 20px;
+
+    a {
+      color: gray;
+    }
+  }
+
+  .footnotes {
+    margin-top: 60px;
+  }
+
+  // デフォルトのボーダーを削除
+  .table {
+    thead {
+      th {
+        border-bottom: none;
+      }
+    }
   }
 }
 </style>

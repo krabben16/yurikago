@@ -15,7 +15,9 @@ export default {
     Pagenation
   },
   async asyncData (context) {
-    const page = 1
+    // NaN = Not a Number
+    // typeof context.params.page => string
+    const page = isNaN(context.params.page) ? 1 : parseInt(context.params.page)
     const articles = await context.app.$axios.get(`/articles?p=${page}`)
     const count = await context.app.$axios.get('/articles/count')
     return {
@@ -24,18 +26,19 @@ export default {
       totalArticleCount: count.data
     }
   },
-  data () {
+  data() {
+    // asyncDataで定義した値を参照できない？
     return {
-      title: 'Yurikago Blog'
+      titlePrefix: '記事一覧'
     }
   },
   head () {
     return {
-      titleTemplate: this.title,
+      title: this.titlePrefix + this.activePage,
       // 構造化マークアップ
       script: [{
         hid: 'breadcrumbSchema',
-        innerHTML: this.$getBreadcrumbSchema(this.title, this.$route.path),
+        innerHTML: this.$getBreadcrumbSchema(this.titlePrefix + this.activePage, this.$route.path),
         type: 'application/ld+json'
       }],
       __dangerouslyDisableSanitizersByTagID: {
@@ -45,7 +48,7 @@ export default {
   },
   mounted () {
     // パンくず
-    this.$nuxt.$emit('clearPageName')
+    this.$nuxt.$emit('setPageName', this.titlePrefix + this.activePage)
   }
 }
 </script>

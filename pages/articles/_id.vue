@@ -1,22 +1,27 @@
 <template>
-  <div class="content">
-    <div class="article-header">
-      <div>{{ article.posted_at }}</div>
-      <div class="clearfix">
-        <div class="tags">
-          <nuxt-link
-            v-for="tag in article.tags"
-            :key="tag.id"
-            :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
-            class="badge badge-light">
-            {{ tag.name }}
-          </nuxt-link>
+  <div>
+    <div class="content-wrapper">
+      <div class="article-header">
+        <div>{{ article.posted_at }}</div>
+        <div class="clearfix">
+          <div class="tags">
+            <nuxt-link
+              v-for="articleTag in article.article_tags"
+              :key="articleTag.tag_id"
+              :to="{ name: 'articles-tag-id', params: { id: articleTag.tag_id } }"
+              class="badge badge-dark">
+              {{ articleTag.tag.name }}
+            </nuxt-link>
+          </div>
         </div>
+        <h2>{{ article.title }}</h2>
       </div>
-      <h2>{{ article.title }}</h2>
+      <div class="article-body">
+        <Markdown :markdownContent="article.markdown"></Markdown>
+      </div>
     </div>
-    <div class="article-body">
-      <Markdown :markdownContent="article.markdown"></Markdown>
+    <div class="disqus-wrapper">
+      <vue-disqus shortname='yurikago-blog' :identifier="$route.path" :url="'https://www.yurikago-blog.com' + $route.path"></vue-disqus>
     </div>
   </div>
 </template>
@@ -36,10 +41,10 @@ export default {
     ...mapActions('articles', ['changeLandingArticleID'])
   },
   async asyncData (context) {
-    const res = await context.app.$axios.$get(`/api/articles/${context.params.id}`)
+    const article = await context.app.$axios.get(`/articles/${context.params.id}`)
     return {
       id: context.params.id,
-      article: res
+      article: article.data
     }
   },
   created () {
@@ -50,12 +55,21 @@ export default {
   head () {
     return {
       title: this.article.title,
-      // 構造化マークアップ
-      script: [{
-        hid: 'breadcrumbSchema',
-        innerHTML: this.$getBreadcrumbSchema(this.article.title, this.$route.path),
-        type: 'application/ld+json'
-      }],
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/zenburn.min.css',
+          type: 'text/css'
+        }
+      ],
+      script: [
+        // 構造化マークアップ
+        {
+          hid: 'breadcrumbSchema',
+          innerHTML: this.$getBreadcrumbSchema(this.article.title, this.$route.path),
+          type: 'application/ld+json'
+        }
+      ],
       __dangerouslyDisableSanitizersByTagID: {
         breadcrumbSchema: ['innerHTML']
       }
@@ -71,7 +85,7 @@ export default {
 <style lang="scss" scoped>
 .article-header {
   h2 {
-    margin: 30px 0;
+    margin: 40px 0;
   }
 
   .clearfix::after {
@@ -86,5 +100,10 @@ export default {
       margin-left: 10px;
     }
   }
+}
+
+.disqus-wrapper {
+  margin-top: 60px;
+  background-color: white;
 }
 </style>

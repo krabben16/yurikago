@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark">
+  <nav class="navbar navbar-expand-sm navbar-light">
     <nuxt-link :to="{ name: 'index' }" class="navbar-brand">Yurikago Blog</nuxt-link>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -14,16 +14,6 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Categories
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <nuxt-link v-for="(category, k) in categories" :key="k" class="dropdown-item" :to="{ name: 'articles-category-id', params: { id: category.id } }">
-              {{ category.name }} ({{ category.article_count }})
-            </nuxt-link>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Tags
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -33,7 +23,17 @@
           </div>
         </li>
         <li class="nav-item">
-          <nuxt-link :to="{ name: 'arigato' }" class="nav-link">&#x1f64f;</nuxt-link>
+          <nuxt-link :to="{ name: 'arigato' }" class="nav-link">Arigato</nuxt-link>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item nav-item-github">
+          <a href="https://github.com/w9uZDFEYnT/yurikago" target="_blank">
+            <picture>
+              <source srcset="/images/common/GitHub-Mark-32px.webp" type="image/webp">
+              <img src="/images/common/GitHub-Mark-32px.png" alt="GitHub">
+            </picture>
+          </a>
         </li>
       </ul>
     </div>
@@ -44,29 +44,29 @@
 export default {
   methods: {
     async fetchTags () {
-      const res = await this.$axios.$get('/api/tags')
-      this.tags = res
-    },
-    async fetchCategories () {
-      const res = await this.$axios.$get('/api/categories')
-      this.categories = res
+      const tags = await this.$axios.get('/tags')
+      this.tags = tags.data
     }
   },
   data () {
     return {
-      tags: null,
-      categories: null
+      tags: null
     }
   },
   mounted () {
     this.fetchTags()
-    this.fetchCategories()
   }
 }
 </script>
 
 <style lang="scss" scoped>
 nav {
-  background-color: lightslategray;
+  margin-bottom: 50px;
+
+  @media screen and (max-width: 575px) {
+    .nav-item-github {
+      display: none;
+    }
+  }
 }
 </style>
