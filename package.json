@@ -1,5 +1,5 @@
 {
-  "name": "nuxt",
+  "name": "yurikago-blog",
   "version": "1.0.0",
   "description": "技術ブログ",
   "author": "Hiroki Kawaguchi",
@@ -11,21 +11,21 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/google-analytics": "^2.2.2",
+    "@nuxtjs/google-analytics": "^2.2.3",
     "@nuxtjs/sitemap": "^2.0.1",
     "axios": "^0.19.2",
-    "highlight.js": "^9.18.0",
+    "highlight.js": "^9.18.1",
     "markdown-it": "^10.0.0",
     "markdown-it-footnote": "^3.0.2",
-    "node-sass": "^4.13.0",
-    "nuxt": "^2.0.0",
-    "sass-loader": "^8.0.0",
+    "node-sass": "^4.13.1",
+    "nuxt": "^2.12.0",
+    "sass-loader": "^8.0.2",
     "vue-disqus": "^3.0.5"
   },
   "devDependencies": {
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "firebase-tools": "^7.12.1",
+    "firebase-tools": "^7.15.1",
     "prettier": "^1.16.4"
   }
 }
