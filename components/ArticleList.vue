@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row" v-for="article in articles" :key="article.id">
+    <div v-for="article in articles" :key="article.id" class="row">
       <div class="col-12 col-sm-10 mx-sm-auto">
         <Article :article="article" />
       </div>
@@ -9,20 +9,18 @@
 </template>
 
 <script>
-import Article from '~/components/Article.vue'
+import Article from "~/components/Article.vue"
 
 export default {
   components: {
     Article
   },
-  props: [
-    'articles'
-  ]
+  props: ["articles"]
 }
 </script>
 
 <style lang="scss" scoped>
-.row:nth-child(n+2) {
+.row:nth-child(n + 2) {
   margin-top: 40px;
 }
 </style>

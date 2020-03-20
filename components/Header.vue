@@ -1,10 +1,20 @@
 <template>
   <nav class="navbar navbar-expand-sm navbar-light">
-    <nuxt-link :to="{ name: 'index' }" class="navbar-brand">Yurikago Blog</nuxt-link>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nuxt-link :to="{ name: 'index' }" class="navbar-brand">
+      Yurikago Blog
+    </nuxt-link>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div id="navbarSupportedContent" class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <nuxt-link :to="{ name: 'about' }" class="nav-link">About</nuxt-link>
@@ -13,11 +23,24 @@
           <nuxt-link :to="{ name: 'profile' }" class="nav-link">Profile</nuxt-link>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a
+            id="navbarDropdown"
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
             Tags
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <nuxt-link v-for="(tag, k) in tags" :key="k" class="dropdown-item" :to="{ name: 'articles-tag-id', params: { id: tag.id } }">
+            <nuxt-link
+              v-for="(tag, k) in tags"
+              :key="k"
+              class="dropdown-item"
+              :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
+            >
               {{ tag.name }} ({{ tag.article_count }})
             </nuxt-link>
           </div>
@@ -30,8 +53,8 @@
         <li class="nav-item nav-item-github">
           <a href="https://github.com/w9uZDFEYnT/yurikago" target="_blank">
             <picture>
-              <source srcset="/images/common/GitHub-Mark-32px.webp" type="image/webp">
-              <img src="/images/common/GitHub-Mark-32px.png" alt="GitHub">
+              <source srcset="/images/common/GitHub-Mark-32px.webp" type="image/webp" />
+              <img src="/images/common/GitHub-Mark-32px.png" alt="GitHub" />
             </picture>
           </a>
         </li>
@@ -42,19 +65,19 @@
 
 <script>
 export default {
-  methods: {
-    async fetchTags () {
-      const tags = await this.$axios.get('/tags')
-      this.tags = tags.data
-    }
-  },
-  data () {
+  data() {
     return {
       tags: null
     }
   },
-  mounted () {
+  mounted() {
     this.fetchTags()
+  },
+  methods: {
+    async fetchTags() {
+      const tags = await this.$axios.get("/tags")
+      this.tags = tags.data
+    }
   }
 }
 </script>

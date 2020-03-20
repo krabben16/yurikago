@@ -2,7 +2,13 @@
   <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
       <li v-for="p in pages" :key="p" class="page-item" v-bind:class="{ disabled: activePage === p }">
-        <nuxt-link class="page-link text-dark" v-bind:class="{ 'bg-light': activePage === p }" :to="{ name: 'articles-list-page', params: { page: p } }">{{ p }}</nuxt-link>
+        <nuxt-link
+          class="page-link text-dark"
+          v-bind:class="{ 'bg-light': activePage === p }"
+          :to="{ name: 'articles-list-page', params: { page: p } }"
+        >
+          {{ p }}
+        </nuxt-link>
       </li>
     </ul>
   </nav>
@@ -10,10 +16,7 @@
 
 <script>
 export default {
-  props: [
-    'activePage',
-    'totalArticleCount'
-  ],
+  props: ["activePage", "totalArticleCount"],
   data() {
     return {
       pages: null

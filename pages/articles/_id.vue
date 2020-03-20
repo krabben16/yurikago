@@ -9,7 +9,8 @@
               v-for="articleTag in article.article_tags"
               :key="articleTag.tag_id"
               :to="{ name: 'articles-tag-id', params: { id: articleTag.tag_id } }"
-              class="badge badge-dark">
+              class="badge badge-dark"
+            >
               {{ articleTag.tag.name }}
             </nuxt-link>
           </div>
@@ -17,67 +18,71 @@
         <h2>{{ article.title }}</h2>
       </div>
       <div class="article-body">
-        <Markdown :markdownContent="article.markdown"></Markdown>
+        <Markdown :markdownContent="article.markdown" />
       </div>
     </div>
     <div class="disqus-wrapper">
-      <vue-disqus shortname='yurikago-blog' :identifier="$route.path" :url="'https://www.yurikago-blog.com' + $route.path"></vue-disqus>
+      <vue-disqus
+        shortname="yurikago-blog"
+        :identifier="$route.path"
+        :url="'https://www.yurikago-blog.com' + $route.path"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import Markdown from '~/components/Markdown.vue'
+import { mapGetters, mapActions } from "vuex"
+import Markdown from "~/components/Markdown.vue"
 
 export default {
   components: {
     Markdown
   },
-  computed: {
-    ...mapGetters('articles', ['landingArticleID'])
-  },
-  methods: {
-    ...mapActions('articles', ['changeLandingArticleID'])
-  },
-  async asyncData (context) {
+  async asyncData(context) {
     const article = await context.app.$axios.get(`/articles/${context.params.id}`)
     return {
       id: context.params.id,
       article: article.data
     }
   },
-  created () {
+  computed: {
+    ...mapGetters("articles", ["landingArticleID"])
+  },
+  created() {
     if (!this.landingArticleID) {
       this.changeLandingArticleID(this.id)
     }
   },
-  head () {
+  mounted() {
+    // パンくず
+    this.$nuxt.$emit("setPageName", this.article.title)
+  },
+  methods: {
+    ...mapActions("articles", ["changeLandingArticleID"])
+  },
+  head() {
     return {
       title: this.article.title,
       link: [
         {
-          rel: 'stylesheet',
-          href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/zenburn.min.css',
-          type: 'text/css'
+          rel: "stylesheet",
+          href: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/zenburn.min.css",
+          type: "text/css"
         }
       ],
       script: [
         // 構造化マークアップ
         {
-          hid: 'breadcrumbSchema',
+          hid: "breadcrumbSchema",
           innerHTML: this.$getBreadcrumbSchema(this.article.title, this.$route.path),
-          type: 'application/ld+json'
+          type: "application/ld+json"
         }
       ],
       __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ['innerHTML']
+        breadcrumbSchema: ["innerHTML"]
       }
     }
-  },
-  mounted () {
-    // パンくず
-    this.$nuxt.$emit('setPageName', this.article.title)
   }
 }
 </script>
@@ -92,11 +97,11 @@ export default {
     display: block;
     clear: both;
   }
-  
+
   .tags {
     float: right;
 
-    .badge:nth-child(n+2) {
+    .badge:nth-child(n + 2) {
       margin-left: 10px;
     }
   }

@@ -1,44 +1,49 @@
 <template>
-  <div class="markdown-wrapper" v-html="htmlContent"></div>
+  <div class="markdown-wrapper" v-html="htmlContent" />
 </template>
 
 <script>
-import mdit from 'markdown-it'
-import footnote from 'markdown-it-footnote'
-import hljs from 'highlight.js'
+import mdit from "markdown-it"
+import footnote from "markdown-it-footnote"
+import hljs from "highlight.js"
 
 export default {
+  props: ["markdownContent"],
   data() {
     return {
       htmlContent: null
     }
   },
-  props: [
-    'markdownContent'
-  ],
   mounted() {
     const md = new mdit({
       highlight: (str, lang) => {
         if (lang && hljs.getLanguage(lang)) {
           try {
-            return '<pre class="hljs"><code>' + hljs.highlight(lang, str, true).value + '</code></pre>'
-          } catch (__) {}
+            return '<pre class="hljs"><code>' + hljs.highlight(lang, str, true).value + "</code></pre>"
+          } catch (__) {
+            return "Error"
+          }
         }
-        return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+        return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + "</code></pre>"
       }
     }).use(footnote)
 
-  　// 外部リンクを別タブで開く
-    const defaultLinkOpen = md.renderer.rules.link_open || function(tokens, idx, options, env, self) {
-      return self.renderToken(tokens, idx, options)
+    // 外部リンクを別タブで開く
+    let defaultLinkOpen = null
+    if (md.renderer.rules.link_open) {
+      defaultLinkOpen = md.renderer.rules.link_open
+    } else {
+      defaultLinkOpen = (tokens, idx, options, env, self) => {
+        return self.renderToken(tokens, idx, options)
+      }
     }
 
     md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
-      const hrefIndex = tokens[idx].attrIndex('href')
+      const hrefIndex = tokens[idx].attrIndex("href")
       const href = tokens[idx].attrs[hrefIndex][1]
 
-      if (href.slice(0, 1) !== '/') {
-        tokens[idx].attrPush(['target', '_blank'])
+      if (href.slice(0, 1) !== "/") {
+        tokens[idx].attrPush(["target", "_blank"])
       }
 
       return defaultLinkOpen(tokens, idx, options, env, self)
@@ -48,9 +53,9 @@ export default {
     md.renderer.rules.table_open = () => {
       return '<div class="table-responsive"><table class="table">'
     }
-    
+
     md.renderer.rules.table_close = () => {
-      return '</table></div>'
+      return "</table></div>"
     }
 
     // 脚注 デフォルトのhrタグを削除する
@@ -71,14 +76,17 @@ export default {
     border-left: 3px solid lightseagreen;
   }
 
-  h3, h4, h5, h6 {
+  h3,
+  h4,
+  h5,
+  h6 {
     margin-bottom: 40px;
   }
 
-  h3:nth-child(n+2),
-  h4:nth-child(n+2),
-  h5:nth-child(n+2),
-  h6:nth-child(n+2) {
+  h3:nth-child(n + 2),
+  h4:nth-child(n + 2),
+  h5:nth-child(n + 2),
+  h6:nth-child(n + 2) {
     margin-top: 40px;
   }
 

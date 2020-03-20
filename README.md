@@ -11,9 +11,13 @@
 
 - Nuxt.js
 - bootstrap
-- Firebase
+- Firebase Hosting
 
-ページ遷移するとき表示するデータをバックエンドから取得して表示します。修正をGitHubのmasterブランチにマージするとCircleCIがFirebaseにデプロイします。このとき `nuxt generate` を実行して生成した静的HTMLをFirebaseに配置します。
+ページを表示 or 遷移するときデータをバックエンドから取得して表示します。
+
+修正をGitHubのmasterブランチにマージするとCircleCIがFirebaseにデプロイします。このとき `nuxt generate` を実行して生成した静的ファイルをFirebaseにアップロードします。
+
+開発時のコーディングスタイルを統一するためPrettierとESLintを導入しています。ホットリロードモードでファイルを修正したとき、ESLintが静的解析を実行してコーディングスタイルの問題点を指摘してくれるよう設定しています。
 
 ### バックエンド（別リポジトリ）
 
