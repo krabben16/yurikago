@@ -1,6 +1,6 @@
 <template>
   <div class="content-wrapper">
-    <Markdown :markdownContent="about.markdown" />
+    <Markdown :markdown-content="about.markdown" />
   </div>
 </template>
 

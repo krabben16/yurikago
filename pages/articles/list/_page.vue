@@ -1,7 +1,7 @@
 <template>
   <div>
     <ArticleList :articles="articles" />
-    <Pagenation :activePage="activePage" :totalArticleCount="totalArticleCount" />
+    <Pagenation :active-page="activePage" :total-article-count="totalArticleCount" />
   </div>
 </template>
 

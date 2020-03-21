@@ -1,6 +1,6 @@
 <template>
   <div class="content-wrapper">
-    <Markdown :markdownContent="arigato.markdown" />
+    <Markdown :markdown-content="arigato.markdown" />
   </div>
 </template>
 

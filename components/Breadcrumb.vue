@@ -5,7 +5,7 @@
         v-for="(v, k) in breadcrumbItemList"
         :key="k"
         class="breadcrumb-item"
-        v-bind:class="{ active: k === breadcrumbItemList.length - 1 }"
+        :class="{ active: k === breadcrumbItemList.length - 1 }"
         :aria-current="k === breadcrumbItemList.length - 1 ? 'page' : ''"
       >
         <span v-if="k === breadcrumbItemList.length - 1">{{ v.name }}</span>

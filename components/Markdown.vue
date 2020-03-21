@@ -8,7 +8,9 @@ import footnote from "markdown-it-footnote"
 import hljs from "highlight.js"
 
 export default {
-  props: ["markdownContent"],
+  props: {
+    markdownContent: String
+  },
   data() {
     return {
       htmlContent: null

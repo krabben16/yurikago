@@ -18,7 +18,7 @@
         <h2>{{ article.title }}</h2>
       </div>
       <div class="article-body">
-        <Markdown :markdownContent="article.markdown" />
+        <Markdown :markdown-content="article.markdown" />
       </div>
     </div>
     <div class="disqus-wrapper">
