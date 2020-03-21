@@ -19,25 +19,22 @@ export default {
     const page = 1
     const articles = await context.app.$axios.get(`/articles?p=${page}`)
     const count = await context.app.$axios.get("/articles/count")
+    const title = "トップページ"
     return {
       activePage: page,
       articles: articles.data,
-      totalArticleCount: count.data
-    }
-  },
-  data() {
-    return {
-      title: "トップページ"
+      totalArticleCount: count.data,
+      title: title,
+      breadcrumbItemList: [
+        {
+          name: title,
+          path: "/"
+        }
+      ]
     }
   },
   mounted() {
     // パンくず
-    this.breadcrumbItemList = [
-      {
-        name: this.title,
-        path: "/"
-      }
-    ]
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
@@ -50,7 +47,7 @@ export default {
       script: [
         {
           hid: "breadcrumbSchema",
-          innerHTML: this.$getBreadcrumbSchema(this.title, this.$route.path),
+          innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
           type: "application/ld+json"
         }
       ],

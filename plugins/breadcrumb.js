@@ -1,37 +1,20 @@
 import Vue from "vue"
 
-Vue.prototype.$getBreadcrumbSchema = (pageName, path) => {
-  if (path === "/") {
-    return `{
-      "@context": "http://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "${pageName}",
-          "item": "https://www.yurikago-blog.com/"
-        }
-      ]
-    }`
-  } else {
-    return `{
-      "@context": "http://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Yurikago Blog",
-          "item": "https://www.yurikago-blog.com/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "${pageName}",
-          "item": "https://www.yurikago-blog.com${path}"
-        }
-      ]
-    }`
+Vue.prototype.$getBreadcrumbSchema = breadcrumbItemList => {
+  const itemListElementValue = breadcrumbItemList.map((v, k) => {
+    return {
+      "@type": "ListItem",
+      position: k + 1,
+      name: v.name,
+      item: "https://www.yurikago-blog.com" + v.path
+    }
+  })
+
+  const breadcrumbList = {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: itemListElementValue
   }
+
+  return JSON.stringify(breadcrumbList)
 }

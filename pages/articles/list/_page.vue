@@ -21,30 +21,26 @@ export default {
     const page = isNaN(context.params.page) ? 1 : parseInt(context.params.page)
     const articles = await context.app.$axios.get(`/articles?p=${page}`)
     const count = await context.app.$axios.get("/articles/count")
+    const title = `記事一覧${page}`
     return {
       activePage: page,
       articles: articles.data,
-      totalArticleCount: count.data
-    }
-  },
-  data() {
-    // asyncDataで定義した値を参照できない？
-    return {
-      titlePrefix: "記事一覧"
+      totalArticleCount: count.data,
+      title: title,
+      breadcrumbItemList: [
+        {
+          name: "トップページ",
+          path: "/"
+        },
+        {
+          name: title,
+          path: `/articles/list/${page}`
+        }
+      ]
     }
   },
   mounted() {
     // パンくず
-    this.breadcrumbItemList = [
-      {
-        name: "トップページ",
-        path: "/"
-      },
-      {
-        name: this.titlePrefix + this.activePage,
-        path: this.$route.path
-      }
-    ]
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
@@ -52,12 +48,12 @@ export default {
   },
   head() {
     return {
-      title: this.titlePrefix + this.activePage,
+      title: this.title,
       // 構造化マークアップ
       script: [
         {
           hid: "breadcrumbSchema",
-          innerHTML: this.$getBreadcrumbSchema(this.titlePrefix + this.activePage, this.$route.path),
+          innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
           type: "application/ld+json"
         }
       ],

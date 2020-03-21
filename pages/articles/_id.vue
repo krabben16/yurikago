@@ -41,9 +41,21 @@ export default {
   },
   async asyncData(context) {
     const article = await context.app.$axios.get(`/articles/${context.params.id}`)
+    const title = article.data.title
     return {
       id: context.params.id,
-      article: article.data
+      article: article.data,
+      title: title,
+      breadcrumbItemList: [
+        {
+          name: "トップページ",
+          path: "/"
+        },
+        {
+          name: title,
+          path: `/articles/${context.params.id}`
+        }
+      ]
     }
   },
   computed: {
@@ -55,16 +67,6 @@ export default {
     }
 
     // パンくず
-    this.breadcrumbItemList = [
-      {
-        name: "トップページ",
-        path: "/"
-      },
-      {
-        name: this.article.title,
-        path: this.$route.path
-      }
-    ]
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
@@ -73,7 +75,7 @@ export default {
   },
   head() {
     return {
-      title: this.article.title,
+      title: this.title,
       link: [
         {
           rel: "stylesheet",
@@ -85,7 +87,7 @@ export default {
         // 構造化マークアップ
         {
           hid: "breadcrumbSchema",
-          innerHTML: this.$getBreadcrumbSchema(this.article.title, this.$route.path),
+          innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
           type: "application/ld+json"
         }
       ],

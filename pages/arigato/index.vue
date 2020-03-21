@@ -14,27 +14,24 @@ export default {
   },
   async asyncData(context) {
     const arigato = await context.app.$axios.get("/arigato")
+    const title = "ありがとうございます"
     return {
-      arigato: arigato.data
-    }
-  },
-  data() {
-    return {
-      title: "ありがとうございます"
+      arigato: arigato.data,
+      title: title,
+      breadcrumbItemList: [
+        {
+          name: "トップページ",
+          path: "/"
+        },
+        {
+          name: title,
+          path: "/arigato"
+        }
+      ]
     }
   },
   mounted() {
     // パンくず
-    this.breadcrumbItemList = [
-      {
-        name: "トップページ",
-        path: "/"
-      },
-      {
-        name: this.title,
-        path: this.$route.path
-      }
-    ]
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
@@ -47,7 +44,7 @@ export default {
       script: [
         {
           hid: "breadcrumbSchema",
-          innerHTML: this.$getBreadcrumbSchema(this.title, this.$route.path),
+          innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
           type: "application/ld+json"
         }
       ],
