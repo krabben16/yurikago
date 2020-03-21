@@ -25,7 +25,9 @@
 
 <script>
 export default {
-  props: ["error"],
+  props: {
+    error: Object
+  },
   mounted() {
     // パンくず
     this.$nuxt.$emit("setPageName", "エラー")

@@ -13,23 +13,25 @@ export default {
   async asyncData(context) {
     const articles = await context.app.$axios.get(`/articles/tag/${context.params.id}`)
     const tag = await context.app.$axios.get(`/tags/${context.params.id}`)
+    const title = tag.data.name
     return {
       tag: tag.data,
-      articles: articles.data.reverse()
+      articles: articles.data.reverse(),
+      title: title,
+      breadcrumbItemList: [
+        {
+          name: "トップページ",
+          path: "/"
+        },
+        {
+          name: title,
+          path: `/articles/tag/${context.params.id}`
+        }
+      ]
     }
   },
   mounted() {
     // パンくず
-    this.breadcrumbItemList = [
-      {
-        name: "トップページ",
-        path: "/"
-      },
-      {
-        name: this.tag.name,
-        path: this.$route.path
-      }
-    ]
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
@@ -37,12 +39,12 @@ export default {
   },
   head() {
     return {
-      title: this.tag.name,
+      title: this.title,
       // 構造化マークアップ
       script: [
         {
           hid: "breadcrumbSchema",
-          innerHTML: this.$getBreadcrumbSchema(this.tag.name, this.$route.path),
+          innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
           type: "application/ld+json"
         }
       ],

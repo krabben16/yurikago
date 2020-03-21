@@ -1,6 +1,6 @@
 <template>
   <div class="content-wrapper">
-    <Markdown :markdownContent="profile.markdown" />
+    <Markdown :markdown-content="profile.markdown" />
   </div>
 </template>
 
@@ -14,27 +14,24 @@ export default {
   },
   async asyncData(context) {
     const profile = await context.app.$axios.get("/profile")
+    const title = "プロフィール"
     return {
-      profile: profile.data
-    }
-  },
-  data() {
-    return {
-      title: "プロフィール"
+      profile: profile.data,
+      title: title,
+      breadcrumbItemList: [
+        {
+          name: "トップページ",
+          path: "/"
+        },
+        {
+          name: title,
+          path: "/profile"
+        }
+      ]
     }
   },
   mounted() {
     // パンくず
-    this.breadcrumbItemList = [
-      {
-        name: "トップページ",
-        path: "/"
-      },
-      {
-        name: this.title,
-        path: this.$route.path
-      }
-    ]
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
@@ -47,7 +44,7 @@ export default {
       script: [
         {
           hid: "breadcrumbSchema",
-          innerHTML: this.$getBreadcrumbSchema(this.title, this.$route.path),
+          innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
           type: "application/ld+json"
         }
       ],

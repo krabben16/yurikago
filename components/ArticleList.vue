@@ -15,7 +15,9 @@ export default {
   components: {
     Article
   },
-  props: ["articles"]
+  props: {
+    articles: Array
+  }
 }
 </script>
 
