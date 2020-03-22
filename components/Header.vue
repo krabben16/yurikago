@@ -51,7 +51,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item nav-item-github">
-          <a href="https://github.com/w9uZDFEYnT/yurikago" target="_blank">
+          <a :href="$constant.GITHUB_URL" target="_blank">
             <picture>
               <source srcset="~/assets/images/common/GitHub-Mark-32px.webp" type="image/webp" />
               <img src="~/assets/images/common/GitHub-Mark-32px.png" alt="GitHub" />

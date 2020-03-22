@@ -22,11 +22,7 @@
       </div>
     </div>
     <div class="disqus-wrapper">
-      <vue-disqus
-        shortname="yurikago-blog"
-        :identifier="$route.path"
-        :url="'https://www.yurikago-blog.com' + $route.path"
-      />
+      <vue-disqus shortname="yurikago-blog" :identifier="$route.path" :url="$constant.FRONT_URL + $route.path" />
     </div>
   </div>
 </template>

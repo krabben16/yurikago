@@ -1,4 +1,5 @@
 import { axios } from './plugins/axios.js'
+import constant from './plugins/constant.js'
 
 export default {
   mode: 'universal',
@@ -54,7 +55,8 @@ export default {
   plugins: [
     '~/plugins/breadcrumb.js',
     '~/plugins/disqus.js',
-    '~/plugins/axios.js'
+    '~/plugins/axios.js',
+    '~/plugins/constant.js'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -72,7 +74,7 @@ export default {
     id: 'UA-155216702-1'
   },
   sitemap: {
-    hostname: 'https://www.yurikago-blog.com',
+    hostname: constant.FRONT_URL,
     routes: async () => {
       let path = []
 
