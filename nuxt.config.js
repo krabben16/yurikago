@@ -1,5 +1,9 @@
-import { axios } from './plugins/axios.js'
 import constant from './plugins/constant.js'
+
+import axiosStatic from "axios"
+const axiosInstance = axiosStatic.create({
+  baseURL: constant.API_URL
+})
 
 export default {
   mode: 'universal',
@@ -78,17 +82,17 @@ export default {
     routes: async () => {
       let path = []
 
-      const articles = await axios.get('/articles')
+      const articles = await axiosInstance.get('/articles')
       path.push(...articles.data.map(v => {
         return `/articles/${v.id}`
       }))
 
-      const tags = await axios.get('/tags')
+      const tags = await axiosInstance.get('/tags')
       path.push(...tags.data.map(v => {
         return `/articles/tag/${v.id}`
       }))
 
-      const totalArticleCount = await axios.get('/articles/count')
+      const totalArticleCount = await axiosInstance.get('/articles/count')
       const maxArticleCount = 10
       const maxPageCount = Math.ceil(totalArticleCount.data / maxArticleCount)
       path.push(...Array.from(Array(maxPageCount).keys()).map(v => {
@@ -122,17 +126,17 @@ export default {
     routes: async () => {
       let path = []
 
-      const articles = await axios.get('/articles')
+      const articles = await axiosInstance.get('/articles')
       path.push(...articles.data.map(v => {
         return `/articles/${v.id}`
       }))
 
-      const tags = await axios.get('/tags')
+      const tags = await axiosInstance.get('/tags')
       path.push(...tags.data.map(v => {
         return `/articles/tag/${v.id}`
       }))
 
-      const totalArticleCount = await axios.get('/articles/count')
+      const totalArticleCount = await axiosInstance.get('/articles/count')
       const maxArticleCount = 10
       const maxPageCount = Math.ceil(totalArticleCount.data / maxArticleCount)
       path.push(...Array.from(Array(maxPageCount).keys()).map(v => {

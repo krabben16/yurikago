@@ -1,11 +1,10 @@
 import axiosStatic from "axios"
+import constant from "~/plugins/constant.js"
 
 const axiosInstance = axiosStatic.create({
-  baseURL: process.env.NODE_ENV === "production" ? "https://api.yurikago-blog.com" : "http://homestead.test"
+  baseURL: constant.API_URL
 })
 
 export default ({ app }, inject) => {
   inject("axios", axiosInstance)
 }
-
-export const axios = axiosInstance
