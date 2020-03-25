@@ -3,8 +3,7 @@
 </template>
 
 <script>
-import mdit from "markdown-it"
-import footnote from "markdown-it-footnote"
+import marked from "marked"
 import hljs from "highlight.js"
 
 export default {
@@ -17,55 +16,49 @@ export default {
     }
   },
   mounted() {
-    const md = new mdit({
-      highlight: (str, lang) => {
-        if (lang && hljs.getLanguage(lang)) {
-          try {
-            return '<pre class="hljs"><code>' + hljs.highlight(lang, str, true).value + "</code></pre>"
-          } catch (__) {
-            return "Error"
-          }
-        }
-        return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + "</code></pre>"
-      }
-    }).use(footnote)
+    const renderer = new marked.Renderer()
 
-    // 外部リンクを別タブで開く
-    let defaultLinkOpen = null
-    if (md.renderer.rules.link_open) {
-      defaultLinkOpen = md.renderer.rules.link_open
-    } else {
-      defaultLinkOpen = (tokens, idx, options, env, self) => {
-        return self.renderToken(tokens, idx, options)
-      }
+    // WebP画像を表示
+    renderer.image = (href, title, text) => {
+      const webp = href.replace("png", "webp")
+      return `<picture><source srcset="${webp}" type="image/webp"><img src="${href}" alt="${text}"></picture>`
     }
 
-    md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
-      const hrefIndex = tokens[idx].attrIndex("href")
-      const href = tokens[idx].attrs[hrefIndex][1]
-
-      if (href.slice(0, 1) !== "/") {
-        tokens[idx].attrPush(["target", "_blank"])
+    // 外部リンクを別タブで開く
+    renderer.link = (href, title, text) => {
+      let out = null
+      if (href.slice(0, 1) == "/") {
+        out = `<a href="${href}">${text}</a>`
+      } else {
+        out = `<a href="${href}" target="_blank">${text}</a>`
       }
-
-      return defaultLinkOpen(tokens, idx, options, env, self)
+      return out
     }
 
     // テーブルにbootstrapのクラスを付与
-    md.renderer.rules.table_open = () => {
-      return '<div class="table-responsive"><table class="table">'
+    renderer.table = (header, body) => {
+      if (body) {
+        body = "<tbody>" + body + "</tbody>"
+      }
+      return `<div class="table-responsive"><table class="table"><thead>${header}</thead>${body}</table></div>`
     }
 
-    md.renderer.rules.table_close = () => {
-      return "</table></div>"
+    // 中央寄せを解除
+    renderer.tablecell = (content, flags) => {
+      const type = flags.header ? "th" : "td"
+      return `<${type}>${content}</${type}>`
     }
 
-    // 脚注 デフォルトのhrタグを削除する
-    md.renderer.rules.footnote_block_open = () => {
-      return '<section class="footnotes"><ol class="footnotes-list">'
-    }
+    marked.setOptions({
+      renderer: renderer,
+      langPrefix: "hljs language-",
+      highlight: (code, language) => {
+        const validLanguage = hljs.getLanguage(language) ? language : "plaintext"
+        return hljs.highlight(validLanguage, code).value
+      }
+    })
 
-    this.htmlContent = md.render(this.markdownContent)
+    this.htmlContent = marked(this.markdownContent)
   }
 }
 </script>
@@ -82,14 +75,11 @@ export default {
   h4,
   h5,
   h6 {
-    margin-bottom: 40px;
+    margin: 40px 0;
   }
 
-  h3:nth-child(n + 2),
-  h4:nth-child(n + 2),
-  h5:nth-child(n + 2),
-  h6:nth-child(n + 2) {
-    margin-top: 40px;
+  hr {
+    margin: 40px 0;
   }
 
   li {
@@ -116,10 +106,6 @@ export default {
     a {
       color: gray;
     }
-  }
-
-  .footnotes {
-    margin-top: 60px;
   }
 
   // デフォルトのボーダーを削除
