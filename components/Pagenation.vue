@@ -26,8 +26,7 @@ export default {
     }
   },
   mounted() {
-    const maxArticleCount = 10
-    const maxPageCount = Math.ceil(this.totalArticleCount / maxArticleCount)
+    const maxPageCount = Math.ceil(this.totalArticleCount / this.$constant.MAX_ARTICLE_COUNT_IN_LIST)
     this.pages = Array.from(Array(maxPageCount).keys()).map(p => p + 1)
   }
 }
