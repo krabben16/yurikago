@@ -27,7 +27,7 @@ export default {
     // 外部リンクを別タブで開く
     renderer.link = (href, title, text) => {
       let out = null
-      if (href.slice(0, 1) == "/") {
+      if (href.slice(0, 1) === "/") {
         out = `<a href="${href}">${text}</a>`
       } else {
         out = `<a href="${href}" target="_blank">${text}</a>`
