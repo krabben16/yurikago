@@ -93,8 +93,7 @@ export default {
       }))
 
       const totalArticleCount = await axiosInstance.get('/articles/count')
-      const maxArticleCount = 10
-      const maxPageCount = Math.ceil(totalArticleCount.data / maxArticleCount)
+      const maxPageCount = Math.ceil(totalArticleCount.data / constant.MAX_ARTICLE_COUNT_IN_LIST)
       path.push(...Array.from(Array(maxPageCount).keys()).map(v => {
         return `/articles/list/${v + 1}`
       }))
@@ -137,8 +136,7 @@ export default {
       }))
 
       const totalArticleCount = await axiosInstance.get('/articles/count')
-      const maxArticleCount = 10
-      const maxPageCount = Math.ceil(totalArticleCount.data / maxArticleCount)
+      const maxPageCount = Math.ceil(totalArticleCount.data / constant.MAX_ARTICLE_COUNT_IN_LIST)
       path.push(...Array.from(Array(maxPageCount).keys()).map(v => {
         return `/articles/list/${v + 1}`
       }))
