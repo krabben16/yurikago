@@ -31,12 +31,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scope>
-.pagination {
-  // デフォルトのマージンをリセット
-  margin-bottom: 0;
-
-  margin-top: 40px;
-}
-</style>

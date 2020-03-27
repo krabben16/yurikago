@@ -1,7 +1,5 @@
 <template>
-  <div class="content-wrapper">
-    <Markdown :markdown-content="about.markdown" />
-  </div>
+  <Markdown :markdown-content="about.markdown" />
 </template>
 
 <script>
