@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container-fluid">
+    <div class="container-fluid l-main">
       <Header />
       <div class="row no-gutters">
         <div class="col-11 mx-auto col-sm-6 mx-sm-auto">
@@ -26,11 +26,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.container-fluid {
-  // デフォルトのパディングをリセット
-  padding-left: 0;
-  padding-right: 0;
-}
-</style>

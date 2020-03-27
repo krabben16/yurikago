@@ -1,11 +1,11 @@
 <template>
   <div
-    class="link-wrapper"
+    class="c-article-link"
     @mouseenter="isActive = true"
     @mouseleave="isActive = false"
     @click="changeRoute(article.id)"
   >
-    <h5 :class="{ 'text-theme': isActive }">{{ article.title }}</h5>
+    <h5 :class="{ 'u-link-color': isActive }">{{ article.title }}</h5>
     <h6 class="text-muted">{{ article.posted_at }}</h6>
   </div>
 </template>
@@ -25,9 +25,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.link-wrapper {
-  cursor: pointer;
-}
-</style>

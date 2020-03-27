@@ -46,12 +46,12 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: 'lightseagreen' },
+  loading: { color: '#3fc1c9' },
   /*
   ** Global CSS
   */
   css: [
-    'assets/css/default.css'
+    '~/assets/scss/app.scss'
   ],
   /*
   ** Plugins to load before mounting the App

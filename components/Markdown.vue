@@ -1,5 +1,5 @@
 <template>
-  <div class="markdown-wrapper" v-html="htmlContent" />
+  <div class="p-markdown" v-html="htmlContent" />
 </template>
 
 <script>
@@ -25,12 +25,13 @@ export default {
     }
 
     // 外部リンクを別タブで開く
+    // スタイルを適用するためクラスを付与する
     renderer.link = (href, title, text) => {
       let out = null
       if (href.slice(0, 1) === "/") {
-        out = `<a href="${href}">${text}</a>`
+        out = `<a href="${href}" class="u-link-color">${text}</a>`
       } else {
-        out = `<a href="${href}" target="_blank">${text}</a>`
+        out = `<a href="${href}" target="_blank" class="u-link-color">${text}</a>`
       }
       return out
     }
@@ -62,59 +63,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.markdown-wrapper {
-  h3 {
-    background-color: #f8f9fa;
-    padding: 10px 10px 10px 20px;
-    border-left: 3px solid lightseagreen;
-  }
-
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 40px 0;
-  }
-
-  hr {
-    margin: 40px 0;
-  }
-
-  li {
-    margin: 10px 0;
-  }
-
-  img {
-    max-width: 100%;
-  }
-
-  pre {
-    white-space: pre-wrap;
-  }
-
-  blockquote {
-    p {
-      // デフォルトのマージンをリセット
-      margin-bottom: 0;
-    }
-
-    color: gray;
-    padding: 10px 20px;
-
-    a {
-      color: gray;
-    }
-  }
-
-  // デフォルトのボーダーを削除
-  .table {
-    thead {
-      th {
-        border-bottom: none;
-      }
-    }
-  }
-}
-</style>

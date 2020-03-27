@@ -1,27 +1,23 @@
 <template>
   <div>
-    <div class="content-wrapper">
-      <div class="article-header">
-        <div>{{ article.posted_at }}</div>
-        <div class="clearfix">
-          <div class="tags">
-            <nuxt-link
-              v-for="articleTag in article.article_tags"
-              :key="articleTag.tag_id"
-              :to="{ name: 'articles-tag-id', params: { id: articleTag.tag_id } }"
-              class="badge badge-dark"
-            >
-              {{ articleTag.tag.name }}
-            </nuxt-link>
-          </div>
+    <div class="p-article">
+      <div>{{ article.posted_at }}</div>
+      <div class="clearfix">
+        <div class="tags">
+          <nuxt-link
+            v-for="articleTag in article.article_tags"
+            :key="articleTag.tag_id"
+            :to="{ name: 'articles-tag-id', params: { id: articleTag.tag_id } }"
+            class="badge badge-light"
+          >
+            {{ articleTag.tag.name }}
+          </nuxt-link>
         </div>
-        <h2>{{ article.title }}</h2>
       </div>
-      <div class="article-body">
-        <Markdown :markdown-content="article.markdown" />
-      </div>
+      <h2>{{ article.title }}</h2>
+      <Markdown :markdown-content="article.markdown" />
     </div>
-    <div class="disqus-wrapper">
+    <div class="c-disqus">
       <vue-disqus shortname="yurikago-blog" :identifier="$route.path" :url="$constant.FRONT_URL + $route.path" />
     </div>
   </div>
@@ -94,29 +90,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.article-header {
-  h2 {
-    margin: 40px 0;
-  }
-
-  .clearfix::after {
-    display: block;
-    clear: both;
-  }
-
-  .tags {
-    float: right;
-
-    .badge:nth-child(n + 2) {
-      margin-left: 10px;
-    }
-  }
-}
-
-.disqus-wrapper {
-  margin-top: 60px;
-  background-color: white;
-}
-</style>

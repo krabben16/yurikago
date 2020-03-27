@@ -1,7 +1,5 @@
 <template>
-  <div class="content-wrapper">
-    <Markdown :markdown-content="arigato.markdown" />
-  </div>
+  <Markdown :markdown-content="arigato.markdown" />
 </template>
 
 <script>

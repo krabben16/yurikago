@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-for="article in articles" :key="article.id" class="row">
+    <div v-for="article in articles" :key="article.id" class="row c-article-list">
       <div class="col-12 col-sm-10 mx-sm-auto">
         <Article :article="article" />
       </div>
@@ -20,9 +20,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.row:nth-child(n + 2) {
-  margin-top: 40px;
-}
-</style>

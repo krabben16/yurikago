@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-light">
+  <nav class="l-header navbar navbar-expand-sm navbar-light">
     <nuxt-link :to="{ name: 'index' }" class="navbar-brand">
       Yurikago Blog
     </nuxt-link>
@@ -50,7 +50,7 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item nav-item-github">
+        <li class="nav-item c-github-icon">
           <a :href="$constant.GITHUB_URL" target="_blank">
             <picture>
               <source srcset="~/assets/images/common/GitHub-Mark-32px.webp" type="image/webp" />
@@ -81,15 +81,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-nav {
-  margin-bottom: 50px;
-
-  @media screen and (max-width: 575px) {
-    .nav-item-github {
-      display: none;
-    }
-  }
-}
-</style>
