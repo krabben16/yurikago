@@ -81,10 +81,16 @@ export default {
           hid: "breadcrumbSchema",
           innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
           type: "application/ld+json"
+        },
+        {
+          hid: "articleSchema",
+          innerHTML: this.$getArticleSchema(this.article),
+          type: "application/ld+json"
         }
       ],
       __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ["innerHTML"]
+        breadcrumbSchema: ["innerHTML"],
+        articleSchema: ["innerHTML"]
       }
     }
   }

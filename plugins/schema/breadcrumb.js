@@ -5,17 +5,17 @@ Vue.prototype.$getBreadcrumbSchema = breadcrumbItemList => {
   const itemListElementValue = breadcrumbItemList.map((v, k) => {
     return {
       "@type": "ListItem",
-      position: k + 1,
-      name: v.name,
-      item: constant.FRONT_URL + v.path
+      "position": k + 1,
+      "name": v.name,
+      "item": constant.FRONT_URL + v.path
     }
   })
 
-  const breadcrumbList = {
+  const breadcrumbListSchema = {
     "@context": "http://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: itemListElementValue
+    "itemListElement": itemListElementValue
   }
 
-  return JSON.stringify(breadcrumbList)
+  return JSON.stringify(breadcrumbListSchema)
 }

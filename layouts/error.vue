@@ -24,17 +24,35 @@
 </template>
 
 <script>
+import { mapActions } from "vuex"
+
 export default {
   props: {
     error: Object
   },
+  created() {
+    this.title = "エラー"
+    this.breadcrumbItemList = [
+      {
+        name: "トップページ",
+        path: "/"
+      },
+      {
+        name: this.title,
+        path: this.$route.path
+      }
+    ]
+  },
   mounted() {
     // パンくず
-    this.$nuxt.$emit("setPageName", "エラー")
+    this.changeBreadcrumbItemList(this.breadcrumbItemList)
+  },
+  methods: {
+    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
   },
   head() {
     return {
-      title: "Error"
+      title: this.title
     }
   }
 }
