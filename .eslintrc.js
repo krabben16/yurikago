@@ -28,7 +28,10 @@ module.exports = {
     'prettier/prettier': [
       'error', {
         'semi': false,
-        'printWidth': 120
+        'printWidth': 120,
+        // https://prettier.io/docs/en/options.html#quote-props
+        // プロパティの引用符の使用を尊重する
+        'quoteProps': 'preserve'
       }
     ]
   }
