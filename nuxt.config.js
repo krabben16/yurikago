@@ -57,10 +57,11 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/breadcrumb.js',
-    '~/plugins/disqus.js',
+    '~/plugins/constant.js',
     '~/plugins/axios.js',
-    '~/plugins/constant.js'
+    '~/plugins/disqus.js',
+    '~/plugins/schema/breadcrumb.js',
+    '~/plugins/schema/article.js'
   ],
   /*
   ** Nuxt.js dev-modules
