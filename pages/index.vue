@@ -19,19 +19,21 @@ export default {
     const page = 1
     const articles = await context.app.$axios.get(`/articles?p=${page}`)
     const count = await context.app.$axios.get("/articles/count")
-    const title = "トップページ"
     return {
       activePage: page,
       articles: articles.data,
-      totalArticleCount: count.data,
-      title: title,
-      breadcrumbItemList: [
-        {
-          name: title,
-          path: "/"
-        }
-      ]
+      totalArticleCount: count.data
     }
+  },
+  created() {
+    this.title = "トップページ"
+    this.description = `${this.$constant.SITE_OWNER}の技術ブログです。`
+    this.breadcrumbItemList = [
+      {
+        name: this.title,
+        path: "/"
+      }
+    ]
   },
   mounted() {
     // パンくず
@@ -43,8 +45,13 @@ export default {
   head() {
     return {
       title: this.title,
-      // 構造化マークアップ
+      meta: [
+        {
+          "description": this.description
+        }
+      ],
       script: [
+        // 構造化マークアップ
         {
           hid: "breadcrumbSchema",
           innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),

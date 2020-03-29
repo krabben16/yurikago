@@ -1,12 +1,18 @@
 import Vue from "vue"
 import constant from "~/plugins/constant.js"
 
-Vue.prototype.$getArticleSchema = article => {
-  const joinedTagName = article.article_tags
+const getJoinedTagName = article_tags => {
+  return article_tags
     .map(article_tag => {
       return article_tag.tag.name
     })
     .join(",")
+}
+
+Vue.prototype.$getJoinedTagName = getJoinedTagName
+
+Vue.prototype.$getArticleSchema = article => {
+  const joinedTagName = getJoinedTagName(article.article_tags)
 
   const articleSchema = {
     "@context": "http://schema.org",

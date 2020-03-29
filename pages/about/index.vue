@@ -12,21 +12,23 @@ export default {
   },
   async asyncData(context) {
     const about = await context.app.$axios.get("/about")
-    const title = "このサイトについて"
     return {
-      about: about.data,
-      title: title,
-      breadcrumbItemList: [
-        {
-          name: "トップページ",
-          path: "/"
-        },
-        {
-          name: title,
-          path: "/about"
-        }
-      ]
+      about: about.data
     }
+  },
+  created() {
+    this.title = "このサイトについて"
+    this.description = "このサイトを作成した背景や方法などをまとめたページです。"
+    this.breadcrumbItemList = [
+      {
+        name: "トップページ",
+        path: "/"
+      },
+      {
+        name: this.title,
+        path: "/about"
+      }
+    ]
   },
   mounted() {
     // パンくず
@@ -38,6 +40,11 @@ export default {
   head() {
     return {
       title: this.title,
+      meta: [
+        {
+          "description": this.description
+        }
+      ],
       // 構造化マークアップ
       script: [
         {

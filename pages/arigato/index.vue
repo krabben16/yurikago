@@ -12,21 +12,23 @@ export default {
   },
   async asyncData(context) {
     const arigato = await context.app.$axios.get("/arigato")
-    const title = "ありがとうございます"
     return {
-      arigato: arigato.data,
-      title: title,
-      breadcrumbItemList: [
-        {
-          name: "トップページ",
-          path: "/"
-        },
-        {
-          name: title,
-          path: "/arigato"
-        }
-      ]
+      arigato: arigato.data
     }
+  },
+  created() {
+    this.title = "ありがとうございます"
+    this.description = "利用させていただいているライブラリやフレームワークなどをまとめたページです。"
+    this.breadcrumbItemList = [
+      {
+        name: "トップページ",
+        path: "/"
+      },
+      {
+        name: this.title,
+        path: "/arigato"
+      }
+    ]
   },
   mounted() {
     // パンくず
@@ -38,8 +40,13 @@ export default {
   head() {
     return {
       title: this.title,
-      // 構造化マークアップ
+      meta: [
+        {
+          "description": this.description
+        }
+      ],
       script: [
+        // 構造化マークアップ
         {
           hid: "breadcrumbSchema",
           innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),

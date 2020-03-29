@@ -12,21 +12,23 @@ export default {
   },
   async asyncData(context) {
     const profile = await context.app.$axios.get("/profile")
-    const title = "プロフィール"
     return {
-      profile: profile.data,
-      title: title,
-      breadcrumbItemList: [
-        {
-          name: "トップページ",
-          path: "/"
-        },
-        {
-          name: title,
-          path: "/profile"
-        }
-      ]
+      profile: profile.data
     }
+  },
+  created() {
+    this.title = "プロフィール"
+    this.description = "プロフィールやスキルセットなどをまとめたページです。"
+    this.breadcrumbItemList = [
+      {
+        name: "トップページ",
+        path: "/"
+      },
+      {
+        name: this.title,
+        path: "/profile"
+      }
+    ]
   },
   mounted() {
     // パンくず
@@ -38,8 +40,13 @@ export default {
   head() {
     return {
       title: this.title,
-      // 構造化マークアップ
+      meta: [
+        {
+          "description": this.description
+        }
+      ],
       script: [
+        // 構造化マークアップ
         {
           hid: "breadcrumbSchema",
           innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
