@@ -18,7 +18,11 @@
       <Markdown :markdown-content="article.markdown" />
     </div>
     <div class="c-disqus">
-      <vue-disqus shortname="yurikago-blog" :identifier="$route.path" :url="$constant.FRONT_URL + $route.path" />
+      <vue-disqus
+        :shortname="$constant.DISQUS_SHORTNAME"
+        :identifier="$route.path"
+        :url="$constant.FRONT_URL + $route.path"
+      />
     </div>
   </div>
 </template>
