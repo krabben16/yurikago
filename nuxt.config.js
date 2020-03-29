@@ -81,23 +81,46 @@ export default {
   sitemap: {
     hostname: constant.FRONT_URL,
     routes: async () => {
+      const getMaxPageCount = async () => {
+        const totalArticleCount = await axiosInstance.get('/articles/count')
+        return Math.ceil(totalArticleCount.data / constant.MAX_ARTICLE_COUNT_IN_LIST)
+      }
+
+      const getArticlesListUrl = async maxPageCount  => {
+        let url = []
+        for (let i=1; i<=maxPageCount; i++) {
+          url.push(`/articles/list/${i}`)
+        }
+        return url
+      }
+
+      const getArticlesUrl = async maxPageCount => {
+        let url = []
+        for (let i=1; i<=maxPageCount; i++) {
+          const articles = await axiosInstance.get(`/articles?p=${i}`)
+          for (let j=0; j<articles.data.length; j++) {
+            const article = articles.data[j]
+            url.push(`/articles/${article.id}`)
+          }
+        }
+        return url
+      }
+
+      const getArticlesTagUrl = async () => {
+        let url = []
+        const tags = await axiosInstance.get('/tags')
+        for (let i=0; i<tags.data.length; i++) {
+          const tag = tags.data[i]
+          url.push(`/articles/tag/${tag.id}`)
+        }
+        return url
+      }
+
       let path = []
-
-      const articles = await axiosInstance.get('/articles')
-      path.push(...articles.data.map(v => {
-        return `/articles/${v.id}`
-      }))
-
-      const tags = await axiosInstance.get('/tags')
-      path.push(...tags.data.map(v => {
-        return `/articles/tag/${v.id}`
-      }))
-
-      const totalArticleCount = await axiosInstance.get('/articles/count')
-      const maxPageCount = Math.ceil(totalArticleCount.data / constant.MAX_ARTICLE_COUNT_IN_LIST)
-      path.push(...Array.from(Array(maxPageCount).keys()).map(v => {
-        return `/articles/list/${v + 1}`
-      }))
+      const maxPageCount = await getMaxPageCount()
+      path = path.concat(await getArticlesListUrl(maxPageCount))
+      path = path.concat(await getArticlesUrl(maxPageCount))
+      path = path.concat(await getArticlesTagUrl())
 
       return path
     }
@@ -124,23 +147,46 @@ export default {
   generate: {
     // 動的なパラメーターを用いたルートを生成
     routes: async () => {
+      const getMaxPageCount = async () => {
+        const totalArticleCount = await axiosInstance.get('/articles/count')
+        return Math.ceil(totalArticleCount.data / constant.MAX_ARTICLE_COUNT_IN_LIST)
+      }
+
+      const getArticlesListUrl = async maxPageCount  => {
+        let url = []
+        for (let i=1; i<=maxPageCount; i++) {
+          url.push(`/articles/list/${i}`)
+        }
+        return url
+      }
+
+      const getArticlesUrl = async maxPageCount => {
+        let url = []
+        for (let i=1; i<=maxPageCount; i++) {
+          const articles = await axiosInstance.get(`/articles?p=${i}`)
+          for (let j=0; j<articles.data.length; j++) {
+            const article = articles.data[j]
+            url.push(`/articles/${article.id}`)
+          }
+        }
+        return url
+      }
+
+      const getArticlesTagUrl = async () => {
+        let url = []
+        const tags = await axiosInstance.get('/tags')
+        for (let i=0; i<tags.data.length; i++) {
+          const tag = tags.data[i]
+          url.push(`/articles/tag/${tag.id}`)
+        }
+        return url
+      }
+
       let path = []
-
-      const articles = await axiosInstance.get('/articles')
-      path.push(...articles.data.map(v => {
-        return `/articles/${v.id}`
-      }))
-
-      const tags = await axiosInstance.get('/tags')
-      path.push(...tags.data.map(v => {
-        return `/articles/tag/${v.id}`
-      }))
-
-      const totalArticleCount = await axiosInstance.get('/articles/count')
-      const maxPageCount = Math.ceil(totalArticleCount.data / constant.MAX_ARTICLE_COUNT_IN_LIST)
-      path.push(...Array.from(Array(maxPageCount).keys()).map(v => {
-        return `/articles/list/${v + 1}`
-      }))
+      const maxPageCount = await getMaxPageCount()
+      path = path.concat(await getArticlesListUrl(maxPageCount))
+      path = path.concat(await getArticlesUrl(maxPageCount))
+      path = path.concat(await getArticlesTagUrl())
 
       return path
     },
