@@ -32,6 +32,7 @@ export default {
   },
   created() {
     this.title = "エラー"
+    this.description = "エラーページです！"
     this.breadcrumbItemList = [
       {
         name: "トップページ",
@@ -52,7 +53,12 @@ export default {
   },
   head() {
     return {
-      title: this.title
+      title: this.title,
+      meta: [
+        {
+          "description": this.description
+        }
+      ]
     }
   }
 }

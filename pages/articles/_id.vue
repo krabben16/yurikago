@@ -18,7 +18,11 @@
       <Markdown :markdown-content="article.markdown" />
     </div>
     <div class="c-disqus">
-      <vue-disqus shortname="yurikago-blog" :identifier="$route.path" :url="$constant.FRONT_URL + $route.path" />
+      <vue-disqus
+        :shortname="$constant.DISQUS_SHORTNAME"
+        :identifier="$route.path"
+        :url="$constant.FRONT_URL + $route.path"
+      />
     </div>
   </div>
 </template>
@@ -33,25 +37,28 @@ export default {
   },
   async asyncData(context) {
     const article = await context.app.$axios.get(`/articles/${context.params.id}`)
-    const title = article.data.title
     return {
       id: context.params.id,
-      article: article.data,
-      title: title,
-      breadcrumbItemList: [
-        {
-          name: "トップページ",
-          path: "/"
-        },
-        {
-          name: title,
-          path: `/articles/${context.params.id}`
-        }
-      ]
+      article: article.data
     }
   },
   computed: {
     ...mapGetters("articles", ["landingArticleID"])
+  },
+  created() {
+    this.title = this.article.title
+    const joinedTagName = this.$getJoinedTagName(this.article.article_tags)
+    this.description = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagName}」を含みます。`
+    this.breadcrumbItemList = [
+      {
+        name: "トップページ",
+        path: "/"
+      },
+      {
+        name: this.title,
+        path: `/articles/${this.id}`
+      }
+    ]
   },
   mounted() {
     if (!this.landingArticleID) {
@@ -68,6 +75,11 @@ export default {
   head() {
     return {
       title: this.title,
+      meta: [
+        {
+          "description": this.description
+        }
+      ],
       link: [
         {
           rel: "stylesheet",
