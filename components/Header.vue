@@ -19,9 +19,6 @@
         <li class="nav-item">
           <nuxt-link :to="{ name: 'about' }" class="nav-link">About</nuxt-link>
         </li>
-        <li class="nav-item">
-          <nuxt-link :to="{ name: 'profile' }" class="nav-link">Profile</nuxt-link>
-        </li>
         <li class="nav-item dropdown">
           <a
             id="navbarDropdown"
