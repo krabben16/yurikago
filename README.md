@@ -13,7 +13,7 @@
 - bootstrap
 - Firebase Hosting
 
-ページを表示 or 遷移するときデータをバックエンドから取得して表示します。
+ページ遷移するときデータをバックエンドから取得して表示します。
 
 修正をGitHubのmasterブランチにマージするとCircleCIがFirebaseにデプロイします。このとき `nuxt generate` を実行して生成した静的ファイルをFirebaseにアップロードします。
 
