@@ -9,25 +9,28 @@
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
+import { getTotalArticleCount, getArticlesByPage } from "~/plugins/articles.js"
 
 export default {
   components: {
     ArticleList,
     Pagenation
   },
-  async asyncData(context) {
+  asyncData() {
     const page = 1
-    const articles = await context.app.$axios.get(`/articles?p=${page}`)
-    const count = await context.app.$axios.get("/articles/count")
     return {
-      activePage: page,
-      articles: articles.data,
-      totalArticleCount: count.data
+      activePage: page
     }
   },
   created() {
+    const articles = getArticlesByPage(this.activePage)
+    this.articles = articles
+    this.totalArticleCount = getTotalArticleCount()
+
+    // TDK
     this.title = "トップページ"
     this.description = `${this.$constant.SITE_OWNER}の技術ブログです。`
+
     this.breadcrumbItemList = [
       {
         name: this.title,

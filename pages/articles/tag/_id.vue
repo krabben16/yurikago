@@ -5,23 +5,27 @@
 <script>
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
+import { getTagById } from "~/plugins/tags.js"
+import { getArticlesByTagId } from "~/plugins/articles.js"
 
 export default {
   components: {
     ArticleList
   },
   async asyncData(context) {
-    const articles = await context.app.$axios.get(`/articles/tag/${context.params.id}`)
-    const tag = await context.app.$axios.get(`/tags/${context.params.id}`)
+    const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
     return {
-      id: context.params.id,
-      tag: tag.data,
-      articles: articles.data.reverse()
+      tagId: id
     }
   },
   created() {
+    this.tag = getTagById(this.tagId)
+    this.articles = getArticlesByTagId(this.tagId)
+
+    // TDK
     this.title = this.tag.name
     this.description = `タグ「${this.tag.name}」を含む記事の一覧です。`
+
     this.breadcrumbItemList = [
       {
         name: "トップページ",
@@ -29,7 +33,7 @@ export default {
       },
       {
         name: this.title,
-        path: `/articles/tag/${this.id}`
+        path: `/articles/tag/${this.tagId}`
       }
     ]
   },

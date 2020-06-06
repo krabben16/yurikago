@@ -1,54 +1,33 @@
 <template>
-  <div>
-    <div class="p-article">
-      <div>{{ article.posted_at }}</div>
-      <div class="clearfix">
-        <div class="tags">
-          <nuxt-link
-            v-for="articleTag in article.article_tags"
-            :key="articleTag.tag_id"
-            :to="{ name: 'articles-tag-id', params: { id: articleTag.tag_id } }"
-            class="badge badge-light"
-          >
-            {{ articleTag.tag.name }}
-          </nuxt-link>
-        </div>
-      </div>
-      <h2>{{ article.title }}</h2>
-      <Markdown :markdown-content="article.markdown" />
-    </div>
-    <div class="c-disqus">
-      <vue-disqus
-        :shortname="$constant.DISQUS_SHORTNAME"
-        :identifier="$route.path"
-        :url="$constant.FRONT_URL + $route.path"
-      />
-    </div>
-  </div>
+  <Article :article="article" />
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
-import Markdown from "~/components/Markdown.vue"
+import Article from "~/components/Article.vue"
+import { getJoinedTagsName } from "~/plugins/tags.js"
+import { getArticleById } from "~/plugins/articles.js"
 
 export default {
   components: {
-    Markdown
+    Article
   },
   async asyncData(context) {
-    const article = await context.app.$axios.get(`/articles/${context.params.id}`)
     return {
-      id: context.params.id,
-      article: article.data
+      id: context.params.id
     }
   },
   computed: {
     ...mapGetters("articles", ["landingArticleID"])
   },
   created() {
+    this.article = getArticleById(this.id)
+
+    // TDK
     this.title = this.article.title
-    const joinedTagName = this.$getJoinedTagName(this.article.article_tags)
-    this.description = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagName}」を含みます。`
+    const joinedTagsName = getJoinedTagsName(this.article.tags)
+    this.description = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagsName}」を含みます。`
+
     this.breadcrumbItemList = [
       {
         name: "トップページ",
@@ -56,13 +35,13 @@ export default {
       },
       {
         name: this.title,
-        path: `/articles/${this.id}`
+        path: `/articles/${this.article.id}`
       }
     ]
   },
   mounted() {
     if (!this.landingArticleID) {
-      this.changeLandingArticleID(this.id)
+      this.changeLandingArticleID(this.article.id)
     }
 
     // パンくず

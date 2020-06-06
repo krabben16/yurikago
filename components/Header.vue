@@ -38,7 +38,7 @@
               class="dropdown-item"
               :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
             >
-              {{ tag.name }} ({{ tag.article_count }})
+              {{ tag.name }}
             </nuxt-link>
           </div>
         </li>
@@ -61,20 +61,11 @@
 </template>
 
 <script>
+import { getTagsAll } from "~/plugins/tags.js"
+
 export default {
-  data() {
-    return {
-      tags: null
-    }
-  },
-  mounted() {
-    this.fetchTags()
-  },
-  methods: {
-    async fetchTags() {
-      const tags = await this.$axios.get("/tags")
-      this.tags = tags.data
-    }
+  created() {
+    this.tags = getTagsAll()
   }
 }
 </script>

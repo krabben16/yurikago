@@ -20,6 +20,9 @@ module.exports = {
   ],
   // ここにカスタムルールを追加します。
   rules: {
+    // https://eslint.org/docs/rules/semi
+    // never: 行末尾のセミコロンを許可しない
+    // 上記のルールに違反した場合にerror（=2）を引き起こす？
     'semi': [2, 'never'],
     'no-console': 'off',
     'no-unused-vars': 1,
@@ -27,11 +30,13 @@ module.exports = {
     'vue/singleline-html-element-content-newline': 'off',
     'prettier/prettier': [
       'error', {
+        // https://prettier.io/docs/en/options.html#semicolons
+        // false: ASIエラーを引き起こす可能性のある行の先頭のみセミコロンを追加する
         'semi': false,
-        'printWidth': 120,
         // https://prettier.io/docs/en/options.html#quote-props
-        // プロパティの引用符の使用を尊重する
-        'quoteProps': 'preserve'
+        // preserve: オブジェクトプロパティの引用符を使用できるようにする
+        'quoteProps': 'preserve',
+        'printWidth': 120,
       }
     ]
   }
