@@ -1,24 +1,23 @@
 <template>
-  <Markdown :markdown-content="arigato.markdown" />
+  <Markdown :markdown-content="content" />
 </template>
 
 <script>
 import { mapActions } from "vuex"
 import Markdown from "~/components/Markdown.vue"
+import markdownSource from "~/assets/markdown/about.md"
 
 export default {
   components: {
     Markdown
   },
-  async asyncData(context) {
-    const arigato = await context.app.$axios.get("/arigato")
-    return {
-      arigato: arigato.data
-    }
-  },
   created() {
+    this.content = markdownSource
+
+    // TDK
     this.title = "ありがとうございます"
     this.description = "利用させていただいているライブラリやフレームワークなどをまとめたページです。"
+
     this.breadcrumbItemList = [
       {
         name: "トップページ",

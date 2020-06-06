@@ -1,18 +1,9 @@
 import Vue from "vue"
 import constant from "~/plugins/constant.js"
-
-const getJoinedTagName = article_tags => {
-  return article_tags
-    .map(article_tag => {
-      return article_tag.tag.name
-    })
-    .join(",")
-}
-
-Vue.prototype.$getJoinedTagName = getJoinedTagName
+import { getJoinedTagsName } from "~/plugins/tags.js"
 
 Vue.prototype.$getArticleSchema = article => {
-  const joinedTagName = getJoinedTagName(article.article_tags)
+  const joinedTagsName = getJoinedTagsName(article.tags)
 
   const articleSchema = {
     "@context": "http://schema.org",
@@ -37,7 +28,7 @@ Vue.prototype.$getArticleSchema = article => {
         "url": `${constant.FRONT_URL}/icon.jpg`
       }
     },
-    "description": `「${article.title}」についてまとめた記事です。この記事には以下のキーワード「${joinedTagName}」が含まれます。`
+    "description": `「${article.title}」についてまとめた記事です。この記事には以下のキーワード「${joinedTagsName}」が含まれます。`
   }
 
   return JSON.stringify(articleSchema)

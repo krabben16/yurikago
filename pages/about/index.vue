@@ -1,24 +1,23 @@
 <template>
-  <Markdown :markdown-content="about.markdown" />
+  <Markdown :markdown-content="content" />
 </template>
 
 <script>
 import { mapActions } from "vuex"
 import Markdown from "~/components/Markdown.vue"
+import markdownSource from "~/assets/markdown/about.md"
 
 export default {
   components: {
     Markdown
   },
-  async asyncData(context) {
-    const about = await context.app.$axios.get("/about")
-    return {
-      about: about.data
-    }
-  },
   created() {
+    this.content = markdownSource
+
+    // TDK
     this.title = "このサイトについて"
     this.description = "このサイトを作成した背景や方法などをまとめたページです。"
+
     this.breadcrumbItemList = [
       {
         name: "トップページ",

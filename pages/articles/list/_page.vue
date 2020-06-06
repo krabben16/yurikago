@@ -9,6 +9,7 @@
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
+import { getTotalArticleCount, getArticlesByPage } from "~/plugins/articles.js"
 
 export default {
   components: {
@@ -19,17 +20,18 @@ export default {
     // NaN = Not a Number
     // typeof context.params.page => string
     const page = isNaN(context.params.page) ? 1 : parseInt(context.params.page)
-    const articles = await context.app.$axios.get(`/articles?p=${page}`)
-    const count = await context.app.$axios.get("/articles/count")
     return {
-      activePage: page,
-      articles: articles.data,
-      totalArticleCount: count.data
+      activePage: page
     }
   },
   created() {
+    this.articles = getArticlesByPage(this.activePage)
+    this.totalArticleCount = getTotalArticleCount()
+
+    // TDK
     this.title = `記事一覧${this.activePage}`
     this.description = `記事一覧の${this.activePage}ページ目です。`
+
     this.breadcrumbItemList = [
       {
         name: "トップページ",
