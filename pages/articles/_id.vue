@@ -13,8 +13,9 @@ export default {
     Article
   },
   async asyncData(context) {
+    const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
     return {
-      id: context.params.id
+      id: id
     }
   },
   computed: {
