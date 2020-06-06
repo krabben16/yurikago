@@ -158,7 +158,7 @@ export const getArticlesByPage = page => {
   if (page === 1) {
     const start = 0
     const end = constant.MAX_ARTICLE_COUNT_IN_LIST
-    return articles.slice(start, end)
+    return sortArticlesByIdDesc(articles).slice(start, end)
   }
 
   // page = 2
@@ -166,7 +166,7 @@ export const getArticlesByPage = page => {
   // end = 10 * 2 = 20
   const start = constant.MAX_ARTICLE_COUNT_IN_LIST * (page - 1)
   const end = constant.MAX_ARTICLE_COUNT_IN_LIST * page
-  return articles.slice(start, end)
+  return sortArticlesByIdDesc(articles).slice(start, end)
 }
 
 /**
@@ -175,7 +175,7 @@ export const getArticlesByPage = page => {
  */
 export const getArticlesByTagId = tagId => {
   const ret = []
-  articles.map(a => {
+  sortArticlesByIdDesc(articles).map(a => {
     a.tags.map(t => {
       if (t.id === tagId) {
         ret.push(a)
@@ -186,8 +186,21 @@ export const getArticlesByTagId = tagId => {
 }
 
 /**
- * 全ての記事を取得する
+ * 記事リストをIDの降順で並び替える
+ * @param {Array} articles
  */
-export const getArticlesAll = () => {
-  return articles
+const sortArticlesByIdDesc = articles => {
+  const compare = (a, b) => {
+    // bをaの後ろに置く
+    if (a.id > b.id) {
+      return -1
+    }
+    // bをaの前に置く
+    if (a.id < b.id) {
+      return 1
+    }
+    // aとbの位置は変わらない
+    return 0
+  }
+  return articles.sort(compare)
 }
