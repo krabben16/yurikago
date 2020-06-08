@@ -5,7 +5,7 @@
 <script>
 import { mapActions } from "vuex"
 import Markdown from "~/components/Markdown.vue"
-import markdownSource from "~/assets/markdown/about.md"
+import markdownSource from "~/assets/markdown/arigato.md"
 
 export default {
   components: {
