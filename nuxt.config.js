@@ -1,51 +1,56 @@
-import constant from './plugins/constant.js'
+import { constant } from './constant.js'
 
-const url = [
-  "/",
-  "/about",
-  "/arigato",
-  "/articles/1",
-  "/articles/2",
-  "/articles/3",
-  "/articles/4",
-  "/articles/5",
-  "/articles/6",
-  "/articles/7",
-  "/articles/8",
-  "/articles/9",
-  "/articles/10",
-  "/articles/11",
-  "/articles/12",
-  "/articles/13",
-  "/articles/14",
-  "/articles/15",
-  "/articles/16",
-  "/articles/list/1",
-  "/articles/list/2",
-  "/articles/tag/1",
-  "/articles/tag/2",
-  "/articles/tag/3",
-  "/articles/tag/4",
-  "/articles/tag/5",
-  "/articles/tag/6",
-  "/articles/tag/7",
-  "/articles/tag/8",
-  "/articles/tag/9",
-  "/articles/tag/10",
-  "/articles/tag/11",
-  "/articles/tag/12",
-  "/articles/tag/13",
-  "/articles/tag/14",
-  "/articles/tag/15",
-  "/articles/tag/16",
-  "/articles/tag/17",
-  "/articles/tag/18",
-  "/articles/tag/19",
-  "/articles/tag/20",
-  "/articles/tag/21",
-  "/articles/tag/22",
-  "/articles/tag/23",
-  "/articles/tag/24",
+/**
+ * NOTE:
+ *   - 以下のパスをサイトマップXMLに出力する
+ *   - generateしたとき以下のパスの静的ファイルを作成する
+ */
+const path = [
+  '/',
+  '/about',
+  '/arigato',
+  '/articles/1',
+  '/articles/2',
+  '/articles/3',
+  '/articles/4',
+  '/articles/5',
+  '/articles/6',
+  '/articles/7',
+  '/articles/8',
+  '/articles/9',
+  '/articles/10',
+  '/articles/11',
+  '/articles/12',
+  '/articles/13',
+  '/articles/14',
+  '/articles/15',
+  '/articles/16',
+  '/articles/list/1',
+  '/articles/list/2',
+  '/articles/tag/1',
+  '/articles/tag/2',
+  '/articles/tag/3',
+  '/articles/tag/4',
+  '/articles/tag/5',
+  '/articles/tag/6',
+  '/articles/tag/7',
+  '/articles/tag/8',
+  '/articles/tag/9',
+  '/articles/tag/10',
+  '/articles/tag/11',
+  '/articles/tag/12',
+  '/articles/tag/13',
+  '/articles/tag/14',
+  '/articles/tag/15',
+  '/articles/tag/16',
+  '/articles/tag/17',
+  '/articles/tag/18',
+  '/articles/tag/19',
+  '/articles/tag/20',
+  '/articles/tag/21',
+  '/articles/tag/22',
+  '/articles/tag/23',
+  '/articles/tag/24',
 ]
 
 export default {
@@ -121,7 +126,7 @@ export default {
   },
   sitemap: {
     hostname: constant.FRONT_URL,
-    routes: url
+    routes: path
   },
   /*
   ** Build configuration
@@ -140,7 +145,7 @@ export default {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
-          enforce: "pre",
+          enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: "eslint-loader",
           exclude: /(node_modules)/
@@ -150,7 +155,7 @@ export default {
   },
   generate: {
     // 動的なパラメーターを用いたルートを生成
-    routes: url,
+    routes: path,
     // エラー発生時に 200.html ではなく 404.html を表示する
     fallback: true
   }

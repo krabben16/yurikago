@@ -1,5 +1,5 @@
 import Vue from "vue"
-import constant from "~/plugins/constant.js"
+import { constant } from "~/constant.js"
 
 Vue.prototype.$getBreadcrumbSchema = breadcrumbItemList => {
   const itemListElementValue = breadcrumbItemList.map((v, k) => {
