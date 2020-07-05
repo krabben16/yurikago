@@ -1,4 +1,4 @@
-import constant from "~/plugins/constant.js"
+import { constant } from "~/constant.js"
 import { getTagByName } from "~/plugins/tags.js"
 
 import content1 from "~/assets/markdown/articles/1.md"

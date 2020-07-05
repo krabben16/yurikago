@@ -1,5 +1,5 @@
 import Vue from "vue"
-import constant from "~/plugins/constant.js"
+import { constant } from "~/constant.js"
 import { getJoinedTagsName } from "~/plugins/tags.js"
 
 Vue.prototype.$getArticleSchema = article => {
