@@ -48,7 +48,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item c-github-icon">
-          <a :href="$constant.GITHUB_URL" target="_blank">
+          <a :href="githubUrl" target="_blank">
             <picture>
               <source srcset="~/assets/images/common/GitHub-Mark-32px.webp" type="image/webp" />
               <img src="~/assets/images/common/GitHub-Mark-32px.png" alt="GitHub" />
@@ -66,6 +66,7 @@ import { getTagsAll } from "~/plugins/tags.js"
 export default {
   created() {
     this.tags = getTagsAll()
+    this.githubUrl = process.env.GITHUB_URL
   }
 }
 </script>

@@ -29,7 +29,7 @@ export default {
 
     // TDK
     this.title = "トップページ"
-    this.description = `${this.$constant.SITE_OWNER}の技術ブログです。`
+    this.description = `${process.env.SITE_OWNER}の技術ブログです。`
 
     this.breadcrumbItemList = [
       {
