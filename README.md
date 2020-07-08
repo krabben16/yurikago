@@ -15,3 +15,12 @@
 修正をGitHubのmasterブランチにマージするとCircleCIがFirebaseにデプロイします。このとき `nuxt generate` を実行して生成した静的ファイルをFirebaseにアップロードします。
 
 開発時のコーディングスタイルを統一するためPrettierとESLintを導入しました。
+
+## 動作検証ブラウザ
+
+- PC
+    - Google Chrome 83
+    - Firefox 78
+
+- SP
+    - Safari 13
