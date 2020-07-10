@@ -16,6 +16,7 @@ import content13 from "~/assets/markdown/articles/13.md"
 import content14 from "~/assets/markdown/articles/14.md"
 import content15 from "~/assets/markdown/articles/15.md"
 import content16 from "~/assets/markdown/articles/16.md"
+import content17 from "~/assets/markdown/articles/17.md"
 
 const articles = [
   {
@@ -129,6 +130,13 @@ const articles = [
     "posted_at": "2020-04-27",
     "tags": [getTagByName("cURL")],
     "content": content16
+  },
+  {
+    "id": 17,
+    "title": "画像をIE11でpreloadする",
+    "posted_at": "2020-07-10",
+    "tags": [getTagByName("JavaScript"), getTagByName("HTML")],
+    "content": content17
   }
 ]
 
