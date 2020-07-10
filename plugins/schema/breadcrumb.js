@@ -1,5 +1,4 @@
 import Vue from "vue"
-import { constant } from "~/constant.js"
 
 Vue.prototype.$getBreadcrumbSchema = breadcrumbItemList => {
   const itemListElementValue = breadcrumbItemList.map((v, k) => {
@@ -7,7 +6,7 @@ Vue.prototype.$getBreadcrumbSchema = breadcrumbItemList => {
       "@type": "ListItem",
       "position": k + 1,
       "name": v.name,
-      "item": constant.FRONT_URL + v.path
+      "item": process.env.FRONT_URL + v.path
     }
   })
 

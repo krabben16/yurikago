@@ -1,5 +1,3 @@
-import { constant } from './constant.js'
-
 /**
  * NOTE:
  *   - 以下のパスをサイトマップXMLに出力する
@@ -53,6 +51,15 @@ const path = [
   '/articles/tag/24',
 ]
 
+// 定数
+const frontUrl = 'https://www.yurikago-blog.com'
+const githubUrl = 'https://github.com/krabben27/yurikago'
+const maxArticleCountInList = 10
+const articleAuthor = 'Hiroki Kawaguchi'
+const articleOrganization = 'Yurikago Blog'
+const siteOwner = 'Hiroki Kawaguchi'
+const disqusShortname = 'yurikago-blog'
+
 export default {
   mode: 'universal',
   /*
@@ -104,7 +111,6 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/constant.js',
     '~/plugins/disqus.js',
     '~/plugins/schema/breadcrumb.js',
     '~/plugins/schema/article.js'
@@ -125,8 +131,18 @@ export default {
     id: 'UA-155216702-1'
   },
   sitemap: {
-    hostname: constant.FRONT_URL,
+    hostname: frontUrl,
     routes: path
+  },
+  // NOTE: クライアントサイドで使用できる環境変数を定義する
+  env: {
+    FRONT_URL: frontUrl,
+    GITHUB_URL: githubUrl,
+    MAX_ARTICLE_COUNT_IN_LIST: maxArticleCountInList,
+    ARTICLE_AUTHOR: articleAuthor,
+    ARTICLE_ORGANIZATION: articleOrganization,
+    SITE_OWNER: siteOwner,
+    DISQUS_SHORTNAME: disqusShortname
   },
   /*
   ** Build configuration

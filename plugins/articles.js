@@ -1,4 +1,3 @@
-import { constant } from "~/constant.js"
 import { getTagByName } from "~/plugins/tags.js"
 
 import content1 from "~/assets/markdown/articles/1.md"
@@ -157,15 +156,15 @@ export const getArticleById = id => {
 export const getArticlesByPage = page => {
   if (page === 1) {
     const start = 0
-    const end = constant.MAX_ARTICLE_COUNT_IN_LIST
+    const end = process.env.MAX_ARTICLE_COUNT_IN_LIST
     return sortArticlesByIdDesc(articles).slice(start, end)
   }
 
   // page = 2
   // start = 10 * (2 - 1) = 10
   // end = 10 * 2 = 20
-  const start = constant.MAX_ARTICLE_COUNT_IN_LIST * (page - 1)
-  const end = constant.MAX_ARTICLE_COUNT_IN_LIST * page
+  const start = process.env.MAX_ARTICLE_COUNT_IN_LIST * (page - 1)
+  const end = process.env.MAX_ARTICLE_COUNT_IN_LIST * page
   return sortArticlesByIdDesc(articles).slice(start, end)
 }
 
