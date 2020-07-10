@@ -18,9 +18,11 @@
 
 ## 動作検証ブラウザ
 
-- PC
-    - Google Chrome 83
-    - Firefox 78
+### PC
 
-- SP
-    - Safari 13
+- Google Chrome 83
+- Firefox 78
+
+### SP
+
+- Safari 13
