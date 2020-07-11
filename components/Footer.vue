@@ -1,6 +1,6 @@
 <template>
   <footer class="l-footer">
-    <div class="c-footer-text text-dark">
+    <div class="text-dark py-3">
       &copy; 2020 Hiroki Kawaguchi, Built with Nuxt.js
     </div>
   </footer>
