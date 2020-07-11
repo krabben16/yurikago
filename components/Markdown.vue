@@ -32,15 +32,15 @@ export default {
       return `<hr class="my-5">`
     }
 
-    // 引用にパディングを設定する
+    // 引用に背景色とパディングを設定する
     renderer.blockquote = quote => {
       if (quote.indexOf("<p>") > -1) {
-        quote = quote.replace("<p>", `<p class="p-3">`)
+        quote = quote.replace("<p>", `<p class="bg-light p-3">`)
       }
       return `<blockquote>${quote}</blockquote>`
     }
 
-    // リストアイテムにマージンを設定する
+    // リストの要素にマージンを設定する
     renderer.listitem = text => {
       return `<li class="my-1">${text}</li>`
     }
