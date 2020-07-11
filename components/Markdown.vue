@@ -22,8 +22,11 @@ export default {
      */
     const renderer = new marked.Renderer()
 
-    // 見出しにマージンを設定する
+    // 見出しに下線とマージンを設定する
     renderer.heading = (text, level, raw, slugger) => {
+      if (level === 3) {
+        return `<h3 class="pb-3 my-5">${text}</h3>`
+      }
       return `<h${level} class="my-5">${text}</h${level}>`
     }
 
