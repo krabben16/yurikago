@@ -1,19 +1,4 @@
 .p-markdown {
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 40px 0;
-  }
-
-  hr {
-    margin: 40px 0;
-  }
-
-  li {
-    margin: 10px 0;
-  }
-
   img {
     max-width: 100%;
   }
@@ -24,7 +9,6 @@
 
   blockquote {
     p {
-      padding: 15px;
       // bootstrap .badge-light
       background: #f8f9fa;
     }
