@@ -8,11 +8,6 @@
   }
 
   blockquote {
-    p {
-      // bootstrap .badge-light
-      background: #f8f9fa;
-    }
-
     p::before {
       content: "\201C";
     }
