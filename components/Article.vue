@@ -4,20 +4,22 @@
       <div>{{ article.posted_at }}</div>
       <div class="clearfix">
         <div class="tags">
+          <!-- NOTE: 二個目のタグからマージンレフトを設定する -->
           <nuxt-link
-            v-for="tag in article.tags"
+            v-for="(tag, i) in article.tags"
             :key="tag.id"
             :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
             class="badge badge-light"
+            :class="{ 'ml-3': i > 0 }"
           >
             {{ tag.name }}
           </nuxt-link>
         </div>
       </div>
-      <h2>{{ article.title }}</h2>
+      <h2 class="my-5">{{ article.title }}</h2>
       <Markdown :markdown-content="article.content" />
     </div>
-    <div class="c-disqus">
+    <div class="mt-5">
       <vue-disqus :shortname="disqusShortname" :identifier="$route.path" :url="frontUrl + $route.path" />
     </div>
   </div>
