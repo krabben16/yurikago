@@ -1,4 +1,8 @@
 .p-markdown {
+  h3 {
+    border-bottom: 1px solid $heading-border-color;
+  }
+
   img {
     max-width: 100%;
   }
