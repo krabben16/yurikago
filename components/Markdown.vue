@@ -24,12 +24,12 @@ export default {
 
     // 見出しにマージンを設定する
     renderer.heading = (text, level, raw, slugger) => {
-      return `<h${level} class="my-4">${text}</h${level}>`
+      return `<h${level} class="my-5">${text}</h${level}>`
     }
 
     // 水平の罫線にマージンを設定する
     renderer.hr = () => {
-      return `<hr class="my-4">`
+      return `<hr class="my-5">`
     }
 
     // 引用にパディングを設定する

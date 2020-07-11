@@ -4,7 +4,7 @@
       <div>{{ article.posted_at }}</div>
       <div class="clearfix">
         <div class="tags">
-          <!-- NOTE: 二個目のタグからマージンレフトを設定する -->
+          <!-- NOTE: 二個目のタグからマージンを設定する -->
           <nuxt-link
             v-for="(tag, i) in article.tags"
             :key="tag.id"
