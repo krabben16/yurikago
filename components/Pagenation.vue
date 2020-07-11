@@ -1,6 +1,7 @@
 <template>
   <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
+    <!-- NOTE: デフォルトのマージンをリセット -->
+    <ul class="pagination justify-content-center mt-5 mb-0">
       <li v-for="p in pages" :key="p" class="page-item" :class="{ disabled: activePage === p }">
         <nuxt-link
           class="page-link text-dark"

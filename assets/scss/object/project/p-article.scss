@@ -1,8 +1,4 @@
 .p-article {
-  h2 {
-    margin: 40px 0;
-  }
-
   .clearfix::after {
     display: block;
     clear: both;
@@ -10,9 +6,5 @@
 
   .tags {
     float: right;
-
-    .badge:nth-child(n + 2) {
-      margin-left: 10px;
-    }
   }
 }

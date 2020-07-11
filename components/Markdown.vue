@@ -16,27 +16,51 @@ export default {
     }
   },
   mounted() {
+    /**
+     * NOTE: markedのレンダラーを上書きする
+     * @see https://github.com/markedjs/marked/blob/master/src/Renderer.js
+     */
     const renderer = new marked.Renderer()
 
-    // WebP画像を表示
+    // 見出しにマージンを設定する
+    renderer.heading = (text, level, raw, slugger) => {
+      return `<h${level} class="my-5">${text}</h${level}>`
+    }
+
+    // 水平の罫線にマージンを設定する
+    renderer.hr = () => {
+      return `<hr class="my-5">`
+    }
+
+    // 引用にパディングを設定する
+    renderer.blockquote = quote => {
+      if (quote.indexOf("<p>") > -1) {
+        quote = quote.replace("<p>", `<p class="p-3">`)
+      }
+      return `<blockquote>${quote}</blockquote>`
+    }
+
+    // リストアイテムにマージンを設定する
+    renderer.listitem = text => {
+      return `<li class="my-1">${text}</li>`
+    }
+
+    // WebP画像を表示する
     renderer.image = (href, title, text) => {
       const webp = href.replace("png", "webp")
       return `<picture><source srcset="${webp}" type="image/webp"><img src="${href}" alt="${text}"></picture>`
     }
 
     // 外部リンクを別タブで開く
-    // スタイルを適用するためクラスを付与する
+    // クラスを付与してリンクのカラーを変更する
     renderer.link = (href, title, text) => {
-      let out = null
       if (href.slice(0, 1) === "/") {
-        out = `<a href="${href}" class="u-link-color">${text}</a>`
-      } else {
-        out = `<a href="${href}" target="_blank" class="u-link-color">${text}</a>`
+        return `<a href="${href}" class="u-link-color">${text}</a>`
       }
-      return out
+      return `<a href="${href}" target="_blank" class="u-link-color">${text}</a>`
     }
 
-    // テーブルにbootstrapのクラスを付与
+    // レスポンシブテーブルを表示する
     renderer.table = (header, body) => {
       if (body) {
         body = "<tbody>" + body + "</tbody>"
@@ -44,7 +68,7 @@ export default {
       return `<div class="table-responsive"><table class="table"><thead>${header}</thead>${body}</table></div>`
     }
 
-    // 中央寄せを解除
+    // テーブルのセルの中央寄せを解除する
     renderer.tablecell = (content, flags) => {
       const type = flags.header ? "th" : "td"
       return `<${type}>${content}</${type}>`

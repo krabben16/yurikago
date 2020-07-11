@@ -1,6 +1,7 @@
 <template>
   <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+    <!-- NOTE: デフォルトのマージンをリセット -->
+    <ol class="breadcrumb mt-5 mb-0">
       <li
         v-for="(v, k) in breadcrumbItemList"
         :key="k"
