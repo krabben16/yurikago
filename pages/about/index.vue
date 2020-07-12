@@ -1,5 +1,9 @@
 <template>
-  <Markdown :markdown-content="content" />
+  <div class="row">
+    <div class="col-11 mx-auto col-sm-6 mx-sm-auto">
+      <Markdown :markdown-content="content" />
+    </div>
+  </div>
 </template>
 
 <script>
