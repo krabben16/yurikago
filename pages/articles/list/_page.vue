@@ -22,14 +22,20 @@ export default {
     // NaN = Not a Number
     // typeof context.params.page => string
     const page = isNaN(context.params.page) ? 1 : parseInt(context.params.page)
+    const articles = getArticlesByPage(page)
+    const totalArticleCount = getTotalArticleCount()
+
+    if (!articles) {
+      return context.error({ statusCode: 404, message: "Not Found" })
+    }
+
     return {
-      activePage: page
+      activePage: page,
+      articles: articles,
+      totalArticleCount: totalArticleCount
     }
   },
   created() {
-    this.articles = getArticlesByPage(this.activePage)
-    this.totalArticleCount = getTotalArticleCount()
-
     // TDK
     this.title = `記事一覧${this.activePage}`
     this.description = `記事一覧の${this.activePage}ページ目です。`
