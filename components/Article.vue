@@ -2,8 +2,8 @@
   <div>
     <div class="p-article">
       <div>{{ article.posted_at }}</div>
-      <div class="clearfix">
-        <div class="tags">
+      <div class="p-article__tags-wrapper">
+        <div class="p-article__tags">
           <!-- NOTE: 二個目のタグからマージンを設定する -->
           <nuxt-link
             v-for="(tag, i) in article.tags"
