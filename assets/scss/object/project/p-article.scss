@@ -1,10 +1,10 @@
 .p-article {
-  .clearfix::after {
+  &__tags-wrapper::after {
     display: block;
     clear: both;
   }
 
-  .tags {
+  &__tags {
     float: right;
   }
 }
