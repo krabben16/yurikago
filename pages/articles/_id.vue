@@ -18,16 +18,22 @@ export default {
   },
   async asyncData(context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
+    const article = getArticleById(id)
+
+    // 記事データが存在しない場合はエラーページに遷移する
+    // @see https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
+    if (!article) {
+      return context.error({ statusCode: 404, message: "ページが見つかりません" })
+    }
+
     return {
-      id: id
+      article: article
     }
   },
   computed: {
     ...mapGetters("articles", ["landingArticleID"])
   },
   created() {
-    this.article = getArticleById(this.id)
-
     // TDK
     this.title = this.article.title
     const joinedTagsName = getJoinedTagsName(this.article.tags)

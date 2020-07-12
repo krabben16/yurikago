@@ -153,6 +153,9 @@ export const getTotalArticleCount = () => {
  */
 export const getArticleById = id => {
   const article = articles.filter(a => a.id === id)
+  if (article.length === 0) {
+    return false
+  }
   // 配列からオブジェクトを取り出す
   return article.shift()
 }

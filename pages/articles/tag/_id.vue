@@ -18,14 +18,21 @@ export default {
   },
   async asyncData(context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
+    const tag = getTagById(id)
+    const articles = getArticlesByTagId(id)
+
+    // タグまたは記事リストが存在しない場合はエラーページに遷移する
+    if (!tag || !articles) {
+      return context.error({ statusCode: 404, message: "ページが見つかりません" })
+    }
+
     return {
-      tagId: id
+      tagId: id,
+      tag: tag,
+      articles: articles
     }
   },
   created() {
-    this.tag = getTagById(this.tagId)
-    this.articles = getArticlesByTagId(this.tagId)
-
     // TDK
     this.title = this.tag.name
     this.description = `タグ「${this.tag.name}」を含む記事の一覧です。`
