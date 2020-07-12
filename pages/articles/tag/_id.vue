@@ -23,7 +23,7 @@ export default {
 
     // タグまたは記事リストが存在しない場合はエラーページに遷移する
     if (!tag || !articles) {
-      return context.error({ statusCode: 404, message: "ページが見つかりません" })
+      return context.error({ statusCode: 404, message: "Not Found" })
     }
 
     return {

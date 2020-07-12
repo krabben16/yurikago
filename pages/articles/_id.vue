@@ -23,7 +23,7 @@ export default {
     // 記事データが存在しない場合はエラーページに遷移する
     // @see https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
     if (!article) {
-      return context.error({ statusCode: 404, message: "ページが見つかりません" })
+      return context.error({ statusCode: 404, message: "Not Found" })
     }
 
     return {
