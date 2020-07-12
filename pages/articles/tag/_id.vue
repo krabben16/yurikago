@@ -1,5 +1,9 @@
 <template>
-  <ArticleList :articles="articles" />
+  <div class="row">
+    <div class="col-11 mx-auto col-sm-4 mx-sm-auto">
+      <ArticleList :articles="articles" />
+    </div>
+  </div>
 </template>
 
 <script>
