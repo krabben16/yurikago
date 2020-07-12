@@ -141,6 +141,28 @@ const articles = [
 ]
 
 /**
+ * 記事リストをIDの降順で並び替える
+ * @param {Array} articles
+ */
+const sortArticlesByIdDesc = articles => {
+  const compare = (a, b) => {
+    // bをaの後ろに置く
+    if (a.id > b.id) {
+      return -1
+    }
+    // bをaの前に置く
+    if (a.id < b.id) {
+      return 1
+    }
+    // aとbの位置は変わらない
+    return 0
+  }
+  return articles.sort(compare)
+}
+
+const sortedArticles = sortArticlesByIdDesc(articles)
+
+/**
  * 記事データの合計数を取得する
  */
 export const getTotalArticleCount = () => {
@@ -165,18 +187,25 @@ export const getArticleById = id => {
  * @param {Number} page
  */
 export const getArticlesByPage = page => {
+  let start, end
+
   if (page === 1) {
-    const start = 0
-    const end = process.env.MAX_ARTICLE_COUNT_IN_LIST
-    return sortArticlesByIdDesc(articles).slice(start, end)
+    start = 0
+    end = process.env.MAX_ARTICLE_COUNT_IN_LIST
+  } else {
+    // page = 2
+    // start = 10 * (2 - 1) = 10
+    // end = 10 * 2 = 20
+    start = process.env.MAX_ARTICLE_COUNT_IN_LIST * (page - 1)
+    end = process.env.MAX_ARTICLE_COUNT_IN_LIST * page
   }
 
-  // page = 2
-  // start = 10 * (2 - 1) = 10
-  // end = 10 * 2 = 20
-  const start = process.env.MAX_ARTICLE_COUNT_IN_LIST * (page - 1)
-  const end = process.env.MAX_ARTICLE_COUNT_IN_LIST * page
-  return sortArticlesByIdDesc(articles).slice(start, end)
+  const sliced = sortedArticles.slice(start, end)
+  if (sliced.length === 0) {
+    return false
+  }
+
+  return sliced
 }
 
 /**
@@ -185,7 +214,7 @@ export const getArticlesByPage = page => {
  */
 export const getArticlesByTagId = tagId => {
   const ret = []
-  sortArticlesByIdDesc(articles).map(a => {
+  sortedArticles.map(a => {
     a.tags.map(t => {
       if (t.id === tagId) {
         ret.push(a)
@@ -193,24 +222,4 @@ export const getArticlesByTagId = tagId => {
     })
   })
   return ret
-}
-
-/**
- * 記事リストをIDの降順で並び替える
- * @param {Array} articles
- */
-const sortArticlesByIdDesc = articles => {
-  const compare = (a, b) => {
-    // bをaの後ろに置く
-    if (a.id > b.id) {
-      return -1
-    }
-    // bをaの前に置く
-    if (a.id < b.id) {
-      return 1
-    }
-    // aとbの位置は変わらない
-    return 0
-  }
-  return articles.sort(compare)
 }
