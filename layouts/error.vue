@@ -32,8 +32,10 @@ export default {
     }
   },
   created() {
+    // TDK
     this.title = "エラー"
     this.description = "エラーページです！"
+
     this.breadcrumbItemList = [
       {
         name: "トップページ",
