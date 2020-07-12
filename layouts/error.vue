@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <div class="l-error">
-      <h2 v-if="error.statusCode === 404">404 Not Found</h2>
-      <h2 v-else>エラーが発生しました</h2>
-      <div>
-        <pre class="c-error-text">
+  <div class="l-error">
+    <h2 v-if="error.statusCode === 404">404 Not Found</h2>
+    <h2 v-else>エラーが発生しました</h2>
+    <div class="ml-3">
+      <pre class="c-ascii-art">
         ∧ ∧
         ﾊ丿ﾊ丿
       ／￣￣＼
@@ -17,8 +16,7 @@
   ｜      ｜  ヽ|
    ＼ ノ   ＼ ノ|
 ￣￣￣￣￣￣￣￣￣￣
-        </pre>
-      </div>
+      </pre>
     </div>
   </div>
 </template>
