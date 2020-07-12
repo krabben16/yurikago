@@ -18,8 +18,14 @@
 <script>
 export default {
   props: {
-    activePage: Number,
-    totalArticleCount: Number
+    activePage: {
+      type: Number,
+      required: true
+    },
+    totalArticleCount: {
+      type: Number,
+      required: true
+    }
   },
   data() {
     return {

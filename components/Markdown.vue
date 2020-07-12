@@ -8,7 +8,10 @@ import hljs from "highlight.js"
 
 export default {
   props: {
-    markdownContent: String
+    markdownContent: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {

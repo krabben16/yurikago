@@ -28,7 +28,10 @@ import { mapActions } from "vuex"
 
 export default {
   props: {
-    error: Object
+    error: {
+      type: Object,
+      required: true
+    }
   },
   created() {
     this.title = "エラー"

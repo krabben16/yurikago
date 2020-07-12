@@ -33,7 +33,10 @@ export default {
     Markdown
   },
   props: {
-    article: Object
+    article: {
+      type: Object,
+      required: true
+    }
   },
   created() {
     this.disqusShortname = process.env.DISQUS_SHORTNAME
