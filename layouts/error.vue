@@ -1,22 +1,10 @@
 <template>
-  <div class="l-error">
-    <h2 v-if="error.statusCode === 404">404 {{ error.message }}</h2>
-    <h2 v-else>エラーが発生しました</h2>
-    <div class="ml-3">
-      <pre class="c-ascii-art">
-        ∧ ∧
-        ﾊ丿ﾊ丿
-      ／￣￣＼
-     / ⌒  ⌒ ヽ
-    ｜ へ  へ  |
-    /          |
-   /           |
-  ｜           ヽ
-  (＼＿＿＿/⌒) |
-  ｜      ｜  ヽ|
-   ＼ ノ   ＼ ノ|
-￣￣￣￣￣￣￣￣￣￣
-      </pre>
+  <div class="row">
+    <div class="col-11 mx-auto col-sm-6 mx-sm-auto">
+      <div class="l-error">
+        <p v-if="error.statusCode === 404">{{ error.message }}</p>
+        <p v-else>Error</p>
+      </div>
     </div>
   </div>
 </template>
