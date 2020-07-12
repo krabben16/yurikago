@@ -15,7 +15,10 @@
 <script>
 export default {
   props: {
-    articles: Array
+    articles: {
+      type: Array,
+      required: true
+    }
   }
 }
 </script>

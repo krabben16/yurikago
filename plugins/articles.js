@@ -141,58 +141,6 @@ const articles = [
 ]
 
 /**
- * 記事データの合計数を取得する
- */
-export const getTotalArticleCount = () => {
-  return articles.length
-}
-
-/**
- * 記事IDから記事データを取得する
- * @param {Number} id
- */
-export const getArticleById = id => {
-  const article = articles.filter(a => a.id === id)
-  // 配列からオブジェクトを取り出す
-  return article.shift()
-}
-
-/**
- * ページ番号から記事リストを取得する
- * @param {Number} page
- */
-export const getArticlesByPage = page => {
-  if (page === 1) {
-    const start = 0
-    const end = process.env.MAX_ARTICLE_COUNT_IN_LIST
-    return sortArticlesByIdDesc(articles).slice(start, end)
-  }
-
-  // page = 2
-  // start = 10 * (2 - 1) = 10
-  // end = 10 * 2 = 20
-  const start = process.env.MAX_ARTICLE_COUNT_IN_LIST * (page - 1)
-  const end = process.env.MAX_ARTICLE_COUNT_IN_LIST * page
-  return sortArticlesByIdDesc(articles).slice(start, end)
-}
-
-/**
- * タグIDから記事リストを取得する
- * @param {Number} tagId
- */
-export const getArticlesByTagId = tagId => {
-  const ret = []
-  sortArticlesByIdDesc(articles).map(a => {
-    a.tags.map(t => {
-      if (t.id === tagId) {
-        ret.push(a)
-      }
-    })
-  })
-  return ret
-}
-
-/**
  * 記事リストをIDの降順で並び替える
  * @param {Array} articles
  */
@@ -210,4 +158,68 @@ const sortArticlesByIdDesc = articles => {
     return 0
   }
   return articles.sort(compare)
+}
+
+const sortedArticles = sortArticlesByIdDesc(articles)
+
+/**
+ * 記事データの合計数を取得する
+ */
+export const getTotalArticleCount = () => {
+  return articles.length
+}
+
+/**
+ * 記事IDから記事データを取得する
+ * @param {Number} id
+ */
+export const getArticleById = id => {
+  const article = articles.filter(a => a.id === id)
+  if (article.length === 0) {
+    return false
+  }
+  // 配列からオブジェクトを取り出す
+  return article.shift()
+}
+
+/**
+ * ページ番号から記事リストを取得する
+ * @param {Number} page
+ */
+export const getArticlesByPage = page => {
+  let start, end
+
+  if (page === 1) {
+    start = 0
+    end = process.env.MAX_ARTICLE_COUNT_IN_LIST
+  } else {
+    // page = 2
+    // start = 10 * (2 - 1) = 10
+    // end = 10 * 2 = 20
+    start = process.env.MAX_ARTICLE_COUNT_IN_LIST * (page - 1)
+    end = process.env.MAX_ARTICLE_COUNT_IN_LIST * page
+  }
+
+  const sliced = sortedArticles.slice(start, end)
+  if (sliced.length === 0) {
+    return false
+  }
+
+  return sliced
+}
+
+/**
+ * タグIDから記事リストを取得する
+ * @param {Number} tagId
+ */
+export const getArticlesByTagId = tagId => {
+  const ret = []
+  sortedArticles.map(a => {
+    a.tags.map(t => {
+      if (t.id === tagId) {
+        ret.push(a)
+      }
+    })
+  })
+  return ret
 }

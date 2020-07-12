@@ -106,21 +106,27 @@ export const getJoinedTagsName = tags => {
 }
 
 /**
- * タグIDからタグリストを取得する
+ * タグIDからタグデータを取得する
  * @param {Number} id
  */
 export const getTagById = id => {
   const tag = tags.filter(t => t.id === id)
+  if (tag.length === 0) {
+    return false
+  }
   // 配列からオブジェクトを取り出す
   return tag.shift()
 }
 
 /**
- * タグ名称からタグリストを取得する
+ * タグ名称からタグデータを取得する
  * @param {String} name
  */
 export const getTagByName = name => {
   const tag = tags.filter(t => t.name === name)
+  if (tag.length === 0) {
+    return false
+  }
   // 配列からオブジェクトを取り出す
   return tag.shift()
 }
