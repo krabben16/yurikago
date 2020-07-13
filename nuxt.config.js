@@ -76,6 +76,10 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap' },
+      /**
+       * BootstrapCDN
+       * https://www.bootstrapcdn.com/
+       */
       {
         rel: 'stylesheet',
         href: 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css',
@@ -84,6 +88,10 @@ export default {
       }
     ],
     script: [
+      /**
+       * jQuery CDN
+       * https://code.jquery.com/
+       */
       {
         src: 'https://code.jquery.com/jquery-3.5.1.slim.min.js',
         integrity: 'sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=',
