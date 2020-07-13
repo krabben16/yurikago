@@ -38,17 +38,17 @@ export default {
       return `<hr class="my-5">`
     }
 
-    // リストの要素にマージンを設定する
-    renderer.listitem = text => {
-      return `<li class="my-1">${text}</li>`
-    }
-
     // 引用に背景色とパディングを設定する
     renderer.blockquote = quote => {
       if (quote.indexOf("<p>") > -1) {
         quote = quote.replace("<p>", `<p class="bg-light p-3">`)
       }
       return `<blockquote>${quote}</blockquote>`
+    }
+
+    // リストの要素にマージンを設定する
+    renderer.listitem = text => {
+      return `<li class="my-1">${text}</li>`
     }
 
     // WebP画像を表示する
@@ -58,12 +58,12 @@ export default {
     }
 
     // 外部リンクを別タブで開く
-    // リンクのカラーを変更する
+    // クラスを付与してリンクのカラーを変更する
     renderer.link = (href, title, text) => {
       if (href.slice(0, 1) === "/") {
-        return `<a href="${href}" class="c-link">${text}</a>`
+        return `<a href="${href}" class="u-link-color">${text}</a>`
       }
-      return `<a href="${href}" target="_blank" class="c-link">${text}</a>`
+      return `<a href="${href}" target="_blank" class="u-link-color">${text}</a>`
     }
 
     // レスポンシブテーブルを表示する
