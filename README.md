@@ -7,7 +7,7 @@ npm run dev
 
 コーディングスタイルを統一するため、ESLintとPrettierによる構文チェックを実施します。
 
-Gitのブランチの運用ルールとして git-flow を採用しました。
+Gitのブランチモデルは git-flow です。
 
 ## システム構成
 
