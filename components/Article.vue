@@ -20,7 +20,7 @@
       <Markdown :markdown-content="article.content" />
     </div>
     <div class="mt-5">
-      <vue-disqus :shortname="disqusShortname" :identifier="$route.path" :url="frontUrl + $route.path" />
+      <Disqus />
     </div>
   </div>
 </template>
@@ -37,10 +37,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  created() {
-    this.disqusShortname = process.env.DISQUS_SHORTNAME
-    this.frontUrl = process.env.FRONT_URL
   }
 }
 </script>
