@@ -1,20 +1,23 @@
-## 背景
+## 開発
 
-1. はてなブログやQiitaなどアウトプットの場所が分散していたので1箇所にまとめたかった
-1. Nuxt.jsやFirebaseなど未経験の技術を勉強したかった
-1. Google Analyticsの動作を検証する場所が欲しかった
+```sh
+npm i
+npm run dev
+```
+
+コーディングスタイルを統一するため、ESLintとPrettierによる構文チェックを実施します。
+
+Gitのブランチの運用ルールとして git-flow を採用しました。
 
 ## システム構成
 
 - Nuxt.js
-- bootstrap
 - Firebase Hosting
+- CircleCI
 
 マークダウン形式で作成した記事データをHTMLに変換して表示します。
 
 修正をGitHubのmasterブランチにマージするとCircleCIがFirebaseにデプロイします。このとき `nuxt generate` を実行して生成した静的ファイルをFirebaseにアップロードします。
-
-開発時のコーディングスタイルを統一するためPrettierとESLintを導入しました。
 
 ## 動作検証ブラウザ
 
@@ -26,3 +29,9 @@
 ### SP
 
 - Safari 13
+
+## ブログを作成した背景
+
+1. はてなブログやQiitaなどアウトプットの場所が分散していたので1箇所にまとめたかった
+1. Nuxt.jsやFirebaseなど未経験の技術を勉強したかった
+1. Google Analyticsの動作を検証する場所が欲しかった
