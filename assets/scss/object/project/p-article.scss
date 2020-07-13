@@ -7,4 +7,12 @@
   &__tags {
     float: right;
   }
+
+  &__tag {
+    text-decoration: none;
+  }
+
+  &__tag:hover {
+    text-decoration: underline;
+  }
 }
