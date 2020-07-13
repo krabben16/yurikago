@@ -61,9 +61,9 @@ export default {
     // リンクのカラーを変更する
     renderer.link = (href, title, text) => {
       if (href.slice(0, 1) === "/") {
-        return `<a href="${href}" class="c-link">${text}</a>`
+        return `<a href="${href}" class="u-link-color">${text}</a>`
       }
-      return `<a href="${href}" target="_blank" class="c-link">${text}</a>`
+      return `<a href="${href}" target="_blank" class="u-link-color">${text}</a>`
     }
 
     // レスポンシブテーブルを表示する

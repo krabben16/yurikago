@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-light mb-5 px-3">
+  <nav class="navbar navbar-expand-sm navbar-light mb-5">
     <nuxt-link :to="{ name: 'index' }" class="navbar-brand">
       Yurikago Blog
     </nuxt-link>
@@ -47,7 +47,7 @@
         </li>
       </ul>
       <div class="c-github-icon">
-        <a :href="githubUrl" @click="$ga.event('header', 'click', 'github')" target="_blank">
+        <a :href="githubUrl" target="_blank" @click="$ga.event('header', 'click', 'github')">
           <picture>
             <source srcset="~/assets/images/common/GitHub-Mark-32px.webp" type="image/webp" />
             <img src="~/assets/images/common/GitHub-Mark-32px.png" alt="GitHub" />

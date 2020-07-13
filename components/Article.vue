@@ -9,8 +9,8 @@
             v-for="(tag, i) in article.tags"
             :key="tag.id"
             :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
-            class="badge rounded-pill bg-light text-dark p-article__tag"
-            :class="{ 'ml-2': i > 0 }"
+            class="badge badge-light"
+            :class="{ 'ml-3': i > 0 }"
           >
             {{ tag.name }}
           </nuxt-link>
@@ -20,7 +20,7 @@
       <Markdown :markdown-content="article.content" />
     </div>
     <div class="mt-5">
-      <vue-disqus :shortname="disqusShortname" :identifier="$route.path" :url="frontUrl + $route.path" />
+      <Disqus />
     </div>
   </div>
 </template>
@@ -37,10 +37,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  created() {
-    this.disqusShortname = process.env.DISQUS_SHORTNAME
-    this.frontUrl = process.env.FRONT_URL
   }
 }
 </script>

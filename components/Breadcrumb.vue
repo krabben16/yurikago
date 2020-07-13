@@ -10,7 +10,7 @@
         :aria-current="k === breadcrumbItemList.length - 1 ? 'page' : ''"
       >
         <span v-if="k === breadcrumbItemList.length - 1">{{ v.name }}</span>
-        <nuxt-link v-else :to="v.path" class="c-link">{{ v.name }}</nuxt-link>
+        <nuxt-link v-else :to="v.path" class="u-link-color">{{ v.name }}</nuxt-link>
       </li>
     </ol>
   </nav>
