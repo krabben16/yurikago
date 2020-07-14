@@ -23,13 +23,15 @@ Gitのブランチモデルは git-flow です。
 
 ### PC
 
-- Windows10 Google Chrome 83
-- Windows10 Firefox 78
+- Windows 10
+    - Google Chrome 83
+    - Firefox 78
 
 ### SP
 
-- iOS Google Chrome 83
-- iOS Safari 13
+- iOS 13
+    - Google Chrome 83
+    - Safari 13
 
 ## ブログを作成した背景
 
