@@ -51,9 +51,10 @@ export default {
       return `<blockquote>${quote}</blockquote>`
     }
 
-    // サムネイル画像を表示する
+    // 中央寄せで表示する
+    // サムネイル表示する
     renderer.image = (href, title, text) => {
-      return `<img src="${href}" alt="${text}" class="img-thumbnail">`
+      return `<div class="text-center"><img src="${href}" alt="${text}" class="img-thumbnail"></div>`
     }
 
     // 外部リンクを別タブで開く
