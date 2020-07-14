@@ -51,10 +51,10 @@ export default {
       return `<blockquote>${quote}</blockquote>`
     }
 
-    // WebP画像を表示する
+    // 中央寄せで表示する
+    // サムネイル表示する
     renderer.image = (href, title, text) => {
-      const webp = href.replace("png", "webp")
-      return `<picture><source srcset="${webp}" type="image/webp"><img src="${href}" alt="${text}"></picture>`
+      return `<div class="text-center"><img src="${href}" alt="${text}" class="img-thumbnail"></div>`
     }
 
     // 外部リンクを別タブで開く
