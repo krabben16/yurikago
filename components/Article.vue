@@ -20,7 +20,7 @@
       <Markdown :markdown-content="article.content" />
     </div>
     <div class="mt-5">
-      <Disqus />
+      <Disqus lang="ja" />
     </div>
   </div>
 </template>
