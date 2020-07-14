@@ -54,7 +54,7 @@ export default {
     // 中央寄せで表示する
     // サムネイル表示する
     renderer.image = (href, title, text) => {
-      return `<div class="text-center"><img src="${href}" alt="${text}" class="img-thumbnail"></div>`
+      return `<img src="${href}" alt="${text}" class="mx-auto d-block img-thumbnail">`
     }
 
     // 外部リンクを別タブで開く
