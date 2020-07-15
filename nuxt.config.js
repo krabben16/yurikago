@@ -143,8 +143,7 @@ export default {
   */
   modules: [
     '@nuxtjs/google-analytics',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/redirect-module'
+    '@nuxtjs/sitemap'
   ],
   googleAnalytics: {
     id: 'UA-155216702-1'
@@ -153,9 +152,6 @@ export default {
     hostname: frontUrl,
     routes: path
   },
-  redirect: [
-    { from: '^/about$', to: '/', statusCode: 301 }
-  ],
   // NOTE: クライアントサイドで使用できる環境変数を定義する
   env: {
     FRONT_URL: frontUrl,
