@@ -13,3 +13,7 @@
 ## Favicon
 
 [ICOOON MONO](https://icooon-mono.com/)
+
+## Icon
+
+[Font Awesome](https://fontawesome.com/)
