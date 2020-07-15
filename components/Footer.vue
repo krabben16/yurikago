@@ -1,7 +1,7 @@
 <template>
   <footer :class="className">
     <a :href="githubUrl" target="_blank" @click="$ga.event('header', 'click', 'github')">
-      <div class="text-dark py-3">
+      <div class="text-dark py-4">
         <i class="fab fa-github fa-3x" />
       </div>
     </a>

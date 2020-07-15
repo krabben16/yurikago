@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-12 col-sm-8 mx-sm-auto">
+      <div class="col-12 col-sm-9 mx-sm-auto">
         <div class="p-article">
           <div>{{ article.posted_at }}</div>
           <!-- NOTE: 二個目のタグからマージンを設定する -->
