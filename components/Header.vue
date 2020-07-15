@@ -17,9 +17,6 @@
     <div id="navbarSupportedContent" class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <nuxt-link :to="{ name: 'about' }" class="nav-link">About</nuxt-link>
-        </li>
-        <li class="nav-item">
           <nuxt-link :to="{ name: 'arigato' }" class="nav-link">Arigato</nuxt-link>
         </li>
       </ul>
