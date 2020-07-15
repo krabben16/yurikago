@@ -5,7 +5,6 @@
  */
 const path = [
   '/',
-  '/about',
   '/arigato',
   '/articles/1',
   '/articles/2',
@@ -85,6 +84,10 @@ export default {
         integrity: 'sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk',
         crossorigin: 'anonymous'
       },
+      /**
+       * Font Awesome CDN
+       * https://fontawesome.com/account/cdn
+       */
       {
         rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.13.1/css/all.css',
@@ -139,7 +142,8 @@ export default {
   */
   modules: [
     '@nuxtjs/google-analytics',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxtjs/redirect-module'
   ],
   googleAnalytics: {
     id: 'UA-155216702-1'
@@ -148,6 +152,9 @@ export default {
     hostname: frontUrl,
     routes: path
   },
+  redirect: [
+    { from: '^/about$', to: '/', statusCode: 301 }
+  ],
   // NOTE: クライアントサイドで使用できる環境変数を定義する
   env: {
     FRONT_URL: frontUrl,
