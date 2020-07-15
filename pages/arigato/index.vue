@@ -1,7 +1,9 @@
 <template>
-  <div class="row">
-    <div class="col-11 mx-auto col-sm-6 mx-sm-auto">
-      <Markdown :markdown-content="content" />
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-9 mx-sm-auto">
+        <Markdown :markdown-content="content" />
+      </div>
     </div>
   </div>
 </template>

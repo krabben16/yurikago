@@ -1,8 +1,10 @@
 <template>
-  <div class="row">
-    <div class="col-11 mx-auto col-sm-4 mx-sm-auto">
-      <ArticleList :articles="articles" />
-      <Pagenation :active-page="activePage" :total-article-count="totalArticleCount" />
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-9 mx-sm-auto">
+        <ArticleList :articles="articles" />
+        <Pagenation class-name="clearfix mt-5" :active-page="activePage" :total-article-count="totalArticleCount" />
+      </div>
     </div>
   </div>
 </template>

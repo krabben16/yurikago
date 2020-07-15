@@ -1,20 +1,39 @@
 <template>
-  <div class="row">
-    <div class="col-11 mx-auto col-sm-6 mx-sm-auto">
-      <Article :article="article" />
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-9 mx-sm-auto">
+        <div class="p-article">
+          <div>{{ article.posted_at }}</div>
+          <!-- NOTE: 二個目のタグからマージンを設定する -->
+          <nuxt-link
+            v-for="(tag, i) in article.tags"
+            :key="tag.id"
+            :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
+            class="badge badge-light mt-3"
+            :class="{ 'ml-3': i > 0 }"
+          >
+            {{ tag.name }}
+          </nuxt-link>
+          <h1 class="my-5">{{ article.title }}</h1>
+          <Markdown :markdown-content="article.content" />
+        </div>
+        <div class="mt-5">
+          <Disqus lang="ja" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Markdown from "~/components/Markdown.vue"
 import { mapGetters, mapActions } from "vuex"
-import Article from "~/components/Article.vue"
 import { getJoinedTagsName } from "~/plugins/tags.js"
 import { getArticleById } from "~/plugins/articles.js"
 
 export default {
   components: {
-    Article
+    Markdown
   },
   async asyncData(context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)

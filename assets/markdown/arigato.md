@@ -1,19 +1,19 @@
-### Markdown Parser
+## Markdown Parser
 
 [Marked.js](https://marked.js.org/)
 
-### Syntax Highlighter
+## Syntax Highlighter
 
 [highlight.js](https://highlightjs.org/)
 
-### CSS Framework
+## CSS Framework
 
 [Bootstrap](https://getbootstrap.com/)
 
-### Font
-
-[Noto Sans JP](https://fonts.google.com/specimen/Noto+Sans+JP)
-
-### Favicon
+## Favicon
 
 [ICOOON MONO](https://icooon-mono.com/)
+
+## Icon
+
+[Font Awesome](https://fontawesome.com/)
