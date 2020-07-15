@@ -1,13 +1,17 @@
 <template>
-  <div class="clearfix mt-5">
-    <a v-if="isVisiblePrev" class="btn btn-light float-left" :href="prevPagePath">&larr; Prev</a>
-    <a v-if="isVisibleNext" class="btn btn-light float-right" :href="nextPagePath">Next &rarr;</a>
+  <div :class="className">
+    <a v-if="isVisiblePrev" class="btn btn-outline-dark float-left" :href="prevPagePath">&larr; Prev</a>
+    <a v-if="isVisibleNext" class="btn btn-outline-dark float-right" :href="nextPagePath">Next &rarr;</a>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    className: {
+      type: String,
+      default: ""
+    },
     activePage: {
       type: Number,
       required: true

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-markdown" v-html="htmlContent" />
+  <div class="c-markdown" v-html="htmlContent" />
 </template>
 
 <script>
@@ -27,8 +27,8 @@ export default {
 
     // 見出しに下線とマージンを設定する
     renderer.heading = (text, level, raw, slugger) => {
-      if (level === 3) {
-        return `<h3 class="pb-3 my-5">${text}</h3>`
+      if (level === 2) {
+        return `<h${level} class="pb-3 my-5">${text}</h${level}>`
       }
       return `<h${level} class="my-5">${text}</h${level}>`
     }

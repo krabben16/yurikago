@@ -2,7 +2,7 @@
   <div>
     <Header />
     <nuxt />
-    <Footer />
+    <Footer class-name="l-footer my-5" />
   </div>
 </template>
 

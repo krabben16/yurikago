@@ -1,9 +1,11 @@
 <template>
-  <div class="row">
-    <div class="col-11 mx-auto col-sm-6 mx-sm-auto">
-      <div class="l-error">
-        <p v-if="error.statusCode === 404">{{ error.message }}</p>
-        <p v-else>Error</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-8 mx-sm-auto">
+        <div class="l-error">
+          <p v-if="error.statusCode === 404">{{ error.message }}</p>
+          <p v-else>Error</p>
+        </div>
       </div>
     </div>
   </div>

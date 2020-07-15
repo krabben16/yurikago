@@ -1,9 +1,8 @@
-@import "foundation/reset";
 @import "foundation/variable";
+@import "foundation/reset";
 
 @import "layout/l-footer";
 @import "layout/l-error";
 
-@import "object/project/p-article";
-@import "object/project/p-markdown";
+@import "object/component/c-markdown";
 @import "object/utility/u-link-color";

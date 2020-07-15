@@ -1,7 +1,7 @@
 <template>
-  <footer class="l-footer mt-5 py-3">
+  <footer :class="className">
     <a :href="githubUrl" target="_blank" @click="$ga.event('header', 'click', 'github')">
-      <div class="text-dark my-3">
+      <div class="text-dark py-3">
         <i class="fab fa-github fa-3x" />
       </div>
     </a>
@@ -12,6 +12,12 @@
 
 <script>
 export default {
+  props: {
+    className: {
+      type: String,
+      default: ""
+    }
+  },
   created() {
     this.githubUrl = process.env.GITHUB_URL
   }
