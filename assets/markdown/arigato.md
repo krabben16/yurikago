@@ -1,15 +1,15 @@
-### Markdown Parser
+## Markdown Parser
 
 [Marked.js](https://marked.js.org/)
 
-### Syntax Highlighter
+## Syntax Highlighter
 
 [highlight.js](https://highlightjs.org/)
 
-### CSS Framework
+## CSS Framework
 
 [Bootstrap](https://getbootstrap.com/)
 
-### Favicon
+## Favicon
 
 [ICOOON MONO](https://icooon-mono.com/)
