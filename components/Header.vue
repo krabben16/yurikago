@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-light mb-5">
+  <nav class="navbar navbar-expand-sm navbar-light bg-dark navbar-dark mb-5">
     <nuxt-link :to="{ name: 'index' }" class="navbar-brand">
       Yurikago Blog
     </nuxt-link>

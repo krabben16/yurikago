@@ -1,11 +1,9 @@
 <template>
   <div>
-    <div class="container-fluid">
-      <Header />
-      <nuxt />
-      <Breadcrumb />
-      <Footer />
-    </div>
+    <Header />
+    <nuxt />
+    <Breadcrumb />
+    <Footer />
   </div>
 </template>
 
