@@ -1,18 +1,8 @@
 <template>
-  <nav aria-label="Page navigation">
-    <!-- NOTE: デフォルトのマージンをリセット -->
-    <ul class="pagination justify-content-center mt-5 mb-0">
-      <li v-for="p in pages" :key="p" class="page-item" :class="{ disabled: activePage === p }">
-        <nuxt-link
-          class="page-link text-dark"
-          :class="{ 'bg-light': activePage === p }"
-          :to="{ name: 'articles-list-page', params: { page: p } }"
-        >
-          {{ p }}
-        </nuxt-link>
-      </li>
-    </ul>
-  </nav>
+  <div class="clearfix mt-5">
+    <a v-if="isVisiblePrev" class="btn btn-light float-left" :href="prevPagePath">&larr; Prev</a>
+    <a v-if="isVisibleNext" class="btn btn-light float-right" :href="nextPagePath">Next &rarr;</a>
+  </div>
 </template>
 
 <script>
@@ -27,14 +17,15 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      pages: null
-    }
-  },
-  mounted() {
+  created() {
+    // 2ページ目以降が存在する場合はNextを表示する
     const maxPageCount = Math.ceil(this.totalArticleCount / process.env.MAX_ARTICLE_COUNT_IN_LIST)
-    this.pages = Array.from(Array(maxPageCount).keys()).map(p => p + 1)
+    this.isVisibleNext = this.activePage < maxPageCount
+    this.nextPagePath = "/articles/list/" + (this.activePage + 1)
+
+    // 2ページ目以降を表示中の場合はPrevを表示する
+    this.isVisiblePrev = this.activePage > 1
+    this.prevPagePath = "/articles/list/" + (this.activePage - 1)
   }
 }
 </script>
