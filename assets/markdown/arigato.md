@@ -10,6 +10,10 @@
 
 [Bootstrap](https://getbootstrap.com/)
 
+## Font
+
+[Noto Sans JP](https://fonts.google.com/specimen/Noto+Sans+JP)
+
 ## Favicon
 
 [ICOOON MONO](https://icooon-mono.com/)

@@ -1,7 +1,7 @@
 <template>
   <div :class="className">
-    <a v-if="isVisiblePrev" class="btn btn-dark float-left" :href="prevPagePath">&larr; Prev</a>
-    <a v-if="isVisibleNext" class="btn btn-dark float-right" :href="nextPagePath">Next &rarr;</a>
+    <nuxt-link v-if="isVisiblePrev" class="btn btn-dark float-left" :to="prevPagePath">&larr; Prev</nuxt-link>
+    <nuxt-link v-if="isVisibleNext" class="btn btn-dark float-right" :to="nextPagePath">Next &rarr;</nuxt-link>
   </div>
 </template>
 
