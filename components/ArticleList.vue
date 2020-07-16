@@ -7,7 +7,10 @@
           {{ article.title }}
         </nuxt-link>
       </h2>
-      <div class="text-muted">{{ article.posted_at }}</div>
+      <div>
+        <i class="far fa-clock" />
+        {{ article.posted_at }}
+      </div>
     </div>
   </div>
 </template>
