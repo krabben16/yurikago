@@ -43,12 +43,9 @@ export default {
       return `<li class="my-1">${text}</li>`
     }
 
-    // 引用に背景色とパディングを設定する
+    // 引用分のテキストカラーを変更する
     renderer.blockquote = quote => {
-      if (quote.indexOf("<p>") > -1) {
-        quote = quote.replace("<p>", `<p class="bg-light p-3">`)
-      }
-      return `<blockquote>${quote}</blockquote>`
+      return `<blockquote class="blockquote text-muted">${quote}</blockquote>`
     }
 
     // 中央寄せで表示する
@@ -80,6 +77,7 @@ export default {
       return `<${type}>${content}</${type}>`
     }
 
+    // https://github.com/markedjs/marked/blob/v0.8.2/docs/USING_ADVANCED.md#alternative-using-reference
     marked.setOptions({
       renderer: renderer,
       langPrefix: "hljs language-",

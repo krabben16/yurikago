@@ -1,24 +1,41 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-12 col-sm-9 mx-sm-auto">
-        <div class="p-article">
-          <div>{{ article.posted_at }}</div>
-          <!-- NOTE: 二個目のタグからマージンを設定する -->
-          <nuxt-link
-            v-for="(tag, i) in article.tags"
-            :key="tag.id"
-            :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
-            class="badge badge-light mt-3"
-            :class="{ 'ml-3': i > 0 }"
-          >
-            {{ tag.name }}
-          </nuxt-link>
-          <h1 class="my-5">{{ article.title }}</h1>
-          <Markdown :markdown-content="article.content" />
+      <div class="col-12 py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-sm-10 mx-sm-auto">
+              <div>
+                <i class="far fa-clock" />
+                {{ article.posted_at }}
+              </div>
+              <!-- NOTE: 二個目のタグからマージンを設定する -->
+              <nuxt-link
+                v-for="(tag, i) in article.tags"
+                :key="tag.id"
+                :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
+                class="btn btn-sm btn-outline-dark mt-3"
+                :class="{ 'ml-3': i > 0 }"
+              >
+                {{ tag.name }}
+              </nuxt-link>
+              <h1 class="mt-5">{{ article.title }}</h1>
+            </div>
+          </div>
         </div>
-        <div class="mt-5">
-          <Disqus lang="ja" />
+      </div>
+      <div class="col-12 py-5 bg-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-sm-9 mx-sm-auto">
+              <div class="mt-5">
+                <Markdown :markdown-content="article.content" />
+              </div>
+              <div class="mt-5">
+                <Disqus lang="ja" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

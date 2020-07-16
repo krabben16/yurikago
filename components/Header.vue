@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-light bg-dark navbar-dark mb-5">
+  <nav class="navbar navbar-expand-sm navbar-light bg-dark navbar-dark">
     <nuxt-link :to="{ name: 'index' }" class="navbar-brand">
       Yurikago Blog
     </nuxt-link>
@@ -23,11 +23,3 @@
     </div>
   </nav>
 </template>
-
-<script>
-export default {
-  created() {
-    this.githubUrl = process.env.GITHUB_URL
-  }
-}
-</script>
