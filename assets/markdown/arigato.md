@@ -1,3 +1,5 @@
+利用させていただいているライブラリ、フレームワーク、アイコンなど
+
 ## Markdown Parser
 
 [Marked.js](https://marked.js.org/)
