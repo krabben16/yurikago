@@ -128,7 +128,7 @@ const articles = [
     "id": 16,
     "title": "curlでHTTPステータスコードを取得する",
     "posted_at": "2020-04-27",
-    "tags": [getTagByName("cURL")],
+    "tags": [getTagByName("Git for Windows"), getTagByName("cURL")],
     "content": content16
   },
   {
