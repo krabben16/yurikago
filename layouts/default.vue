@@ -2,7 +2,7 @@
   <div>
     <Header />
     <nuxt />
-    <Social class-name="text-center bg-light py-5" />
+    <Social class-name="text-center bg-secondary py-5" />
     <Footer class-name="text-center bg-dark py-5" />
   </div>
 </template>
