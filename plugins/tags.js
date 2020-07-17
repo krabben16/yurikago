@@ -94,6 +94,10 @@ const tags = [
   {
     id: 24,
     name: "cURL"
+  },
+  {
+    id: 25,
+    name: "Git for Windows"
   }
 ]
 

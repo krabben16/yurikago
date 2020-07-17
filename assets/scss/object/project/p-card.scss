@@ -1,0 +1,17 @@
+.p-card {
+  a {
+    text-decoration: none;
+  }
+
+  a &__image {
+    transition: .3s;
+  }
+
+  a:hover &__image {
+    transform: scale(1.3);
+  }
+
+  &__title {
+    height: 80px;
+  }
+}

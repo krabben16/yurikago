@@ -49,12 +49,13 @@ const path = [
   '/articles/tag/22',
   '/articles/tag/23',
   '/articles/tag/24',
+  '/articles/tag/25',
 ]
 
 // 定数
 const frontUrl = 'https://www.yurikago-blog.com'
 const githubUrl = 'https://github.com/krabben27/yurikago'
-const maxArticleCountInList = 10
+const maxArticleCountInList = 9
 const articleAuthor = 'Hiroki Kawaguchi'
 const articleOrganization = 'Yurikago Blog'
 const siteOwner = 'Hiroki Kawaguchi'
