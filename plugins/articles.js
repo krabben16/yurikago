@@ -26,7 +26,7 @@ const articles = [
     "tags": [getTagByName("CentOS"), getTagByName("Tesseract")],
     "content": content1,
     "thumbnail": {
-      "iconClass": "fab fa-centos fa-5x",
+      "iconClass": "fab fa-centos fa-6x",
       "bgClass": "p-thumbnail__centos"
     }
   },
@@ -37,7 +37,7 @@ const articles = [
     "tags": [getTagByName("CentOS"), getTagByName("Chromium"), getTagByName("Node.js"), getTagByName("Puppeteer")],
     "content": content2,
     "thumbnail": {
-      "iconClass": "fab fa-centos fa-5x",
+      "iconClass": "fab fa-centos fa-6x",
       "bgClass": "p-thumbnail__centos"
     }
   },
@@ -48,7 +48,7 @@ const articles = [
     "tags": [getTagByName("Google Chrome"), getTagByName("Selenium")],
     "content": content3,
     "thumbnail": {
-      "iconClass": "fab fa-chrome fa-5x",
+      "iconClass": "fab fa-chrome fa-6x",
       "bgClass": "p-thumbnail__chrome"
     }
   },
@@ -59,7 +59,7 @@ const articles = [
     "tags": [getTagByName("CentOS"), getTagByName("Node.js"), getTagByName("Puppeteer"), getTagByName("Lighthouse")],
     "content": content4,
     "thumbnail": {
-      "iconClass": "fab fa-centos fa-5x",
+      "iconClass": "fab fa-centos fa-6x",
       "bgClass": "p-thumbnail__centos"
     }
   },
@@ -70,7 +70,7 @@ const articles = [
     "tags": [getTagByName("Alpine Linux"), getTagByName("NLTK"), getTagByName("Python")],
     "content": content5,
     "thumbnail": {
-      "iconClass": "fab fa-python fa-5x",
+      "iconClass": "fab fa-python fa-6x",
       "bgClass": "p-thumbnail__python"
     }
   },
@@ -81,7 +81,7 @@ const articles = [
     "tags": [getTagByName("Homestead"), getTagByName("HeidiSQL"), getTagByName("PostgreSQL")],
     "content": content6,
     "thumbnail": {
-      "iconClass": "fas fa-database fa-5x",
+      "iconClass": "fas fa-database fa-6x",
       "bgClass": "p-thumbnail__postgresql"
     }
   },
@@ -92,7 +92,7 @@ const articles = [
     "tags": [getTagByName("CentOS"), getTagByName("PHP"), getTagByName("VSCode"), getTagByName("Xdebug")],
     "content": content7,
     "thumbnail": {
-      "iconClass": "fab fa-php fa-5x",
+      "iconClass": "fab fa-php fa-6x",
       "bgClass": "p-thumbnail__php"
     }
   },
@@ -103,7 +103,7 @@ const articles = [
     "tags": [getTagByName("Chromium"), getTagByName("Node.js"), getTagByName("Puppeteer")],
     "content": content8,
     "thumbnail": {
-      "iconClass": "fab fa-chrome fa-5x",
+      "iconClass": "fab fa-chrome fa-6x",
       "bgClass": "p-thumbnail__chrome"
     }
   },
@@ -114,7 +114,7 @@ const articles = [
     "tags": [getTagByName("Marked.js"), getTagByName("Nuxt.js")],
     "content": content9,
     "thumbnail": {
-      "iconClass": "fab fa-vuejs fa-5x",
+      "iconClass": "fab fa-vuejs fa-6x",
       "bgClass": "p-thumbnail__vue"
     }
   },
@@ -125,7 +125,7 @@ const articles = [
     "tags": [getTagByName("Google Chrome"), getTagByName("JavaScript"), getTagByName("HTML")],
     "content": content10,
     "thumbnail": {
-      "iconClass": "fab fa-js fa-5x",
+      "iconClass": "fab fa-js fa-6x",
       "bgClass": "p-thumbnail__js"
     }
   },
@@ -136,7 +136,7 @@ const articles = [
     "tags": [getTagByName("Nuxt.js"), getTagByName("Postman")],
     "content": content11,
     "thumbnail": {
-      "iconClass": "fab fa-vuejs fa-5x",
+      "iconClass": "fab fa-vuejs fa-6x",
       "bgClass": "p-thumbnail__vue"
     }
   },
@@ -147,7 +147,7 @@ const articles = [
     "tags": [getTagByName("Google Chrome"), getTagByName("Nuxt.js"), getTagByName("Disqus")],
     "content": content12,
     "thumbnail": {
-      "iconClass": "fab fa-vuejs fa-5x",
+      "iconClass": "fab fa-vuejs fa-6x",
       "bgClass": "p-thumbnail__vue"
     }
   },
@@ -158,7 +158,7 @@ const articles = [
     "tags": [getTagByName("Node.js"), getTagByName("Homestead"), getTagByName("Nuxt.js")],
     "content": content13,
     "thumbnail": {
-      "iconClass": "fab fa-vuejs fa-5x",
+      "iconClass": "fab fa-vuejs fa-6x",
       "bgClass": "p-thumbnail__vue"
     }
   },
@@ -169,7 +169,7 @@ const articles = [
     "tags": [getTagByName("JavaScript")],
     "content": content14,
     "thumbnail": {
-      "iconClass": "fab fa-js fa-5x",
+      "iconClass": "fab fa-js fa-6x",
       "bgClass": "p-thumbnail__js"
     }
   },
@@ -180,7 +180,7 @@ const articles = [
     "tags": [getTagByName("PHP")],
     "content": content15,
     "thumbnail": {
-      "iconClass": "fab fa-php fa-5x",
+      "iconClass": "fab fa-php fa-6x",
       "bgClass": "p-thumbnail__php"
     }
   },
@@ -191,7 +191,7 @@ const articles = [
     "tags": [getTagByName("Git for Windows"), getTagByName("cURL")],
     "content": content16,
     "thumbnail": {
-      "iconClass": "fab fa-git-alt fa-5x",
+      "iconClass": "fab fa-git-alt fa-6x",
       "bgClass": "p-thumbnail__git"
     }
   },
@@ -202,7 +202,7 @@ const articles = [
     "tags": [getTagByName("JavaScript"), getTagByName("HTML")],
     "content": content17,
     "thumbnail": {
-      "iconClass": "fab fa-internet-explorer fa-5x",
+      "iconClass": "fab fa-internet-explorer fa-6x",
       "bgClass": "p-thumbnail__ie"
     }
   }

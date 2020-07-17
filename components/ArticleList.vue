@@ -1,9 +1,7 @@
 <template>
   <div :class="className">
     <div class="card-columns">
-      <div v-for="article in articles" :key="article.id">
-        <ArticleListItem :article="article" />
-      </div>
+      <ArticleListItem v-for="article in articles" :key="article.id" :article="article" />
     </div>
   </div>
 </template>
