@@ -109,7 +109,7 @@ const articles = [
   },
   {
     "id": 9,
-    "title": "記事ページにWebP画像を表示する",
+    "title": "Marked.jsを拡張してWebP画像を表示する",
     "posted_at": "2020-01-05",
     "tags": [getTagByName("Marked.js"), getTagByName("Nuxt.js")],
     "content": content9,
