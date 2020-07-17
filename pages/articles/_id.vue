@@ -24,16 +24,20 @@
           </div>
         </div>
       </div>
-      <div class="col-12 py-5 bg-white">
+      <div class="col-12 pb-5 bg-white">
         <div class="container">
           <div class="row">
             <div class="col-12 col-sm-9 mx-sm-auto">
-              <div class="mt-5">
-                <Markdown :markdown-content="article.content" />
-              </div>
-              <div class="mt-5">
-                <Disqus lang="ja" />
-              </div>
+              <Markdown :markdown-content="article.content" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-sm-9 mx-sm-auto">
+              <Disqus lang="ja" />
             </div>
           </div>
         </div>
