@@ -1,4 +1,7 @@
 .p-card {
+  width: 320px;
+  display: inline-block;
+
   a {
     text-decoration: none;
   }
@@ -12,6 +15,7 @@
   }
 
   &__title {
-    height: 80px;
+    line-height: 1.2;
+    height: calc(1.2em * 3);
   }
 }
