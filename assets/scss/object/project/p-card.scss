@@ -12,6 +12,7 @@
   }
 
   &__title {
-    height: 80px;
+    line-height: 1.2;
+    height: calc(1.2em * 3);
   }
 }
