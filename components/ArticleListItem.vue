@@ -1,5 +1,5 @@
 <template>
-  <div class="p-card py-2" @mouseover="mouseOverAction" @mouseleave="mouseLeaveAction">
+  <div class="p-card py-2 mx-1" @mouseover="mouseOverAction" @mouseleave="mouseLeaveAction">
     <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }" class="u-link-color">
       <div class="card shadow">
         <div v-if="article.thumbnail" class="text-center py-5 text-dark rounded-top" :class="article.thumbnail.bgClass">
