@@ -15,8 +15,8 @@
   "dependencies": {
     "@nuxtjs/google-analytics": "^2.3.0",
     "@nuxtjs/sitemap": "^2.4.0",
-    "highlight.js": "^9.18.1",
-    "markedjs": "^10.0.0",
+    "highlight.js": "^10.1.1",
+    "marked": "^1.1.1",
     "node-sass": "^4.14.1",
     "nuxt": "^2.13.3",
     "raw-loader": "^4.0.1",
