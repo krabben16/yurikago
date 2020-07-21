@@ -5,7 +5,6 @@
  */
 const path = [
   '/',
-  '/arigato',
   '/articles/1',
   '/articles/2',
   '/articles/3',
