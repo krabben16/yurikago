@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-12 col-sm-9 mx-sm-auto">
         <div class="l-error">
-          <p v-if="error.statusCode === 404">{{ error.message }}</p>
-          <p v-else>Error</p>
+          <h1 v-if="error.statusCode === 404">{{ error.statusCode }} {{ error.message }}</h1>
+          <h1 v-else>{{ error.statusCode }} Error</h1>
         </div>
       </div>
     </div>
