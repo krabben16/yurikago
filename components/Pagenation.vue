@@ -1,9 +1,9 @@
 <template>
-  <div :class="className">
-    <nuxt-link v-if="isVisiblePrev" class="btn btn-dark float-left ml-1" :to="prevPagePath" role="button">
+  <div class="clearfix">
+    <nuxt-link v-if="isVisiblePrev" class="btn btn-dark float-left" :to="prevPagePath" role="button">
       &larr; Prev
     </nuxt-link>
-    <nuxt-link v-if="isVisibleNext" class="btn btn-dark float-right mr-1" :to="nextPagePath" role="button">
+    <nuxt-link v-if="isVisibleNext" class="btn btn-dark float-right" :to="nextPagePath" role="button">
       Next &rarr;
     </nuxt-link>
   </div>
@@ -12,10 +12,6 @@
 <script>
 export default {
   props: {
-    className: {
-      type: String,
-      default: ""
-    },
     activePage: {
       type: Number,
       required: true

@@ -24,187 +24,119 @@ const articles = [
     "title": "CentOS7 Tesseract3.04をビルドして実行する",
     "posted_at": "2018-07-09",
     "tags": [getTagByName("CentOS"), getTagByName("Tesseract")],
-    "content": content1,
-    "thumbnail": {
-      "iconClass": "fab fa-centos fa-6x",
-      "bgClass": "p-thumbnail__centos"
-    }
+    "content": content1
   },
   {
     "id": 2,
     "title": "CentOS7 Puppeteerを実行してスクリーンショット画像を作成する",
     "posted_at": "2018-12-20",
     "tags": [getTagByName("CentOS"), getTagByName("Chromium"), getTagByName("Node.js"), getTagByName("Puppeteer")],
-    "content": content2,
-    "thumbnail": {
-      "iconClass": "fab fa-centos fa-6x",
-      "bgClass": "p-thumbnail__centos"
-    }
+    "content": content2
   },
   {
     "id": 3,
     "title": "Chrome SeleniumIDE 配列を定義してループする",
     "posted_at": "2019-03-14",
     "tags": [getTagByName("Google Chrome"), getTagByName("Selenium")],
-    "content": content3,
-    "thumbnail": {
-      "iconClass": "fab fa-chrome fa-6x",
-      "bgClass": "p-thumbnail__chrome"
-    }
+    "content": content3
   },
   {
     "id": 4,
     "title": "CentOS7 CLIでLighthouseを実行する",
     "posted_at": "2019-07-28",
     "tags": [getTagByName("CentOS"), getTagByName("Node.js"), getTagByName("Puppeteer"), getTagByName("Lighthouse")],
-    "content": content4,
-    "thumbnail": {
-      "iconClass": "fab fa-centos fa-6x",
-      "bgClass": "p-thumbnail__centos"
-    }
+    "content": content4
   },
   {
     "id": 5,
     "title": "Alpine Linux 3.10.3 Python3 NLTKを実行する",
     "posted_at": "2019-12-19",
     "tags": [getTagByName("Alpine Linux"), getTagByName("NLTK"), getTagByName("Python")],
-    "content": content5,
-    "thumbnail": {
-      "iconClass": "fab fa-python fa-6x",
-      "bgClass": "p-thumbnail__python"
-    }
+    "content": content5
   },
   {
     "id": 6,
     "title": "Homestead PostgreSQLにHeidiSQLで接続する",
     "posted_at": "2019-12-30",
     "tags": [getTagByName("Homestead"), getTagByName("HeidiSQL"), getTagByName("PostgreSQL")],
-    "content": content6,
-    "thumbnail": {
-      "iconClass": "fas fa-database fa-6x",
-      "bgClass": "p-thumbnail__postgresql"
-    }
+    "content": content6
   },
   {
     "id": 7,
     "title": "CentOS6 Xdebug+VSCodeでPHP5.3をデバッグする",
     "posted_at": "2020-01-01",
     "tags": [getTagByName("CentOS"), getTagByName("PHP"), getTagByName("VSCode"), getTagByName("Xdebug")],
-    "content": content7,
-    "thumbnail": {
-      "iconClass": "fab fa-php fa-6x",
-      "bgClass": "p-thumbnail__php"
-    }
+    "content": content7
   },
   {
     "id": 8,
     "title": "Googleクローラーが画像の遅延読み込みを認識できるかどうか検証する",
     "posted_at": "2020-01-03",
     "tags": [getTagByName("Chromium"), getTagByName("Node.js"), getTagByName("Puppeteer")],
-    "content": content8,
-    "thumbnail": {
-      "iconClass": "fab fa-chrome fa-6x",
-      "bgClass": "p-thumbnail__chrome"
-    }
+    "content": content8
   },
   {
     "id": 9,
     "title": "Marked.jsを拡張してWebP画像を表示する",
     "posted_at": "2020-01-05",
     "tags": [getTagByName("Marked.js"), getTagByName("Nuxt.js")],
-    "content": content9,
-    "thumbnail": {
-      "iconClass": "fab fa-vuejs fa-6x",
-      "bgClass": "p-thumbnail__vue"
-    }
+    "content": content9
   },
   {
     "id": 10,
     "title": "JavaScriptはDOMツリーの構築中に実行される",
     "posted_at": "2020-01-14",
     "tags": [getTagByName("Google Chrome"), getTagByName("JavaScript"), getTagByName("HTML")],
-    "content": content10,
-    "thumbnail": {
-      "iconClass": "fab fa-js fa-6x",
-      "bgClass": "p-thumbnail__js"
-    }
+    "content": content10
   },
   {
     "id": 11,
     "title": "Nuxt.js サイトマップXMLを動的に出力する",
     "posted_at": "2020-01-21",
     "tags": [getTagByName("Nuxt.js"), getTagByName("Postman")],
-    "content": content11,
-    "thumbnail": {
-      "iconClass": "fab fa-vuejs fa-6x",
-      "bgClass": "p-thumbnail__vue"
-    }
+    "content": content11
   },
   {
     "id": 12,
     "title": "Nuxt.js Disqusのコメントフォームを表示する",
     "posted_at": "2020-01-27",
     "tags": [getTagByName("Google Chrome"), getTagByName("Nuxt.js"), getTagByName("Disqus")],
-    "content": content12,
-    "thumbnail": {
-      "iconClass": "fab fa-vuejs fa-6x",
-      "bgClass": "p-thumbnail__vue"
-    }
+    "content": content12
   },
   {
     "id": 13,
     "title": "Nuxt.js Homesteadにhttpsでリクエストしてレスポンスを取得する",
     "posted_at": "2020-02-02",
     "tags": [getTagByName("Node.js"), getTagByName("Homestead"), getTagByName("Nuxt.js")],
-    "content": content13,
-    "thumbnail": {
-      "iconClass": "fab fa-vuejs fa-6x",
-      "bgClass": "p-thumbnail__vue"
-    }
+    "content": content13
   },
   {
     "id": 14,
     "title": "JavaScript 整数の連番を配列として取得する",
     "posted_at": "2020-02-05",
     "tags": [getTagByName("JavaScript")],
-    "content": content14,
-    "thumbnail": {
-      "iconClass": "fab fa-js fa-6x",
-      "bgClass": "p-thumbnail__js"
-    }
+    "content": content14
   },
   {
     "id": 15,
     "title": "PHP5.3 全角ひらがなの濁点を削除する",
     "posted_at": "2020-03-25",
     "tags": [getTagByName("PHP")],
-    "content": content15,
-    "thumbnail": {
-      "iconClass": "fab fa-php fa-6x",
-      "bgClass": "p-thumbnail__php"
-    }
+    "content": content15
   },
   {
     "id": 16,
     "title": "curlでHTTPステータスコードを取得する",
     "posted_at": "2020-04-27",
     "tags": [getTagByName("Git for Windows"), getTagByName("cURL")],
-    "content": content16,
-    "thumbnail": {
-      "iconClass": "fab fa-git-alt fa-6x",
-      "bgClass": "p-thumbnail__git"
-    }
+    "content": content16
   },
   {
     "id": 17,
     "title": "画像をIE11でpreloadする",
     "posted_at": "2020-07-10",
     "tags": [getTagByName("JavaScript"), getTagByName("HTML")],
-    "content": content17,
-    "thumbnail": {
-      "iconClass": "fab fa-internet-explorer fa-6x",
-      "bgClass": "p-thumbnail__ie"
-    }
+    "content": content17
   }
 ]
 

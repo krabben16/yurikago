@@ -1,10 +1,4 @@
-@import "foundation/variable";
-@import "foundation/reset";
-@import "foundation/base";
-
-@import "layout/l-error";
-
-@import "object/component/c-markdown";
-@import "object/project/p-card";
-@import "object/project/p-thumbnail";
-@import "object/utility/u-underline";
+@import "variable";
+@import "reset";
+@import "base";
+@import "markdown";
