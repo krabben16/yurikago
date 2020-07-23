@@ -72,9 +72,9 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { "og:image": frontUrl + "/images/ogp.jpg" },
-      { "og:site_name": siteName },
-      { "og:locale": "ja_JP" }
+      { property: "og:image", content: frontUrl + "/images/ogp.jpg" },
+      { property: "og:site_name", content: siteName },
+      { property: "og:locale", content: "ja_JP" }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

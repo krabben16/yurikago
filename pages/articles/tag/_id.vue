@@ -68,16 +68,20 @@ export default {
           "description": this.description
         },
         {
-          "og:title": `${this.title} | Yurikago Blog`
+          property: "og:title",
+          content: `${this.title} | Yurikago Blog`
         },
         {
-          "og:type": "blog"
+          property: "og:type",
+          content: "blog"
         },
         {
-          "og:description": this.description
+          property: "og:description",
+          content: this.description
         },
         {
-          "og:url": process.env.FRONT_URL + this.$route.path
+          property: "og:url",
+          content: process.env.FRONT_URL + this.$route.path
         }
       ],
       script: [
