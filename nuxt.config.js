@@ -58,6 +58,7 @@ const maxArticleCountInList = 10
 const articleAuthor = 'Hiroki Kawaguchi'
 const articleOrganization = 'Yurikago Blog'
 const siteOwner = 'Hiroki Kawaguchi'
+const siteName = 'Yurikago Blog'
 const disqusShortname = 'yurikago-blog'
 
 export default {
@@ -70,7 +71,10 @@ export default {
     titleTemplate: '%s | Yurikago Blog',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { "og:image": frontUrl + "/images/ogp.jpg" },
+      { "og:site_name": siteName },
+      { "og:locale": "ja_JP" }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -160,6 +164,7 @@ export default {
     ARTICLE_AUTHOR: articleAuthor,
     ARTICLE_ORGANIZATION: articleOrganization,
     SITE_OWNER: siteOwner,
+    SITE_NAME: siteName,
     DISQUS_SHORTNAME: disqusShortname
   },
   /*
