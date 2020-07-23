@@ -57,6 +57,18 @@ export default {
       meta: [
         {
           "description": this.description
+        },
+        {
+          "og:title": `${this.title} | Yurikago Blog`
+        },
+        {
+          "og:type": "blog"
+        },
+        {
+          "og:description": this.description
+        },
+        {
+          "og:url": process.env.FRONT_URL + this.$route.path
         }
       ],
       script: [
