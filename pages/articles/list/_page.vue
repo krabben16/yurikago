@@ -67,7 +67,8 @@ export default {
       title: this.title,
       meta: [
         {
-          "description": this.description
+          name: "description",
+          content: this.description
         },
         {
           property: "og:title",
