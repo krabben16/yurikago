@@ -1,6 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
+      <!-- タイトル -->
       <div class="col-12 py-5">
         <div class="container">
           <div class="row">
@@ -26,6 +27,7 @@
           </div>
         </div>
       </div>
+      <!-- 本文 -->
       <div class="col-12 pb-5 bg-white">
         <div class="container">
           <div class="row">
@@ -35,6 +37,7 @@
           </div>
         </div>
       </div>
+      <!-- ソーシャルボタン -->
       <div class="col-12 pb-5 bg-white">
         <div class="container">
           <div class="row">
@@ -53,6 +56,7 @@
           </div>
         </div>
       </div>
+      <!-- コメント -->
       <div class="col-12 py-5">
         <div class="container">
           <div class="row">
