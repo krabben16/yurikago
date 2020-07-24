@@ -101,8 +101,8 @@ export default {
   created() {
     // TDK
     this.title = this.article.title
-    this.joinedTagsName = getJoinedTagsName(this.article.tags)
-    this.description = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${this.joinedTagsName}」を含みます。`
+    const joinedTagsName = getJoinedTagsName(this.article.tags)
+    this.description = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagsName}」を含みます。`
 
     this.breadcrumbItemList = [
       {
