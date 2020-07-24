@@ -134,6 +134,7 @@ export default {
   */
   plugins: [
     '~/plugins/disqus.js',
+    '~/plugins/vss.js',
     '~/plugins/schema/breadcrumb.js',
     '~/plugins/schema/article.js'
   ],
