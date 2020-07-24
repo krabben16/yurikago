@@ -1,6 +1,6 @@
 <template>
   <div class="text-center bg-secondary py-5">
-    <a :href="githubUrl" target="_blank" @click="$ga.event('header', 'click', 'github')">
+    <a :href="githubUrl" target="_blank" @click="$ga.event('view', 'click', 'github')">
       <!-- NOTE: アイコンは親要素のサイズとカラーを継承する -->
       <span class="text-white">
         <i class="fab fa-github fa-3x" />
