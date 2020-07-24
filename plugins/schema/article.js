@@ -30,6 +30,7 @@ Vue.prototype.$getArticleSchema = article => {
     "publisher": {
       "@type": "Organization",
       "name": process.env.ARTICLE_ORGANIZATION,
+      "url": process.env.FRONT_URL,
       "logo": {
         "@type": "ImageObject",
         "url": `${process.env.FRONT_URL}/icon.jpg`
