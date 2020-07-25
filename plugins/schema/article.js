@@ -20,7 +20,7 @@ Vue.prototype.$getArticleSchema = article => {
       "@id": `${process.env.FRONT_URL}/articles/${article.id}`
     },
     "headline": article.title,
-    "image": [`${process.env.FRONT_URL}/16x9.jpg`],
+    "image": [`${process.env.FRONT_URL}/images/schema/16x9.jpg`],
     "datePublished": `${article.posted_at}T00:00:00+09:00`,
     "dateModified": `${article.posted_at}T00:00:00+09:00`,
     "author": {
@@ -32,7 +32,7 @@ Vue.prototype.$getArticleSchema = article => {
       "name": process.env.ARTICLE_ORGANIZATION,
       "logo": {
         "@type": "ImageObject",
-        "url": `${process.env.FRONT_URL}/icon.jpg`
+        "url": `${process.env.FRONT_URL}/images/schema/logo.jpg`
       }
     }
   }
