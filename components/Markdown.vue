@@ -21,7 +21,7 @@ export default {
   mounted() {
     /**
      * NOTE: markedのレンダラーを上書きする
-     * @see https://github.com/markedjs/marked/blob/master/src/Renderer.js
+     * @see https://github.com/markedjs/marked/blob/v0.8.2/src/Renderer.js
      */
     const renderer = new marked.Renderer()
 
@@ -48,10 +48,35 @@ export default {
       return `<blockquote class="blockquote text-muted">${quote}</blockquote>`
     }
 
-    // 中央寄せで表示する
-    // サムネイル表示する
+    /**
+     * 画像を中央寄せで表示する
+     * https://getbootstrap.com/docs/4.4/content/images/#aligning-images
+     *
+     * サムネイル表示する
+     * モーダル表示する
+     */
     renderer.image = (href, title, text) => {
-      return `<img src="${href}" alt="${text}" class="mx-auto d-block img-thumbnail">`
+      return `
+        <a href="javascript:void(0);" data-toggle="modal" data-target="#${text}">
+          <img src="${href}" alt="${text}" class="mx-auto d-block img-thumbnail">
+        </a>
+        <!-- モーダル -->
+        <div class="modal fade" id="${text}" tabindex="-1" role="dialog" aria-labelledby="label1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="label1">${text}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img src="${href}" alt="${text}" class="mx-auto d-block img-thumbnail">
+              </div>
+            </div>
+          </div>
+        </div>
+      `
     }
 
     // 外部リンクを別タブで開く
