@@ -3,10 +3,6 @@
     border-bottom: 1px solid $headingBorderBottomColor;
   }
 
-  pre {
-    white-space: pre-wrap;
-  }
-
   blockquote {
     p::before {
       content: "\201C";
@@ -15,5 +11,9 @@
     p::after {
       content: "\201D";
     }
+  }
+
+  .cursor-zoom-in {
+    cursor: zoom-in;
   }
 }
