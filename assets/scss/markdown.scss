@@ -3,10 +3,6 @@
     border-bottom: 1px solid $headingBorderBottomColor;
   }
 
-  pre {
-    white-space: pre-wrap;
-  }
-
   blockquote {
     p::before {
       content: "\201C";
