@@ -30,13 +30,11 @@ Vue.prototype.$getArticleSchema = article => {
     "publisher": {
       "@type": "Organization",
       "name": process.env.ARTICLE_ORGANIZATION,
-      "url": process.env.FRONT_URL,
       "logo": {
         "@type": "ImageObject",
         "url": `${process.env.FRONT_URL}/icon.jpg`
       }
-    },
-    "description": `「${article.title}」についてまとめた記事です。この記事には以下のキーワード「${joinedTagsName}」が含まれます。`
+    }
   }
 
   return JSON.stringify(articleSchema)
