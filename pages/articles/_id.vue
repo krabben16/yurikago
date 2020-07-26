@@ -66,6 +66,31 @@
           </div>
         </div>
       </div>
+      <!-- ページャー -->
+      <div class="col-12 py-5 bg-white">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-sm-9 mx-sm-auto">
+              <nuxt-link
+                v-if="isVisibleNextArticle"
+                class="btn btn-dark float-left"
+                :to="{ name: 'articles-id', params: { id: nextArticleId } }"
+                role="button"
+              >
+                &larr; 次の記事
+              </nuxt-link>
+              <nuxt-link
+                v-if="isVisiblePrevArticle"
+                class="btn btn-dark float-right"
+                :to="{ name: 'articles-id', params: { id: prevArticleId } }"
+                role="button"
+              >
+                前の記事 &rarr;
+              </nuxt-link>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -76,7 +101,13 @@ import TwitterIcon from "~/components/ShareNetwork/TwitterIcon.vue"
 import LineIcon from "~/components/ShareNetwork/LineIcon.vue"
 import { mapGetters, mapActions } from "vuex"
 import { getJoinedTagsName } from "~/plugins/tags.js"
-import { getArticleById } from "~/plugins/articles.js"
+import {
+  getArticleById,
+  isVisibleNextArticle,
+  getNextArticleId,
+  isVisiblePrevArticle,
+  getPrevArticleId
+} from "~/plugins/articles.js"
 
 export default {
   components: {
@@ -118,6 +149,12 @@ export default {
         path: `/articles/${this.article.id}`
       }
     ]
+
+    // ページャー
+    this.isVisibleNextArticle = isVisibleNextArticle(this.article.id)
+    this.nextArticleId = getNextArticleId(this.article.id)
+    this.isVisiblePrevArticle = isVisiblePrevArticle(this.article.id)
+    this.prevArticleId = getPrevArticleId(this.article.id)
   },
   mounted() {
     if (!this.landingArticleID) {
