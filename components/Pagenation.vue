@@ -1,10 +1,20 @@
 <template>
-  <div class="clearfix">
-    <nuxt-link v-if="isVisiblePrev" class="btn btn-dark float-left" :to="prevPagePath" role="button">
-      &larr; Prev
+  <div>
+    <nuxt-link
+      v-if="isVisibleNext"
+      class="btn btn-dark float-left"
+      :to="{ name: 'articles-list-page', params: { page: nextPage } }"
+      role="button"
+    >
+      &larr; Next
     </nuxt-link>
-    <nuxt-link v-if="isVisibleNext" class="btn btn-dark float-right" :to="nextPagePath" role="button">
-      Next &rarr;
+    <nuxt-link
+      v-if="isVisiblePrev"
+      class="btn btn-dark float-right"
+      :to="{ name: 'articles-list-page', params: { page: prevPage } }"
+      role="button"
+    >
+      Prev &rarr;
     </nuxt-link>
   </div>
 </template>
@@ -22,14 +32,14 @@ export default {
     }
   },
   created() {
-    // 2ページ目以降が存在する場合はNextを表示する
-    const maxPageCount = Math.ceil(this.totalArticleCount / process.env.MAX_ARTICLE_COUNT_IN_LIST)
-    this.isVisibleNext = this.activePage < maxPageCount
-    this.nextPagePath = "/articles/list/" + (this.activePage + 1)
+    // 2ページ目以降を表示中の場合はNextを表示する
+    this.isVisibleNext = this.activePage > 1
+    this.nextPage = this.activePage - 1
 
-    // 2ページ目以降を表示中の場合はPrevを表示する
-    this.isVisiblePrev = this.activePage > 1
-    this.prevPagePath = "/articles/list/" + (this.activePage - 1)
+    // 2ページ目以降が存在する場合はPrevを表示する
+    const maxPageCount = Math.ceil(this.totalArticleCount / process.env.MAX_ARTICLE_COUNT_IN_LIST)
+    this.isVisiblePrev = this.activePage < maxPageCount
+    this.prevPage = this.activePage + 1
   }
 }
 </script>

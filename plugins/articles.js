@@ -223,3 +223,67 @@ export const getArticlesByTagId = tagId => {
   })
   return ret
 }
+
+/**
+ * 記事IDから次の記事リンクの表示有無を判定する
+ * @param {Number} id
+ */
+export const isVisibleNextArticle = id => {
+  const firstArticle = sortedArticles[0]
+  if (firstArticle.id === id) {
+    // 最初の記事の場合は次の記事が存在しないのでfalseを返す
+    return false
+  }
+  return true
+}
+
+/**
+ * 記事IDから次の記事IDを取得する
+ * @param {Number} id
+ */
+export const getNextArticleId = id => {
+  if (!isVisibleNextArticle(id)) {
+    return false
+  }
+  const currentIndex = getSortedArticlesIndex(id)
+  return sortedArticles[currentIndex - 1].id
+}
+
+/**
+ * 記事IDから前の記事リンクの表示有無を判定する
+ * @param {Number} id
+ */
+export const isVisiblePrevArticle = id => {
+  const lastArticle = sortedArticles[sortedArticles.length - 1]
+  if (lastArticle.id === id) {
+    // 最後の記事の場合は前の記事が存在しないのでfalseを返す
+    return false
+  }
+  return true
+}
+
+/**
+ * 記事IDから前の記事IDを取得する
+ * @param {Number} id
+ */
+export const getPrevArticleId = id => {
+  if (!isVisiblePrevArticle(id)) {
+    return false
+  }
+  const currentIndex = getSortedArticlesIndex(id)
+  return sortedArticles[currentIndex + 1].id
+}
+
+/**
+ * 記事IDから記事リストのインデックスを取得する
+ * @param {Number} id
+ */
+const getSortedArticlesIndex = id => {
+  let targetIndex = false
+  sortedArticles.map((a, i) => {
+    if (a.id === id) {
+      targetIndex = i
+    }
+  })
+  return targetIndex
+}
