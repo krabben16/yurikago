@@ -103,7 +103,8 @@ const tags = [
 
 /**
  * タグ名称を句点で連結する
- * @param {Array} tags
+ * @param {array} tags
+ * @return {string}
  */
 export const getJoinedTagsName = tags => {
   return tags.map(t => t.name).join(",")
@@ -111,7 +112,8 @@ export const getJoinedTagsName = tags => {
 
 /**
  * タグIDからタグデータを取得する
- * @param {Number} id
+ * @param {number} id
+ * @return {(object|boolean)}
  */
 export const getTagById = id => {
   const tag = tags.filter(t => t.id === id)
@@ -124,7 +126,8 @@ export const getTagById = id => {
 
 /**
  * タグ名称からタグデータを取得する
- * @param {String} name
+ * @param {string} name
+ * @return {(object|boolean)}
  */
 export const getTagByName = name => {
   const tag = tags.filter(t => t.name === name)
@@ -137,6 +140,7 @@ export const getTagByName = name => {
 
 /**
  * 全てのタグを取得する
+ * @return {object[]}
  */
 export const getTagsAll = () => {
   return tags

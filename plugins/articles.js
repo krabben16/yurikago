@@ -142,7 +142,8 @@ const articles = [
 
 /**
  * 記事リストをIDの降順で並び替える
- * @param {Array} articles
+ * @param {object[]} articles
+ * @return {object[]}
  */
 const sortArticlesByIdDesc = articles => {
   const compare = (a, b) => {
@@ -164,6 +165,7 @@ const sortedArticles = sortArticlesByIdDesc(articles)
 
 /**
  * 記事データの合計数を取得する
+ * @return {number}
  */
 export const getTotalArticleCount = () => {
   return articles.length
@@ -171,7 +173,8 @@ export const getTotalArticleCount = () => {
 
 /**
  * 記事IDから記事データを取得する
- * @param {Number} id
+ * @param {number} id
+ * @return {(object|boolean)}
  */
 export const getArticleById = id => {
   const article = articles.filter(a => a.id === id)
@@ -184,7 +187,8 @@ export const getArticleById = id => {
 
 /**
  * ページ番号から記事リストを取得する
- * @param {Number} page
+ * @param {number} page
+ * @return {(object[]|boolean)}
  */
 export const getArticlesByPage = page => {
   let start, end
@@ -210,7 +214,8 @@ export const getArticlesByPage = page => {
 
 /**
  * タグIDから記事リストを取得する
- * @param {Number} tagId
+ * @param {number} tagId
+ * @return {object[]}
  */
 export const getArticlesByTagId = tagId => {
   const ret = []
@@ -226,7 +231,8 @@ export const getArticlesByTagId = tagId => {
 
 /**
  * 記事IDから次の記事リンクの表示有無を判定する
- * @param {Number} id
+ * @param {number} id
+ * @return {boolean}
  */
 export const isVisibleNextArticle = id => {
   const firstArticle = sortedArticles[0]
@@ -239,7 +245,8 @@ export const isVisibleNextArticle = id => {
 
 /**
  * 記事IDから次の記事IDを取得する
- * @param {Number} id
+ * @param {number} id
+ * @return {(number|boolean)}
  */
 export const getNextArticleId = id => {
   if (!isVisibleNextArticle(id)) {
@@ -251,7 +258,8 @@ export const getNextArticleId = id => {
 
 /**
  * 記事IDから前の記事リンクの表示有無を判定する
- * @param {Number} id
+ * @param {number} id
+ * @return {boolean}
  */
 export const isVisiblePrevArticle = id => {
   const lastArticle = sortedArticles[sortedArticles.length - 1]
@@ -264,7 +272,8 @@ export const isVisiblePrevArticle = id => {
 
 /**
  * 記事IDから前の記事IDを取得する
- * @param {Number} id
+ * @param {number} id
+ * @return {(number|boolean)}
  */
 export const getPrevArticleId = id => {
   if (!isVisiblePrevArticle(id)) {
@@ -276,7 +285,8 @@ export const getPrevArticleId = id => {
 
 /**
  * 記事IDから記事リストのインデックスを取得する
- * @param {Number} id
+ * @param {number} id
+ * @return {(number|boolean)}
  */
 const getSortedArticlesIndex = id => {
   let targetIndex = false
