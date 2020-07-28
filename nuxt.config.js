@@ -22,6 +22,7 @@ const path = [
   '/articles/15',
   '/articles/16',
   '/articles/17',
+  '/articles/18',
   '/articles/list/1',
   '/articles/list/2',
   '/articles/tag/1',

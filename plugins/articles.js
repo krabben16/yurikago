@@ -17,6 +17,7 @@ import content14 from "~/assets/markdown/articles/14.md"
 import content15 from "~/assets/markdown/articles/15.md"
 import content16 from "~/assets/markdown/articles/16.md"
 import content17 from "~/assets/markdown/articles/17.md"
+import content18 from "~/assets/markdown/articles/18.md"
 
 const articles = [
   {
@@ -137,6 +138,13 @@ const articles = [
     "posted_at": "2020-07-10",
     "tags": [getTagByName("JavaScript"), getTagByName("HTML")],
     "content": content17
+  },
+  {
+    "id": 18,
+    "title": "JavaScriptをデバッグする方法",
+    "posted_at": "2020-07-28",
+    "tags": [getTagByName("JavaScript")],
+    "content": content18
   }
 ]
 
