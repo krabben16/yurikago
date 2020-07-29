@@ -141,9 +141,9 @@ const articles = [
   },
   {
     "id": 18,
-    "title": "JavaScriptをデバッグする方法",
+    "title": "debuggerやconsole.traceなどを使ってJavaScriptをデバッグする",
     "posted_at": "2020-07-28",
-    "tags": [getTagByName("JavaScript")],
+    "tags": [getTagByName("Google Chrome"), getTagByName("JavaScript")],
     "content": content18
   }
 ]
