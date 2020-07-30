@@ -15,7 +15,7 @@
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
-import { getTotalArticleCount, getArticlesByPage } from "~/plugins/articles.js"
+import { articleApplicationService } from "~/ddd/useCase/applicationService/ArticleApplicationService.js"
 
 export default {
   components: {
@@ -29,9 +29,8 @@ export default {
     }
   },
   created() {
-    const articles = getArticlesByPage(this.activePage)
-    this.articles = articles
-    this.totalArticleCount = getTotalArticleCount()
+    this.articles = articleApplicationService.getArticlesByPage(this.activePage)
+    this.totalArticleCount = articleApplicationService.getTotalArticleCount()
 
     // TDK
     this.title = "トップページ"
