@@ -100,14 +100,8 @@ import Markdown from "~/components/Markdown.vue"
 import TwitterIcon from "~/components/ShareNetwork/TwitterIcon.vue"
 import LineIcon from "~/components/ShareNetwork/LineIcon.vue"
 import { mapGetters, mapActions } from "vuex"
-import { getJoinedTagsName } from "~/plugins/tags.js"
-import {
-  getArticleById,
-  isVisibleNextArticle,
-  getNextArticleId,
-  isVisiblePrevArticle,
-  getPrevArticleId
-} from "~/plugins/articles.js"
+import { tagApplicationService } from "~/ddd/useCase/applicationService/TagApplicationService.js"
+import { articleApplicationService } from "~/ddd/useCase/applicationService/ArticleApplicationService.js"
 
 export default {
   components: {
@@ -117,7 +111,7 @@ export default {
   },
   async asyncData(context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
-    const article = getArticleById(id)
+    const article = articleApplicationService.getArticleById(id)
 
     // 記事データが存在しない場合はエラーページに遷移する
     // @see https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
@@ -136,7 +130,7 @@ export default {
   created() {
     // TDK
     this.title = this.article.title
-    const joinedTagsName = getJoinedTagsName(this.article.tags)
+    const joinedTagsName = tagApplicationService.getJoinedTagsName(this.article.tags)
     this.description = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagsName}」を含みます。`
 
     this.breadcrumbItemList = [
@@ -151,10 +145,10 @@ export default {
     ]
 
     // ページャー
-    this.isVisibleNextArticle = isVisibleNextArticle(this.article.id)
-    this.nextArticleId = getNextArticleId(this.article.id)
-    this.isVisiblePrevArticle = isVisiblePrevArticle(this.article.id)
-    this.prevArticleId = getPrevArticleId(this.article.id)
+    this.isVisibleNextArticle = articleApplicationService.isVisibleNextArticle(this.article.id)
+    this.nextArticleId = articleApplicationService.getNextArticleId(this.article.id)
+    this.isVisiblePrevArticle = articleApplicationService.isVisiblePrevArticle(this.article.id)
+    this.prevArticleId = articleApplicationService.getPrevArticleId(this.article.id)
   },
   mounted() {
     if (!this.landingArticleID) {

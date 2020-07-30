@@ -15,7 +15,7 @@
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
-import { getTotalArticleCount, getArticlesByPage } from "~/plugins/articles.js"
+import { articleApplicationService } from "~/ddd/useCase/applicationService/ArticleApplicationService.js"
 
 export default {
   components: {
@@ -26,8 +26,8 @@ export default {
     // NaN = Not a Number
     // typeof context.params.page => string
     const page = isNaN(context.params.page) ? 1 : parseInt(context.params.page)
-    const articles = getArticlesByPage(page)
-    const totalArticleCount = getTotalArticleCount()
+    const articles = articleApplicationService.getArticlesByPage(page)
+    const totalArticleCount = articleApplicationService.getTotalArticleCount()
 
     if (!articles) {
       return context.error({ statusCode: 404, message: "Not Found" })

@@ -14,8 +14,8 @@
 <script>
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
-import { getTagById } from "~/plugins/tags.js"
-import { getArticlesByTagId } from "~/plugins/articles.js"
+import { tagApplicationService } from "~/ddd/useCase/applicationService/TagApplicationService.js"
+import { articleApplicationService } from "~/ddd/useCase/applicationService/ArticleApplicationService.js"
 
 export default {
   components: {
@@ -23,8 +23,8 @@ export default {
   },
   async asyncData(context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
-    const tag = getTagById(id)
-    const articles = getArticlesByTagId(id)
+    const tag = tagApplicationService.getTagById(id)
+    const articles = articleApplicationService.getArticlesByTagId(id)
 
     // タグまたは記事リストが存在しない場合はエラーページに遷移する
     if (!tag || !articles) {

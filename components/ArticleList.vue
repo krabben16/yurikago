@@ -11,14 +11,14 @@
 import ArticleListItem from "~/components/ArticleListItem.vue"
 
 export default {
+  components: {
+    ArticleListItem
+  },
   props: {
     articles: {
       type: Array,
       required: true
     }
-  },
-  components: {
-    ArticleListItem
   }
 }
 </script>
