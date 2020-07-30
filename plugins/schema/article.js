@@ -7,11 +7,8 @@
  */
 
 import Vue from "vue"
-import { getJoinedTagsName } from "~/plugins/tags.js"
 
 Vue.prototype.$getArticleSchema = article => {
-  const joinedTagsName = getJoinedTagsName(article.tags)
-
   const articleSchema = {
     "@context": "http://schema.org",
     "@type": "Article",
