@@ -1,6 +1,7 @@
 // domain/repository の処理を実装する
 
 import { articleList } from "~/resources/js/infra/data/articles/all.js"
+import { Article } from "~/resources/js/domain/model/article.js"
 
 export class ArticleRepository {
   /**
@@ -8,7 +9,19 @@ export class ArticleRepository {
    * @return {object[]}
    */
   getArticles = () => {
-    return this._sortArticlesByIdDesc(articleList)
+    const sortedArticles = this._sortArticlesByIdDesc(articleList)
+
+    const ret = sortedArticles.map(article => {
+      return new Article({
+        id: article.id,
+        title: article.title,
+        posted_at: article.posted_at,
+        tags: article.tags,
+        content: article.content
+      })
+    })
+
+    return ret
   }
 
   /**
@@ -17,12 +30,23 @@ export class ArticleRepository {
    * @return {(object|boolean)}
    */
   getArticleById = id => {
-    const article = this._sortArticlesByIdDesc(articleList).filter(a => a.id === id)
-    if (article.length === 0) {
+    const filtered = articleList.filter(a => a.id === id)
+    if (filtered.length === 0) {
       return false
     }
+
     // 配列からオブジェクトを取り出す
-    return article.shift()
+    const article = filtered.shift()
+
+    const ret = new Article({
+      id: article.id,
+      title: article.title,
+      posted_at: article.posted_at,
+      tags: article.tags,
+      content: article.content
+    })
+
+    return ret
   }
 
   /**
@@ -32,7 +56,6 @@ export class ArticleRepository {
    */
   getArticlesByPage = page => {
     let start, end
-
     if (page === 1) {
       start = 0
       end = process.env.MAX_ARTICLE_COUNT_IN_LIST
@@ -44,12 +67,24 @@ export class ArticleRepository {
       end = process.env.MAX_ARTICLE_COUNT_IN_LIST * page
     }
 
-    const sliced = this._sortArticlesByIdDesc(articleList).slice(start, end)
+    const sortedArticles = this._sortArticlesByIdDesc(articleList)
+
+    const sliced = sortedArticles.slice(start, end)
     if (sliced.length === 0) {
       return false
     }
 
-    return sliced
+    const ret = sliced.map(article => {
+      return new Article({
+        id: article.id,
+        title: article.title,
+        posted_at: article.posted_at,
+        tags: article.tags,
+        content: article.content
+      })
+    })
+
+    return ret
   }
 
   /**
@@ -58,14 +93,27 @@ export class ArticleRepository {
    * @return {object[]}
    */
   getArticlesByTagId = tagId => {
-    const ret = []
-    this._sortArticlesByIdDesc(articleList).map(a => {
-      a.tags.map(t => {
-        if (t.id === tagId) {
-          ret.push(a)
+    const sortedArticles = this._sortArticlesByIdDesc(articleList)
+
+    const matched = []
+    sortedArticles.map(article => {
+      article.tags.map(tag => {
+        if (tag.id === tagId) {
+          matched.push(article)
         }
       })
     })
+
+    const ret = matched.map(article => {
+      return new Article({
+        id: article.id,
+        title: article.title,
+        posted_at: article.posted_at,
+        tags: article.tags,
+        content: article.content
+      })
+    })
+
     return ret
   }
 

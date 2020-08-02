@@ -1,4 +1,3 @@
-import { Article } from "~/resources/js/domain/model/article.js"
 import content from "~/resources/markdown/articles/7.md"
 import { TagRepository } from "~/resources/js/infra/repository/tagRepository.js"
 import { TagUseCase } from "~/resources/js/useCase/tagUseCase.js"
@@ -6,7 +5,7 @@ import { TagUseCase } from "~/resources/js/useCase/tagUseCase.js"
 const tagRepository = new TagRepository()
 const tagUseCase = new TagUseCase(tagRepository)
 
-export default new Article({
+export default {
   id: 7,
   title: "CentOS6 Xdebug+VSCodeでPHP5.3をデバッグする",
   posted_at: "2020-01-01",
@@ -17,4 +16,4 @@ export default new Article({
     tagUseCase.getTagByName("Xdebug")
   ],
   content: content
-})
+}

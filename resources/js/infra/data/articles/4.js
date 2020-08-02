@@ -1,4 +1,3 @@
-import { Article } from "~/resources/js/domain/model/article.js"
 import content from "~/resources/markdown/articles/4.md"
 import { TagRepository } from "~/resources/js/infra/repository/tagRepository.js"
 import { TagUseCase } from "~/resources/js/useCase/tagUseCase.js"
@@ -6,7 +5,7 @@ import { TagUseCase } from "~/resources/js/useCase/tagUseCase.js"
 const tagRepository = new TagRepository()
 const tagUseCase = new TagUseCase(tagRepository)
 
-export default new Article({
+export default {
   id: 4,
   title: "CentOS7 CLIでLighthouseを実行する",
   posted_at: "2019-07-28",
@@ -17,4 +16,4 @@ export default new Article({
     tagUseCase.getTagByName("Lighthouse")
   ],
   content: content
-})
+}
