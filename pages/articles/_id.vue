@@ -100,7 +100,7 @@ import Markdown from "~/components/Markdown.vue"
 import TwitterIcon from "~/components/ShareNetwork/TwitterIcon.vue"
 import LineIcon from "~/components/ShareNetwork/LineIcon.vue"
 import { mapGetters, mapActions } from "vuex"
-import { articleUseCase, tagUseCase } from "~/resources/js/index.js"
+import { articleUseCase, tagUseCase } from "~/resources/js/index.ts"
 
 export default {
   components: {

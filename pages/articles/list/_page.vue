@@ -15,7 +15,7 @@
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
-import { articleUseCase } from "~/resources/js/index.js"
+import { articleUseCase } from "~/resources/js/index.ts"
 
 export default {
   components: {
