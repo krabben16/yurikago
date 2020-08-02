@@ -3,9 +3,6 @@
     <div class="row">
       <div class="col-12 col-sm-6 mx-sm-auto py-5">
         <ArticleList :articles="articles" />
-        <div class="mt-4">
-          <Pagenation :active-page="activePage" :total-article-count="totalArticleCount" />
-        </div>
       </div>
     </div>
   </div>
@@ -14,8 +11,7 @@
 <script>
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
-import { tagApplicationService } from "~/ddd/useCase/applicationService/TagApplicationService.js"
-import { articleApplicationService } from "~/ddd/useCase/applicationService/ArticleApplicationService.js"
+import { articleUseCase, tagUseCase } from "~/resources/js/index.js"
 
 export default {
   components: {
@@ -23,8 +19,8 @@ export default {
   },
   async asyncData(context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
-    const tag = tagApplicationService.getTagById(id)
-    const articles = articleApplicationService.getArticlesByTagId(id)
+    const tag = tagUseCase.getTagById(id)
+    const articles = articleUseCase.getArticlesByTagId(id)
 
     // タグまたは記事リストが存在しない場合はエラーページに遷移する
     if (!tag || !articles) {
