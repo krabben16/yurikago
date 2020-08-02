@@ -1,4 +1,4 @@
-import { Tag } from "~/resources/js/domain/model/Tag.js"
+import { Tag } from "~/resources/js/domain/model/tag.js"
 
 export const tagList = [
   new Tag({ id: 1, name: "CentOS" }),
