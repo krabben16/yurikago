@@ -1,32 +1,31 @@
+import { Tag } from "~/resources/js/domain/model/tag.ts"
+import { ITagRepository } from "~/resources/js/domain/repository/ITagRepository.ts"
+
 export class TagUseCase {
-  constructor(tagRepository) {
+  private readonly tagRepository: ITagRepository
+
+  constructor(tagRepository: ITagRepository) {
     this.tagRepository = tagRepository
   }
 
   /**
    * タグIDからタグデータを取得する
-   * @param {number} id
-   * @return {(object|boolean)}
    */
-  getTagById = id => {
+  getTagById = (id: number): Tag | boolean => {
     return this.tagRepository.getTagById(id)
   }
 
   /**
    * タグ名称からタグデータを取得する
-   * @param {string} name
-   * @return {(object|boolean)}
    */
-  getTagByName = name => {
+  getTagByName = (name: string): Tag | boolean => {
     return this.tagRepository.getTagByName(name)
   }
 
   /**
    * タグ名称を句点で連結する
-   * @param {array} tags
-   * @return {string}
    */
-  getJoinedTagsName = tags => {
+  getJoinedTagsName = (tags: Tag[]): string => {
     return tags.map(t => t.name).join(",")
   }
 }
