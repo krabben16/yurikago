@@ -1,4 +1,3 @@
-import { Article } from "~/resources/js/domain/model/article.js"
 import content from "~/resources/markdown/articles/12.md"
 import { TagRepository } from "~/resources/js/infra/repository/tagRepository.js"
 import { TagUseCase } from "~/resources/js/useCase/tagUseCase.js"
@@ -6,7 +5,7 @@ import { TagUseCase } from "~/resources/js/useCase/tagUseCase.js"
 const tagRepository = new TagRepository()
 const tagUseCase = new TagUseCase(tagRepository)
 
-export default new Article({
+export default {
   id: 12,
   title: "Nuxt.js Disqusのコメントフォームを表示する",
   posted_at: "2020-01-27",
@@ -16,4 +15,4 @@ export default new Article({
     tagUseCase.getTagByName("Disqus")
   ],
   content: content
-})
+}

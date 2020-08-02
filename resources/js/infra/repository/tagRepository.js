@@ -1,4 +1,5 @@
 import { tagList } from "~/resources/js/infra/data/tags/all.js"
+import { Tag } from "~/resources/js/domain/model/tag.js"
 
 export class TagRepository {
   /**
@@ -7,12 +8,20 @@ export class TagRepository {
    * @return {(object|boolean)}
    */
   getTagById = id => {
-    const tag = tagList.filter(t => t.id === id)
-    if (tag.length === 0) {
+    const filtered = tagList.filter(t => t.id === id)
+    if (filtered.length === 0) {
       return false
     }
+
     // 配列からオブジェクトを取り出す
-    return tag.shift()
+    const tag = filtered.shift()
+
+    const ret = new Tag({
+      id: tag.id,
+      name: tag.name
+    })
+
+    return ret
   }
 
   /**
@@ -21,11 +30,19 @@ export class TagRepository {
    * @return {(object|boolean)}
    */
   getTagByName = name => {
-    const tag = tagList.filter(t => t.name === name)
-    if (tag.length === 0) {
+    const filtered = tagList.filter(t => t.name === name)
+    if (filtered.length === 0) {
       return false
     }
+
     // 配列からオブジェクトを取り出す
-    return tag.shift()
+    const tag = filtered.shift()
+
+    const ret = new Tag({
+      id: tag.id,
+      name: tag.name
+    })
+
+    return ret
   }
 }
