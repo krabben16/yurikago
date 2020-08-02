@@ -1,4 +1,4 @@
-import { Article } from "~/resources/js/domain/model/Article.js"
+import { Article } from "~/resources/js/domain/model/article.js"
 import content from "~/resources/markdown/articles/18.md"
 import { TagRepository } from "~/resources/js/infra/repository/tagRepository.js"
 import { TagUseCase } from "~/resources/js/useCase/tagUseCase.js"
