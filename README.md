@@ -12,6 +12,7 @@ Gitのブランチモデルは git-flow です。
 ## システム構成
 
 - Nuxt.js
+- TypeScript
 - Firebase Hosting
 - CircleCI
 
