@@ -13,27 +13,27 @@
     "test": "jest --config jest.config.js"
   },
   "dependencies": {
-    "@nuxtjs/google-analytics": "^2.3.0",
+    "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/sitemap": "^2.4.0",
-    "highlight.js": "^10.1.1",
+    "highlight.js": "^10.1.2",
     "marked": "^1.1.1",
-    "nuxt": "^2.13.3",
+    "nuxt": "^2.14.0",
     "raw-loader": "^4.0.1",
     "vue-disqus": "^4.0.1",
     "vue-social-sharing": "^3.0.0-beta.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
     "@nuxt/types": "^2.14.0",
     "@nuxt/typescript-build": "^2.0.2",
     "@nuxtjs/eslint-config-typescript": "^3.0.0",
-    "babel-jest": "^26.1.0",
+    "babel-jest": "^26.2.2",
     "eslint": "^6.8.0",
     "eslint-loader": "^3.0.4",
     "eslint-plugin-vue": "^6.2.2",
     "firebase-tools": "^7.16.2",
-    "jest": "^26.1.0",
+    "jest": "^26.2.2",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.2"
   }
