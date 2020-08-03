@@ -1,7 +1,4 @@
-/**
- * 開発ツール 
- * https://ja.nuxtjs.org/guide/development-tools/
- * 
+/** 
  * Getting Started with ESLint
  * https://eslint.org/docs/user-guide/getting-started
  */
