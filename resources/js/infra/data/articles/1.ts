@@ -5,8 +5,8 @@ import { tagListWithKey } from "~/resources/js/infra/data/tags/all.ts"
 const article: IArticleObject = {
   id: 1,
   title: "CentOS7 Tesseract3.04をビルドして実行する",
-  posted_at: "2018-07-09",
-  tags: [tagListWithKey["CentOS"], tagListWithKey["Tesseract"]],
+  postedAt: "2018-07-09",
+  tags: [tagListWithKey.CentOS, tagListWithKey.Tesseract],
   content: content
 }
 

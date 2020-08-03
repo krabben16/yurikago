@@ -17,7 +17,7 @@ export default {
   components: {
     ArticleList
   },
-  async asyncData(context) {
+  asyncData(context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
     const tag = tagUseCase.getTagById(id)
     const articles = articleUseCase.getArticlesByTagId(id)
