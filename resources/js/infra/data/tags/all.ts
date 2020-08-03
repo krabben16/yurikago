@@ -23,8 +23,7 @@ const tag20: ITagObject = { id: 20, name: "JavaScript" }
 const tag21: ITagObject = { id: 21, name: "HTML" }
 const tag22: ITagObject = { id: 22, name: "Postman" }
 const tag23: ITagObject = { id: 23, name: "Disqus" }
-const tag24: ITagObject = { id: 24, name: "cURL" }
-const tag25: ITagObject = { id: 25, name: "Git for Windows" }
+const tag24: ITagObject = { id: 24, name: "bash" }
 
 export const tagList = [
   tag1,
@@ -50,8 +49,7 @@ export const tagList = [
   tag21,
   tag22,
   tag23,
-  tag24,
-  tag25
+  tag24
 ]
 
 export const tagListWithKey = {
@@ -78,6 +76,5 @@ export const tagListWithKey = {
   HTML: tag21,
   Postman: tag22,
   Disqus: tag23,
-  cURL: tag24,
-  GitForWindows: tag25
+  bash: tag24
 }

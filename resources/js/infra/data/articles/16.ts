@@ -6,7 +6,7 @@ const article: IArticleObject = {
   id: 16,
   title: "curlでHTTPステータスコードを取得する",
   postedAt: "2020-04-27",
-  tags: [tagListWithKey.cURL, tagListWithKey.GitForWindows],
+  tags: [tagListWithKey.bash],
   content: content
 }
 
