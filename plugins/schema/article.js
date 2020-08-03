@@ -18,8 +18,8 @@ Vue.prototype.$getArticleSchema = article => {
     },
     "headline": article.title,
     "image": [`${process.env.FRONT_URL}/images/schema/16x9.jpg`],
-    "datePublished": `${article.posted_at}T00:00:00+09:00`,
-    "dateModified": `${article.posted_at}T00:00:00+09:00`,
+    "datePublished": `${article.postedAt}T00:00:00+09:00`,
+    "dateModified": `${article.postedAt}T00:00:00+09:00`,
     "author": {
       "@type": "Person",
       "name": process.env.ARTICLE_AUTHOR

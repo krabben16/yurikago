@@ -8,7 +8,7 @@
             <div class="col-12 col-sm-10 mx-sm-auto">
               <div>
                 <i class="far fa-clock mr-1" />
-                {{ article.posted_at }}
+                {{ article.postedAt }}
               </div>
               <div class="mt-2">
                 <i class="fas fa-tag mr-1" />
@@ -96,10 +96,10 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
 import Markdown from "~/components/Markdown.vue"
 import TwitterIcon from "~/components/ShareNetwork/TwitterIcon.vue"
 import LineIcon from "~/components/ShareNetwork/LineIcon.vue"
-import { mapGetters, mapActions } from "vuex"
 import { articleUseCase, tagUseCase } from "~/resources/js/index.ts"
 
 export default {
@@ -108,7 +108,7 @@ export default {
     TwitterIcon,
     LineIcon
   },
-  async asyncData(context) {
+  asyncData(context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
     const article = articleUseCase.getArticleById(id)
 

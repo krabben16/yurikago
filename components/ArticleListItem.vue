@@ -7,7 +7,7 @@
     </nuxt-link>
     <div class="mt-3">
       <i class="far fa-clock mr-1" />
-      {{ article.posted_at }}
+      {{ article.postedAt }}
     </div>
     <div class="mt-2">
       <i class="fas fa-tag mr-1" />

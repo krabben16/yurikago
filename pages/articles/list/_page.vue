@@ -22,7 +22,7 @@ export default {
     ArticleList,
     Pagenation
   },
-  async asyncData(context) {
+  asyncData(context) {
     // NaN = Not a Number
     // typeof context.params.page => string
     const page = isNaN(context.params.page) ? 1 : parseInt(context.params.page)

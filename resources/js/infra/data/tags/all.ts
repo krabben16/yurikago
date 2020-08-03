@@ -23,8 +23,7 @@ const tag20: ITagObject = { id: 20, name: "JavaScript" }
 const tag21: ITagObject = { id: 21, name: "HTML" }
 const tag22: ITagObject = { id: 22, name: "Postman" }
 const tag23: ITagObject = { id: 23, name: "Disqus" }
-const tag24: ITagObject = { id: 24, name: "cURL" }
-const tag25: ITagObject = { id: 25, name: "Git for Windows" }
+const tag24: ITagObject = { id: 24, name: "bash" }
 
 export const tagList = [
   tag1,
@@ -50,34 +49,32 @@ export const tagList = [
   tag21,
   tag22,
   tag23,
-  tag24,
-  tag25,
+  tag24
 ]
 
 export const tagListWithKey = {
-  "CentOS": tag1,
-  "Tesseract": tag2,
-  "Chromium": tag3,
-  "Node.js": tag4,
-  "Puppeteer": tag5,
-  "Google Chrome": tag6,
-  "Selenium": tag7,
-  "Lighthouse": tag8,
-  "Alpine Linux": tag9,
-  "NLTK": tag10,
-  "Python": tag11,
-  "Homestead": tag12,
-  "HeidiSQL": tag13,
-  "PostgreSQL": tag14,
-  "PHP": tag15,
-  "VSCode": tag16,
-  "Xdebug": tag17,
-  "Marked.js": tag18,
-  "Nuxt.js": tag19,
-  "JavaScript": tag20,
-  "HTML": tag21,
-  "Postman": tag22,
-  "Disqus": tag23,
-  "cURL": tag24,
-  "Git for Windows": tag25
+  CentOS: tag1,
+  Tesseract: tag2,
+  Chromium: tag3,
+  NodeJS: tag4,
+  Puppeteer: tag5,
+  GoogleChrome: tag6,
+  Selenium: tag7,
+  Lighthouse: tag8,
+  AlpineLinux: tag9,
+  NLTK: tag10,
+  Python: tag11,
+  Homestead: tag12,
+  HeidiSQL: tag13,
+  PostgreSQL: tag14,
+  PHP: tag15,
+  VSCode: tag16,
+  Xdebug: tag17,
+  MarkedJS: tag18,
+  NuxtJS: tag19,
+  JavaScript: tag20,
+  HTML: tag21,
+  Postman: tag22,
+  Disqus: tag23,
+  bash: tag24
 }

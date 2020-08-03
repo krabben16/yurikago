@@ -48,8 +48,7 @@ const path = [
   '/articles/tag/21',
   '/articles/tag/22',
   '/articles/tag/23',
-  '/articles/tag/24',
-  '/articles/tag/25',
+  '/articles/tag/24'
 ]
 
 // 定数
@@ -188,7 +187,7 @@ export default {
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
-          test: /\.(js|vue)$/,
+          test: /\.(ts|js|vue)$/,
           loader: "eslint-loader",
           exclude: /(node_modules)/
         })

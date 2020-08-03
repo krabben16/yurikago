@@ -5,11 +5,11 @@ import { tagListWithKey } from "~/resources/js/infra/data/tags/all.ts"
 const article: IArticleObject = {
   id: 6,
   title: "Homestead PostgreSQLにHeidiSQLで接続する",
-  posted_at: "2019-12-30",
+  postedAt: "2019-12-30",
   tags: [
-    tagListWithKey["Homestead"],
-    tagListWithKey["HeidiSQL"],
-    tagListWithKey["PostgreSQL"]
+    tagListWithKey.Homestead,
+    tagListWithKey.HeidiSQL,
+    tagListWithKey.PostgreSQL
   ],
   content: content
 }
