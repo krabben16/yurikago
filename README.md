@@ -5,7 +5,7 @@ npm i
 npm run dev
 ```
 
-コーディングスタイルを統一するため、ESLintとPrettierによる構文チェックを実施します。
+コーディングスタイルを統一するためESLintによる構文チェックを実施します。
 
 Gitのブランチモデルは git-flow です。
 
