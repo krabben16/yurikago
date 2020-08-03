@@ -20,16 +20,14 @@ module.exports = {
   // カスタムルール
   rules: {
     /**
-     * セミコロンの一貫した使用を強制する
-     * never: 構文の最後のセミコロンを許可しない（[, (, /, +, -で始まる構文を除く）
-     * https://eslint.org/docs/rules/semi
-     */
-    'semi': [2, 'never'],
-    /**
      * consoleオブジェクトのメソッドの呼び出しを禁止する
      * https://eslint.org/docs/rules/no-console
      */
     'no-console': 'off',
+    /**
+     * https://eslint.org/docs/rules/semi
+     */
+    'semi': 'off',
     /**
      * https://eslint.org/docs/rules/no-unused-vars
      */
@@ -58,6 +56,13 @@ module.exports = {
      * as-needed: 省略可能なブレースを強制しない
      */
     'arrow-parens': [2, 'as-needed'],
+    /**
+     * !! eslint/semi を拡張するルール
+     * セミコロンの一貫した使用を強制する
+     * never: 構文の最後のセミコロンを許可しない（[, (, /, +, -で始まる構文を除く）
+     * https://github.com/typescript-eslint/typescript-eslint/blob/v3.7.1/packages/eslint-plugin/docs/rules/semi.md
+     */
+    '@typescript-eslint/semi': [2, 'never'],
     /**
      * !! eslint/no-unused-vars を拡張するルール
      * 未使用の変数を許可しない
