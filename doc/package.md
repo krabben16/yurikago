@@ -100,7 +100,7 @@ https://typescript.nuxtjs.org/ja/guide/lint.html
 
 ### 依存関係
 
-`@nuxtjs/eslint-config-typescript`
+#### @nuxtjs/eslint-config-typescript
 
 ```json
   "dependencies": {
@@ -112,7 +112,27 @@ https://typescript.nuxtjs.org/ja/guide/lint.html
 
 https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%403.0.0/packages/eslint-config-typescript/package.json
 
-`@nuxtjs/eslint-config`
+```js
+module.exports = {
+  extends: [
+    '@nuxtjs'
+  ],
+  plugins: ['@typescript-eslint'],
+  parserOptions: {
+    parser: '@typescript-eslint/parser'
+  },
+  rules: {
+    '@typescript-eslint/no-unused-vars': ['error', { args: 'all', argsIgnorePattern: '^_' }]
+  }
+}
+```
+
+https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%403.0.0/packages/eslint-config-typescript/index.js
+
+※ `extends['@nuxtjs']` => `@nuxtjs/eslint-config` のルールを有効にする
+※ `plugins: ['@typescript-eslint']` => `@typescript-eslint/eslint-plugin` のルールを追加する
+
+#### @nuxtjs/eslint-config
 
 ```json
   "dependencies": {
@@ -130,9 +150,41 @@ https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%40
   },
 ```
 
-https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%403.0.0/packages/eslint-config-typescript/package.json
+https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%403.0.0/packages/eslint-config/package.json
 
-※ `eslint-plugin-vue` に依存しているのでvueファイルをリントできる
+```js
+module.exports = {
+  env: {
+    browser: true,
+    node: true,
+    'jest/globals': true
+  },
+  extends: [
+    'standard',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:vue/recommended'
+  ],
+  plugins: [
+    'jest',
+    'unicorn',
+    'vue'
+  ],
+  settings: {
+    'import/resolver': {
+      node: { extensions: ['.js', '.mjs'] }
+    }
+  },
+  rules: {
+:
+  }
+}
+```
+
+https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%403.0.0/packages/eslint-config/index.js
+
+※ `extends['standard']` => `eslint-config-standard` のルールを有効にする
+※ `extends['plugin:vue/recommended']` => `eslint-plugin-vue` のルールを有効にする
 
 # テストツール
 
