@@ -186,11 +186,15 @@ https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%40
 
 ※ `extends: ['standard']` => `eslint-config-standard` のルールを有効にする
 
-※ `extends: ['plugin:vue/recommended']` => `eslint-plugin-vue` のルールを有効にする
+※ `extends: ['plugin:vue/recommended']` => `eslint-plugin-vue/recommended` のルールを有効にする
 
 #### eslint-config-standard
 
 https://github.com/standard/eslint-config-standard/blob/v14.1.1/eslintrc.json
+
+#### eslint-plugin-vue/recommended
+
+https://github.com/vuejs/eslint-plugin-vue/blob/v6.2.2/lib/configs/recommended.js
 
 # テストツール
 
