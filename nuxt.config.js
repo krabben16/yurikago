@@ -23,6 +23,7 @@ const path = [
   '/articles/16',
   '/articles/17',
   '/articles/18',
+  '/articles/19',
   '/articles/list/1',
   '/articles/list/2',
   '/articles/tag/1',
@@ -48,7 +49,8 @@ const path = [
   '/articles/tag/21',
   '/articles/tag/22',
   '/articles/tag/23',
-  '/articles/tag/24'
+  '/articles/tag/24',
+  '/articles/tag/25'
 ]
 
 // 定数

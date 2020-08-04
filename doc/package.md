@@ -151,7 +151,7 @@ https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%40
   },
 ```
 
-https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%403.0.0/packages/eslint-config/package.json
+https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config%403.1.0/packages/eslint-config/package.json
 
 ```js
 module.exports = {
@@ -182,7 +182,7 @@ module.exports = {
 }
 ```
 
-https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%403.0.0/packages/eslint-config/index.js
+https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config%403.1.0/packages/eslint-config/index.js
 
 ※ `extends: ['standard']` => `eslint-config-standard` のルールを有効にする
 
