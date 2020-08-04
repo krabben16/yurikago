@@ -6,7 +6,7 @@ import { IArticleRepository } from "~/resources/js/domain/repository/IArticleRep
 export class ArticleUseCase {
   private readonly articleRepository: IArticleRepository
 
-  constructor(articleRepository: IArticleRepository) {
+  constructor (articleRepository: IArticleRepository) {
     this.articleRepository = articleRepository
   }
 

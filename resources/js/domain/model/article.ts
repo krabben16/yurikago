@@ -8,7 +8,7 @@ export class Article {
   tags: Tag[]
   content: string
 
-  constructor(obj: IArticleObject) {
+  constructor (obj: IArticleObject) {
     this.id = obj.id
     this.title = obj.title
     this.postedAt = obj.postedAt

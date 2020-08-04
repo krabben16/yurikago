@@ -22,11 +22,11 @@ export default {
     ArticleList,
     Pagenation
   },
-  asyncData(context) {
+  asyncData (context) {
     // NaN = Not a Number
     // typeof context.params.page => string
-    const page = isNaN(context.params.page) ? 1 : parseInt(context.params.page)
-    const articles = articleUseCase.getArticlesByPage(page)
+    const activePage = isNaN(context.params.page) ? 1 : parseInt(context.params.page)
+    const articles = articleUseCase.getArticlesByPage(activePage)
     const totalArticleCount = articleUseCase.getTotalArticleCount()
 
     if (!articles) {
@@ -34,12 +34,12 @@ export default {
     }
 
     return {
-      activePage: page,
-      articles: articles,
-      totalArticleCount: totalArticleCount
+      activePage,
+      articles,
+      totalArticleCount
     }
   },
-  created() {
+  created () {
     // TDK
     this.title = `記事一覧${this.activePage}`
     this.description = `記事一覧の${this.activePage}ページ目です。`
@@ -55,14 +55,14 @@ export default {
       }
     ]
   },
-  mounted() {
+  mounted () {
     // パンくず
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
     ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
   },
-  head() {
+  head () {
     return {
       title: this.title,
       meta: [

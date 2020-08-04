@@ -1,4 +1,4 @@
-import content from "~/resources/markdown/articles/5.md"
+import markdown from "~/resources/markdown/articles/5.md"
 import { IArticleObject } from "~/resources/js/infra/data/interface/IArticleObject.ts"
 import { tagListWithKey } from "~/resources/js/infra/data/tags/all.ts"
 
@@ -7,7 +7,7 @@ const article: IArticleObject = {
   title: "AlpineLinux 3.10.3 Python3 NLTKを実行する",
   postedAt: "2019-12-19",
   tags: [tagListWithKey.AlpineLinux, tagListWithKey.NLTK, tagListWithKey.Python],
-  content: content
+  content: markdown
 }
 
 export default article

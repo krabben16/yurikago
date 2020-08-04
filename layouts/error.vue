@@ -3,8 +3,12 @@
     <div class="row">
       <div class="col-12 col-sm-9 mx-sm-auto">
         <div class="min-vh-100 d-flex justify-content-center align-items-center">
-          <h1 v-if="error.statusCode === 404">{{ error.statusCode }} {{ error.message }}</h1>
-          <h1 v-else>{{ error.statusCode }} Error</h1>
+          <h1 v-if="error.statusCode === 404">
+            {{ error.statusCode }} {{ error.message }}
+          </h1>
+          <h1 v-else>
+            {{ error.statusCode }} Error
+          </h1>
         </div>
       </div>
     </div>
@@ -21,7 +25,7 @@ export default {
       required: true
     }
   },
-  created() {
+  created () {
     // TDK
     this.title = "エラー"
     this.description = "エラーページです！"
@@ -37,14 +41,14 @@ export default {
       }
     ]
   },
-  mounted() {
+  mounted () {
     // パンくず
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
     ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
   },
-  head() {
+  head () {
     return {
       title: this.title,
       meta: [

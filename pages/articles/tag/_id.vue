@@ -17,10 +17,10 @@ export default {
   components: {
     ArticleList
   },
-  asyncData(context) {
-    const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
-    const tag = tagUseCase.getTagById(id)
-    const articles = articleUseCase.getArticlesByTagId(id)
+  asyncData (context) {
+    const tagId = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
+    const tag = tagUseCase.getTagById(tagId)
+    const articles = articleUseCase.getArticlesByTagId(tagId)
 
     // タグまたは記事リストが存在しない場合はエラーページに遷移する
     if (!tag || !articles) {
@@ -28,12 +28,12 @@ export default {
     }
 
     return {
-      tagId: id,
-      tag: tag,
-      articles: articles
+      tagId,
+      tag,
+      articles
     }
   },
-  created() {
+  created () {
     // TDK
     this.title = this.tag.name
     this.description = `タグ「${this.tag.name}」を含む記事の一覧です。`
@@ -49,14 +49,14 @@ export default {
       }
     ]
   },
-  mounted() {
+  mounted () {
     // パンくず
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
     ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
   },
-  head() {
+  head () {
     return {
       title: this.title,
       meta: [

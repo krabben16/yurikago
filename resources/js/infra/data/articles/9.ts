@@ -1,4 +1,4 @@
-import content from "~/resources/markdown/articles/9.md"
+import markdown from "~/resources/markdown/articles/9.md"
 import { IArticleObject } from "~/resources/js/infra/data/interface/IArticleObject.ts"
 import { tagListWithKey } from "~/resources/js/infra/data/tags/all.ts"
 
@@ -7,7 +7,7 @@ const article: IArticleObject = {
   title: "MarkedJSを拡張してWebP画像を表示する",
   postedAt: "2020-01-05",
   tags: [tagListWithKey.MarkedJS, tagListWithKey.NuxtJS],
-  content: content
+  content: markdown
 }
 
 export default article

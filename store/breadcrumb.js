@@ -3,19 +3,19 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setBreadcrumbItemList(state, breadcrumbItemList) {
+  setBreadcrumbItemList (state, breadcrumbItemList) {
     state.breadcrumbItemList = breadcrumbItemList
   }
 }
 
 export const actions = {
-  changeBreadcrumbItemList({ commit }, breadcrumbItemList) {
+  changeBreadcrumbItemList ({ commit }, breadcrumbItemList) {
     commit("setBreadcrumbItemList", breadcrumbItemList)
   }
 }
 
 export const getters = {
-  breadcrumbItemList(state) {
+  breadcrumbItemList (state) {
     return state.breadcrumbItemList
   }
 }

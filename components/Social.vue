@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  created() {
+  created () {
     this.githubUrl = process.env.GITHUB_URL
   }
 }

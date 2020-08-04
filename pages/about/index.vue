@@ -3,7 +3,7 @@ export default {
   /**
    * NOTE: ページをクローズしてトップページへリダイレクトする
    */
-  asyncData({ redirect }) {
+  asyncData ({ redirect }) {
     return redirect(301, "/")
   }
 }

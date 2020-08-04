@@ -22,13 +22,13 @@ export default {
     ArticleList,
     Pagenation
   },
-  asyncData() {
+  asyncData () {
     const page = 1
     return {
       activePage: page
     }
   },
-  created() {
+  created () {
     this.articles = articleUseCase.getArticlesByPage(this.activePage)
     this.totalArticleCount = articleUseCase.getTotalArticleCount()
 
@@ -43,14 +43,14 @@ export default {
       }
     ]
   },
-  mounted() {
+  mounted () {
     // パンくず
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
     ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
   },
-  head() {
+  head () {
     return {
       title: this.title,
       meta: [
