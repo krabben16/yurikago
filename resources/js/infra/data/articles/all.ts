@@ -16,6 +16,7 @@ import article15 from "~/resources/js/infra/data/articles/15.ts"
 import article16 from "~/resources/js/infra/data/articles/16.ts"
 import article17 from "~/resources/js/infra/data/articles/17.ts"
 import article18 from "~/resources/js/infra/data/articles/18.ts"
+import article19 from "~/resources/js/infra/data/articles/19.ts"
 
 export const articleList = [
   article1,
@@ -35,5 +36,6 @@ export const articleList = [
   article15,
   article16,
   article17,
-  article18
+  article18,
+  article19
 ]
