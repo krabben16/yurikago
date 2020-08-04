@@ -130,6 +130,7 @@ module.exports = {
 https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%403.0.0/packages/eslint-config-typescript/index.js
 
 ※ `extends['@nuxtjs']` => `@nuxtjs/eslint-config` のルールを有効にする
+
 ※ `plugins: ['@typescript-eslint']` => `@typescript-eslint/eslint-plugin` のルールを追加する
 
 #### @nuxtjs/eslint-config
@@ -184,6 +185,7 @@ module.exports = {
 https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%403.0.0/packages/eslint-config/index.js
 
 ※ `extends['standard']` => `eslint-config-standard` のルールを有効にする
+
 ※ `extends['plugin:vue/recommended']` => `eslint-plugin-vue` のルールを有効にする
 
 # テストツール
