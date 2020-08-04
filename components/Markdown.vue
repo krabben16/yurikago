@@ -13,20 +13,20 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       htmlContent: null
     }
   },
-  mounted() {
+  mounted () {
     /**
      * NOTE: markedのレンダラーを上書きする
      * @see https://github.com/markedjs/marked/blob/v0.8.2/src/Renderer.js
      */
-    const renderer = new marked.Renderer()
+    const customRenderer = new marked.Renderer()
 
     // 見出しに下線とマージンを設定する
-    renderer.heading = (text, level, raw, slugger) => {
+    customRenderer.heading = (text, level, _raw, _slugger) => {
       if (level === 2) {
         return `<h${level} class="pb-3 my-5">${text}</h${level}>`
       }
@@ -34,17 +34,17 @@ export default {
     }
 
     // 水平の罫線にマージンを設定する
-    renderer.hr = () => {
+    customRenderer.hr = () => {
       return `<hr class="my-5">`
     }
 
     // リストの要素にマージンを設定する
-    renderer.listitem = text => {
+    customRenderer.listitem = text => {
       return `<li class="my-1">${text}</li>`
     }
 
     // 引用分のテキストカラーを変更する
-    renderer.blockquote = quote => {
+    customRenderer.blockquote = quote => {
       return `<blockquote class="blockquote text-muted">${quote}</blockquote>`
     }
 
@@ -55,7 +55,7 @@ export default {
      * サムネイル表示する
      * モーダル表示する
      */
-    renderer.image = (href, title, text) => {
+    customRenderer.image = (href, _title, text) => {
       return `
         <a href="javascript:void(0);" data-toggle="modal" data-target="#${text}">
           <img src="${href}" alt="${text}" loading="lazy" class="mx-auto d-block img-thumbnail cursor-zoom-in">
@@ -81,7 +81,7 @@ export default {
 
     // 外部リンクを別タブで開く
     // リンクのカラーを変更する
-    renderer.link = (href, title, text) => {
+    customRenderer.link = (href, _title, text) => {
       if (href.slice(0, 1) === "/") {
         return `<a href="${href}">${text}</a>`
       }
@@ -89,7 +89,7 @@ export default {
     }
 
     // レスポンシブテーブルを表示する
-    renderer.table = (header, body) => {
+    customRenderer.table = (header, body) => {
       if (body) {
         body = "<tbody>" + body + "</tbody>"
       }
@@ -97,14 +97,14 @@ export default {
     }
 
     // テーブルのセルの中央寄せを解除する
-    renderer.tablecell = (content, flags) => {
+    customRenderer.tablecell = (content, flags) => {
       const type = flags.header ? "th" : "td"
       return `<${type}>${content}</${type}>`
     }
 
     // https://github.com/markedjs/marked/blob/v0.8.2/docs/USING_ADVANCED.md#alternative-using-reference
     marked.setOptions({
-      renderer: renderer,
+      renderer: customRenderer,
       langPrefix: "hljs language-",
       highlight: (code, language) => {
         const validLanguage = hljs.getLanguage(language) ? language : "plaintext"

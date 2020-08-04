@@ -31,7 +31,7 @@ export default {
       required: true
     }
   },
-  created() {
+  created () {
     // 2ページ目以降を表示中の場合はNextを表示する
     this.isVisibleNext = this.activePage > 1
     this.nextPage = this.activePage - 1

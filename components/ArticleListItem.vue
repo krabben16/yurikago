@@ -32,16 +32,16 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       isMouseOver: false
     }
   },
   methods: {
-    mouseOverAction() {
+    mouseOverAction () {
       this.isMouseOver = true
     },
-    mouseLeaveAction() {
+    mouseLeaveAction () {
       this.isMouseOver = false
     }
   }

@@ -3,19 +3,19 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setLandingArticleID(state, landingArticleID) {
+  setLandingArticleID (state, landingArticleID) {
     state.landingArticleID = landingArticleID
   }
 }
 
 export const actions = {
-  changeLandingArticleID({ commit }, landingArticleID) {
+  changeLandingArticleID ({ commit }, landingArticleID) {
     commit("setLandingArticleID", landingArticleID)
   }
 }
 
 export const getters = {
-  landingArticleID(state) {
+  landingArticleID (state) {
     return state.landingArticleID
   }
 }

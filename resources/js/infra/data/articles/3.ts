@@ -1,4 +1,4 @@
-import content from "~/resources/markdown/articles/3.md"
+import markdown from "~/resources/markdown/articles/3.md"
 import { IArticleObject } from "~/resources/js/infra/data/interface/IArticleObject.ts"
 import { tagListWithKey } from "~/resources/js/infra/data/tags/all.ts"
 
@@ -7,7 +7,7 @@ const article: IArticleObject = {
   title: "Chrome SeleniumIDE 配列を定義してループする",
   postedAt: "2019-03-14",
   tags: [tagListWithKey.GoogleChrome, tagListWithKey.Selenium],
-  content: content
+  content: markdown
 }
 
 export default article

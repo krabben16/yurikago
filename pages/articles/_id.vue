@@ -22,7 +22,9 @@
                   {{ tag.name }}
                 </nuxt-link>
               </div>
-              <h1 class="mt-5">{{ article.title }}</h1>
+              <h1 class="mt-5">
+                {{ article.title }}
+              </h1>
             </div>
           </div>
         </div>
@@ -108,7 +110,7 @@ export default {
     TwitterIcon,
     LineIcon
   },
-  asyncData(context) {
+  asyncData (context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
     const article = articleUseCase.getArticleById(id)
 
@@ -118,15 +120,17 @@ export default {
       return context.error({ statusCode: 404, message: "Not Found" })
     }
 
+    const frontUrl = process.env.FRONT_URL
+
     return {
-      article: article,
-      frontUrl: process.env.FRONT_URL
+      article,
+      frontUrl
     }
   },
   computed: {
     ...mapGetters("articles", ["landingArticleID"])
   },
-  created() {
+  created () {
     // TDK
     this.title = this.article.title
     const joinedTagsName = tagUseCase.getJoinedTagsName(this.article.tags)
@@ -149,7 +153,7 @@ export default {
     this.isVisiblePrevArticle = articleUseCase.isVisiblePrevArticle(this.article.id)
     this.prevArticleId = articleUseCase.getPrevArticleId(this.article.id)
   },
-  mounted() {
+  mounted () {
     if (!this.landingArticleID) {
       this.changeLandingArticleID(this.article.id)
     }
@@ -161,7 +165,7 @@ export default {
     ...mapActions("articles", ["changeLandingArticleID"]),
     ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
   },
-  head() {
+  head () {
     return {
       title: this.title,
       meta: [

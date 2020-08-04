@@ -1,4 +1,4 @@
-import content from "~/resources/markdown/articles/2.md"
+import markdown from "~/resources/markdown/articles/2.md"
 import { IArticleObject } from "~/resources/js/infra/data/interface/IArticleObject.ts"
 import { tagListWithKey } from "~/resources/js/infra/data/tags/all.ts"
 
@@ -12,7 +12,7 @@ const article: IArticleObject = {
     tagListWithKey.NodeJS,
     tagListWithKey.Puppeteer
   ],
-  content: content
+  content: markdown
 }
 
 export default article

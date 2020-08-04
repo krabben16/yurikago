@@ -4,7 +4,7 @@ import { ITagRepository } from "~/resources/js/domain/repository/ITagRepository.
 export class TagUseCase {
   private readonly tagRepository: ITagRepository
 
-  constructor(tagRepository: ITagRepository) {
+  constructor (tagRepository: ITagRepository) {
     this.tagRepository = tagRepository
   }
 
