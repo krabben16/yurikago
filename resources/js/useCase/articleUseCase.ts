@@ -73,7 +73,7 @@ export class ArticleUseCase {
   /**
    * 記事IDから次の記事リンクの表示有無を判定する
    */
-  isVisibleNextArticle = (id: number): boolean => {
+  existsNextArticle = (id: number): boolean => {
     const articles = this.articleRepository.getArticles()
     const firstArticle = articles[0]
     if (firstArticle.id === id) {
@@ -87,7 +87,7 @@ export class ArticleUseCase {
    * 記事IDから次の記事IDを取得する
    */
   getNextArticleId = (id: number): number | boolean => {
-    if (!this.isVisibleNextArticle(id)) {
+    if (!this.existsNextArticle(id)) {
       return false
     }
 
@@ -103,7 +103,7 @@ export class ArticleUseCase {
   /**
    * 記事IDから前の記事リンクの表示有無を判定する
    */
-  isVisiblePrevArticle = (id: number): boolean => {
+  existsPrevArticle = (id: number): boolean => {
     const articles = this.articleRepository.getArticles()
     const lastArticle = articles[articles.length - 1]
     if (lastArticle.id === id) {
@@ -117,7 +117,7 @@ export class ArticleUseCase {
    * 記事IDから前の記事IDを取得する
    */
   getPrevArticleId = (id: number): number | boolean => {
-    if (!this.isVisiblePrevArticle(id)) {
+    if (!this.existsPrevArticle(id)) {
       return false
     }
 

@@ -74,7 +74,7 @@
           <div class="row">
             <div class="col-12 col-sm-9 mx-sm-auto">
               <nuxt-link
-                v-if="isVisibleNextArticle"
+                v-if="existsNextArticle"
                 class="btn btn-dark float-left"
                 :to="{ name: 'articles-id', params: { id: nextArticleId } }"
                 role="button"
@@ -82,7 +82,7 @@
                 &larr; 次の記事
               </nuxt-link>
               <nuxt-link
-                v-if="isVisiblePrevArticle"
+                v-if="existsPrevArticle"
                 class="btn btn-dark float-right"
                 :to="{ name: 'articles-id', params: { id: prevArticleId } }"
                 role="button"
@@ -148,9 +148,9 @@ export default {
     ]
 
     // ページャー
-    this.isVisibleNextArticle = articleUseCase.isVisibleNextArticle(this.article.id)
+    this.existsNextArticle = articleUseCase.existsNextArticle(this.article.id)
     this.nextArticleId = articleUseCase.getNextArticleId(this.article.id)
-    this.isVisiblePrevArticle = articleUseCase.isVisiblePrevArticle(this.article.id)
+    this.existsPrevArticle = articleUseCase.existsPrevArticle(this.article.id)
     this.prevArticleId = articleUseCase.getPrevArticleId(this.article.id)
   },
   mounted () {
