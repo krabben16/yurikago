@@ -102,7 +102,7 @@ import { mapGetters, mapActions } from "vuex"
 import Markdown from "~/components/Markdown.vue"
 import TwitterIcon from "~/components/ShareNetwork/TwitterIcon.vue"
 import LineIcon from "~/components/ShareNetwork/LineIcon.vue"
-import { articleUseCase, tagUseCase } from "~/resources/js/index.ts"
+import { articleUseCase, tagUseCase } from "~/resources/ts/entry.ts"
 
 export default {
   components: {
