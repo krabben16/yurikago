@@ -11,7 +11,7 @@
 <script>
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
-import { articleUseCase, tagUseCase } from "~/resources/js/index.ts"
+import { articleUseCase, tagUseCase } from "~/resources/ts/entry.ts"
 
 export default {
   components: {
