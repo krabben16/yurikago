@@ -1,17 +1,51 @@
 version: 2
 
-jobs:
-  deploy:
+executors:
+  node:
     docker:
       - image: circleci/node:12.14.1
+
+commands:
+  restore_packages:
     steps:
-      - checkout
-      - run:
-          name: copy env file
-          command: cp .env.dist .env
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+  install_packages:
+    steps:
       - run:
           name: install npm packages
           command: npm i
+  save_packages:
+    steps:
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+  copy_env_file:
+    steps:
+      - run: copy env file
+        name: cp .env.dist .env
+
+jobs:
+  test:
+    executor: node
+    steps:
+      - checkout
+      - restore_packages
+      - install_packages
+      - save_packages
+      - copy_env_file
+      - run:
+          name: execute test
+          command: npm run test
+  deploy:
+    executor: node
+    steps:
+      - checkout
+      - restore_packages
+      - install_packages
+      - save_packages
+      - copy_env_file
       - run:
           name: generate nuxt
           command: npm run generate
@@ -24,6 +58,12 @@ jobs:
 
 workflows:
   version: 2
+  test_develop:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: develop
   deploy_master:
     jobs:
       - deploy:
