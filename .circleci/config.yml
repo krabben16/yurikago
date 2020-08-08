@@ -1,7 +1,7 @@
-version: 2
+version: 2.1
 
 executors:
-  node:
+  docker_image:
     docker:
       - image: circleci/node:12.14.1
 
@@ -28,7 +28,7 @@ commands:
 
 jobs:
   test:
-    executor: node
+    executor: docker_image
     steps:
       - checkout
       - restore_packages
@@ -39,7 +39,7 @@ jobs:
           name: execute test
           command: npm run test
   deploy:
-    executor: node
+    executor: docker_image
     steps:
       - checkout
       - restore_packages
