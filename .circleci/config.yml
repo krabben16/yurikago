@@ -10,14 +10,17 @@ jobs:
           name: copy env file
           command: cp .env.dist .env
       - run:
-          name: install npm module
+          name: install npm packages
           command: npm i
       - run:
           name: generate nuxt
           command: npm run generate
       - run:
+          name: install firebase-tools
+          command: npm i -D firebase-tools
+      - run:
           name: deploy to firebase
-          command: npm run deploy
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
   version: 2
