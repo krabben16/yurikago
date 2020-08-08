@@ -23,8 +23,9 @@ commands:
             - ./node_modules
   copy_env_file:
     steps:
-      - run: copy env file
-        name: cp .env.dist .env
+      - run:
+          name: copy env file
+          command: cp .env.dist .env
 
 jobs:
   test:
