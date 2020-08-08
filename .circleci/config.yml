@@ -1,26 +1,70 @@
-version: 2
+version: 2.1
 
-jobs:
-  deploy:
+executors:
+  docker_image:
     docker:
       - image: circleci/node:12.14.1
+
+commands:
+  restore_packages:
     steps:
-      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+  install_packages:
+    steps:
+      - run:
+          name: install npm packages
+          command: npm i
+  save_packages:
+    steps:
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+  copy_env_file:
+    steps:
       - run:
           name: copy env file
           command: cp .env.dist .env
+
+jobs:
+  test:
+    executor: docker_image
+    steps:
+      - checkout
+      - restore_packages
+      - install_packages
+      - save_packages
+      - copy_env_file
       - run:
-          name: install npm module
-          command: npm i
+          name: execute test
+          command: npm run test
+  deploy:
+    executor: docker_image
+    steps:
+      - checkout
+      - restore_packages
+      - install_packages
+      - save_packages
+      - copy_env_file
       - run:
           name: generate nuxt
           command: npm run generate
       - run:
+          name: install firebase-tools
+          command: npm i -D firebase-tools
+      - run:
           name: deploy to firebase
-          command: npm run deploy
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
   version: 2
+  test_develop:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: develop
   deploy_master:
     jobs:
       - deploy:

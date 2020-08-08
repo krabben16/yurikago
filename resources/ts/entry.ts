@@ -1,3 +1,6 @@
+/**
+ * Nuxtから記事データを取得するときのエントリーポイント
+ */
 import { ArticleRepository } from "~/resources/ts/infra/repository/articleRepository"
 import { ArticleUseCase } from "~/resources/ts/useCase/articleUseCase"
 import { TagRepository } from "~/resources/ts/infra/repository/tagRepository"
