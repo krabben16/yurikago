@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 /**
  * NOTE:
  *   - 以下のパスをサイトマップXMLに出力する
@@ -53,16 +55,6 @@ const path = [
   '/articles/tag/25'
 ]
 
-// 定数
-const frontUrl = 'https://www.yurikago-blog.com'
-const githubUrl = 'https://github.com/krabben27/yurikago'
-const maxArticleCountInList = 10
-const articleAuthor = 'Hiroki Kawaguchi'
-const articleOrganization = 'Yurikago Blog'
-const siteOwner = 'Hiroki Kawaguchi'
-const siteName = 'Yurikago Blog'
-const disqusShortname = 'yurikago-blog'
-
 export default {
   mode: 'universal',
   /*
@@ -74,8 +66,8 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { property: "og:image", content: frontUrl + "/images/ogp.jpg" },
-      { property: "og:site_name", content: siteName },
+      { property: "og:image", content: process.env.FRONT_URL + "/images/ogp.jpg" },
+      { property: "og:site_name", content: process.env.SITE_NAME },
       { property: "og:locale", content: "ja_JP" }
     ],
     link: [
@@ -157,19 +149,19 @@ export default {
     id: 'UA-155216702-1'
   },
   sitemap: {
-    hostname: frontUrl,
+    hostname: process.env.FRONT_URL,
     routes: path
   },
   // NOTE: クライアントサイドで使用できる環境変数を定義する
   env: {
-    FRONT_URL: frontUrl,
-    GITHUB_URL: githubUrl,
-    MAX_ARTICLE_COUNT_IN_LIST: maxArticleCountInList,
-    ARTICLE_AUTHOR: articleAuthor,
-    ARTICLE_ORGANIZATION: articleOrganization,
-    SITE_OWNER: siteOwner,
-    SITE_NAME: siteName,
-    DISQUS_SHORTNAME: disqusShortname
+    FRONT_URL: process.env.FRONT_URL,
+    GITHUB_URL: process.env.GITHUB_URL,
+    MAX_ARTICLE_COUNT_IN_LIST: process.env.MAX_ARTICLE_COUNT_IN_LIST,
+    ARTICLE_AUTHOR: process.env.ARTICLE_AUTHOR,
+    ARTICLE_ORGANIZATION: process.env.ARTICLE_ORGANIZATION,
+    SITE_OWNER: process.env.SITE_OWNER,
+    SITE_NAME: process.env.SITE_NAME,
+    DISQUS_SHORTNAME: process.env.DISQUS_SHORTNAME
   },
   /*
   ** Build configuration

@@ -1,6 +1,7 @@
 ## 開発
 
 ```sh
+cp .env.dist .env
 npm i
 npm run dev
 ```
