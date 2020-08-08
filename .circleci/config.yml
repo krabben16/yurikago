@@ -17,7 +17,7 @@ jobs:
           command: npm run generate
       - run:
           name: deploy to firebase
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+          command: npm run deploy
 
 workflows:
   version: 2
