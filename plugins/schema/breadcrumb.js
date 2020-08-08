@@ -1,20 +1,8 @@
 import Vue from "vue"
+import { createBreadcrumbSchemaObject } from "~/resources/js/schema/breadcrumb.js"
 
 Vue.prototype.$getBreadcrumbSchema = breadcrumbItemList => {
-  const itemListElementValue = breadcrumbItemList.map((v, k) => {
-    return {
-      "@type": "ListItem",
-      "position": k + 1,
-      "name": v.name,
-      "item": process.env.FRONT_URL + v.path
-    }
-  })
+  const breadcrumbSchemaObject = createBreadcrumbSchemaObject(breadcrumbItemList)
 
-  const breadcrumbListSchema = {
-    "@context": "http://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": itemListElementValue
-  }
-
-  return JSON.stringify(breadcrumbListSchema)
+  return JSON.stringify(breadcrumbSchemaObject)
 }

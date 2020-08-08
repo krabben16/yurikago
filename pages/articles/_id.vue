@@ -206,7 +206,7 @@ export default {
         },
         {
           hid: "articleSchema",
-          innerHTML: this.$getArticleSchema(this.article),
+          innerHTML: this.$createArticleSchemaString(this.article),
           type: "application/ld+json"
         }
       ],
