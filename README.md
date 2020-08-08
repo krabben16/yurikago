@@ -14,26 +14,13 @@ Gitのブランチモデルは git-flow です。
 
 - Nuxt.js
 - TypeScript
-- Firebase Hosting
+- Jest
 - CircleCI
+- Firebase Hosting
 
 マークダウン形式で作成した記事データをHTMLに変換して表示します。
 
 修正をGitHubのmasterブランチにマージするとCircleCIがFirebaseにデプロイします。このとき `nuxt generate` を実行して生成した静的ファイルをFirebaseにアップロードします。
-
-## 動作検証ブラウザ
-
-### PC
-
-- Windows 10
-    - Google Chrome 83
-    - Firefox 78
-
-### SP
-
-- iOS 13
-    - Google Chrome 83
-    - Safari 13
 
 ## ブログを作成した背景
 
