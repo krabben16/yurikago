@@ -7,14 +7,17 @@ jobs:
     steps:
       - checkout
       - run:
-          name: npm install
+          name: copy env file
+          command: cp .env.dist .env
+      - run:
+          name: install npm module
           command: npm i
       - run:
-          name: nuxt generate
+          name: generate nuxt
           command: npm run generate
       - run:
-          name: deploy to Firebase Hosting
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+          name: deploy to firebase
+          command: npm run deploy
 
 workflows:
   version: 2
