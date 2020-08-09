@@ -1,4 +1,6 @@
-require("dotenv").config()
+// https://github.com/motdotla/dotenv/tree/v8.2.0#how-do-i-use-dotenv-with-import
+import dotenv from 'dotenv'
+dotenv.config()
 
 /**
  * NOTE:

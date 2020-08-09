@@ -1,4 +1,6 @@
-require("dotenv").config()
+import dotenv from "dotenv"
+dotenv.config()
+
 import { createBreadcrumbSchemaObject } from "~/resources/js/schema/breadcrumb.js"
 
 // パンくずの構造化データが正しく作成されているかテストする
