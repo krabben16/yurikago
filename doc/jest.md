@@ -1,4 +1,4 @@
-https://github.com/krabben27/yurikago/blob/develop/jest.config.js
+https://github.com/nerukani/yurikago/blob/develop/jest.config.js
 
 # オプション
 
