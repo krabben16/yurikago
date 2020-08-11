@@ -4,7 +4,7 @@
 
 <script>
 import marked from "marked"
-import hljs from "highlight.js"
+import { hljs } from "~/resources/js/highlight/custome.js"
 
 export default {
   props: {
@@ -107,6 +107,7 @@ export default {
       renderer: customRenderer,
       langPrefix: "hljs language-",
       highlight: (code, language) => {
+        // 何の言語の文字列としてパースするかを指定する
         const validLanguage = hljs.getLanguage(language) ? language : "plaintext"
         return hljs.highlight(validLanguage, code).value
       }
