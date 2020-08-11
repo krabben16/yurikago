@@ -1,11 +1,13 @@
-// _reboot.scssを拡張する
 body {
+  // _reboot.scssを拡張する
   font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   background-color: $bgColor;
 }
 
 a {
   color: $linkColor;
+  // 表示範囲に合わせて改行する
+  word-break: break-all;
 }
 
 a:hover {
