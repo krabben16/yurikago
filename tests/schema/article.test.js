@@ -1,4 +1,6 @@
-require("dotenv").config()
+import dotenv from "dotenv"
+dotenv.config()
+
 import { createArticleSchemaObject } from "~/resources/js/schema/article.js"
 
 // 記事の構造化データが正しく作成されているかテストする

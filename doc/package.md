@@ -112,7 +112,7 @@ https://typescript.nuxtjs.org/ja/guide/lint.html
 
 https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%403.0.0/packages/eslint-config-typescript/package.json
 
-```js
+```javascript
 module.exports = {
   extends: [
     '@nuxtjs'
@@ -153,7 +153,7 @@ https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config-typescript%40
 
 https://github.com/nuxt/eslint-config/blob/%40nuxtjs/eslint-config%403.1.0/packages/eslint-config/package.json
 
-```js
+```javascript
 module.exports = {
   env: {
     browser: true,

@@ -1,6 +1,6 @@
 ## 開発
 
-```sh
+```shell
 cp .env.dist .env
 npm i
 npm run dev
