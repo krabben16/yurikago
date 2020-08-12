@@ -1,4 +1,4 @@
-https://github.com/kani15/yurikago/blob/develop/tsconfig.json
+https://github.com/krabben16/yurikago/blob/develop/tsconfig.json
 
 # compilerOptions
 
