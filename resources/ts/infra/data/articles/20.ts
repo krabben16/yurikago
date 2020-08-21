@@ -6,7 +6,7 @@ const article: IArticleObject = {
   id: 20,
   title: "highlight.jsの設定を見直してwebpackのバンドル後のファイルサイズを削減する",
   postedAt: "2020-08-11",
-  tags: [tagListWithKey.NuxtJS, tagListWithKey.webpack, tagListWithKey.HighlightJS],
+  tags: [tagListWithKey.NuxtJS, tagListWithKey.Webpack, tagListWithKey.HighlightJS],
   content: markdown
 }
 
