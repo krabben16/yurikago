@@ -29,6 +29,7 @@ const path = [
   '/articles/18',
   '/articles/19',
   '/articles/20',
+  '/articles/21',
   '/articles/list/1',
   '/articles/list/2',
   '/articles/tag/1',
@@ -57,7 +58,10 @@ const path = [
   '/articles/tag/24',
   '/articles/tag/25',
   '/articles/tag/26',
-  '/articles/tag/27'
+  '/articles/tag/27',
+  '/articles/tag/28',
+  '/articles/tag/29',
+  '/articles/tag/30'
 ]
 
 export default {
