@@ -8,7 +8,7 @@
     ],
     "redirects": [
       {
-        "source" : "/(about|arigato)",
+        "source" : "/@(about|arigato)",
         "destination" : "/",
         "type" : 301
       }
