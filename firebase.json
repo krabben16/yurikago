@@ -6,13 +6,6 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "redirects": [
-      {
-        "source" : "/(about|arigato)",
-        "destination" : "/",
-        "type" : 301
-      }
-    ],
     "trailingSlash": false
   }
 }
