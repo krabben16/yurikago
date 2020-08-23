@@ -3,11 +3,9 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 /**
- * NOTE:
- *   - 以下のパスをサイトマップXMLに出力する
- *   - generateしたとき以下のパスの静的ファイルを作成する
+ * NOTE: 以下のパスをサイトマップXMLに出力する
  */
-const path = [
+const routeList = [
   '/',
   '/articles/1',
   '/articles/2',
@@ -29,8 +27,10 @@ const path = [
   '/articles/18',
   '/articles/19',
   '/articles/20',
+  '/articles/21',
   '/articles/list/1',
   '/articles/list/2',
+  '/articles/list/3',
   '/articles/tag/1',
   '/articles/tag/2',
   '/articles/tag/3',
@@ -57,11 +57,15 @@ const path = [
   '/articles/tag/24',
   '/articles/tag/25',
   '/articles/tag/26',
-  '/articles/tag/27'
+  '/articles/tag/27',
+  '/articles/tag/28',
+  '/articles/tag/29',
+  '/articles/tag/30'
 ]
 
 export default {
   mode: 'universal',
+  target: 'static',
   /*
   ** Headers of the page
   */
@@ -155,7 +159,7 @@ export default {
   },
   sitemap: {
     hostname: process.env.FRONT_URL,
-    routes: path
+    routes: routeList
   },
   // NOTE: クライアントサイドで使用できる環境変数を定義する
   env: {
@@ -193,9 +197,8 @@ export default {
       }
     }
   },
+  // NOTE: v2.13 から内部クローラーが実装されたのでroutesプロパティは不要
   generate: {
-    // 動的なパラメーターを用いたルートを生成
-    routes: path,
     // エラー発生時に 200.html ではなく 404.html を表示する
     fallback: true
   }
