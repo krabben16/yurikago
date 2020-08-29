@@ -21,8 +21,7 @@
     "marked": "^1.1.1",
     "nuxt": "^2.14.0",
     "raw-loader": "^4.0.1",
-    "vue-disqus": "^4.0.1",
-    "vue-social-sharing": "^3.0.0-beta.11"
+    "vue-disqus": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",

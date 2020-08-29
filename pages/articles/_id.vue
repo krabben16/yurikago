@@ -39,25 +39,6 @@
           </div>
         </div>
       </div>
-      <!-- ソーシャルボタン -->
-      <div class="col-12 pb-5 bg-white">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 col-sm-9 mx-sm-auto">
-              <div class="container">
-                <div class="row">
-                  <div class="col-6 text-center twitter py-2">
-                    <TwitterIcon :url="frontUrl + $route.path" :title="title" />
-                  </div>
-                  <div class="col-6 text-center line py-2">
-                    <LineIcon :url="frontUrl + $route.path" :title="title" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- コメント -->
       <div class="col-12 py-5">
         <div class="container">
@@ -100,15 +81,11 @@
 <script>
 import { mapGetters, mapActions } from "vuex"
 import Markdown from "~/components/Markdown.vue"
-import TwitterIcon from "~/components/ShareNetwork/TwitterIcon.vue"
-import LineIcon from "~/components/ShareNetwork/LineIcon.vue"
 import { articleUseCase, tagUseCase } from "~/resources/ts/entry.ts"
 
 export default {
   components: {
-    Markdown,
-    TwitterIcon,
-    LineIcon
+    Markdown
   },
   asyncData (context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
