@@ -48,11 +48,8 @@ jobs:
       - save_packages
       - copy_env_file
       - run:
-          name: build nuxt
-          command: npm run build
-      - run:
-          name: export nuxt
-          command: npm run export
+          name: generate nuxt
+          command: npm run generate
       - run:
           name: install firebase-tools
           command: npm i -D firebase-tools

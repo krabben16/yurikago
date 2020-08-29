@@ -58,7 +58,7 @@ export default {
     customRenderer.image = (href, _title, text) => {
       return `
         <a href="javascript:void(0);" data-toggle="modal" data-target="#${text}">
-          <img src="${href}" alt="${text}" loading="lazy" class="mx-auto d-block img-thumbnail cursor-zoom-in">
+          <img src="${href}" alt="${text}" loading="lazy" class="mx-auto d-block img-thumbnail" style="cursor: zoom-in;">
         </a>
         <!-- モーダル -->
         <div class="modal fade" id="${text}" tabindex="-1" role="dialog" aria-labelledby="label1" aria-hidden="true">
