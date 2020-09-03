@@ -28,6 +28,7 @@ const routeList = [
   '/articles/19',
   '/articles/20',
   '/articles/21',
+  '/articles/22',
   '/articles/list/1',
   '/articles/list/2',
   '/articles/list/3',
