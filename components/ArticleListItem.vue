@@ -1,9 +1,9 @@
 <template>
   <div class="py-3" @mouseover="mouseOverAction" @mouseleave="mouseLeaveAction">
     <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">
-      <h2>
+      <h3>
         {{ article.title }}
-      </h2>
+      </h3>
     </nuxt-link>
     <div class="mt-3">
       <i class="far fa-clock mr-1" />
