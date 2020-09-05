@@ -123,7 +123,7 @@ export default {
         
         for (let j=0; j<article.tags.length; j++) {
           // 記事一覧 タグ
-          routeList.push(`/tag/${article.tags[j]}`)
+          routeList.push(`/tags/${article.tags[j].id}`)
         }
       }
 
