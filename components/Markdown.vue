@@ -21,7 +21,7 @@ export default {
   mounted () {
     /**
      * NOTE: markedのレンダラーを上書きする
-     * @see https://github.com/markedjs/marked/blob/v0.8.2/src/Renderer.js
+     * https://github.com/markedjs/marked/blob/v0.8.2/src/Renderer.js
      */
     const customRenderer = new marked.Renderer()
 

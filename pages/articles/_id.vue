@@ -92,7 +92,7 @@ export default {
     const article = articleUseCase.getArticleById(id)
 
     // 記事データが存在しない場合はエラーページに遷移する
-    // @see https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
+    // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
     if (!article) {
       return context.error({ statusCode: 404, message: "Not Found" })
     }
@@ -170,8 +170,7 @@ export default {
       link: [
         {
           rel: "stylesheet",
-          href: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/zenburn.min.css",
-          type: "text/css"
+          href: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/zenburn.min.css"
         }
       ],
       script: [
