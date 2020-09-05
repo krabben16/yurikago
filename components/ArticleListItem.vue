@@ -14,11 +14,11 @@
       <!-- NOTE: 二個目のタグからマージンを設定する -->
       <nuxt-link
         v-for="(tag, i) in article.tags"
-        :key="i"
-        :to="{ name: 'tag-name', params: { name: tag } }"
+        :key="tag.id"
+        :to="{ name: 'tags-id', params: { id: tag.id } }"
         :class="{ 'ml-2': i > 0 }"
       >
-        {{ tag }}
+        {{ tag.name }}
       </nuxt-link>
     </div>
   </div>

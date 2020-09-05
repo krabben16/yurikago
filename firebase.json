@@ -13,8 +13,8 @@
         "type" : 301
       },
       {
-        "regex" : "/articles/tag/\\d+",
-        "destination" : "/",
+        "regex" : "/articles/tag/(\\d+)",
+        "destination" : "/tags/:1",
         "type" : 301
       }
     ],

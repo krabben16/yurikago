@@ -17,12 +17,22 @@ export default {
     ArticleList
   },
   async asyncData (context) {
-    const tag = context.params.name
-    const articles = await context.$content("articles").where({ "tags": { $contains: tag } }).sortBy("id", "desc").fetch()
+    const tagId = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
+    const articles = await context.$content("articles").where({ "tags.id": { $contains: tagId } }).sortBy("id", "desc").fetch()
 
     if (articles.length === 0) {
       return context.error({ statusCode: 404, message: "Not Found" })
     }
+
+    // タグデータを取得する
+    let tag = {}
+    articles.map(a => {
+      a.tags.map(t => {
+        if (t.id === tagId) {
+          tag = t
+        }
+      })
+    })
 
     return {
       tag,
@@ -31,8 +41,8 @@ export default {
   },
   created () {
     // TDK
-    this.title = this.tag
-    this.description = `タグ「${this.tag}」を含む記事の一覧です。`
+    this.title = this.tag.name
+    this.description = `タグ「${this.tag.name}」を含む記事の一覧です。`
 
     this.breadcrumbItemList = [
       {
@@ -41,7 +51,7 @@ export default {
       },
       {
         name: this.title,
-        path: `/tag/${this.tag}`
+        path: `/tags/${this.tag.id}`
       }
     ]
   },
