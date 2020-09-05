@@ -14,13 +14,12 @@
     "analyze": "nuxt build --analyze"
   },
   "dependencies": {
+    "@nuxt/content": "^1.8.1",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/sitemap": "^2.4.0",
     "dotenv": "^8.2.0",
-    "highlight.js": "^10.1.2",
-    "marked": "^1.1.1",
     "nuxt": "^2.14.0",
-    "raw-loader": "^4.0.1",
+    "prism-themes": "^1.4.0",
     "vue-disqus": "^4.0.1"
   },
   "devDependencies": {

@@ -7,7 +7,7 @@
             {{ error.statusCode }} {{ error.message }}
           </h1>
           <h1 v-else>
-            {{ error.statusCode }} Error
+            {{ error.statusCode }} {{ error.message }}
           </h1>
         </div>
       </div>

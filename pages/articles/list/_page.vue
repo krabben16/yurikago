@@ -15,23 +15,26 @@
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
-import { articleUseCase } from "~/resources/ts/entry.ts"
 
 export default {
   components: {
     ArticleList,
     Pagenation
   },
-  asyncData (context) {
+  async asyncData (context) {
     // NaN = Not a Number
     // typeof context.params.page => string
     const activePage = isNaN(context.params.page) ? 1 : parseInt(context.params.page)
-    const articles = articleUseCase.getArticlesByPage(activePage)
-    const totalArticleCount = articleUseCase.getTotalArticleCount()
+    const skipCount = activePage === 1 ? 0 : (activePage - 1) * process.env.MAX_ARTICLE_COUNT_IN_LIST
+    const limitCount = process.env.MAX_ARTICLE_COUNT_IN_LIST
+    const articles = await context.$content("articles").sortBy("id", "desc").skip(skipCount).limit(limitCount).fetch()
 
-    if (!articles) {
+    if (articles.length === 0) {
       return context.error({ statusCode: 404, message: "Not Found" })
     }
+
+    const totalArticle = await context.$content("articles").only(["id"]).fetch()
+    const totalArticleCount = totalArticle.length
 
     return {
       activePage,

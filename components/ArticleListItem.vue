@@ -7,7 +7,7 @@
     </nuxt-link>
     <div class="mt-3">
       <i class="far fa-clock mr-1" />
-      {{ article.postedAt }}
+      {{ article.date }}
     </div>
     <div class="mt-2">
       <i class="fas fa-tag mr-1" />
@@ -15,7 +15,7 @@
       <nuxt-link
         v-for="(tag, i) in article.tags"
         :key="tag.id"
-        :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
+        :to="{ name: 'tags-id', params: { id: tag.id } }"
         :class="{ 'ml-2': i > 0 }"
       >
         {{ tag.name }}
