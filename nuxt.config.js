@@ -20,6 +20,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap' },
       /**
        * BootstrapCDN
        * https://www.bootstrapcdn.com/
@@ -136,6 +137,7 @@ export default {
     }
   },
   content: {
+    nestedProperties: ['tags.id'],
     markdown: {
       prism: {
         theme: 'prism-themes/themes/prism-nord.css'
