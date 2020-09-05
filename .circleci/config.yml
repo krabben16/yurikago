@@ -9,23 +9,23 @@ commands:
   restore_packages:
     steps:
       - restore_cache:
-        key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
   install_packages:
     steps:
       - run:
-        name: install npm packages
-        command: npm i
+          name: install npm packages
+          command: npm i
   save_packages:
     steps:
       - save_cache:
-        key: dependency-cache-{{ checksum "package-lock.json" }}
-        paths:
-          - ./node_modules
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
   copy_env_file:
     steps:
       - run:
-        name: copy env file
-        command: cp .env.dist .env
+          name: copy env file
+          command: cp .env.dist .env
 
 jobs:
   test:
@@ -37,8 +37,8 @@ jobs:
       - save_packages
       - copy_env_file
       - run:
-        name: execute test
-        command: npm run test
+          name: execute test
+          command: npm run test
   deploy:
     executor: docker_image
     steps:
@@ -48,26 +48,26 @@ jobs:
       - save_packages
       - copy_env_file
       - run:
-        name: generate nuxt
-        command: npm run generate
+          name: generate nuxt
+          command: npm run generate
       - run:
-        name: install firebase-tools
-        command: npm i -D firebase-tools
+          name: install firebase-tools
+          command: npm i -D firebase-tools
       - run:
-        name: deploy to firebase
-        command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+          name: deploy to firebase
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
   version: 2
   test_develop:
     jobs:
       - test:
-        filters:
-          branches:
-            only: develop
+          filters:
+            branches:
+              only: develop
   deploy_master:
     jobs:
       - deploy:
-        filters:
-          branches:
-            only: master
+          filters:
+            branches:
+              only: master
