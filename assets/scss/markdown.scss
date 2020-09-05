@@ -4,12 +4,12 @@
   }
 
   blockquote {
-    p::before {
-      content: "\201C";
-    }
+    // https://github.com/sindresorhus/github-markdown-css/blob/v4.0.0/github-markdown.css#L651-L655
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: .25em solid #dfe2e5;
     
-    p::after {
-      content: "\201D";
-    }
+    // 表示範囲に合わせて改行する
+    word-break: break-all;
   }
 }
