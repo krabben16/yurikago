@@ -33,11 +33,6 @@ export default {
       return `<h${level} class="my-5">${text}</h${level}>`
     }
 
-    // 水平の罫線にマージンを設定する
-    customRenderer.hr = () => {
-      return `<hr class="my-5">`
-    }
-
     // リストの要素にマージンを設定する
     customRenderer.listitem = text => {
       return `<li class="my-1">${text}</li>`
