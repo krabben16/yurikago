@@ -3,9 +3,6 @@
     <div class="row">
       <div class="col-12 col-sm-6 mx-sm-auto py-5">
         <ArticleList :articles="articles" />
-        <div class="mt-4">
-          <Pagenation :active-page="activePage" :total-article-count="totalArticleCount" />
-        </div>
       </div>
     </div>
   </div>
@@ -14,36 +11,38 @@
 <script>
 import { mapActions } from "vuex"
 import ArticleList from "~/components/ArticleList.vue"
-import Pagenation from "~/components/Pagenation.vue"
 
 export default {
   components: {
-    ArticleList,
-    Pagenation
+    ArticleList
   },
   async asyncData (context) {
-    const activePage = 1
-    const limitCount = process.env.MAX_ARTICLE_COUNT_IN_LIST
-    const articles = await context.$content("articles").sortBy("id", "desc").limit(limitCount).fetch()
+    const tag = context.params.name
+    const articles = await context.$content("articles").where({ "tags": { $contains: tag } }).sortBy("id", "desc").fetch()
 
-    const totalArticle = await context.$content("articles").only(["id"]).fetch()
-    const totalArticleCount = totalArticle.length
+    // 記事リストが存在しない場合はエラーページに遷移する
+    if (!articles) {
+      return context.error({ statusCode: 404, message: "Not Found" })
+    }
 
     return {
-      activePage,
-      articles,
-      totalArticleCount
+      tag,
+      articles
     }
   },
   created () {
     // TDK
-    this.title = "トップページ"
-    this.description = `${process.env.SITE_OWNER}の技術ブログです。`
+    this.title = this.tag
+    this.description = `タグ「${this.tag}」を含む記事の一覧です。`
 
     this.breadcrumbItemList = [
       {
-        name: this.title,
+        name: "トップページ",
         path: "/"
+      },
+      {
+        name: this.title,
+        path: `/tag/${this.tag}`
       }
     ]
   },

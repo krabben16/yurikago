@@ -8,18 +8,18 @@
             <div class="col-12 col-sm-10 mx-sm-auto">
               <div>
                 <i class="far fa-clock mr-1" />
-                {{ article.postedAt }}
+                {{ article.date }}
               </div>
               <div class="mt-2">
                 <i class="fas fa-tag mr-1" />
                 <!-- NOTE: 二個目のタグからマージンを設定する -->
                 <nuxt-link
                   v-for="(tag, i) in article.tags"
-                  :key="tag.id"
-                  :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
+                  :key="i"
+                  :to="{ name: 'tag-name', params: { name: tag } }"
                   :class="{ 'ml-2': i > 0 }"
                 >
-                  {{ tag.name }}
+                  {{ tag }}
                 </nuxt-link>
               </div>
               <h1 class="mt-5">
@@ -30,11 +30,11 @@
         </div>
       </div>
       <!-- 本文 -->
-      <div class="col-12 pb-5 bg-white">
+      <div class="col-12 py-5 bg-white">
         <div class="container">
           <div class="row">
             <div class="col-12 col-sm-9 mx-sm-auto">
-              <Markdown :markdown-content="article.content" />
+              <nuxt-content class="markdown-body" :document="article" />
             </div>
           </div>
         </div>
@@ -55,17 +55,17 @@
           <div class="row">
             <div class="col-12 col-sm-9 mx-sm-auto">
               <nuxt-link
-                v-if="existsNextArticle"
+                v-if="next"
                 class="btn btn-dark float-left"
-                :to="{ name: 'articles-id', params: { id: nextArticleId } }"
+                :to="{ name: 'articles-id', params: { id: next.id } }"
                 role="button"
               >
                 &larr; 次の記事
               </nuxt-link>
               <nuxt-link
-                v-if="existsPrevArticle"
+                v-if="prev"
                 class="btn btn-dark float-right"
-                :to="{ name: 'articles-id', params: { id: prevArticleId } }"
+                :to="{ name: 'articles-id', params: { id: prev.id } }"
                 role="button"
               >
                 前の記事 &rarr;
@@ -79,17 +79,12 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
-import Markdown from "~/components/Markdown.vue"
-import { articleUseCase, tagUseCase } from "~/resources/ts/entry.ts"
+import { mapActions } from "vuex"
 
 export default {
-  components: {
-    Markdown
-  },
-  asyncData (context) {
+  async asyncData (context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
-    const article = articleUseCase.getArticleById(id)
+    const article = await context.$content(`articles/${id}`).fetch()
 
     // 記事データが存在しない場合はエラーページに遷移する
     // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
@@ -97,20 +92,20 @@ export default {
       return context.error({ statusCode: 404, message: "Not Found" })
     }
 
-    const frontUrl = process.env.FRONT_URL
+    // 前後の記事
+    // https://content.nuxtjs.org/ja/examples#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3
+    const [prev, next] = await context.$content("articles").only(["id"]).sortBy("id").surround(id.toString()).fetch()
 
     return {
       article,
-      frontUrl
+      prev,
+      next
     }
-  },
-  computed: {
-    ...mapGetters("articles", ["landingArticleID"])
   },
   created () {
     // TDK
     this.title = this.article.title
-    const joinedTagsName = tagUseCase.getJoinedTagsName(this.article.tags)
+    const joinedTagsName = this.getJoinedTagsName(this.article.tags)
     this.description = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagsName}」を含みます。`
 
     this.breadcrumbItemList = [
@@ -123,24 +118,16 @@ export default {
         path: `/articles/${this.article.id}`
       }
     ]
-
-    // ページャー
-    this.existsNextArticle = articleUseCase.existsNextArticle(this.article.id)
-    this.nextArticleId = articleUseCase.getNextArticleId(this.article.id)
-    this.existsPrevArticle = articleUseCase.existsPrevArticle(this.article.id)
-    this.prevArticleId = articleUseCase.getPrevArticleId(this.article.id)
   },
   mounted () {
-    if (!this.landingArticleID) {
-      this.changeLandingArticleID(this.article.id)
-    }
-
     // パンくず
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
-    ...mapActions("articles", ["changeLandingArticleID"]),
-    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
+    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"]),
+    getJoinedTagsName (tagList) {
+      return tagList.join(",")
+    }
   },
   head () {
     return {
@@ -165,12 +152,6 @@ export default {
         {
           property: "og:url",
           content: process.env.FRONT_URL + this.$route.path
-        }
-      ],
-      link: [
-        {
-          rel: "stylesheet",
-          href: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/zenburn.min.css"
         }
       ],
       script: [

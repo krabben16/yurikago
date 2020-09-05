@@ -8,7 +8,12 @@
     ],
     "redirects": [
       {
-        "source" : "/@(about|arigato)",
+        "regex" : "/(about|arigato)",
+        "destination" : "/",
+        "type" : 301
+      },
+      {
+        "regex" : "/articles/tag/\\d+",
         "destination" : "/",
         "type" : 301
       }

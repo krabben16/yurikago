@@ -2,68 +2,6 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-/**
- * NOTE: 以下のパスをサイトマップXMLに出力する
- */
-const routeList = [
-  '/',
-  '/articles/1',
-  '/articles/2',
-  '/articles/3',
-  '/articles/4',
-  '/articles/5',
-  '/articles/6',
-  '/articles/7',
-  '/articles/8',
-  '/articles/9',
-  '/articles/10',
-  '/articles/11',
-  '/articles/12',
-  '/articles/13',
-  '/articles/14',
-  '/articles/15',
-  '/articles/16',
-  '/articles/17',
-  '/articles/18',
-  '/articles/19',
-  '/articles/20',
-  '/articles/21',
-  '/articles/22',
-  '/articles/list/1',
-  '/articles/list/2',
-  '/articles/list/3',
-  '/articles/tag/1',
-  '/articles/tag/2',
-  '/articles/tag/3',
-  '/articles/tag/4',
-  '/articles/tag/5',
-  '/articles/tag/6',
-  '/articles/tag/7',
-  '/articles/tag/8',
-  '/articles/tag/9',
-  '/articles/tag/10',
-  '/articles/tag/11',
-  '/articles/tag/12',
-  '/articles/tag/13',
-  '/articles/tag/14',
-  '/articles/tag/15',
-  '/articles/tag/16',
-  '/articles/tag/17',
-  '/articles/tag/18',
-  '/articles/tag/19',
-  '/articles/tag/20',
-  '/articles/tag/21',
-  '/articles/tag/22',
-  '/articles/tag/23',
-  '/articles/tag/24',
-  '/articles/tag/25',
-  '/articles/tag/26',
-  '/articles/tag/27',
-  '/articles/tag/28',
-  '/articles/tag/29',
-  '/articles/tag/30'
-]
-
 export default {
   mode: 'universal',
   target: 'static',
@@ -82,7 +20,6 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap' },
       /**
        * BootstrapCDN
        * https://www.bootstrapcdn.com/
@@ -102,6 +39,16 @@ export default {
         href: 'https://use.fontawesome.com/releases/v5.13.1/css/all.css',
         integrity: 'sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q',
         crossorigin: 'anonymous'
+      },
+      /**
+       * github-markdown-css CDN
+       * https://cdnjs.com/libraries/github-markdown-css/4.0.0
+       */
+      {
+        rel: "stylesheet",
+        href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css",
+        integrity: "sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg==",
+        crossorigin: "anonymous"
       }
     ],
     script: [
@@ -152,14 +99,48 @@ export default {
   */
   modules: [
     '@nuxtjs/google-analytics',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxt/content'
   ],
   googleAnalytics: {
     id: 'UA-155216702-1'
   },
   sitemap: {
     hostname: process.env.FRONT_URL,
-    routes: routeList
+    routes: async () => {
+      let routeList = []
+
+      // https://content.nuxtjs.org/ja/advanced#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%E3%81%AA%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95
+      const { $content } = require('@nuxt/content')
+      const articles = await $content('articles').only(['id', 'tags']).fetch()
+
+      for (let i=0; i<articles.length; i++) {
+        const article = articles[i]
+
+        // 記事詳細
+        routeList.push(`/articles/${article.id}`)
+        
+        for (let j=0; j<article.tags.length; j++) {
+          // 記事一覧 タグ
+          routeList.push(`/tag/${article.tags[j]}`)
+        }
+      }
+
+      // 記事一覧 ページ
+      const maxPageCount = Math.ceil(articles.length / process.env.MAX_ARTICLE_COUNT_IN_LIST)
+      for (let i=0; i<maxPageCount; i++) {
+        routeList.push(`/articles/list/${i+1}`)
+      }
+
+      return routeList
+    }
+  },
+  content: {
+    markdown: {
+      prism: {
+        theme: 'prism-themes/themes/prism-nord.css'
+      }
+    }
   },
   // NOTE: クライアントサイドで使用できる環境変数を定義する
   env: {
@@ -180,12 +161,6 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
-      // mdファイルはraw-loaderで読み込む
-      config.module.rules.push({
-        test: /\.md$/,
-        loader: 'raw-loader',
-        exclude: /(node_modules)/,
-      })
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({

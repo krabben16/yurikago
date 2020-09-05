@@ -7,18 +7,18 @@
     </nuxt-link>
     <div class="mt-3">
       <i class="far fa-clock mr-1" />
-      {{ article.postedAt }}
+      {{ article.date }}
     </div>
     <div class="mt-2">
       <i class="fas fa-tag mr-1" />
       <!-- NOTE: 二個目のタグからマージンを設定する -->
       <nuxt-link
         v-for="(tag, i) in article.tags"
-        :key="tag.id"
-        :to="{ name: 'articles-tag-id', params: { id: tag.id } }"
+        :key="i"
+        :to="{ name: 'tag-name', params: { name: tag } }"
         :class="{ 'ml-2': i > 0 }"
       >
-        {{ tag.name }}
+        {{ tag }}
       </nuxt-link>
     </div>
   </div>

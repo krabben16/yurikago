@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center bg-secondary py-5">
+  <div class="text-center bg-secondary py-4">
     <a :href="githubUrl" target="_blank" @click="$ga.event('view', 'click', 'github')">
       <!-- NOTE: アイコンは親要素のサイズとカラーを継承する -->
       <span class="text-white">
