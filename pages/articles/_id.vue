@@ -84,11 +84,13 @@ import { mapActions } from "vuex"
 export default {
   async asyncData (context) {
     const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
-    const article = await context.$content(`articles/${id}`).fetch()
+    let article = {}
 
-    // 記事データが存在しない場合はエラーページに遷移する
-    // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
-    if (!article) {
+    try {
+      article = await context.$content(`articles/${id}`).fetch()
+    } catch {
+      // 記事データが存在しない場合はエラーページに遷移する
+      // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
       return context.error({ statusCode: 404, message: "Not Found" })
     }
 

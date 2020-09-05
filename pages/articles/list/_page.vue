@@ -29,12 +29,12 @@ export default {
     const limitCount = process.env.MAX_ARTICLE_COUNT_IN_LIST
     const articles = await context.$content("articles").sortBy("id", "desc").skip(skipCount).limit(limitCount).fetch()
 
-    const totalArticle = await context.$content("articles").only(["id"]).fetch()
-    const totalArticleCount = totalArticle.length
-
-    if (!articles) {
+    if (articles.length === 0) {
       return context.error({ statusCode: 404, message: "Not Found" })
     }
+
+    const totalArticle = await context.$content("articles").only(["id"]).fetch()
+    const totalArticleCount = totalArticle.length
 
     return {
       activePage,

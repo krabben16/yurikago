@@ -20,8 +20,7 @@ export default {
     const tag = context.params.name
     const articles = await context.$content("articles").where({ "tags": { $contains: tag } }).sortBy("id", "desc").fetch()
 
-    // 記事リストが存在しない場合はエラーページに遷移する
-    if (!articles) {
+    if (articles.length === 0) {
       return context.error({ statusCode: 404, message: "Not Found" })
     }
 
