@@ -40,7 +40,7 @@ export default {
 
     // 引用分のテキストカラーを変更する
     customRenderer.blockquote = quote => {
-      return `<blockquote class="blockquote text-muted">${quote}</blockquote>`
+      return `<blockquote>${quote}</blockquote>`
     }
 
     /**
