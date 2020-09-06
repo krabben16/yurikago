@@ -2,7 +2,7 @@
   <div class="container-fluid bg-white min-vh-100">
     <div class="row">
       <div class="col-12 col-sm-6 mx-sm-auto py-5">
-        <ArticleList :articles="articles" />
+        <ArticleList :articles="articles" :title="articleListTitle" />
       </div>
     </div>
   </div>
@@ -24,25 +24,19 @@ export default {
       return context.error({ statusCode: 404, message: "Not Found" })
     }
 
-    // タグデータを取得する
-    let tag = {}
-    articles.map(a => {
-      a.tags.map(t => {
-        if (t.id === tagId) {
-          tag = t
-        }
-      })
-    })
-
     return {
-      tag,
+      tagId,
       articles
     }
   },
   created () {
+    const tag = this.getTagObject(this.tagId, this.articles)
+
+    this.articleListTitle = `タグ: ${tag.name}`
+
     // TDK
-    this.title = this.tag.name
-    this.description = `タグ「${this.tag.name}」を含む記事の一覧です。`
+    this.title = tag.name
+    this.description = `タグ「${tag.name}」を含む記事の一覧です。`
 
     this.breadcrumbItemList = [
       {
@@ -51,7 +45,7 @@ export default {
       },
       {
         name: this.title,
-        path: `/tags/${this.tag.id}`
+        path: `/tags/${tag.id}`
       }
     ]
   },
@@ -60,7 +54,25 @@ export default {
     this.changeBreadcrumbItemList(this.breadcrumbItemList)
   },
   methods: {
-    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
+    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"]),
+    /**
+     * tagIdと一致するオブジェクトを取得する
+     * @param {number} tagId
+     * @param {object[]} articleList
+     * @return {object}
+     */
+    getTagObject (tagId, articleList) {
+      for (let i = 0; i < articleList.length; i++) {
+        const article = articleList[i]
+        for (let j = 0; j < article.tags.length; j++) {
+          const tag = article.tags[j]
+          if (tag.id === tagId) {
+            return tag
+          }
+        }
+      }
+      return {}
+    }
   },
   head () {
     return {

@@ -2,7 +2,7 @@
   <div class="container-fluid bg-white min-vh-100">
     <div class="row">
       <div class="col-12 col-sm-6 mx-sm-auto py-5">
-        <ArticleList :articles="articles" />
+        <ArticleList :articles="articles" :title="articleListTitle" />
         <div class="mt-4">
           <Pagenation :active-page="activePage" :total-article-count="totalArticleCount" />
         </div>
@@ -43,6 +43,8 @@ export default {
     }
   },
   created () {
+    this.articleListTitle = `${this.activePage}ページ目`
+
     // TDK
     this.title = `記事一覧${this.activePage}`
     this.description = `記事一覧の${this.activePage}ページ目です。`

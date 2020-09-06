@@ -20,7 +20,6 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap' },
       /**
        * BootstrapCDN
        * https://www.bootstrapcdn.com/
@@ -123,7 +122,7 @@ export default {
         
         for (let j=0; j<article.tags.length; j++) {
           // 記事一覧 タグ
-          routeList.push(`/tag/${article.tags[j]}`)
+          routeList.push(`/tags/${article.tags[j].id}`)
         }
       }
 
