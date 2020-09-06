@@ -2,7 +2,7 @@
   <div class="container-fluid bg-white min-vh-100">
     <div class="row">
       <div class="col-12 col-sm-6 mx-sm-auto py-5">
-        <ArticleList :articles="articles" />
+        <ArticleList :articles="articles" title="直近の記事" />
         <div class="mt-4">
           <Pagenation :active-page="activePage" :total-article-count="totalArticleCount" />
         </div>

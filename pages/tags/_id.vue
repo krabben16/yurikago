@@ -2,7 +2,7 @@
   <div class="container-fluid bg-white min-vh-100">
     <div class="row">
       <div class="col-12 col-sm-6 mx-sm-auto py-5">
-        <ArticleList :articles="articles" />
+        <ArticleList :articles="articles" :title="articleListTitle" />
       </div>
     </div>
   </div>
@@ -31,6 +31,8 @@ export default {
   },
   created () {
     const tag = this.getTagObject(this.tagId, this.articles)
+
+    this.articleListTitle = `タグ: ${tag.name}`
 
     // TDK
     this.title = tag.name
