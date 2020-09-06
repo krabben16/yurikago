@@ -11,3 +11,9 @@ a {
 a:hover {
   color: $hoverColor;
 }
+
+// bootstrap コードブロックの文字色を上書きする
+p > code,
+li > code {
+  color: #24292e;
+}
