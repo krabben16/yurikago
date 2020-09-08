@@ -93,6 +93,7 @@ export default Vue.extend({
     let article
 
     try {
+      // NOTE: context.params.idはstringで型推論されるが実際はnumber型なので注意
       article = await context.$content(`articles/${context.params.id}`).fetch()
     } catch {
       // 記事データが存在しない場合はエラー
@@ -102,7 +103,7 @@ export default Vue.extend({
 
     // 前後の記事
     // https://content.nuxtjs.org/ja/examples#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3
-    const [prev, next] = await context.$content("articles").only(["id"]).sortBy("id").surround(context.params.id).fetch()
+    const [prev, next] = await context.$content("articles").only(["id"]).sortBy("id").surround(context.params.id.toString()).fetch()
 
     return {
       article,
@@ -110,6 +111,7 @@ export default Vue.extend({
       prev
     }
   },
+  // NOTE: computedやheadでvueインスタンスのプロパティの型推論をさせるためにdataを定義する
   data (): DataType {
     return {
       article: {},
