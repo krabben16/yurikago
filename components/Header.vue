@@ -21,10 +21,14 @@
   </nav>
 </template>
 
-<script>
-export default {
-  created () {
-    this.githubUrl = process.env.GITHUB_URL
+<script lang="ts">
+import Vue from "vue"
+
+export default Vue.extend({
+  data () {
+    return {
+      githubUrl: process.env.GITHUB_URL
+    }
   }
-}
+})
 </script>

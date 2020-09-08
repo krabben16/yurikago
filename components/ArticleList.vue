@@ -9,10 +9,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue"
 import ArticleListItem from "~/components/ArticleListItem.vue"
 
-export default {
+export default Vue.extend({
   components: {
     ArticleListItem
   },
@@ -26,5 +27,5 @@ export default {
       required: true
     }
   }
-}
+})
 </script>

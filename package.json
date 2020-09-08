@@ -4,17 +4,18 @@
   "author": "Hiroki Kawaguchi",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "generate": "nuxt-ts generate",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "lintfix": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore .",
     "test": "jest --config jest.config.js",
-    "analyze": "nuxt build --analyze"
+    "analyze": "nuxt-ts build --analyze"
   },
   "dependencies": {
     "@nuxt/content": "^1.8.1",
+    "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/sitemap": "^2.4.0",
     "dotenv": "^8.2.0",
@@ -25,7 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
-    "@nuxt/types": "^2.14.0",
+    "@nuxt/types": "^2.14.4",
     "@nuxt/typescript-build": "^2.0.2",
     "@nuxtjs/eslint-config-typescript": "^3.0.0",
     "babel-jest": "^26.2.2",

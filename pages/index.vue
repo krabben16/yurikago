@@ -11,60 +11,60 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from "vuex"
+<script lang="ts">
+import Vue from "vue"
+import { BreadcrumbItem } from "interfaces/BreadcrumbItem"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
 
-export default {
+interface DataType {
+  activePage: number,
+  totalArticleCount: number,
+  articles: any
+}
+
+export default Vue.extend({
   components: {
     ArticleList,
     Pagenation
   },
-  async asyncData (context) {
+  async asyncData (context): Promise<DataType> {
     const activePage = 1
-    const limitCount = process.env.MAX_ARTICLE_COUNT_IN_LIST
-    const articles = await context.$content("articles").sortBy("id", "desc").limit(limitCount).fetch()
 
     const totalArticle = await context.$content("articles").only(["id"]).fetch()
     const totalArticleCount = totalArticle.length
 
+    const limitCount: number = parseInt(process.env.MAX_ARTICLE_COUNT_IN_LIST as string)
+    const articles = await context.$content("articles").sortBy("id", "desc").limit(limitCount).fetch()
+
     return {
       activePage,
-      articles,
-      totalArticleCount
+      totalArticleCount,
+      articles
     }
   },
-  created () {
-    // TDK
-    this.title = "トップページ"
-    this.description = `${process.env.SITE_OWNER}の技術ブログです。`
-
-    this.breadcrumbItemList = [
+  head () {
+    const titleValue: string = "トップページ"
+    const descriptionValue: string = `${process.env.SITE_OWNER}の技術ブログです。`
+    const breadcrumbItemList: BreadcrumbItem[] = [
       {
-        name: this.title,
+        name: titleValue,
         path: "/"
       }
     ]
-  },
-  mounted () {
-    // パンくず
-    this.changeBreadcrumbItemList(this.breadcrumbItemList)
-  },
-  methods: {
-    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
-  },
-  head () {
+
+    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(breadcrumbItemList)
+
     return {
-      title: this.title,
+      title: titleValue,
       meta: [
         {
           name: "description",
-          content: this.description
+          content: descriptionValue
         },
         {
           property: "og:title",
-          content: `${this.title} | Yurikago Blog`
+          content: `${titleValue} | Yurikago Blog`
         },
         {
           property: "og:type",
@@ -72,7 +72,7 @@ export default {
         },
         {
           property: "og:description",
-          content: this.description
+          content: descriptionValue
         },
         {
           property: "og:url",
@@ -83,7 +83,7 @@ export default {
         // 構造化マークアップ
         {
           hid: "breadcrumbSchema",
-          innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
+          innerHTML: breadcrumbSchemaString,
           type: "application/ld+json"
         }
       ],
@@ -92,5 +92,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

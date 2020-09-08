@@ -2,7 +2,7 @@
   <div class="container-fluid bg-white min-vh-100">
     <div class="row">
       <div class="col-12 col-sm-6 mx-sm-auto py-5">
-        <ArticleList :articles="articles" :title="articleListTitle" />
+        <ArticleList :articles="articles" :title="`${activePage}ページ目`" />
         <div class="mt-4">
           <Pagenation :active-page="activePage" :total-article-count="totalArticleCount" />
         </div>
@@ -11,73 +11,78 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from "vuex"
+<script lang="ts">
+import Vue from "vue"
+import { BreadcrumbItem } from "interfaces/BreadcrumbItem"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
 
-export default {
+interface DataType {
+  activePage: number,
+  totalArticleCount: number,
+  articles: any
+}
+
+export default Vue.extend({
   components: {
     ArticleList,
     Pagenation
   },
-  async asyncData (context) {
-    // NaN = Not a Number
+  async asyncData (context): Promise<DataType> {
     // typeof context.params.page => string
-    const activePage = isNaN(context.params.page) ? 1 : parseInt(context.params.page)
-    const skipCount = activePage === 1 ? 0 : (activePage - 1) * process.env.MAX_ARTICLE_COUNT_IN_LIST
-    const limitCount = process.env.MAX_ARTICLE_COUNT_IN_LIST
-    const articles = await context.$content("articles").sortBy("id", "desc").skip(skipCount).limit(limitCount).fetch()
-
-    if (articles.length === 0) {
-      return context.error({ statusCode: 404, message: "Not Found" })
-    }
+    const activePage = parseInt(context.params.page)
 
     const totalArticle = await context.$content("articles").only(["id"]).fetch()
     const totalArticleCount = totalArticle.length
 
+    const skipCount = activePage === 1 ? 0 : (activePage - 1) * parseInt(process.env.MAX_ARTICLE_COUNT_IN_LIST as string)
+    const limitCount = parseInt(process.env.MAX_ARTICLE_COUNT_IN_LIST as string)
+    const articles = await context.$content("articles").sortBy("id", "desc").skip(skipCount).limit(limitCount).fetch()
+
+    // 記事データが存在しない場合はエラー
+    if (articles.length === 0) {
+      context.error({ statusCode: 404, message: "Not Found" })
+    }
+
     return {
       activePage,
-      articles,
-      totalArticleCount
+      totalArticleCount,
+      articles
     }
   },
-  created () {
-    this.articleListTitle = `${this.activePage}ページ目`
-
-    // TDK
-    this.title = `記事一覧${this.activePage}`
-    this.description = `記事一覧の${this.activePage}ページ目です。`
-
-    this.breadcrumbItemList = [
+  data (): DataType {
+    return {
+      activePage: 0,
+      totalArticleCount: 0,
+      articles: []
+    }
+  },
+  head () {
+    const titleValue: string = `記事一覧${this.activePage}`
+    const descriptionValue: string = `記事一覧の${this.activePage}ページ目です。`
+    const breadcrumbItemList: BreadcrumbItem[] = [
       {
         name: "トップページ",
         path: "/"
       },
       {
-        name: this.title,
+        name: titleValue,
         path: `/articles/list/${this.activePage}`
       }
     ]
-  },
-  mounted () {
-    // パンくず
-    this.changeBreadcrumbItemList(this.breadcrumbItemList)
-  },
-  methods: {
-    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
-  },
-  head () {
+
+    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(breadcrumbItemList)
+
     return {
-      title: this.title,
+      title: titleValue,
       meta: [
         {
           name: "description",
-          content: this.description
+          content: descriptionValue
         },
         {
           property: "og:title",
-          content: `${this.title} | Yurikago Blog`
+          content: `${titleValue} | Yurikago Blog`
         },
         {
           property: "og:type",
@@ -85,7 +90,7 @@ export default {
         },
         {
           property: "og:description",
-          content: this.description
+          content: descriptionValue
         },
         {
           property: "og:url",
@@ -96,7 +101,7 @@ export default {
         // 構造化マークアップ
         {
           hid: "breadcrumbSchema",
-          innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
+          innerHTML: breadcrumbSchemaString,
           type: "application/ld+json"
         }
       ],
@@ -105,5 +110,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="py-3" @mouseover="mouseOverAction" @mouseleave="mouseLeaveAction">
+  <div class="py-3">
     <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">
       <h3>
         {{ article.title }}
@@ -24,26 +24,15 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue"
+
+export default Vue.extend({
   props: {
     article: {
       type: Object,
       required: true
     }
-  },
-  data () {
-    return {
-      isMouseOver: false
-    }
-  },
-  methods: {
-    mouseOverAction () {
-      this.isMouseOver = true
-    },
-    mouseLeaveAction () {
-      this.isMouseOver = false
-    }
   }
-}
+})
 </script>

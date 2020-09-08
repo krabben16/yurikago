@@ -19,8 +19,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue"
+
+export default Vue.extend({
   props: {
     activePage: {
       type: Number,
@@ -31,15 +33,23 @@ export default {
       required: true
     }
   },
-  created () {
+  data () {
     // 2ページ目以降を表示中の場合はNextを表示する
-    this.existsNextPage = this.activePage > 1
-    this.nextPage = this.activePage - 1
+    const existsNextPage: boolean = this.activePage > 1
+    const nextPage: number = this.activePage - 1
 
     // 2ページ目以降が存在する場合はPrevを表示する
-    const maxPageCount = Math.ceil(this.totalArticleCount / process.env.MAX_ARTICLE_COUNT_IN_LIST)
-    this.existsPrevPage = this.activePage < maxPageCount
-    this.prevPage = this.activePage + 1
+    const maxArticleCountInList: number = parseInt(process.env.MAX_ARTICLE_COUNT_IN_LIST as string)
+    const maxPageCount: number = Math.ceil(this.totalArticleCount / maxArticleCountInList)
+    const existsPrevPage: boolean = this.activePage < maxPageCount
+    const prevPage: number = this.activePage + 1
+
+    return {
+      existsNextPage,
+      nextPage,
+      existsPrevPage,
+      prevPage
+    }
   }
-}
+})
 </script>
