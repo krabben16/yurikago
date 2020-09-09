@@ -154,22 +154,6 @@ https://github.com/standard/eslint-config-standard/blob/v14.1.1/eslintrc.json
 
 https://github.com/vuejs/eslint-plugin-vue/blob/v6.2.2/lib/configs/recommended.js
 
-# テストツール
-
-```
-npm install --save-dev @babel/core @babel/preset-env
-```
-
-```
-npm install --save-dev jest babel-jest
-```
-
-https://qiita.com/riversun/items/6c30a0d0897194677a37
-
-|パッケージ名|説明|url|
-|---|---|---|
-|@babel/preset-env|ターゲットのブラウザーまたはランタイム環境に基づいて必要なBabelプラグインとポリフィルを自動的に決定し、ES2015+をES5にコンパイルする|https://github.com/babel/babel-preset-env|
-
 # デプロイツール
 
 ```
