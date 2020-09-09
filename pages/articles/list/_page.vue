@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import Vue from "vue"
-import { BreadcrumbItem } from "interfaces/BreadcrumbItem"
+import { BreadcrumbItem } from "~/interfaces/BreadcrumbItem"
 import ArticleList from "~/components/ArticleList.vue"
 import Pagenation from "~/components/Pagenation.vue"
 
