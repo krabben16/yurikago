@@ -1,6 +1,7 @@
 import type { Plugin } from "@nuxt/types"
-import { BreadcrumbItem } from "interfaces/BreadcrumbItem"
-import { createBreadcrumbSchemaObject } from "~/resources/js/schema/breadcrumb.js"
+import { BreadcrumbItem } from "~/interfaces/BreadcrumbItem"
+import { BreadcrumbSchemaArgs } from "~/interfaces/BreadcrumbSchemaArgs"
+import { createBreadcrumbSchemaObject } from "~/resources/schema/breadcrumb"
 
 type BreadcrumbSchemaCreator = (breadcrumbItemList: BreadcrumbItem[]) => string
 
@@ -11,7 +12,10 @@ declare module "vue/types/vue" {
 }
 
 const breadcrumbSchemaCreator: BreadcrumbSchemaCreator = (breadcrumbItemList: BreadcrumbItem[]) => {
-  const breadcrumbSchemaObject = createBreadcrumbSchemaObject(breadcrumbItemList)
+  const args: BreadcrumbSchemaArgs = {
+    breadcrumbItemList
+  }
+  const breadcrumbSchemaObject = createBreadcrumbSchemaObject(args)
   return JSON.stringify(breadcrumbSchemaObject)
 }
 

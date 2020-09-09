@@ -80,7 +80,7 @@
 
 <script lang="ts">
 import Vue from "vue"
-import { BreadcrumbItem } from "interfaces/BreadcrumbItem"
+import { BreadcrumbItem } from "~/interfaces/BreadcrumbItem"
 
 interface DataType {
   article: any,
