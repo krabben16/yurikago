@@ -28,37 +28,11 @@ https://typescript.nuxtjs.org/ja/guide/setup.html
 npm install vue-disqus
 ```
 
-## Social Sharing
+# シンタックスハイライト
 
-```
-npm install vue-social-sharing
-```
+## Prism
 
-ソーシャルボタン
-
-# Webpack
-
-```
-npm install raw-loader
-```
-
-ファイルを文字列としてimportできるWebpackのローダー
-
-https://github.com/webpack-contrib/raw-loader
-
-# HTML
-
-## マークダウンパーサー
-
-```
-npm install marked
-```
-
-## シンタックスハイライト
-
-```
-npm install highlight.js
-```
+https://github.com/PrismJS/prism-themes
 
 # Sass
 
@@ -69,22 +43,6 @@ npm install --save-dev node-sass sass-loader
 https://ja.nuxtjs.org/api/configuration-css/
 
 # リントツール
-
-## vue, js
-
-```
-npm install --save-dev babel-eslint eslint eslint-config-prettier eslint-loader eslint-plugin-vue eslint-plugin-prettier prettier
-```
-
-https://ja.nuxtjs.org/guide/development-tools/
-
-|パッケージ名|説明|url|
-|---|---|---|
-|babel-eslint|Babelによって変換されたソースコードでESLintを実行できるようにする|https://github.com/babel/babel-eslint|
-|eslint-config-prettier|Prettierと競合する可能性のある（ESLintの）すべてのルールをオフにする|https://github.com/prettier/eslint-config-prettier|
-|eslint-loader|WebpackのESLintローダー|https://github.com/webpack-contrib/eslint-loader|
-|eslint-plugin-vue|Vue.jsのESLintプラグイン|https://github.com/vuejs/eslint-plugin-vue|
-|eslint-plugin-prettier|PrettierをESLintのルールとして実行し、差異をESLintの問題として報告する|https://github.com/prettier/eslint-plugin-prettier|
 
 ## vue, js, ts
 
@@ -195,22 +153,6 @@ https://github.com/standard/eslint-config-standard/blob/v14.1.1/eslintrc.json
 #### eslint-plugin-vue/recommended
 
 https://github.com/vuejs/eslint-plugin-vue/blob/v6.2.2/lib/configs/recommended.js
-
-# テストツール
-
-```
-npm install --save-dev @babel/core @babel/preset-env
-```
-
-```
-npm install --save-dev jest babel-jest
-```
-
-https://qiita.com/riversun/items/6c30a0d0897194677a37
-
-|パッケージ名|説明|url|
-|---|---|---|
-|@babel/preset-env|ターゲットのブラウザーまたはランタイム環境に基づいて必要なBabelプラグインとポリフィルを自動的に決定し、ES2015+をES5にコンパイルする|https://github.com/babel/babel-preset-env|
 
 # デプロイツール
 
