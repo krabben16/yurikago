@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1>記事一覧</h1>
-    <h2 class="my-4">{{ title }}</h2>
+    <h2 class="my-4">
+      {{ title }}
+    </h2>
     <div v-for="(article, i) in articles" :key="article.id">
       <ArticleListItem :article="article" />
       <hr v-if="i < articles.length - 1">
@@ -9,10 +11,11 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue"
 import ArticleListItem from "~/components/ArticleListItem.vue"
 
-export default {
+export default Vue.extend({
   components: {
     ArticleListItem
   },
@@ -26,5 +29,5 @@ export default {
       required: true
     }
   }
-}
+})
 </script>

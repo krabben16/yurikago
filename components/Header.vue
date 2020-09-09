@@ -10,10 +10,11 @@
       data-target="#navmenu"
       aria-controls="navmenu"
       aria-expanded="false"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon" />
     </button>
-    <div class="collapse navbar-collapse" id="navmenu">
+    <div id="navmenu" class="collapse navbar-collapse">
       <div class="navbar-nav">
         <a class="nav-item nav-link" :href="githubUrl" target="_blank" @click="$ga.event('view', 'click', 'github')">GitHub</a>
       </div>
@@ -21,10 +22,14 @@
   </nav>
 </template>
 
-<script>
-export default {
-  created () {
-    this.githubUrl = process.env.GITHUB_URL
+<script lang="ts">
+import Vue from "vue"
+
+export default Vue.extend({
+  data () {
+    return {
+      githubUrl: process.env.GITHUB_URL
+    }
   }
-}
+})
 </script>

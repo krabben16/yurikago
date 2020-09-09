@@ -2,66 +2,40 @@
   <div class="container-fluid bg-white min-vh-100">
     <div class="row">
       <div class="col-12 col-sm-6 mx-sm-auto py-5">
-        <ArticleList :articles="articles" :title="articleListTitle" />
+        <ArticleList :articles="articles" :title="`タグ: ${tag.name}`" />
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import { mapActions } from "vuex"
+<script lang="ts">
+import Vue from "vue"
+import { BreadcrumbItem } from "interfaces/BreadcrumbItem"
 import ArticleList from "~/components/ArticleList.vue"
 
-export default {
+interface DataType {
+  articles: any,
+  tag: any
+}
+
+export default Vue.extend({
   components: {
     ArticleList
   },
-  async asyncData (context) {
-    const tagId = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
+  async asyncData (context): Promise<DataType> {
+    const tagId = parseInt(context.params.id)
+
     const articles = await context.$content("articles").where({ "tags.id": { $contains: tagId } }).sortBy("id", "desc").fetch()
 
+    // 記事データが存在しない場合はエラー
     if (articles.length === 0) {
-      return context.error({ statusCode: 404, message: "Not Found" })
+      context.error({ statusCode: 404, message: "Not Found" })
     }
 
-    return {
-      tagId,
-      articles
-    }
-  },
-  created () {
-    const tag = this.getTagObject(this.tagId, this.articles)
-
-    this.articleListTitle = `タグ: ${tag.name}`
-
-    // TDK
-    this.title = tag.name
-    this.description = `タグ「${tag.name}」を含む記事の一覧です。`
-
-    this.breadcrumbItemList = [
-      {
-        name: "トップページ",
-        path: "/"
-      },
-      {
-        name: this.title,
-        path: `/tags/${tag.id}`
-      }
-    ]
-  },
-  mounted () {
-    // パンくず
-    this.changeBreadcrumbItemList(this.breadcrumbItemList)
-  },
-  methods: {
-    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"]),
     /**
      * tagIdと一致するオブジェクトを取得する
-     * @param {number} tagId
-     * @param {object[]} articleList
-     * @return {object}
      */
-    getTagObject (tagId, articleList) {
+    const getTagObject = (tagId: number, articleList: any): any => {
       for (let i = 0; i < articleList.length; i++) {
         const article = articleList[i]
         for (let j = 0; j < article.tags.length; j++) {
@@ -73,18 +47,45 @@ export default {
       }
       return {}
     }
+    const tag = getTagObject(tagId, articles)
+
+    return {
+      articles,
+      tag
+    }
+  },
+  data (): DataType {
+    return {
+      articles: [],
+      tag: {}
+    }
   },
   head () {
+    const titleValue: string = this.tag.name
+    const descriptionValue: string = `タグ「${this.tag.name}」を含む記事の一覧です。`
+    const breadcrumbItemList: BreadcrumbItem[] = [
+      {
+        name: "トップページ",
+        path: "/"
+      },
+      {
+        name: titleValue,
+        path: `/tags/${this.tag.id}`
+      }
+    ]
+
+    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(breadcrumbItemList)
+
     return {
-      title: this.title,
+      title: titleValue,
       meta: [
         {
           name: "description",
-          content: this.description
+          content: descriptionValue
         },
         {
           property: "og:title",
-          content: `${this.title} | Yurikago Blog`
+          content: `${titleValue} | Yurikago Blog`
         },
         {
           property: "og:type",
@@ -92,7 +93,7 @@ export default {
         },
         {
           property: "og:description",
-          content: this.description
+          content: descriptionValue
         },
         {
           property: "og:url",
@@ -103,7 +104,7 @@ export default {
         // 構造化マークアップ
         {
           hid: "breadcrumbSchema",
-          innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
+          innerHTML: breadcrumbSchemaString,
           type: "application/ld+json"
         }
       ],
@@ -112,5 +113,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

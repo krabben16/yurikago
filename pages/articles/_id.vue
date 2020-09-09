@@ -78,70 +78,79 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from "vuex"
+<script lang="ts">
+import Vue from "vue"
+import { BreadcrumbItem } from "interfaces/BreadcrumbItem"
 
-export default {
-  async asyncData (context) {
-    const id = isNaN(context.params.id) ? 1 : parseInt(context.params.id)
-    let article = {}
+interface DataType {
+  article: any,
+  next: any,
+  prev: any
+}
+
+export default Vue.extend({
+  async asyncData (context): Promise<DataType> {
+    let article
 
     try {
-      article = await context.$content(`articles/${id}`).fetch()
+      // NOTE: context.params.idはstringで型推論されるが実際はnumber型なので注意
+      article = await context.$content(`articles/${context.params.id}`).fetch()
     } catch {
-      // 記事データが存在しない場合はエラーページに遷移する
+      // 記事データが存在しない場合はエラー
       // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
-      return context.error({ statusCode: 404, message: "Not Found" })
+      context.error({ statusCode: 404, message: "Not Found" })
     }
 
     // 前後の記事
     // https://content.nuxtjs.org/ja/examples#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3
-    const [prev, next] = await context.$content("articles").only(["id"]).sortBy("id").surround(id.toString()).fetch()
+    const [prev, next] = await context.$content("articles").only(["id"]).sortBy("id").surround(context.params.id.toString()).fetch()
 
     return {
       article,
-      prev,
-      next
+      next,
+      prev
     }
   },
-  created () {
-    // TDK
-    this.title = this.article.title
-    const joinedTagsName = this.getJoinedTagsName(this.article.tags)
-    this.description = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagsName}」を含みます。`
-
-    this.breadcrumbItemList = [
+  // NOTE: computedやheadでvueインスタンスのプロパティの型推論をさせるためにdataを定義する
+  data (): DataType {
+    return {
+      article: {},
+      next: {},
+      prev: {}
+    }
+  },
+  computed: {
+    joinedTagsName (): string {
+      return this.article.tags.map((t: any) => t.name).join(",")
+    }
+  },
+  head () {
+    const titleValue: string = this.article.title
+    const descriptionValue: string = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${this.joinedTagsName}」を含みます。`
+    const breadcrumbItemList: BreadcrumbItem[] = [
       {
         name: "トップページ",
         path: "/"
       },
       {
-        name: this.title,
+        name: titleValue,
         path: `/articles/${this.article.id}`
       }
     ]
-  },
-  mounted () {
-    // パンくず
-    this.changeBreadcrumbItemList(this.breadcrumbItemList)
-  },
-  methods: {
-    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"]),
-    getJoinedTagsName (tagList) {
-      return tagList.join(",")
-    }
-  },
-  head () {
+
+    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(breadcrumbItemList)
+    const articleSchemaString: string = this.$createArticleSchema(this.article)
+
     return {
-      title: this.title,
+      title: titleValue,
       meta: [
         {
           name: "description",
-          content: this.description
+          content: descriptionValue
         },
         {
           property: "og:title",
-          content: `${this.title} | Yurikago Blog`
+          content: `${titleValue} | Yurikago Blog`
         },
         {
           property: "og:type",
@@ -149,7 +158,7 @@ export default {
         },
         {
           property: "og:description",
-          content: this.description
+          content: descriptionValue
         },
         {
           property: "og:url",
@@ -160,12 +169,12 @@ export default {
         // 構造化マークアップ
         {
           hid: "breadcrumbSchema",
-          innerHTML: this.$getBreadcrumbSchema(this.breadcrumbItemList),
+          innerHTML: breadcrumbSchemaString,
           type: "application/ld+json"
         },
         {
           hid: "articleSchema",
-          innerHTML: this.$createArticleSchemaString(this.article),
+          innerHTML: articleSchemaString,
           type: "application/ld+json"
         }
       ],
@@ -175,5 +184,5 @@ export default {
       }
     }
   }
-}
+})
 </script>

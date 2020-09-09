@@ -15,48 +15,69 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from "vuex"
+<script lang="ts">
+import Vue from "vue"
+import { BreadcrumbItem } from "interfaces/BreadcrumbItem"
 
-export default {
+export default Vue.extend({
   props: {
     error: {
       type: Object,
       required: true
     }
   },
-  created () {
-    // TDK
-    this.title = "エラー"
-    this.description = "エラーページです！"
-
-    this.breadcrumbItemList = [
+  head () {
+    const titleValue: string = "エラー"
+    const descriptionValue: string = "エラーページです！"
+    const breadcrumbItemList: BreadcrumbItem[] = [
       {
         name: "トップページ",
         path: "/"
       },
       {
-        name: this.title,
+        name: titleValue,
         path: this.$route.path
       }
     ]
-  },
-  mounted () {
-    // パンくず
-    this.changeBreadcrumbItemList(this.breadcrumbItemList)
-  },
-  methods: {
-    ...mapActions("breadcrumb", ["changeBreadcrumbItemList"])
-  },
-  head () {
+
+    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(breadcrumbItemList)
+
     return {
-      title: this.title,
+      title: titleValue,
       meta: [
         {
-          "description": this.description
+          name: "description",
+          content: descriptionValue
+        },
+        {
+          property: "og:title",
+          content: `${titleValue} | Yurikago Blog`
+        },
+        {
+          property: "og:type",
+          content: "blog"
+        },
+        {
+          property: "og:description",
+          content: descriptionValue
+        },
+        {
+          property: "og:url",
+          content: process.env.FRONT_URL + this.$route.path
         }
-      ]
+      ],
+      script: [
+        // 構造化マークアップ
+        {
+          hid: "breadcrumbSchema",
+          innerHTML: breadcrumbSchemaString,
+          type: "application/ld+json"
+        }
+      ],
+      __dangerouslyDisableSanitizersByTagID: {
+        breadcrumbSchema: ["innerHTML"]
+      }
     }
   }
-}
+})
 </script>
