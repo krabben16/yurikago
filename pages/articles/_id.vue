@@ -103,7 +103,9 @@ export default Vue.extend({
 
     // 前後の記事
     // https://content.nuxtjs.org/ja/examples#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3
-    const [prev, next] = await context.$content("articles").only(["id"]).sortBy("id").surround(context.params.id.toString()).fetch()
+    const surround = await context.$content("articles").only(["id"]).sortBy("id").surround(context.params.id.toString()).fetch()
+    const prev = surround.shift()
+    const next = surround.shift()
 
     return {
       article,
