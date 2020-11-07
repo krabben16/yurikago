@@ -1,4 +1,4 @@
 export interface BreadcrumbItem {
-  name: string,
+  name: string
   path: string
 }
