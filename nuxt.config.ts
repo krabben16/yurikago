@@ -14,11 +14,10 @@ const siteName = process.env.SITE_NAME as string
 const disqusShortname = process.env.DISQUS_SHORTNAME as string
 
 const config: NuxtConfig = {
-  mode: 'universal',
+  // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
-  /*
-   ** Headers of the page
-   */
+
+  // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     // title: process.env.npm_package_name || "",
     titleTemplate: '%s | Yurikago Blog',
@@ -88,33 +87,30 @@ const config: NuxtConfig = {
       },
     ],
   },
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: '#0366d6' },
-  /*
-   ** Global CSS
-   */
+
+  // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ['~/assets/scss/app.scss'],
-  /*
-   ** Plugins to load before mounting the App
-   */
+
+  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/disqus',
     '~/plugins/schema/breadcrumb',
     '~/plugins/schema/article',
   ],
-  /*
-   ** Nuxt.js dev-modules
-   */
+
+  // Auto import components (https://go.nuxtjs.dev/config-components)
+  components: true,
+
+  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: ['@nuxt/typescript-build'],
-  /*
-   ** Nuxt.js modules
-   */
+
+  // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ['@nuxtjs/google-analytics', '@nuxtjs/sitemap', '@nuxt/content'],
+
   googleAnalytics: {
     id: 'UA-155216702-1',
   },
+
   sitemap: {
     hostname: frontUrl,
     routes: async () => {
@@ -147,6 +143,7 @@ const config: NuxtConfig = {
       return routeList
     },
   },
+
   content: {
     nestedProperties: ['tags.id'],
     markdown: {
@@ -155,20 +152,8 @@ const config: NuxtConfig = {
       },
     },
   },
-  // NOTE: クライアントサイドで使用できる環境変数を定義する
-  env: {
-    FRONT_URL: frontUrl,
-    GITHUB_URL: githubUrl,
-    MAX_ARTICLE_COUNT_IN_LIST: maxArticleCountInList,
-    ARTICLE_AUTHOR: articleAuthor,
-    ARTICLE_ORGANIZATION: articleOrganization,
-    SITE_OWNER: siteOwner,
-    SITE_NAME: siteName,
-    DISQUS_SHORTNAME: disqusShortname,
-  },
-  /*
-   ** Build configuration
-   */
+
+  // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     /*
      ** You can extend webpack config here
@@ -185,6 +170,22 @@ const config: NuxtConfig = {
       }
     },
   },
+
+  // Customize the progress-bar color
+  loading: { color: '#0366d6' },
+
+  // NOTE: クライアントサイドで使用できる環境変数を定義する
+  env: {
+    FRONT_URL: frontUrl,
+    GITHUB_URL: githubUrl,
+    MAX_ARTICLE_COUNT_IN_LIST: maxArticleCountInList,
+    ARTICLE_AUTHOR: articleAuthor,
+    ARTICLE_ORGANIZATION: articleOrganization,
+    SITE_OWNER: siteOwner,
+    SITE_NAME: siteName,
+    DISQUS_SHORTNAME: disqusShortname,
+  },
+
   // NOTE: v2.13 から内部クローラーが実装されたのでroutesプロパティは不要
   generate: {
     // エラー発生時に 200.html ではなく 404.html を表示する
