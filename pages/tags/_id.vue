@@ -9,27 +9,31 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import { BreadcrumbItem } from "~/interfaces/BreadcrumbItem"
-import ArticleList from "~/components/ArticleList.vue"
+import Vue from 'vue'
+import { BreadcrumbItem } from '~/interfaces/BreadcrumbItem'
+import ArticleList from '~/components/ArticleList.vue'
 
 interface DataType {
-  articles: any,
+  articles: any
   tag: any
 }
 
 export default Vue.extend({
   components: {
-    ArticleList
+    ArticleList,
   },
-  async asyncData (context): Promise<DataType> {
+  async asyncData(context): Promise<DataType> {
     const tagId = parseInt(context.params.id)
 
-    const articles = await context.$content("articles").where({ "tags.id": { $contains: tagId } }).sortBy("id", "desc").fetch()
+    const articles = await context
+      .$content('articles')
+      .where({ 'tags.id': { $contains: tagId } })
+      .sortBy('id', 'desc')
+      .fetch()
 
     // 記事データが存在しない場合はエラー
     if (articles.length === 0) {
-      context.error({ statusCode: 404, message: "Not Found" })
+      context.error({ statusCode: 404, message: 'Not Found' })
     }
 
     /**
@@ -51,67 +55,69 @@ export default Vue.extend({
 
     return {
       articles,
-      tag
+      tag,
     }
   },
-  data (): DataType {
+  data(): DataType {
     return {
       articles: [],
-      tag: {}
+      tag: {},
     }
   },
-  head () {
+  head() {
     const titleValue: string = this.tag.name
     const descriptionValue: string = `タグ「${this.tag.name}」を含む記事の一覧です。`
     const breadcrumbItemList: BreadcrumbItem[] = [
       {
-        name: "トップページ",
-        path: "/"
+        name: 'トップページ',
+        path: '/',
       },
       {
         name: titleValue,
-        path: `/tags/${this.tag.id}`
-      }
+        path: `/tags/${this.tag.id}`,
+      },
     ]
 
-    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(breadcrumbItemList)
+    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(
+      breadcrumbItemList
+    )
 
     return {
       title: titleValue,
       meta: [
         {
-          name: "description",
-          content: descriptionValue
+          name: 'description',
+          content: descriptionValue,
         },
         {
-          property: "og:title",
-          content: `${titleValue} | Yurikago Blog`
+          property: 'og:title',
+          content: `${titleValue} | Yurikago Blog`,
         },
         {
-          property: "og:type",
-          content: "blog"
+          property: 'og:type',
+          content: 'blog',
         },
         {
-          property: "og:description",
-          content: descriptionValue
+          property: 'og:description',
+          content: descriptionValue,
         },
         {
-          property: "og:url",
-          content: process.env.FRONT_URL + this.$route.path
-        }
+          property: 'og:url',
+          content: process.env.FRONT_URL + this.$route.path,
+        },
       ],
       script: [
         // 構造化マークアップ
         {
-          hid: "breadcrumbSchema",
+          hid: 'breadcrumbSchema',
           innerHTML: breadcrumbSchemaString,
-          type: "application/ld+json"
-        }
+          type: 'application/ld+json',
+        },
       ],
       __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ["innerHTML"]
-      }
+        breadcrumbSchema: ['innerHTML'],
+      },
     }
-  }
+  },
 })
 </script>

@@ -79,17 +79,17 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import { BreadcrumbItem } from "~/interfaces/BreadcrumbItem"
+import Vue from 'vue'
+import { BreadcrumbItem } from '~/interfaces/BreadcrumbItem'
 
 interface DataType {
-  article: any,
-  next: any,
+  article: any
+  next: any
   prev: any
 }
 
 export default Vue.extend({
-  async asyncData (context): Promise<DataType> {
+  async asyncData(context): Promise<DataType> {
     let article
 
     try {
@@ -98,91 +98,100 @@ export default Vue.extend({
     } catch {
       // 記事データが存在しない場合はエラー
       // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
-      context.error({ statusCode: 404, message: "Not Found" })
+      context.error({ statusCode: 404, message: 'Not Found' })
     }
 
     // 前後の記事
     // https://content.nuxtjs.org/ja/examples#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3
-    const [prev, next] = await context.$content("articles").only(["id"]).sortBy("id").surround(context.params.id.toString()).fetch()
+    const surround = await context
+      .$content('articles')
+      .only(['id'])
+      .sortBy('id')
+      .surround(context.params.id.toString())
+      .fetch()
+    const prev = surround.shift()
+    const next = surround.shift()
 
     return {
       article,
       next,
-      prev
+      prev,
     }
   },
   // NOTE: computedやheadでvueインスタンスのプロパティの型推論をさせるためにdataを定義する
-  data (): DataType {
+  data(): DataType {
     return {
       article: {},
       next: {},
-      prev: {}
+      prev: {},
     }
   },
   computed: {
-    joinedTagsName (): string {
-      return this.article.tags.map((t: any) => t.name).join(",")
-    }
+    joinedTagsName(): string {
+      return this.article.tags.map((t: any) => t.name).join(',')
+    },
   },
-  head () {
+  head() {
     const titleValue: string = this.article.title
     const descriptionValue: string = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${this.joinedTagsName}」を含みます。`
     const breadcrumbItemList: BreadcrumbItem[] = [
       {
-        name: "トップページ",
-        path: "/"
+        name: 'トップページ',
+        path: '/',
       },
       {
         name: titleValue,
-        path: `/articles/${this.article.id}`
-      }
+        path: `/articles/${this.article.id}`,
+      },
     ]
 
-    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(breadcrumbItemList)
+    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(
+      breadcrumbItemList
+    )
     const articleSchemaString: string = this.$createArticleSchema(this.article)
 
     return {
       title: titleValue,
       meta: [
         {
-          name: "description",
-          content: descriptionValue
+          name: 'description',
+          content: descriptionValue,
         },
         {
-          property: "og:title",
-          content: `${titleValue} | Yurikago Blog`
+          property: 'og:title',
+          content: `${titleValue} | Yurikago Blog`,
         },
         {
-          property: "og:type",
-          content: "article"
+          property: 'og:type',
+          content: 'article',
         },
         {
-          property: "og:description",
-          content: descriptionValue
+          property: 'og:description',
+          content: descriptionValue,
         },
         {
-          property: "og:url",
-          content: process.env.FRONT_URL + this.$route.path
-        }
+          property: 'og:url',
+          content: process.env.FRONT_URL + this.$route.path,
+        },
       ],
       script: [
         // 構造化マークアップ
         {
-          hid: "breadcrumbSchema",
+          hid: 'breadcrumbSchema',
           innerHTML: breadcrumbSchemaString,
-          type: "application/ld+json"
+          type: 'application/ld+json',
         },
         {
-          hid: "articleSchema",
+          hid: 'articleSchema',
           innerHTML: articleSchemaString,
-          type: "application/ld+json"
-        }
+          type: 'application/ld+json',
+        },
       ],
       __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ["innerHTML"],
-        articleSchema: ["innerHTML"]
-      }
+        breadcrumbSchema: ['innerHTML'],
+        articleSchema: ['innerHTML'],
+      },
     }
-  }
+  },
 })
 </script>

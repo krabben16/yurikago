@@ -1,4 +1,4 @@
-import { ArticleSchemaArgs } from "~/interfaces/ArticleSchemaArgs"
+import { ArticleSchemaArgs } from '~/interfaces/ArticleSchemaArgs'
 
 /**
  * 記事の構造化データを作成する
@@ -7,27 +7,27 @@ import { ArticleSchemaArgs } from "~/interfaces/ArticleSchemaArgs"
  */
 export const createArticleSchemaObject = (args: ArticleSchemaArgs): object => {
   return {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `${process.env.FRONT_URL}/articles/${args.articleId}`
+    '@context': 'http://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${process.env.FRONT_URL}/articles/${args.articleId}`,
     },
-    "headline": args.headlineValue,
-    "image": [`${process.env.FRONT_URL}/images/schema/16x9.jpg`],
-    "datePublished": args.datePublishedValue,
-    "dateModified": args.dateModifiedValue,
-    "author": {
-      "@type": "Person",
-      "name": process.env.ARTICLE_AUTHOR
+    headline: args.headlineValue,
+    image: [`${process.env.FRONT_URL}/images/schema/16x9.jpg`],
+    datePublished: args.datePublishedValue,
+    dateModified: args.dateModifiedValue,
+    author: {
+      '@type': 'Person',
+      name: process.env.ARTICLE_AUTHOR,
     },
-    "publisher": {
-      "@type": "Organization",
-      "name": process.env.ARTICLE_ORGANIZATION,
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${process.env.FRONT_URL}/images/schema/logo.jpg`
-      }
-    }
+    publisher: {
+      '@type': 'Organization',
+      name: process.env.ARTICLE_ORGANIZATION,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${process.env.FRONT_URL}/images/schema/logo.jpg`,
+      },
+    },
   }
 }

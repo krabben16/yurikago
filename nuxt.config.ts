@@ -1,7 +1,7 @@
-import type { NuxtConfig } from "@nuxt/types"
+import type { NuxtConfig } from '@nuxt/types'
 
 // https://github.com/motdotla/dotenv/tree/v8.2.0#how-do-i-use-dotenv-with-import
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
 dotenv.config()
 
 const frontUrl = process.env.FRONT_URL as string
@@ -14,53 +14,57 @@ const siteName = process.env.SITE_NAME as string
 const disqusShortname = process.env.DISQUS_SHORTNAME as string
 
 const config: NuxtConfig = {
-  mode: "universal",
-  target: "static",
-  /*
-  ** Headers of the page
-  */
+  // Target (https://go.nuxtjs.dev/config-target)
+  target: 'static',
+
+  // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     // title: process.env.npm_package_name || "",
-    titleTemplate: "%s | Yurikago Blog",
+    titleTemplate: '%s | Yurikago Blog',
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { property: "og:image", content: frontUrl + "/images/ogp.jpg" },
-      { property: "og:site_name", content: siteName },
-      { property: "og:locale", content: "ja_JP" }
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { property: 'og:image', content: frontUrl + '/images/ogp.jpg' },
+      { property: 'og:site_name', content: siteName },
+      { property: 'og:locale', content: 'ja_JP' },
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       /**
        * BootstrapCDN
        * https://www.bootstrapcdn.com/
        */
       {
-        rel: "stylesheet",
-        href: "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",
-        integrity: "sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk",
-        crossorigin: "anonymous"
+        rel: 'stylesheet',
+        href:
+          'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css',
+        integrity:
+          'sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk',
+        crossorigin: 'anonymous',
       },
       /**
        * Font Awesome CDN
        * https://fontawesome.com/account/cdn
        */
       {
-        rel: "stylesheet",
-        href: "https://use.fontawesome.com/releases/v5.13.1/css/all.css",
-        integrity: "sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q",
-        crossorigin: "anonymous"
+        rel: 'stylesheet',
+        href: 'https://use.fontawesome.com/releases/v5.13.1/css/all.css',
+        integrity:
+          'sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q',
+        crossorigin: 'anonymous',
       },
       /**
        * github-markdown-css CDN
        * https://cdnjs.com/libraries/github-markdown-css/4.0.0
        */
       {
-        rel: "stylesheet",
-        href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css",
-        integrity: "sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg==",
-        crossorigin: "anonymous"
-      }
+        rel: 'stylesheet',
+        href:
+          'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css',
+        integrity:
+          'sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg==',
+        crossorigin: 'anonymous',
+      },
     ],
     script: [
       /**
@@ -68,92 +72,108 @@ const config: NuxtConfig = {
        * https://code.jquery.com/
        */
       {
-        src: "https://code.jquery.com/jquery-3.5.1.slim.min.js",
-        integrity: "sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=",
-        crossorigin: "anonymous",
-        body: true
+        src: 'https://code.jquery.com/jquery-3.5.1.slim.min.js',
+        integrity: 'sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=',
+        crossorigin: 'anonymous',
+        body: true,
       },
       {
-        src: "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js",
-        integrity: "sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI",
-        crossorigin: "anonymous",
-        body: true
-      }
-    ]
+        src:
+          'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js',
+        integrity:
+          'sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI',
+        crossorigin: 'anonymous',
+        body: true,
+      },
+    ],
   },
-  /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: "#0366d6" },
-  /*
-  ** Global CSS
-  */
-  css: [
-    "~/assets/scss/app.scss"
-  ],
-  /*
-  ** Plugins to load before mounting the App
-  */
+
+  // Global CSS (https://go.nuxtjs.dev/config-css)
+  css: ['~/assets/scss/app.scss'],
+
+  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    "~/plugins/disqus",
-    "~/plugins/schema/breadcrumb",
-    "~/plugins/schema/article"
+    '~/plugins/disqus',
+    '~/plugins/schema/breadcrumb',
+    '~/plugins/schema/article',
   ],
-  /*
-  ** Nuxt.js dev-modules
-  */
-  buildModules: [
-    "@nuxt/typescript-build"
-  ],
-  /*
-  ** Nuxt.js modules
-  */
-  modules: [
-    "@nuxtjs/google-analytics",
-    "@nuxtjs/sitemap",
-    "@nuxt/content"
-  ],
+
+  // Auto import components (https://go.nuxtjs.dev/config-components)
+  components: true,
+
+  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
+  buildModules: ['@nuxt/typescript-build'],
+
+  // Modules (https://go.nuxtjs.dev/config-modules)
+  modules: ['@nuxtjs/google-analytics', '@nuxtjs/sitemap', '@nuxt/content'],
+
   googleAnalytics: {
-    id: "UA-155216702-1"
+    id: 'UA-155216702-1',
   },
+
   sitemap: {
     hostname: frontUrl,
     routes: async () => {
-      let routeList = []
+      const routeList = []
 
       // https://content.nuxtjs.org/ja/advanced#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%E3%81%AA%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95
-      const { $content } = require("@nuxt/content")
-      const articles = await $content("articles").only(["id", "tags"]).fetch()
+      const { $content } = require('@nuxt/content')
+      const articles = await $content('articles').only(['id', 'tags']).fetch()
 
-      for (let i=0; i<articles.length; i++) {
+      for (let i = 0; i < articles.length; i++) {
         const article = articles[i]
 
         // 記事詳細
         routeList.push(`/articles/${article.id}`)
-        
-        for (let j=0; j<article.tags.length; j++) {
+
+        for (let j = 0; j < article.tags.length; j++) {
           // 記事一覧 タグ
           routeList.push(`/tags/${article.tags[j].id}`)
         }
       }
 
       // 記事一覧 ページ
-      const maxPageCount = Math.ceil(articles.length / parseInt(maxArticleCountInList))
-      for (let i=0; i<maxPageCount; i++) {
-        routeList.push(`/articles/list/${i+1}`)
+      const maxPageCount = Math.ceil(
+        articles.length / parseInt(maxArticleCountInList)
+      )
+      for (let i = 0; i < maxPageCount; i++) {
+        routeList.push(`/articles/list/${i + 1}`)
       }
 
       return routeList
-    }
+    },
   },
+
   content: {
-    nestedProperties: ["tags.id"],
+    nestedProperties: ['tags.id'],
     markdown: {
       prism: {
-        theme: "prism-themes/themes/prism-nord.css"
-      }
-    }
+        theme: 'prism-themes/themes/prism-nord.css',
+      },
+    },
   },
+
+  // Build Configuration (https://go.nuxtjs.dev/config-build)
+  build: {
+    /*
+     ** You can extend webpack config here
+     */
+    extend(config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module?.rules.push({
+          enforce: 'pre',
+          test: /\.(ts|js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+        })
+      }
+    },
+  },
+
+  // Customize the progress-bar color
+  loading: { color: '#0366d6' },
+
   // NOTE: クライアントサイドで使用できる環境変数を定義する
   env: {
     FRONT_URL: frontUrl,
@@ -163,32 +183,14 @@ const config: NuxtConfig = {
     ARTICLE_ORGANIZATION: articleOrganization,
     SITE_OWNER: siteOwner,
     SITE_NAME: siteName,
-    DISQUS_SHORTNAME: disqusShortname
+    DISQUS_SHORTNAME: disqusShortname,
   },
-  /*
-  ** Build configuration
-  */
-  build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
-      // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module?.rules.push({
-          enforce: "pre",
-          test: /\.(ts|js|vue)$/,
-          loader: "eslint-loader",
-          exclude: /(node_modules)/
-        })
-      }
-    }
-  },
+
   // NOTE: v2.13 から内部クローラーが実装されたのでroutesプロパティは不要
   generate: {
     // エラー発生時に 200.html ではなく 404.html を表示する
-    fallback: true
-  }
+    fallback: true,
+  },
 }
 
 export default config

@@ -16,20 +16,26 @@
     </button>
     <div id="navmenu" class="collapse navbar-collapse">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" :href="githubUrl" target="_blank" @click="$ga.event('view', 'click', 'github')">GitHub</a>
+        <a
+          class="nav-item nav-link"
+          :href="githubUrl"
+          target="_blank"
+          @click="$ga.event('view', 'click', 'github')"
+          >GitHub</a
+        >
       </div>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
-import Vue from "vue"
+import Vue from 'vue'
 
 export default Vue.extend({
-  data () {
+  data() {
     return {
-      githubUrl: process.env.GITHUB_URL
+      githubUrl: process.env.GITHUB_URL,
     }
-  }
+  },
 })
 </script>
