@@ -1,16 +1,9 @@
 import type { Plugin } from '@nuxt/types'
+import { ContentArticle } from '~/interfaces/ContentArticle'
 import { ArticleSchemaArgs } from '~/interfaces/ArticleSchemaArgs'
 import { createArticleSchemaObject } from '~/resources/schema/article'
 
-type ArticleSchemaCreator = (article: any) => string
-
-declare module 'vue/types/vue' {
-  interface Vue {
-    $createArticleSchema: ArticleSchemaCreator
-  }
-}
-
-const articleSchemaCreator: ArticleSchemaCreator = (article: any) => {
+function articleSchemaCreator(article: ContentArticle) {
   const args: ArticleSchemaArgs = {
     articleId: article.id,
     headlineValue: article.title,
@@ -19,6 +12,14 @@ const articleSchemaCreator: ArticleSchemaCreator = (article: any) => {
   }
   const articleSchemaObject = createArticleSchemaObject(args)
   return JSON.stringify(articleSchemaObject)
+}
+
+type ArticleSchemaCreator = (article: ContentArticle) => string
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $createArticleSchema: ArticleSchemaCreator
+  }
 }
 
 const articleSchemaPlugin: Plugin = (_context, inject) => {
