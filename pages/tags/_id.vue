@@ -10,36 +10,29 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { BreadcrumbItem } from '~/interfaces/BreadcrumbItem'
-import ArticleList from '~/components/ArticleList.vue'
-
-interface DataType {
-  articles: any
-  tag: any
-}
+import {
+  ContentArticle,
+  ContentArticleTag,
+} from '~/interfaces/ContentArticle.ts'
 
 export default Vue.extend({
-  components: {
-    ArticleList,
-  },
-  async asyncData(context): Promise<DataType> {
-    const tagId = parseInt(context.params.id)
+  async asyncData({ $content, params, error }) {
+    const tagId = parseInt(params.id)
 
-    const articles = await context
-      .$content('articles')
+    const articles = (await $content('articles')
       .where({ 'tags.id': { $contains: tagId } })
       .sortBy('id', 'desc')
-      .fetch()
+      .fetch()) as ContentArticle[]
 
     // 記事データが存在しない場合はエラー
     if (articles.length === 0) {
-      context.error({ statusCode: 404, message: 'Not Found' })
+      error({ statusCode: 404, message: 'Not Found' })
     }
 
     /**
      * tagIdと一致するオブジェクトを取得する
      */
-    const getTagObject = (tagId: number, articleList: any): any => {
+    function getTagObject(tagId: number, articleList: ContentArticle[]) {
       for (let i = 0; i < articleList.length; i++) {
         const article = articleList[i]
         for (let j = 0; j < article.tags.length; j++) {
@@ -49,8 +42,12 @@ export default Vue.extend({
           }
         }
       }
-      return {}
+      return {
+        id: -1,
+        name: '',
+      }
     }
+
     const tag = getTagObject(tagId, articles)
 
     return {
@@ -58,40 +55,43 @@ export default Vue.extend({
       tag,
     }
   },
-  data(): DataType {
+  data() {
     return {
       articles: [],
-      tag: {},
+      tag: {
+        id: -1,
+        name: '',
+      },
     }
   },
   head() {
-    const titleValue: string = this.tag.name
-    const descriptionValue: string = `タグ「${this.tag.name}」を含む記事の一覧です。`
-    const breadcrumbItemList: BreadcrumbItem[] = [
+    // 型推論が効かないので型を明示する
+    const tag = this.tag as ContentArticleTag
+
+    const title = tag.name
+    const description = `タグ「${tag.name}」を含む記事の一覧です。`
+
+    const breadcrumbSchemaString = this.$createBreadcrumbSchema([
       {
         name: 'トップページ',
         path: '/',
       },
       {
-        name: titleValue,
-        path: `/tags/${this.tag.id}`,
+        name: title,
+        path: `/tags/${tag.id}`,
       },
-    ]
-
-    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(
-      breadcrumbItemList
-    )
+    ])
 
     return {
-      title: titleValue,
+      title,
       meta: [
         {
           name: 'description',
-          content: descriptionValue,
+          content: description,
         },
         {
           property: 'og:title',
-          content: `${titleValue} | Yurikago Blog`,
+          content: `${title} | Yurikago Blog`,
         },
         {
           property: 'og:type',
@@ -99,7 +99,7 @@ export default Vue.extend({
         },
         {
           property: 'og:description',
-          content: descriptionValue,
+          content: description,
         },
         {
           property: 'og:url',
