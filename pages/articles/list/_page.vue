@@ -16,44 +16,35 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { BreadcrumbItem } from '~/interfaces/BreadcrumbItem'
-import ArticleList from '~/components/ArticleList.vue'
-import Pagenation from '~/components/Pagenation.vue'
-
-interface DataType {
-  activePage: number
-  totalArticleCount: number
-  articles: any
-}
+import { ContentArticle } from '~/interfaces/ContentArticle.ts'
 
 export default Vue.extend({
-  components: {
-    ArticleList,
-    Pagenation,
-  },
-  async asyncData(context): Promise<DataType> {
-    // typeof context.params.page => string
-    const activePage = parseInt(context.params.page)
+  async asyncData({ $content, params, error }) {
+    const activePage = parseInt(params.page)
 
-    const totalArticle = await context.$content('articles').only(['id']).fetch()
+    const totalArticle = (await $content(
+      'articles'
+    ).fetch()) as ContentArticle[]
     const totalArticleCount = totalArticle.length
 
+    const maxArticleCountInList = parseInt(
+      process.env.MAX_ARTICLE_COUNT_IN_LIST as string
+    )
+
     const skipCount =
-      activePage === 1
-        ? 0
-        : (activePage - 1) *
-          parseInt(process.env.MAX_ARTICLE_COUNT_IN_LIST as string)
-    const limitCount = parseInt(process.env.MAX_ARTICLE_COUNT_IN_LIST as string)
-    const articles = await context
-      .$content('articles')
+      activePage === 1 ? 0 : (activePage - 1) * maxArticleCountInList
+
+    const limitCount = maxArticleCountInList
+
+    const articles = (await $content('articles')
       .sortBy('id', 'desc')
       .skip(skipCount)
       .limit(limitCount)
-      .fetch()
+      .fetch()) as ContentArticle[]
 
     // 記事データが存在しない場合はエラー
     if (articles.length === 0) {
-      context.error({ statusCode: 404, message: 'Not Found' })
+      error({ statusCode: 404, message: 'Not Found' })
     }
 
     return {
@@ -62,41 +53,41 @@ export default Vue.extend({
       articles,
     }
   },
-  data(): DataType {
+  data() {
     return {
-      activePage: 0,
-      totalArticleCount: 0,
+      activePage: -1,
+      totalArticleCount: -1,
       articles: [],
     }
   },
   head() {
-    const titleValue: string = `記事一覧${this.activePage}`
-    const descriptionValue: string = `記事一覧の${this.activePage}ページ目です。`
-    const breadcrumbItemList: BreadcrumbItem[] = [
+    // 型推論が効かないので型を明示する
+    const activePage = this.activePage as number
+
+    const title = `記事一覧${activePage}`
+    const description = `記事一覧の${activePage}ページ目です。`
+
+    const breadcrumbSchemaString = this.$createBreadcrumbSchema([
       {
         name: 'トップページ',
         path: '/',
       },
       {
-        name: titleValue,
-        path: `/articles/list/${this.activePage}`,
+        name: title,
+        path: `/articles/list/${activePage}`,
       },
-    ]
-
-    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(
-      breadcrumbItemList
-    )
+    ])
 
     return {
-      title: titleValue,
+      title,
       meta: [
         {
           name: 'description',
-          content: descriptionValue,
+          content: description,
         },
         {
           property: 'og:title',
-          content: `${titleValue} | Yurikago Blog`,
+          content: `${title} | Yurikago Blog`,
         },
         {
           property: 'og:type',
@@ -104,7 +95,7 @@ export default Vue.extend({
         },
         {
           property: 'og:description',
-          content: descriptionValue,
+          content: description,
         },
         {
           property: 'og:url',

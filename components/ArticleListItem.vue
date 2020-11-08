@@ -25,14 +25,15 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { PropOptions } from 'vue'
+import { ContentArticle } from '~/interfaces/ContentArticle.ts'
 
 export default Vue.extend({
   props: {
     article: {
       type: Object,
       required: true,
-    },
+    } as PropOptions<ContentArticle>,
   },
 })
 </script>

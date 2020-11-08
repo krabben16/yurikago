@@ -16,35 +16,23 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { BreadcrumbItem } from '~/interfaces/BreadcrumbItem'
-import ArticleList from '~/components/ArticleList.vue'
-import Pagenation from '~/components/Pagenation.vue'
-
-interface DataType {
-  activePage: number
-  totalArticleCount: number
-  articles: any
-}
+import { ContentArticle } from '~/interfaces/ContentArticle.ts'
 
 export default Vue.extend({
-  components: {
-    ArticleList,
-    Pagenation,
-  },
-  async asyncData(context): Promise<DataType> {
+  async asyncData({ $content }) {
     const activePage = 1
 
-    const totalArticle = await context.$content('articles').only(['id']).fetch()
+    const totalArticle = (await $content(
+      'articles'
+    ).fetch()) as ContentArticle[]
     const totalArticleCount = totalArticle.length
 
-    const limitCount: number = parseInt(
-      process.env.MAX_ARTICLE_COUNT_IN_LIST as string
-    )
-    const articles = await context
-      .$content('articles')
+    const limitCount = parseInt(process.env.MAX_ARTICLE_COUNT_IN_LIST as string)
+
+    const articles = (await $content('articles')
       .sortBy('id', 'desc')
       .limit(limitCount)
-      .fetch()
+      .fetch()) as ContentArticle[]
 
     return {
       activePage,
@@ -52,30 +40,34 @@ export default Vue.extend({
       articles,
     }
   },
+  data() {
+    return {
+      activePage: -1,
+      totalArticleCount: -1,
+      articles: [],
+    }
+  },
   head() {
-    const titleValue: string = 'トップページ'
-    const descriptionValue: string = `${process.env.SITE_OWNER}の技術ブログです。`
-    const breadcrumbItemList: BreadcrumbItem[] = [
+    const title = 'トップページ'
+    const description = `${process.env.SITE_OWNER}の技術ブログです。`
+
+    const breadcrumbSchemaString = this.$createBreadcrumbSchema([
       {
-        name: titleValue,
+        name: title,
         path: '/',
       },
-    ]
-
-    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(
-      breadcrumbItemList
-    )
+    ])
 
     return {
-      title: titleValue,
+      title,
       meta: [
         {
           name: 'description',
-          content: descriptionValue,
+          content: description,
         },
         {
           property: 'og:title',
-          content: `${titleValue} | Yurikago Blog`,
+          content: `${title} | Yurikago Blog`,
         },
         {
           property: 'og:type',
@@ -83,7 +75,7 @@ export default Vue.extend({
         },
         {
           property: 'og:description',
-          content: descriptionValue,
+          content: description,
         },
         {
           property: 'og:url',

@@ -80,37 +80,31 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { BreadcrumbItem } from '~/interfaces/BreadcrumbItem'
-
-interface DataType {
-  article: any
-  next: any
-  prev: any
-}
+import { ContentArticle } from '~/interfaces/ContentArticle.ts'
 
 export default Vue.extend({
-  async asyncData(context): Promise<DataType> {
-    let article
+  async asyncData({ $content, params, error }) {
+    const articles = (await $content('articles')
+      .where({ id: parseInt(params.id) })
+      .fetch()) as ContentArticle[]
 
-    try {
-      // NOTE: context.params.idはstringで型推論されるが実際はnumber型なので注意
-      article = await context.$content(`articles/${context.params.id}`).fetch()
-    } catch {
+    if (articles.length === 0) {
       // 記事データが存在しない場合はエラー
       // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
-      context.error({ statusCode: 404, message: 'Not Found' })
+      error({ statusCode: 404, message: 'Not Found' })
     }
+
+    const article = articles[0]
 
     // 前後の記事
     // https://content.nuxtjs.org/ja/examples#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3
-    const surround = await context
-      .$content('articles')
+    const [prev, next] = (await $content('articles')
       .only(['id'])
       .sortBy('id')
-      .surround(context.params.id.toString())
-      .fetch()
-    const prev = surround.shift()
-    const next = surround.shift()
+      // articles以下のファイル名を指定する
+      // CSRの場合はparams.idの型がnumberになるのでstringに変換する
+      .surround(params.id.toString())
+      .fetch()) as ContentArticle[]
 
     return {
       article,
@@ -118,48 +112,56 @@ export default Vue.extend({
       prev,
     }
   },
-  // NOTE: computedやheadでvueインスタンスのプロパティの型推論をさせるためにdataを定義する
-  data(): DataType {
+  data() {
+    const defaultValue: ContentArticle = {
+      dir: '',
+      path: '',
+      extension: '',
+      slug: '',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      id: -1,
+      title: '',
+      date: '',
+      tags: [],
+    }
+
     return {
-      article: {},
-      next: {},
-      prev: {},
+      article: defaultValue,
+      next: defaultValue,
+      prev: defaultValue,
     }
   },
-  computed: {
-    joinedTagsName(): string {
-      return this.article.tags.map((t: any) => t.name).join(',')
-    },
-  },
   head() {
-    const titleValue: string = this.article.title
-    const descriptionValue: string = `「${this.article.title}」についてまとめた記事です。この記事は以下のキーワード「${this.joinedTagsName}」を含みます。`
-    const breadcrumbItemList: BreadcrumbItem[] = [
+    // 型推論が効かないので型を明示する
+    const article = this.article as ContentArticle
+
+    const title = article.title
+    const joinedTagsName = article.tags.map((t) => t.name).join(',')
+    const description = `「${article.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagsName}」を含みます。`
+
+    const breadcrumbSchemaString = this.$createBreadcrumbSchema([
       {
         name: 'トップページ',
         path: '/',
       },
       {
-        name: titleValue,
-        path: `/articles/${this.article.id}`,
+        name: title,
+        path: `/articles/${article.id}`,
       },
-    ]
-
-    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(
-      breadcrumbItemList
-    )
-    const articleSchemaString: string = this.$createArticleSchema(this.article)
+    ])
+    const articleSchemaString = this.$createArticleSchema(article)
 
     return {
-      title: titleValue,
+      title,
       meta: [
         {
           name: 'description',
-          content: descriptionValue,
+          content: description,
         },
         {
           property: 'og:title',
-          content: `${titleValue} | Yurikago Blog`,
+          content: `${title} | Yurikago Blog`,
         },
         {
           property: 'og:type',
@@ -167,7 +169,7 @@ export default Vue.extend({
         },
         {
           property: 'og:description',
-          content: descriptionValue,
+          content: description,
         },
         {
           property: 'og:url',
