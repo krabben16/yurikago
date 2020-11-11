@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
-import { ContentArticle } from '~/interfaces/ContentArticle.ts'
+import { ContentArticle } from '~/interfaces/ContentArticle'
 
 export default Vue.extend({
   props: {

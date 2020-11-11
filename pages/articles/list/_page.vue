@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ContentArticle } from '~/interfaces/ContentArticle.ts'
+import { ContentArticle } from '~/interfaces/ContentArticle'
 
 export default Vue.extend({
   async asyncData({ $content, params, error }) {
