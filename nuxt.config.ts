@@ -190,8 +190,6 @@ const config: NuxtConfig = {
   generate: {
     // エラー発生時に 200.html ではなく 404.html を表示する
     fallback: true,
-    // https://github.com/nuxt-community/composition-api/issues/44
-    interval: 2000,
   },
 }
 

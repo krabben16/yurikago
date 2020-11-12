@@ -16,70 +16,76 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { BreadcrumbItem } from '~/interfaces/BreadcrumbItem'
+import { defineComponent, useContext, useMeta } from '@nuxtjs/composition-api'
+import { NuxtError } from '@nuxt/types'
 
-export default Vue.extend({
+export default defineComponent({
+  // You need to define an empty head to activate this functionality
+  head: {},
   props: {
     error: {
-      type: Object,
+      type: Object as () => NuxtError,
       required: true,
     },
   },
-  head() {
-    const titleValue: string = 'エラー'
-    const descriptionValue: string = 'エラーページです！'
-    const breadcrumbItemList: BreadcrumbItem[] = [
-      {
-        name: 'トップページ',
-        path: '/',
-      },
-      {
-        name: titleValue,
-        path: this.$route.path,
-      },
-    ]
+  setup() {
+    const { app, route } = useContext()
 
-    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(
-      breadcrumbItemList
-    )
+    useMeta(() => {
+      const title = 'エラー'
+      const description = 'エラーページです！'
+      const path = route.value.path
 
-    return {
-      title: titleValue,
-      meta: [
-        {
-          name: 'description',
-          content: descriptionValue,
+      const breadcrumbSchema = app.$createBreadcrumbSchema({
+        breadcrumbItemList: [
+          {
+            name: 'トップページ',
+            path: '/',
+          },
+          {
+            name: title,
+            path,
+          },
+        ],
+      })
+
+      return {
+        title,
+        meta: [
+          {
+            name: 'description',
+            content: description,
+          },
+          {
+            property: 'og:title',
+            content: `${title} | Yurikago Blog`,
+          },
+          {
+            property: 'og:type',
+            content: 'blog',
+          },
+          {
+            property: 'og:description',
+            content: description,
+          },
+          {
+            property: 'og:url',
+            content: process.env.FRONT_URL + path,
+          },
+        ],
+        script: [
+          // 構造化マークアップ
+          {
+            hid: 'breadcrumbSchema',
+            innerHTML: breadcrumbSchema,
+            type: 'application/ld+json',
+          },
+        ],
+        __dangerouslyDisableSanitizersByTagID: {
+          breadcrumbSchema: ['innerHTML'],
         },
-        {
-          property: 'og:title',
-          content: `${titleValue} | Yurikago Blog`,
-        },
-        {
-          property: 'og:type',
-          content: 'blog',
-        },
-        {
-          property: 'og:description',
-          content: descriptionValue,
-        },
-        {
-          property: 'og:url',
-          content: process.env.FRONT_URL + this.$route.path,
-        },
-      ],
-      script: [
-        // 構造化マークアップ
-        {
-          hid: 'breadcrumbSchema',
-          innerHTML: breadcrumbSchemaString,
-          type: 'application/ld+json',
-        },
-      ],
-      __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ['innerHTML'],
-      },
-    }
+      }
+    })
   },
 })
 </script>

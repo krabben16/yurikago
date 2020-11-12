@@ -20,33 +20,33 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
 
-export default Vue.extend({
+export default defineComponent({
   props: {
     activePage: {
-      type: Number,
+      type: Number as () => number,
       required: true,
     },
     totalArticleCount: {
-      type: Number,
+      type: Number as () => number,
       required: true,
     },
   },
-  data() {
+  setup(props) {
     // 2ページ目以降を表示中の場合はNextを表示する
-    const existsNextPage: boolean = this.activePage > 1
-    const nextPage: number = this.activePage - 1
+    const existsNextPage = computed(() => props.activePage > 1)
+    const nextPage = computed(() => props.activePage - 1)
 
     // 2ページ目以降が存在する場合はPrevを表示する
-    const maxArticleCountInList: number = parseInt(
+    const maxArticleCountInList = parseInt(
       process.env.MAX_ARTICLE_COUNT_IN_LIST as string
     )
-    const maxPageCount: number = Math.ceil(
-      this.totalArticleCount / maxArticleCountInList
+    const maxPageCount = computed(() =>
+      Math.ceil(props.totalArticleCount / maxArticleCountInList)
     )
-    const existsPrevPage: boolean = this.activePage < maxPageCount
-    const prevPage: number = this.activePage + 1
+    const existsPrevPage = computed(() => props.activePage < maxPageCount.value)
+    const prevPage = computed(() => props.activePage + 1)
 
     return {
       existsNextPage,

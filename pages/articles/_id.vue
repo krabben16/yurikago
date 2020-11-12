@@ -79,121 +79,162 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { ContentArticle } from '~/interfaces/ContentArticle'
+import {
+  defineComponent,
+  reactive,
+  useAsync,
+  useContext,
+  useMeta,
+} from '@nuxtjs/composition-api'
+import { contentFunc } from '@nuxt/content/types/content'
+import { ContentArticle, ContentSurround } from '~/interfaces/Content'
 
-export default Vue.extend({
-  async asyncData({ $content, params, error }) {
-    const articles = (await $content('articles')
-      .where({ id: parseInt(params.id) })
-      .fetch()) as ContentArticle[]
+async function fetchArticlesById($content: contentFunc, id: string) {
+  const articles = await $content('articles')
+    .where({ id: parseInt(id) })
+    .fetch()
 
-    if (articles.length === 0) {
-      // 記事データが存在しない場合はエラー
-      // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
-      error({ statusCode: 404, message: 'Not Found' })
-    }
+  return articles as ContentArticle[]
+}
 
-    const article = articles[0]
+async function fetchSurround($content: contentFunc, id: string) {
+  const surround = await $content('articles')
+    .only(['id'])
+    .sortBy('id')
+    // articles以下のファイル名を指定する
+    // CSRの場合はparams.idの型がnumberになるのでstringに変換する
+    .surround(id.toString())
+    .fetch()
 
-    // 前後の記事
-    // https://content.nuxtjs.org/ja/examples#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3
-    const [prev, next] = (await $content('articles')
-      .only(['id'])
-      .sortBy('id')
-      // articles以下のファイル名を指定する
-      // CSRの場合はparams.idの型がnumberになるのでstringに変換する
-      .surround(params.id.toString())
-      .fetch()) as ContentArticle[]
+  return surround as ContentSurround[]
+}
 
-    return {
-      article,
-      next,
-      prev,
-    }
-  },
-  data() {
-    const defaultValue: ContentArticle = {
+export default defineComponent({
+  // You need to define an empty head to activate this functionality
+  head: {},
+  setup() {
+    const { $content, app, error, params, route } = useContext()
+
+    const defaultContentDocument = {
       dir: '',
       path: '',
       extension: '',
       slug: '',
       createdAt: new Date(),
       updatedAt: new Date(),
+    }
+
+    const defaultContentArticle = {
+      ...defaultContentDocument,
       id: -1,
       title: '',
       date: '',
       tags: [],
-    }
+    } as ContentArticle
 
-    return {
-      article: defaultValue,
-      next: defaultValue,
-      prev: defaultValue,
-    }
-  },
-  head() {
-    // 型推論が効かないので型を明示する
-    const article = this.article as ContentArticle
+    const defaultContentSurround = {
+      ...defaultContentDocument,
+      id: -1,
+    } as ContentSurround
 
-    const title = article.title
-    const joinedTagsName = article.tags.map((t) => t.name).join(',')
-    const description = `「${article.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagsName}」を含みます。`
+    const state = reactive({
+      article: defaultContentArticle,
+      next: defaultContentSurround,
+      prev: defaultContentSurround,
+    })
 
-    const breadcrumbSchemaString = this.$createBreadcrumbSchema([
-      {
-        name: 'トップページ',
-        path: '/',
-      },
-      {
-        name: title,
-        path: `/articles/${article.id}`,
-      },
-    ])
-    const articleSchemaString = this.$createArticleSchema(article)
+    useAsync(async () => {
+      const articles = await fetchArticlesById($content, params.value.id)
 
-    return {
-      title,
-      meta: [
-        {
-          name: 'description',
-          content: description,
+      // 記事データが存在しない場合はエラー
+      // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
+      if (articles.length === 0) {
+        error({ statusCode: 404, message: 'Not Found' })
+      }
+
+      // 前後の記事
+      // https://content.nuxtjs.org/ja/examples#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3
+      const surround = await fetchSurround($content, params.value.id)
+      const [prev, next] = surround
+
+      state.article =
+        articles.length === 0 ? defaultContentArticle : articles[0]
+      state.prev = prev
+      state.next = next
+    })
+
+    useMeta(() => {
+      const joinedTagsName = state.article.tags.map((t) => t.name).join(',')
+
+      const title = state.article.title
+      const description = `「${state.article.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagsName}」を含みます。`
+      const path = route.value.path
+
+      const breadcrumbSchema = app.$createBreadcrumbSchema({
+        breadcrumbItemList: [
+          {
+            name: 'トップページ',
+            path: '/',
+          },
+          {
+            name: title,
+            path: `/articles/${state.article.id}`,
+          },
+        ],
+      })
+
+      const articleSchema = app.$createArticleSchema({
+        articleId: state.article.id,
+        headlineValue: title,
+        datePublishedValue: `${state.article.date}T00:00:00+09:00`,
+        dateModifiedValue: `${state.article.date}T00:00:00+09:00`,
+      })
+
+      return {
+        title,
+        meta: [
+          {
+            name: 'description',
+            content: description,
+          },
+          {
+            property: 'og:title',
+            content: `${title} | Yurikago Blog`,
+          },
+          {
+            property: 'og:type',
+            content: 'article',
+          },
+          {
+            property: 'og:description',
+            content: description,
+          },
+          {
+            property: 'og:url',
+            content: (process.env.FRONT_URL as string) + path,
+          },
+        ],
+        script: [
+          // 構造化マークアップ
+          {
+            hid: 'breadcrumbSchema',
+            innerHTML: breadcrumbSchema,
+            type: 'application/ld+json',
+          },
+          {
+            hid: 'articleSchema',
+            innerHTML: articleSchema,
+            type: 'application/ld+json',
+          },
+        ],
+        __dangerouslyDisableSanitizersByTagID: {
+          breadcrumbSchema: ['innerHTML'],
+          articleSchema: ['innerHTML'],
         },
-        {
-          property: 'og:title',
-          content: `${title} | Yurikago Blog`,
-        },
-        {
-          property: 'og:type',
-          content: 'article',
-        },
-        {
-          property: 'og:description',
-          content: description,
-        },
-        {
-          property: 'og:url',
-          content: process.env.FRONT_URL + this.$route.path,
-        },
-      ],
-      script: [
-        // 構造化マークアップ
-        {
-          hid: 'breadcrumbSchema',
-          innerHTML: breadcrumbSchemaString,
-          type: 'application/ld+json',
-        },
-        {
-          hid: 'articleSchema',
-          innerHTML: articleSchemaString,
-          type: 'application/ld+json',
-        },
-      ],
-      __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ['innerHTML'],
-        articleSchema: ['innerHTML'],
-      },
-    }
+      }
+    })
+
+    return state
   },
 })
 </script>
