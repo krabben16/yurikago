@@ -1,11 +1,11 @@
-import { ArticleSchemaArgs } from '~/interfaces/ArticleSchemaArgs'
+import { SchemaArticle } from '~/interfaces/Schema'
 
 /**
  * 記事の構造化データを作成する
  * https://developers.google.com/search/docs/data-types/article?hl=ja
  * https://developers.google.com/search/docs/data-types/logo?hl=ja
  */
-export const createArticleSchemaObject = (args: ArticleSchemaArgs): object => {
+export const createArticleSchemaObject = (args: SchemaArticle) => {
   return {
     '@context': 'http://schema.org',
     '@type': 'Article',
