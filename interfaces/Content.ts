@@ -11,3 +11,7 @@ export interface ContentArticle extends IContentDocument {
   date: string
   tags: ContentArticleTag[]
 }
+
+export interface ContentSurround extends IContentDocument {
+  id: number
+}
