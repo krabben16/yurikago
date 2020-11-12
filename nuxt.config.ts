@@ -102,7 +102,7 @@ const config: NuxtConfig = {
   components: true,
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: ['@nuxt/typescript-build'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api'],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ['@nuxtjs/google-analytics', '@nuxtjs/sitemap', '@nuxt/content'],
@@ -190,6 +190,8 @@ const config: NuxtConfig = {
   generate: {
     // エラー発生時に 200.html ではなく 404.html を表示する
     fallback: true,
+    // https://github.com/nuxt-community/composition-api/issues/44
+    interval: 2000,
   },
 }
 
