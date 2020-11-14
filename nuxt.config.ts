@@ -185,6 +185,8 @@ const config: NuxtConfig = {
 
   // NOTE: v2.13 から内部クローラーが実装されたのでroutesプロパティは不要
   generate: {
+    // https://github.com/nuxt-community/composition-api/issues/44
+    interval: 2000,
     // エラー発生時に 200.html ではなく 404.html を表示する
     fallback: true,
   },
