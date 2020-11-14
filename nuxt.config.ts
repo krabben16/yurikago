@@ -1,17 +1,13 @@
 import type { NuxtConfig } from '@nuxt/types'
 
-// https://github.com/motdotla/dotenv/tree/v8.2.0#how-do-i-use-dotenv-with-import
-import dotenv from 'dotenv'
-dotenv.config()
-
-const frontUrl = process.env.FRONT_URL as string
-const githubUrl = process.env.GITHUB_URL as string
-const maxArticleCountInList = process.env.MAX_ARTICLE_COUNT_IN_LIST as string
-const articleAuthor = process.env.ARTICLE_AUTHOR as string
-const articleOrganization = process.env.ARTICLE_ORGANIZATION as string
-const siteOwner = process.env.SITE_OWNER as string
-const siteName = process.env.SITE_NAME as string
-const disqusShortname = process.env.DISQUS_SHORTNAME as string
+const frontUrl = 'https://www.yurikago-blog.com'
+const githubUrl = 'https://github.com/krabben16/yurikago'
+const maxArticleCountInList = 10
+const articleAuthor = 'Hiroki Kawaguchi'
+const articleOrganization = 'Yurikago Blog'
+const siteOwner = 'Hiroki Kawaguchi'
+const siteName = 'Yurikago Blog'
+const disqusShortname = 'yurikago-blog'
 
 const config: NuxtConfig = {
   // Target (https://go.nuxtjs.dev/config-target)
@@ -51,18 +47,6 @@ const config: NuxtConfig = {
         href: 'https://use.fontawesome.com/releases/v5.13.1/css/all.css',
         integrity:
           'sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q',
-        crossorigin: 'anonymous',
-      },
-      /**
-       * github-markdown-css CDN
-       * https://cdnjs.com/libraries/github-markdown-css/4.0.0
-       */
-      {
-        rel: 'stylesheet',
-        href:
-          'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css',
-        integrity:
-          'sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg==',
         crossorigin: 'anonymous',
       },
     ],
@@ -129,9 +113,7 @@ const config: NuxtConfig = {
       }
 
       // 記事一覧 ページ
-      const maxPageCount = Math.ceil(
-        articles.length / parseInt(maxArticleCountInList)
-      )
+      const maxPageCount = Math.ceil(articles.length / maxArticleCountInList)
 
       for (let i = 0; i < maxPageCount; i++) {
         routeList.push(`/articles/list/${i + 1}`)
@@ -143,11 +125,6 @@ const config: NuxtConfig = {
 
   content: {
     nestedProperties: ['tags.id'],
-    markdown: {
-      prism: {
-        theme: 'prism-themes/themes/prism-nord.css',
-      },
-    },
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
@@ -175,7 +152,7 @@ const config: NuxtConfig = {
   env: {
     FRONT_URL: frontUrl,
     GITHUB_URL: githubUrl,
-    MAX_ARTICLE_COUNT_IN_LIST: maxArticleCountInList,
+    MAX_ARTICLE_COUNT_IN_LIST: maxArticleCountInList.toString(),
     ARTICLE_AUTHOR: articleAuthor,
     ARTICLE_ORGANIZATION: articleOrganization,
     SITE_OWNER: siteOwner,

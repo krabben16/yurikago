@@ -10,15 +10,15 @@ export const createBreadcrumbSchemaObject = (
   const itemList = breadcrumbSchema.breadcrumbItemList.map((v, k) => {
     return {
       '@type': 'ListItem',
-      position: k + 1,
-      name: v.name,
-      item: process.env.FRONT_URL + v.path,
+      'position': k + 1,
+      'name': v.name,
+      'item': process.env.FRONT_URL + v.path,
     }
   })
 
   return {
     '@context': 'http://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: itemList,
+    'itemListElement': itemList,
   }
 }
