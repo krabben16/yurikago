@@ -48,19 +48,7 @@ const config: NuxtConfig = {
         integrity:
           'sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q',
         crossorigin: 'anonymous',
-      },
-      /**
-       * github-markdown-css CDN
-       * https://cdnjs.com/libraries/github-markdown-css/4.0.0
-       */
-      {
-        rel: 'stylesheet',
-        href:
-          'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css',
-        integrity:
-          'sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg==',
-        crossorigin: 'anonymous',
-      },
+      }
     ],
     script: [
       /**

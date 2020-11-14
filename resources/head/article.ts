@@ -34,6 +34,16 @@ export function createHeadObject(head: ArticleHead) {
         content: (process.env.FRONT_URL as string) + head.path,
       },
     ],
+    link: [
+      // https://www.jsdelivr.com/package/npm/github-markdown-css
+      {
+        rel: 'stylesheet',
+        href:
+          'https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.css',
+        integrity: 'sha256-cf0utJyD3jlnqw2/IdG9Ai3UyTLsW10Z8nXcCbHhfDI=',
+        crossorigin: 'anonymous',
+      },
+    ],
     script: [
       // 構造化マークアップ
       {
