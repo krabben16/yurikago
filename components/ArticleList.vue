@@ -12,20 +12,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import ArticleListItem from '~/components/ArticleListItem.vue'
+import { defineComponent } from '@nuxtjs/composition-api'
+import { ContentArticle } from '~/interfaces/Content'
 
-export default Vue.extend({
-  components: {
-    ArticleListItem,
-  },
+export default defineComponent({
   props: {
     articles: {
-      type: Array,
+      type: Array as () => ContentArticle[],
       required: true,
     },
     title: {
-      type: String,
+      type: String as () => string,
       required: true,
     },
   },

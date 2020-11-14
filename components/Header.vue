@@ -29,10 +29,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-export default Vue.extend({
-  data() {
+export default defineComponent({
+  setup() {
     return {
       githubUrl: process.env.GITHUB_URL,
     }

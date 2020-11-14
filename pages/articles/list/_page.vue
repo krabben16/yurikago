@@ -1,118 +1,115 @@
 <template>
   <div class="container-fluid bg-white min-vh-100">
-    <div class="row">
-      <div class="col-12 col-sm-6 mx-sm-auto py-5">
-        <ArticleList :articles="articles" :title="`${activePage}ページ目`" />
-        <div class="mt-4">
-          <Pagenation
-            :active-page="activePage"
-            :total-article-count="totalArticleCount"
-          />
+    <template v-if="$fetchState.pending || $fetchState.error">
+      <Placeholder />
+    </template>
+    <template v-else>
+      <div class="row">
+        <div class="col-12 col-sm-6 mx-sm-auto py-5">
+          <ArticleList :articles="articles" :title="`${activePage}ページ目`" />
+          <div class="mt-4">
+            <Pagenation
+              :active-page="activePage"
+              :total-article-count="totalArticleCount"
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { ContentArticle } from '~/interfaces/ContentArticle.ts'
+import {
+  defineComponent,
+  ref,
+  useContext,
+  useFetch,
+  useMeta,
+} from '@nuxtjs/composition-api'
+import { ContentArticle } from '~/interfaces/Content'
+import { createHeadObject } from '~/resources/head/common'
+import {
+  fetchTotalArticleCount,
+  fetchArticlesByPage,
+} from '~/resources/content/article'
 
-export default Vue.extend({
-  async asyncData({ $content, params, error }) {
-    const activePage = parseInt(params.page)
+export default defineComponent({
+  // You need to define an empty head to activate this functionality
+  head: {},
+  setup() {
+    const { $content, error, params, route } = useContext()
 
-    const totalArticle = (await $content(
-      'articles'
-    ).fetch()) as ContentArticle[]
-    const totalArticleCount = totalArticle.length
+    const activePageRef = ref()
+    const totalArticleCountRef = ref()
+    const articlesRef = ref<ContentArticle[]>()
 
-    const maxArticleCountInList = parseInt(
-      process.env.MAX_ARTICLE_COUNT_IN_LIST as string
-    )
+    useFetch(async () => {
+      const activePage = parseInt(params.value.page)
 
-    const skipCount =
-      activePage === 1 ? 0 : (activePage - 1) * maxArticleCountInList
+      const totalArticleCount = await fetchTotalArticleCount($content)
 
-    const limitCount = maxArticleCountInList
+      const maxArticleCountInList = parseInt(
+        process.env.MAX_ARTICLE_COUNT_IN_LIST as string
+      )
 
-    const articles = (await $content('articles')
-      .sortBy('id', 'desc')
-      .skip(skipCount)
-      .limit(limitCount)
-      .fetch()) as ContentArticle[]
+      const skipCount =
+        activePage === 1 ? 0 : (activePage - 1) * maxArticleCountInList
 
-    // 記事データが存在しない場合はエラー
-    if (articles.length === 0) {
-      error({ statusCode: 404, message: 'Not Found' })
-    }
+      const limitCount = parseInt(
+        process.env.MAX_ARTICLE_COUNT_IN_LIST as string
+      )
+
+      const articles = await fetchArticlesByPage(
+        $content,
+        skipCount,
+        limitCount
+      )
+
+      // 記事データが存在しない場合はエラー
+      if (articles.length === 0) {
+        error({ statusCode: 404, message: 'Not Found' })
+        // $fetchState.error
+        throw new Error('Not Found')
+      }
+
+      activePageRef.value = activePage
+      totalArticleCountRef.value = totalArticleCount
+      articlesRef.value = articles
+    })
+
+    useMeta(() => {
+      if (!activePageRef.value) return {}
+
+      const title = `記事一覧${activePageRef.value}`
+      const description = `記事一覧の${activePageRef.value}ページ目です。`
+      const path = route.value.path
+
+      const breadcrumbSchema = {
+        breadcrumbItemList: [
+          {
+            name: 'トップページ',
+            path: '/',
+          },
+          {
+            name: title,
+            path: `/articles/list/${activePageRef.value}`,
+          },
+        ],
+      }
+
+      return createHeadObject({
+        title,
+        description,
+        path,
+        breadcrumbSchema,
+      })
+    })
 
     return {
-      activePage,
-      totalArticleCount,
-      articles,
-    }
-  },
-  data() {
-    return {
-      activePage: -1,
-      totalArticleCount: -1,
-      articles: [],
-    }
-  },
-  head() {
-    // 型推論が効かないので型を明示する
-    const activePage = this.activePage as number
-
-    const title = `記事一覧${activePage}`
-    const description = `記事一覧の${activePage}ページ目です。`
-
-    const breadcrumbSchemaString = this.$createBreadcrumbSchema([
-      {
-        name: 'トップページ',
-        path: '/',
-      },
-      {
-        name: title,
-        path: `/articles/list/${activePage}`,
-      },
-    ])
-
-    return {
-      title,
-      meta: [
-        {
-          name: 'description',
-          content: description,
-        },
-        {
-          property: 'og:title',
-          content: `${title} | Yurikago Blog`,
-        },
-        {
-          property: 'og:type',
-          content: 'blog',
-        },
-        {
-          property: 'og:description',
-          content: description,
-        },
-        {
-          property: 'og:url',
-          content: process.env.FRONT_URL + this.$route.path,
-        },
-      ],
-      script: [
-        // 構造化マークアップ
-        {
-          hid: 'breadcrumbSchema',
-          innerHTML: breadcrumbSchemaString,
-          type: 'application/ld+json',
-        },
-      ],
-      __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ['innerHTML'],
-      },
+      activePage: activePageRef,
+      totalArticleCount: totalArticleCountRef,
+      articles: articlesRef,
     }
   },
 })

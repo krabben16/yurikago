@@ -92,17 +92,13 @@ const config: NuxtConfig = {
   css: ['~/assets/scss/app.scss'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [
-    '~/plugins/disqus',
-    '~/plugins/schema/breadcrumb',
-    '~/plugins/schema/article',
-  ],
+  plugins: ['~/plugins/disqus'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: ['@nuxt/typescript-build'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api'],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ['@nuxtjs/google-analytics', '@nuxtjs/sitemap', '@nuxt/content'],
@@ -136,6 +132,7 @@ const config: NuxtConfig = {
       const maxPageCount = Math.ceil(
         articles.length / parseInt(maxArticleCountInList)
       )
+
       for (let i = 0; i < maxPageCount; i++) {
         routeList.push(`/articles/list/${i + 1}`)
       }
@@ -188,6 +185,8 @@ const config: NuxtConfig = {
 
   // NOTE: v2.13 から内部クローラーが実装されたのでroutesプロパティは不要
   generate: {
+    // https://github.com/nuxt-community/composition-api/issues/44
+    interval: 2000,
     // エラー発生時に 200.html ではなく 404.html を表示する
     fallback: true,
   },

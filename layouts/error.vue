@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid bg-white">
     <div class="row">
       <div class="col-12 col-sm-9 mx-sm-auto">
         <div
@@ -16,70 +16,47 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { BreadcrumbItem } from '~/interfaces/BreadcrumbItem'
+import { defineComponent, useContext, useMeta } from '@nuxtjs/composition-api'
+import { NuxtError } from '@nuxt/types'
+import { createHeadObject } from '~/resources/head/common'
 
-export default Vue.extend({
+export default defineComponent({
+  // You need to define an empty head to activate this functionality
+  head: {},
   props: {
     error: {
-      type: Object,
+      type: Object as () => NuxtError,
       required: true,
     },
   },
-  head() {
-    const titleValue: string = 'エラー'
-    const descriptionValue: string = 'エラーページです！'
-    const breadcrumbItemList: BreadcrumbItem[] = [
-      {
-        name: 'トップページ',
-        path: '/',
-      },
-      {
-        name: titleValue,
-        path: this.$route.path,
-      },
-    ]
+  setup() {
+    const { route } = useContext()
 
-    const breadcrumbSchemaString: string = this.$createBreadcrumbSchema(
-      breadcrumbItemList
-    )
+    useMeta(() => {
+      const title = 'エラー'
+      const description = 'エラーページです！'
+      const path = route.value.path
 
-    return {
-      title: titleValue,
-      meta: [
-        {
-          name: 'description',
-          content: descriptionValue,
-        },
-        {
-          property: 'og:title',
-          content: `${titleValue} | Yurikago Blog`,
-        },
-        {
-          property: 'og:type',
-          content: 'blog',
-        },
-        {
-          property: 'og:description',
-          content: descriptionValue,
-        },
-        {
-          property: 'og:url',
-          content: process.env.FRONT_URL + this.$route.path,
-        },
-      ],
-      script: [
-        // 構造化マークアップ
-        {
-          hid: 'breadcrumbSchema',
-          innerHTML: breadcrumbSchemaString,
-          type: 'application/ld+json',
-        },
-      ],
-      __dangerouslyDisableSanitizersByTagID: {
-        breadcrumbSchema: ['innerHTML'],
-      },
-    }
+      const breadcrumbSchema = {
+        breadcrumbItemList: [
+          {
+            name: 'トップページ',
+            path: '/',
+          },
+          {
+            name: title,
+            path,
+          },
+        ],
+      }
+
+      return createHeadObject({
+        title,
+        description,
+        path,
+        breadcrumbSchema,
+      })
+    })
   },
 })
 </script>

@@ -1,22 +1,22 @@
-import { ArticleSchemaArgs } from '~/interfaces/ArticleSchemaArgs'
+import { ArticleSchema } from '~/interfaces/Schema'
 
 /**
  * 記事の構造化データを作成する
  * https://developers.google.com/search/docs/data-types/article?hl=ja
  * https://developers.google.com/search/docs/data-types/logo?hl=ja
  */
-export const createArticleSchemaObject = (args: ArticleSchemaArgs): object => {
+export const createArticleSchemaObject = (articleSchema: ArticleSchema) => {
   return {
     '@context': 'http://schema.org',
     '@type': 'Article',
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${process.env.FRONT_URL}/articles/${args.articleId}`,
+      '@id': `${process.env.FRONT_URL}/articles/${articleSchema.articleId}`,
     },
-    headline: args.headlineValue,
+    headline: articleSchema.headlineValue,
     image: [`${process.env.FRONT_URL}/images/schema/16x9.jpg`],
-    datePublished: args.datePublishedValue,
-    dateModified: args.dateModifiedValue,
+    datePublished: articleSchema.datePublishedValue,
+    dateModified: articleSchema.dateModifiedValue,
     author: {
       '@type': 'Person',
       name: process.env.ARTICLE_AUTHOR,

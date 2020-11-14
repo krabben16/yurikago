@@ -25,15 +25,15 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from 'vue'
-import { ContentArticle } from '~/interfaces/ContentArticle.ts'
+import { defineComponent } from '@nuxtjs/composition-api'
+import { ContentArticle } from '~/interfaces/Content'
 
-export default Vue.extend({
+export default defineComponent({
   props: {
     article: {
-      type: Object,
+      type: Object as () => ContentArticle,
       required: true,
-    } as PropOptions<ContentArticle>,
+    },
   },
 })
 </script>
