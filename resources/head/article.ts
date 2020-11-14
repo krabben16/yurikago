@@ -34,6 +34,17 @@ export function createHeadObject(head: ArticleHead) {
         content: (process.env.FRONT_URL as string) + head.path,
       },
     ],
+    link: [
+      // https://www.jsdelivr.com/package/npm/prism-themes
+      {
+        hid: 'prism-themes',
+        rel: 'stylesheet',
+        href:
+          'https://cdn.jsdelivr.net/npm/prism-themes@1.5.0/themes/prism-nord.css',
+        integrity: 'sha256-UECD+vP2LCOgONhzrk/YMk7iQuz/aywcQUwv4y7ZAKY=',
+        crossorigin: 'anonymous',
+      },
+    ],
     script: [
       // 構造化マークアップ
       {

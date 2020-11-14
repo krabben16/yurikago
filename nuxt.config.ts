@@ -137,11 +137,6 @@ const config: NuxtConfig = {
 
   content: {
     nestedProperties: ['tags.id'],
-    markdown: {
-      prism: {
-        theme: 'prism-themes/themes/prism-nord.css',
-      },
-    },
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
