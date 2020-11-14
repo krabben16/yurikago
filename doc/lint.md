@@ -43,3 +43,9 @@ https://github.com/nuxt/eslint-plugin-nuxt
 PrettierをESLintルールとして実行し、個々のESLintの問題として違いを報告します。
 
 https://github.com/prettier/eslint-plugin-prettier
+
+eslintrcに `plugins: ['prettier']` を設定したとき
+
+rulesの `prettier/prettier` は以下を指す
+
+https://github.com/prettier/eslint-plugin-prettier/blob/master/eslint-plugin-prettier.js#L118-L145
