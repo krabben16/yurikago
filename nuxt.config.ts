@@ -92,11 +92,7 @@ const config: NuxtConfig = {
   css: ['~/assets/scss/app.scss'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [
-    '~/plugins/disqus',
-    '~/plugins/schema/breadcrumb',
-    '~/plugins/schema/article',
-  ],
+  plugins: ['~/plugins/disqus'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -136,6 +132,7 @@ const config: NuxtConfig = {
       const maxPageCount = Math.ceil(
         articles.length / parseInt(maxArticleCountInList)
       )
+
       for (let i = 0; i < maxPageCount; i++) {
         routeList.push(`/articles/list/${i + 1}`)
       }

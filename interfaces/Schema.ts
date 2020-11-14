@@ -1,13 +1,13 @@
-export interface SchemaBreadcrumbItem {
+export interface BreadcrumbSchemaItem {
   name: string
   path: string
 }
 
-export interface SchemaBreadcrumb {
-  breadcrumbItemList: SchemaBreadcrumbItem[]
+export interface BreadcrumbSchema {
+  breadcrumbItemList: BreadcrumbSchemaItem[]
 }
 
-export interface SchemaArticle {
+export interface ArticleSchema {
   articleId: number
   headlineValue: string
   datePublishedValue: string

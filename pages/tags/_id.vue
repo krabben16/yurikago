@@ -1,32 +1,29 @@
 <template>
   <div class="container-fluid bg-white min-vh-100">
-    <div class="row">
-      <div class="col-12 col-sm-6 mx-sm-auto py-5">
-        <ArticleList :articles="articles" :title="`タグ: ${state.tag.name}`" />
+    <template v-if="$fetchState.pending || $fetchState.error">
+      <Placeholder />
+    </template>
+    <template v-else>
+      <div class="row">
+        <div class="col-12 col-sm-6 mx-sm-auto py-5">
+          <ArticleList :articles="articles" :title="`タグ: ${tag.name}`" />
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
-  reactive,
   ref,
-  useAsync,
   useContext,
+  useFetch,
   useMeta,
 } from '@nuxtjs/composition-api'
-import { contentFunc } from '@nuxt/content/types/content'
 import { ContentArticle, ContentArticleTag } from '~/interfaces/Content'
-
-async function fetchArticlesByTagId($content: contentFunc, tagId: number) {
-  const articles = await $content('articles')
-    .where({ 'tags.id': { $contains: tagId } })
-    .sortBy('id', 'desc')
-    .fetch()
-  return articles as ContentArticle[]
-}
+import { createHeadObject } from '~/resources/head/common'
+import { fetchArticlesByTagId } from '~/resources/content/article'
 
 /**
  * tagIdと一致するオブジェクトを取得する
@@ -51,20 +48,12 @@ export default defineComponent({
   // You need to define an empty head to activate this functionality
   head: {},
   setup() {
-    const { $content, app, error, params, route } = useContext()
+    const { $content, error, params, route } = useContext()
 
-    const defaultContentArticleTag = {
-      id: -1,
-      name: '',
-    } as ContentArticleTag
+    const articlesRef = ref<ContentArticle[]>()
+    const tagRef = ref<ContentArticleTag>()
 
-    const articlesRef = ref<ContentArticle[]>([])
-
-    const state = reactive({
-      tag: defaultContentArticleTag,
-    })
-
-    useAsync(async () => {
+    useFetch(async () => {
       const tagId = parseInt(params.value.id)
 
       const articles = await fetchArticlesByTagId($content, tagId)
@@ -72,20 +61,24 @@ export default defineComponent({
       // 記事データが存在しない場合はエラー
       if (articles.length === 0) {
         error({ statusCode: 404, message: 'Not Found' })
+        // $fetchState.error
+        throw new Error('Not Found')
       }
 
       const tag = searchTagObject(tagId, articles)
 
-      articlesRef.value = articles.length === 0 ? [] : articles
-      state.tag = tag
+      articlesRef.value = articles
+      tagRef.value = tag
     })
 
     useMeta(() => {
-      const title = state.tag.name
-      const description = `タグ「${state.tag.name}」を含む記事の一覧です。`
+      if (!tagRef.value) return {}
+
+      const title = tagRef.value.name
+      const description = `タグ「${tagRef.value.name}」を含む記事の一覧です。`
       const path = route.value.path
 
-      const breadcrumbSchema = app.$createBreadcrumbSchema({
+      const breadcrumbSchema = {
         breadcrumbItemList: [
           {
             name: 'トップページ',
@@ -93,52 +86,22 @@ export default defineComponent({
           },
           {
             name: title,
-            path: `/tags/${state.tag.id}`,
+            path: `/tags/${tagRef.value.id}`,
           },
         ],
-      })
-
-      return {
-        title,
-        meta: [
-          {
-            name: 'description',
-            content: description,
-          },
-          {
-            property: 'og:title',
-            content: `${title} | Yurikago Blog`,
-          },
-          {
-            property: 'og:type',
-            content: 'blog',
-          },
-          {
-            property: 'og:description',
-            content: description,
-          },
-          {
-            property: 'og:url',
-            content: (process.env.FRONT_URL as string) + path,
-          },
-        ],
-        script: [
-          // 構造化マークアップ
-          {
-            hid: 'breadcrumbSchema',
-            innerHTML: breadcrumbSchema,
-            type: 'application/ld+json',
-          },
-        ],
-        __dangerouslyDisableSanitizersByTagID: {
-          breadcrumbSchema: ['innerHTML'],
-        },
       }
+
+      return createHeadObject({
+        title,
+        description,
+        path,
+        breadcrumbSchema,
+      })
     })
 
     return {
       articles: articlesRef,
-      state,
+      tag: tagRef,
     }
   },
 })

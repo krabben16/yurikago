@@ -1,16 +1,21 @@
 <template>
   <div class="container-fluid bg-white min-vh-100">
-    <div class="row">
-      <div class="col-12 col-sm-6 mx-sm-auto py-5">
-        <ArticleList :articles="articles" :title="`${activePage}ページ目`" />
-        <div class="mt-4">
-          <Pagenation
-            :active-page="activePage"
-            :total-article-count="totalArticleCount"
-          />
+    <template v-if="$fetchState.pending || $fetchState.error">
+      <Placeholder />
+    </template>
+    <template v-else>
+      <div class="row">
+        <div class="col-12 col-sm-6 mx-sm-auto py-5">
+          <ArticleList :articles="articles" :title="`${activePage}ページ目`" />
+          <div class="mt-4">
+            <Pagenation
+              :active-page="activePage"
+              :total-article-count="totalArticleCount"
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -18,42 +23,28 @@
 import {
   defineComponent,
   ref,
-  useAsync,
   useContext,
+  useFetch,
   useMeta,
 } from '@nuxtjs/composition-api'
-import { contentFunc } from '@nuxt/content/types/content'
 import { ContentArticle } from '~/interfaces/Content'
-
-async function fetchTotalArticleCount($content: contentFunc) {
-  const articleIds = await $content('articles').only(['id']).fetch()
-  return (articleIds as ContentArticle[]).length
-}
-
-async function fetchArticlesByPage(
-  $content: contentFunc,
-  skipCount: number,
-  limitCount: number
-) {
-  const articles = await $content('articles')
-    .sortBy('id', 'desc')
-    .skip(skipCount)
-    .limit(limitCount)
-    .fetch()
-  return articles as ContentArticle[]
-}
+import { createHeadObject } from '~/resources/head/common'
+import {
+  fetchTotalArticleCount,
+  fetchArticlesByPage,
+} from '~/resources/content/article'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
   head: {},
   setup() {
-    const { $content, app, error, params, route } = useContext()
+    const { $content, error, params, route } = useContext()
 
-    const activePageRef = ref(-1)
-    const totalArticleCountRef = ref(-1)
-    const articlesRef = ref<ContentArticle[]>([])
+    const activePageRef = ref()
+    const totalArticleCountRef = ref()
+    const articlesRef = ref<ContentArticle[]>()
 
-    useAsync(async () => {
+    useFetch(async () => {
       const activePage = parseInt(params.value.page)
 
       const totalArticleCount = await fetchTotalArticleCount($content)
@@ -78,19 +69,23 @@ export default defineComponent({
       // 記事データが存在しない場合はエラー
       if (articles.length === 0) {
         error({ statusCode: 404, message: 'Not Found' })
+        // $fetchState.error
+        throw new Error('Not Found')
       }
 
       activePageRef.value = activePage
       totalArticleCountRef.value = totalArticleCount
-      articlesRef.value = articles.length === 0 ? [] : articles
+      articlesRef.value = articles
     })
 
     useMeta(() => {
+      if (!activePageRef.value) return {}
+
       const title = `記事一覧${activePageRef.value}`
       const description = `記事一覧の${activePageRef.value}ページ目です。`
       const path = route.value.path
 
-      const breadcrumbSchema = app.$createBreadcrumbSchema({
+      const breadcrumbSchema = {
         breadcrumbItemList: [
           {
             name: 'トップページ',
@@ -101,44 +96,14 @@ export default defineComponent({
             path: `/articles/list/${activePageRef.value}`,
           },
         ],
-      })
-
-      return {
-        title,
-        meta: [
-          {
-            name: 'description',
-            content: description,
-          },
-          {
-            property: 'og:title',
-            content: `${title} | Yurikago Blog`,
-          },
-          {
-            property: 'og:type',
-            content: 'blog',
-          },
-          {
-            property: 'og:description',
-            content: description,
-          },
-          {
-            property: 'og:url',
-            content: (process.env.FRONT_URL as string) + path,
-          },
-        ],
-        script: [
-          // 構造化マークアップ
-          {
-            hid: 'breadcrumbSchema',
-            innerHTML: breadcrumbSchema,
-            type: 'application/ld+json',
-          },
-        ],
-        __dangerouslyDisableSanitizersByTagID: {
-          breadcrumbSchema: ['innerHTML'],
-        },
       }
+
+      return createHeadObject({
+        title,
+        description,
+        path,
+        breadcrumbSchema,
+      })
     })
 
     return {
