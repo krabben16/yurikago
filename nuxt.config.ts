@@ -48,7 +48,7 @@ const config: NuxtConfig = {
         integrity:
           'sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q',
         crossorigin: 'anonymous',
-      }
+      },
     ],
     script: [
       /**
