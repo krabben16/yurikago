@@ -9,19 +9,17 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
-          command: npm install
+          command: yarn install
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
       - run:
-          command: cp .env.dist .env
+          command: yarn generate
       - run:
-          command: npm run generate
-      - run:
-          command: npm install -D firebase-tools
+          command: yarn add -D firebase-tools
       - run:
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
