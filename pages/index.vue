@@ -22,7 +22,6 @@
 <script lang="ts">
 import {
   defineComponent,
-  onMounted,
   ref,
   useContext,
   useFetch,

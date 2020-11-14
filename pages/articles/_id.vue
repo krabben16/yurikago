@@ -106,7 +106,6 @@ export default defineComponent({
     const prevRef = ref<ContentSurround>()
 
     useFetch(async () => {
-      console.log('useFetch')
       const articles = await fetchArticlesById($content, params.value.id)
 
       // 記事データが存在しない場合はエラー
@@ -128,7 +127,6 @@ export default defineComponent({
     })
 
     useMeta(() => {
-      console.log('useMeta')
       if (!articleRef.value) return {}
 
       const joinedTagsName = articleRef.value.tags.map((t) => t.name).join(',')
