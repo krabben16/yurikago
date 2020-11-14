@@ -1,17 +1,13 @@
 import type { NuxtConfig } from '@nuxt/types'
 
-// https://github.com/motdotla/dotenv/tree/v8.2.0#how-do-i-use-dotenv-with-import
-import dotenv from 'dotenv'
-dotenv.config()
-
-const frontUrl = process.env.FRONT_URL as string
-const githubUrl = process.env.GITHUB_URL as string
-const maxArticleCountInList = process.env.MAX_ARTICLE_COUNT_IN_LIST as string
-const articleAuthor = process.env.ARTICLE_AUTHOR as string
-const articleOrganization = process.env.ARTICLE_ORGANIZATION as string
-const siteOwner = process.env.SITE_OWNER as string
-const siteName = process.env.SITE_NAME as string
-const disqusShortname = process.env.DISQUS_SHORTNAME as string
+const frontUrl = 'https://www.yurikago-blog.com'
+const githubUrl = 'https://github.com/krabben16/yurikago'
+const maxArticleCountInList = 10
+const articleAuthor = 'Hiroki Kawaguchi'
+const articleOrganization = 'Yurikago Blog'
+const siteOwner = 'Hiroki Kawaguchi'
+const siteName = 'Yurikago Blog'
+const disqusShortname = 'yurikago-blog'
 
 const config: NuxtConfig = {
   // Target (https://go.nuxtjs.dev/config-target)
@@ -129,9 +125,7 @@ const config: NuxtConfig = {
       }
 
       // 記事一覧 ページ
-      const maxPageCount = Math.ceil(
-        articles.length / parseInt(maxArticleCountInList)
-      )
+      const maxPageCount = Math.ceil(articles.length / maxArticleCountInList)
 
       for (let i = 0; i < maxPageCount; i++) {
         routeList.push(`/articles/list/${i + 1}`)
@@ -175,7 +169,7 @@ const config: NuxtConfig = {
   env: {
     FRONT_URL: frontUrl,
     GITHUB_URL: githubUrl,
-    MAX_ARTICLE_COUNT_IN_LIST: maxArticleCountInList,
+    MAX_ARTICLE_COUNT_IN_LIST: maxArticleCountInList.toString(),
     ARTICLE_AUTHOR: articleAuthor,
     ARTICLE_ORGANIZATION: articleOrganization,
     SITE_OWNER: siteOwner,
