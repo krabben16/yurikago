@@ -37,7 +37,10 @@
         <div class="col-12 py-5 bg-white">
           <div class="container">
             <div class="row">
-              <div class="col-12 col-sm-9 mx-sm-auto">
+              <div class="col-12 col-sm-3 mr-sm-auto">
+                <ArticleToc class="pb-4" :toc="article.toc" />
+              </div>
+              <div class="col-12 col-sm-8">
                 <nuxt-content class="markdown-body" :document="article" />
               </div>
             </div>
