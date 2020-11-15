@@ -38,17 +38,6 @@ const config: NuxtConfig = {
           'sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk',
         crossorigin: 'anonymous',
       },
-      /**
-       * Font Awesome CDN
-       * https://fontawesome.com/account/cdn
-       */
-      {
-        rel: 'stylesheet',
-        href: 'https://use.fontawesome.com/releases/v5.13.1/css/all.css',
-        integrity:
-          'sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q',
-        crossorigin: 'anonymous',
-      },
     ],
     script: [
       /**
@@ -82,7 +71,16 @@ const config: NuxtConfig = {
   components: true,
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api', '@nuxtjs/fontawesome'],
+
+  fontawesome: {
+    component: 'Fa',
+    suffix: true,
+    icons: {
+      regular: ['faClock'],
+      solid: ['faTag'],
+    }
+  },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ['@nuxtjs/google-analytics', '@nuxtjs/sitemap', '@nuxt/content'],
