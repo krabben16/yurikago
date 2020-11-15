@@ -37,7 +37,10 @@
         <div class="col-12 py-5 bg-white">
           <div class="container">
             <div class="row">
-              <div class="col-12 col-sm-9 mx-sm-auto">
+              <div class="col-12 col-sm-3 mr-sm-auto">
+                <ArticleToc class="mb-4" :toc="article.toc" />
+              </div>
+              <div class="col-12 col-sm-8">
                 <nuxt-content class="markdown-body" :document="article" />
               </div>
             </div>
@@ -58,22 +61,7 @@
           <div class="container">
             <div class="row">
               <div class="col-12 col-sm-9 mx-sm-auto">
-                <nuxt-link
-                  v-if="next"
-                  class="btn btn-dark float-left"
-                  :to="{ name: 'articles-id', params: { id: next.id } }"
-                  role="button"
-                >
-                  &larr; 次の記事
-                </nuxt-link>
-                <nuxt-link
-                  v-if="prev"
-                  class="btn btn-dark float-right"
-                  :to="{ name: 'articles-id', params: { id: prev.id } }"
-                  role="button"
-                >
-                  前の記事 &rarr;
-                </nuxt-link>
+                <ArticlePager :next="next" :prev="prev" />
               </div>
             </div>
           </div>

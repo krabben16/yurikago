@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1>記事一覧</h1>
-    <h2 class="my-4">
+    <h2 class="mt-4">
       {{ title }}
     </h2>
-    <div v-for="(article, i) in articles" :key="article.id">
+    <div v-for="(article, i) in articles" :key="article.id" class="mt-4">
       <ArticleListItem :article="article" />
       <hr v-if="i < articles.length - 1" />
     </div>
