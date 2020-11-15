@@ -38,7 +38,7 @@
           <div class="container">
             <div class="row">
               <div class="col-12 col-sm-3 mr-sm-auto">
-                <ArticleToc class="pb-4" :toc="article.toc" />
+                <ArticleToc class="mb-4" :toc="article.toc" />
               </div>
               <div class="col-12 col-sm-8">
                 <nuxt-content class="markdown-body" :document="article" />
