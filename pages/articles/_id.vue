@@ -11,11 +11,11 @@
             <div class="row">
               <div class="col-12 col-sm-10 mx-sm-auto">
                 <div>
-                  <i class="far fa-clock mr-1" />
+                  <fa-icon class="mr-1" :icon="['far', 'clock']" />
                   {{ article.date }}
                 </div>
                 <div class="mt-2">
-                  <i class="fas fa-tag mr-1" />
+                  <fa-icon class="mr-1" :icon="['fas', 'tag']" />
                   <!-- NOTE: 二個目のタグからマージンを設定する -->
                   <nuxt-link
                     v-for="(tag, i) in article.tags"
