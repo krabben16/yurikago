@@ -71,7 +71,11 @@ const config: NuxtConfig = {
   components: true,
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api', '@nuxtjs/fontawesome'],
+  buildModules: [
+    '@nuxt/typescript-build',
+    '@nuxtjs/composition-api',
+    '@nuxtjs/fontawesome',
+  ],
 
   fontawesome: {
     component: 'Fa',
@@ -79,7 +83,7 @@ const config: NuxtConfig = {
     icons: {
       regular: ['faClock'],
       solid: ['faTag'],
-    }
+    },
   },
 
   // Modules (https://go.nuxtjs.dev/config-modules)

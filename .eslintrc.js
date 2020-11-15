@@ -1,7 +1,7 @@
 /** 
  * Getting Started with ESLint
  * https://eslint.org/docs/user-guide/getting-started
- */ 
+ */
 
 module.exports = {
   root: true,
