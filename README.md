@@ -1,9 +1,8 @@
 ## 開発
 
 ```shell
-cp .env.dist .env
-npm i
-npm run dev
+yarn install
+yarn dev
 ```
 
 Gitのブランチモデルは git-flow です。
