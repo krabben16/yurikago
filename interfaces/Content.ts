@@ -15,8 +15,8 @@ export interface ContentArticle extends IContentDocument {
   id: number
   title: string
   date: string
-  tags: ContentArticleTag[],
-  toc: ContentArticleToc[],
+  tags: ContentArticleTag[]
+  toc: ContentArticleToc[]
 }
 
 export interface ContentSurround extends IContentDocument {

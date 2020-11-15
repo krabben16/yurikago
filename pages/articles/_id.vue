@@ -37,10 +37,11 @@
         <div class="col-12 py-5 bg-white">
           <div class="container">
             <div class="row">
-              <div class="col-12 col-sm-3 mr-sm-auto">
-                <ArticleToc class="mb-4" :toc="article.toc" />
+              <div class="col-12 col-sm-3">
+                <!-- SP表示の場合に備えて本文とのマージンを設定する -->
+                <ArticleToc class="mb-5" :toc="article.toc" />
               </div>
-              <div class="col-12 col-sm-8">
+              <div class="col-12 col-sm-9">
                 <nuxt-content class="markdown-body" :document="article" />
               </div>
             </div>
