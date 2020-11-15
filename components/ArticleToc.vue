@@ -1,9 +1,16 @@
 <template>
-  <ul>
-    <li v-for="(v, k) in toc" :key="k">
-      <nuxt-link :to="`#${v.id}`">{{ v.text }}</nuxt-link>
-    </li>
-  </ul>
+  <div>
+    <p><strong>TOC</strong></p>
+    <div v-for="(v, k) in toc" :key="k">
+      <nuxt-link
+        :to="`#${v.id}`"
+        :class="`article-toc-item-${v.depth}`"
+        @click.native="$ga.event('view', 'click', 'toc')"
+      >
+        {{ v.text }}
+      </nuxt-link>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

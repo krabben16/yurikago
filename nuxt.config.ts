@@ -89,6 +89,7 @@ const config: NuxtConfig = {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ['@nuxtjs/google-analytics', '@nuxtjs/sitemap', '@nuxt/content'],
 
+  // NOTE: 動作確認する際はyarn startする
   googleAnalytics: {
     id: 'UA-155216702-1',
   },

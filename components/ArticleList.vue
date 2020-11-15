@@ -4,7 +4,7 @@
     <h2 class="mt-4">
       {{ title }}
     </h2>
-    <div class="mt-4" v-for="(article, i) in articles" :key="article.id">
+    <div v-for="(article, i) in articles" :key="article.id" class="mt-4">
       <ArticleListItem :article="article" />
       <hr v-if="i < articles.length - 1" />
     </div>
