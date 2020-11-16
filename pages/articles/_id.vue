@@ -4,68 +4,52 @@
       <Placeholder />
     </template>
     <template v-else>
-      <div class="row">
-        <!-- タイトル -->
-        <div class="col-12 py-5">
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-sm-10 mx-sm-auto">
-                <div>
-                  <fa-icon class="mr-1" :icon="['far', 'clock']" />
-                  {{ article.date }}
-                </div>
-                <div class="mt-2">
-                  <fa-icon class="mr-1" :icon="['fas', 'tag']" />
-                  <!-- NOTE: 二個目のタグからマージンを設定する -->
-                  <nuxt-link
-                    v-for="(tag, i) in article.tags"
-                    :key="tag.id"
-                    :to="{ name: 'tags-id', params: { id: tag.id } }"
-                    :class="{ 'ml-2': i > 0 }"
-                  >
-                    {{ tag.name }}
-                  </nuxt-link>
-                </div>
-                <h1 class="mt-5">
-                  {{ article.title }}
-                </h1>
-              </div>
-            </div>
+      <!-- タイトル -->
+      <div class="row py-5">
+        <div class="col-12 col-sm-6 mx-sm-auto">
+          <div>
+            <fa-icon class="mr-1" :icon="['far', 'clock']" />
+            {{ article.date }}
           </div>
+          <div class="mt-2">
+            <fa-icon class="mr-1" :icon="['fas', 'tag']" />
+            <!-- NOTE: 二個目のタグからマージンを設定する -->
+            <nuxt-link
+              v-for="(tag, i) in article.tags"
+              :key="tag.id"
+              :to="{ name: 'tags-id', params: { id: tag.id } }"
+              :class="{ 'ml-2': i > 0 }"
+            >
+              {{ tag.name }}
+            </nuxt-link>
+          </div>
+          <h1 class="mt-5">
+            {{ article.title }}
+          </h1>
         </div>
-        <!-- 本文 -->
-        <div class="col-12 py-5 bg-white">
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-sm-3">
-                <!-- SP表示の場合に備えて本文とのマージンを設定する -->
-                <ArticleToc class="mb-5" :toc="article.toc" />
-              </div>
-              <div class="col-12 col-sm-9">
-                <nuxt-content class="markdown-body" :document="article" />
-              </div>
-            </div>
-          </div>
+      </div>
+      <!-- TOC -->
+      <div class="row pt-5 bg-white">
+        <div class="col-l2 col-sm-5 mx-sm-auto">
+          <ArticleToc :toc="article.toc" />
         </div>
-        <!-- コメント -->
-        <div class="col-12 py-5">
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-sm-9 mx-sm-auto">
-                <Disqus lang="ja" />
-              </div>
-            </div>
-          </div>
+      </div>
+      <!-- 本文 -->
+      <div class="row py-5 bg-white">
+        <div class="col-12 col-sm-5 mx-sm-auto">
+          <nuxt-content class="markdown-body" :document="article" />
         </div>
-        <!-- ページャー -->
-        <div class="col-12 py-5 bg-white">
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-sm-9 mx-sm-auto">
-                <ArticlePager :next="next" :prev="prev" />
-              </div>
-            </div>
-          </div>
+      </div>
+      <!-- コメント -->
+      <div class="row py-5">
+        <div class="col-12 col-sm-5 mx-sm-auto">
+          <Disqus lang="ja" />
+        </div>
+      </div>
+      <!-- ページャー -->
+      <div class="row py-5 bg-white">
+        <div class="col-12 col-sm-5 mx-sm-auto">
+          <ArticlePager :next="next" :prev="prev" />
         </div>
       </div>
     </template>
