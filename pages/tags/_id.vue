@@ -4,8 +4,8 @@
       <Placeholder />
     </template>
     <template v-else>
-      <div class="row">
-        <div class="col-12 col-sm-6 mx-sm-auto py-5">
+      <div class="row py-5">
+        <div class="col-12 col-sm-5 mx-sm-auto">
           <ArticleList :articles="articles" :title="`タグ: ${tag.name}`" />
         </div>
       </div>
