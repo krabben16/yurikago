@@ -4,9 +4,8 @@
     <h2 class="mt-4">
       {{ title }}
     </h2>
-    <div v-for="(article, i) in articles" :key="article.id" class="mt-4">
+    <div v-for="article in articles" :key="article.id" class="mt-4">
       <ArticleListItem :article="article" />
-      <hr v-if="i < articles.length - 1" />
     </div>
   </div>
 </template>
