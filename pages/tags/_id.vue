@@ -1,11 +1,11 @@
 <template>
-  <div class="container-fluid bg-white min-vh-100">
+  <div class="container-fluid min-vh-100">
     <template v-if="$fetchState.pending || $fetchState.error">
       <Placeholder />
     </template>
     <template v-else>
       <div class="row py-5">
-        <div class="col-12 col-sm-5 mx-sm-auto">
+        <div class="col-12 col-sm-8 mx-sm-auto">
           <ArticleList :articles="articles" :title="`タグ: ${tag.name}`" />
         </div>
       </div>
