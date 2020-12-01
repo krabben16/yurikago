@@ -37,7 +37,7 @@
       <!-- 本文 -->
       <div class="row py-5 bg-white">
         <div class="col-12 col-sm-5 mx-sm-auto">
-          <nuxt-content class="markdown-body" :document="article" />
+          <nuxt-content :document="article" />
         </div>
       </div>
       <!-- コメント -->
