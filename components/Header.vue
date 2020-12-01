@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-sm navbar-light bg-dark navbar-dark">
     <nuxt-link :to="{ name: 'index' }" class="navbar-brand">
-      Yurikago Blog
+      {{ siteName }}
     </nuxt-link>
     <button
       class="navbar-toggler"
@@ -35,6 +35,7 @@ export default defineComponent({
   setup() {
     return {
       githubUrl: process.env.GITHUB_URL,
+      siteName: process.env.SITE_NAME,
     }
   },
 })
