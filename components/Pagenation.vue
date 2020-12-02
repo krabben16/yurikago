@@ -2,7 +2,7 @@
   <div>
     <nuxt-link
       v-if="existsNextPage"
-      class="btn btn-dark float-left"
+      class="btn btn-outline-dark float-left"
       :to="{ name: 'articles-list-page', params: { page: nextPage } }"
       role="button"
     >
@@ -10,7 +10,7 @@
     </nuxt-link>
     <nuxt-link
       v-if="existsPrevPage"
-      class="btn btn-dark float-right"
+      class="btn btn-outline-dark float-right"
       :to="{ name: 'articles-list-page', params: { page: prevPage } }"
       role="button"
     >

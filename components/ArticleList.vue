@@ -1,11 +1,25 @@
 <template>
-  <div>
-    <h1>記事一覧</h1>
-    <h2 class="mt-4">
-      {{ title }}
-    </h2>
-    <div v-for="article in articles" :key="article.id" class="mt-4">
-      <ArticleListItem :article="article" />
+  <div class="card-columns">
+    <div v-for="article in articles" :key="article.id" class="card shadow-sm">
+      <div class="card-body">
+        <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">
+          <h3 class="card-title">
+            {{ article.title }}
+          </h3>
+        </nuxt-link>
+
+        <p class="card-text">on {{ article.date }}</p>
+
+        <nuxt-link
+          v-for="tag in article.tags"
+          :key="tag.id"
+          :to="{ name: 'tags-id', params: { id: tag.id } }"
+          class="btn btn-outline-dark m-1"
+          role="button"
+        >
+          {{ tag.name }}
+        </nuxt-link>
+      </div>
     </div>
   </div>
 </template>
@@ -18,10 +32,6 @@ export default defineComponent({
   props: {
     articles: {
       type: Array as () => ContentArticle[],
-      required: true,
-    },
-    title: {
-      type: String as () => string,
       required: true,
     },
   },

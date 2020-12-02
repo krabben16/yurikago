@@ -1,12 +1,15 @@
 <template>
-  <div class="container-fluid min-vh-100">
+  <div class="min-vh-100">
     <template v-if="$fetchState.pending || $fetchState.error">
       <Placeholder />
     </template>
     <template v-else>
-      <div class="row py-5">
-        <div class="col-12 col-sm-8 mx-sm-auto">
-          <ArticleList :articles="articles" :title="`タグ: ${tag.name}`" />
+      <Header title="記事一覧" :sub-title="`タグ: ${tag.name}`" />
+      <div class="container">
+        <div class="row py-5">
+          <div class="col-12">
+            <ArticleList :articles="articles" />
+          </div>
         </div>
       </div>
     </template>

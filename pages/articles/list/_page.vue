@@ -1,17 +1,20 @@
 <template>
-  <div class="container-fluid min-vh-100">
+  <div class="min-vh-100">
     <template v-if="$fetchState.pending || $fetchState.error">
       <Placeholder />
     </template>
     <template v-else>
-      <div class="row py-5">
-        <div class="col-12 col-sm-8 mx-sm-auto">
-          <ArticleList :articles="articles" :title="`${activePage}ページ目`" />
-          <div class="mt-4">
-            <Pagenation
-              :active-page="activePage"
-              :total-article-count="totalArticleCount"
-            />
+      <Header title="記事一覧" :sub-title="`${activePage}ページ目`" />
+      <div class="container">
+        <div class="row py-5">
+          <div class="col-12">
+            <ArticleList :articles="articles" />
+            <div class="mt-4">
+              <Pagenation
+                :active-page="activePage"
+                :total-article-count="totalArticleCount"
+              />
+            </div>
           </div>
         </div>
       </div>
