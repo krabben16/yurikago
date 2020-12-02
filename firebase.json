@@ -16,6 +16,11 @@
         "regex" : "/articles/tag/(\\d+)",
         "destination" : "/tags/:1",
         "type" : 301
+      },
+      {
+        "regex" : "/articles/(\\d+)",
+        "destination" : "/posts/:1",
+        "type" : 301
       }
     ],
     "trailingSlash": false
