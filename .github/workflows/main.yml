@@ -1,3 +1,4 @@
+# https://dev.classmethod.jp/articles/github-actions-hugo-firebase/
 name: main.yml
 
 on:
@@ -6,14 +7,12 @@ on:
       - master
 
 jobs:
-  build:
-    name: jobs-build
+  deploy:
+    name: jobs-deploy
     runs-on: ubuntu-latest
     steps:
-      - name: uses actions/checkout 
-        uses: actions/checkout@v1
-        with:
-          submodules: true
+      - name: uses actions/checkout
+        uses: actions/checkout@master@v1
       - name: uses peaceiris/actions-hugo
         uses: peaceiris/actions-hugo@v2
         with:
@@ -21,23 +20,6 @@ jobs:
       - name: build hugo project
         run: |
           hugo
-      - name: uses actions/upload-artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: public
-          path: public
-
-  deploy:
-    name: jobs-deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: uses actions/checkout
-        uses: actions/checkout@master
-      - name: uses actions/download-artifact
-        uses: actions/download-artifact@master
-        with:
-          name: public
       - name: uses w9jds/firebase-action
         uses: w9jds/firebase-action@master
         with:
