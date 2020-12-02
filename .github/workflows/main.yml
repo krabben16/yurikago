@@ -1,4 +1,4 @@
-name: hugo_firebase
+name: main.yml
 
 on:
   push:
@@ -7,41 +7,41 @@ on:
 
 jobs:
   build:
-    name: Build hugo project
+    name: jobs-build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: uses actions/checkout 
         uses: actions/checkout@v1
         with:
           submodules: true
-      - name: Setup Hugo
+      - name: uses peaceiris/actions-hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: 'latest'
-      - name: Build hugo pages
+      - name: build hugo project
         run: |
-          cd develop/sampleWeb && hugo
-      - name: Archive Production Artifact
+          hugo
+      - name: uses actions/upload-artifact
         uses: actions/upload-artifact@master
         with:
           name: public
           path: public
 
-deploy:
-  name: Deploy hugo project
-  needs: build
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@master
-    - name: Download Artifact
-      uses: actions/download-artifact@master
-      with:
-        name: public
-    - name: Deploy to Firebase
-      uses: w9jds/firebase-action@master
-      with:
-        args: deploy --only hosting
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        PROJECT_ID: yurikago-blog
+  deploy:
+    name: jobs-deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: uses actions/checkout
+        uses: actions/checkout@master
+      - name: uses actions/download-artifact
+        uses: actions/download-artifact@master
+        with:
+          name: public
+      - name: uses w9jds/firebase-action
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID: yurikago-blog
