@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: uses actions/checkout
-        uses: actions/checkout@master@v1
+        uses: actions/checkout@v1
       - name: uses peaceiris/actions-hugo
         uses: peaceiris/actions-hugo@v2
         with:
