@@ -3,17 +3,17 @@
     <div v-for="(article, i) in articles" :key="article.id">
       <!-- 記事タイトル -->
       <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">
-        <p class="lead">{{ article.title }}</p>
+        <strong>{{ article.title }}</strong>
       </nuxt-link>
 
       <!-- 作成日 -->
-      <div>
+      <div class="mt-1">
         <fa-icon class="mr-1" :icon="['far', 'clock']" />
         {{ article.date }}
       </div>
 
       <!-- タグ -->
-      <div>
+      <div class="mt-1">
         <fa-icon class="mr-1" :icon="['fas', 'tag']" />
         <nuxt-link
           v-for="(tag, i) in article.tags"
