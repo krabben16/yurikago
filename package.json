@@ -1,0 +1,42 @@
+{
+  "name": "yurikago",
+  "description": "技術ブログ",
+  "author": "Hiroki Kawaguchi",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "generate": "nuxt-ts generate",
+    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
+    "lint:fix": "yarn lint --fix",
+    "analyze": "nuxt-ts build --analyze"
+  },
+  "dependencies": {
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@nuxt/content": "^1.10.0",
+    "@nuxt/typescript-runtime": "^2.0.0",
+    "@nuxtjs/composition-api": "^0.15.0",
+    "@nuxtjs/fontawesome": "^1.1.2",
+    "@nuxtjs/google-analytics": "^2.4.0",
+    "@nuxtjs/sitemap": "^2.4.0",
+    "nuxt": "^2.14.7",
+    "prism-themes": "^1.5.0",
+    "vue-disqus": "^4.0.1"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.14.7",
+    "@nuxt/typescript-build": "^2.0.2",
+    "@nuxtjs/eslint-config": "^4.0.0",
+    "@nuxtjs/eslint-config-typescript": "^3.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-loader": "^3.0.4",
+    "eslint-plugin-nuxt": "^1.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "node-sass": "^4.14.1",
+    "prettier": "^2.1.2",
+    "sass-loader": "^9.0.2"
+  }
+}
