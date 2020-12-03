@@ -1,14 +1,21 @@
 <template>
-  <div class="min-vh-100">
+  <div>
     <template v-if="$fetchState.pending || $fetchState.error">
       <Placeholder />
     </template>
     <template v-else>
-      <Header title="記事一覧" :sub-title="`タグ: ${tag.name}`" />
-      <div class="container">
+      <div class="container min-vh-100 px-sm-5 bg-white rounded shadow-sm">
         <div class="row py-5">
           <div class="col-12">
             <ArticleList :articles="articles" />
+          </div>
+        </div>
+        <div class="row pt-5 pb-5">
+          <div class="col-12">
+            <Pagenation
+              :active-page="activePage"
+              :total-article-count="totalArticleCount"
+            />
           </div>
         </div>
       </div>

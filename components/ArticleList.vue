@@ -1,25 +1,32 @@
 <template>
-  <div class="card-columns">
-    <div v-for="article in articles" :key="article.id" class="card shadow-sm">
-      <div class="card-body">
-        <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">
-          <h3 class="card-title">
-            {{ article.title }}
-          </h3>
-        </nuxt-link>
+  <div>
+    <div v-for="(article, i) in articles" :key="article.id">
+      <!-- 記事タイトル -->
+      <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">
+        <p class="lead">{{ article.title }}</p>
+      </nuxt-link>
 
-        <p class="card-text">on {{ article.date }}</p>
+      <!-- 作成日 -->
+      <div>
+        <fa-icon class="mr-1" :icon="['far', 'clock']" />
+        {{ article.date }}
+      </div>
 
+      <!-- タグ -->
+      <div>
+        <fa-icon class="mr-1" :icon="['fas', 'tag']" />
         <nuxt-link
-          v-for="tag in article.tags"
+          v-for="(tag, i) in article.tags"
           :key="tag.id"
           :to="{ name: 'tags-id', params: { id: tag.id } }"
-          class="btn btn-outline-dark m-1"
-          role="button"
+          :class="{ 'ml-2': i > 0 }"
         >
           {{ tag.name }}
         </nuxt-link>
       </div>
+
+      <!-- 区切り -->
+      <hr v-if="i < articles.length - 1" />
     </div>
   </div>
 </template>

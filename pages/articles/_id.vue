@@ -1,55 +1,58 @@
 <template>
-  <div class="container-fluid min-vh-100">
+  <div>
     <template v-if="$fetchState.pending || $fetchState.error">
       <Placeholder />
     </template>
     <template v-else>
-      <!-- タイトル -->
-      <div class="row py-5">
-        <div class="col-12 col-sm-6 mx-sm-auto">
-          <div>
-            <fa-icon class="mr-1" :icon="['far', 'clock']" />
-            {{ article.date }}
+      <div class="container min-vh-100 px-sm-5 bg-white rounded shadow-sm">
+        <div class="row pt-5">
+          <div class="col-12">
+            <!-- 記事タイトル -->
+            <h1>{{ article.title }}</h1>
+
+            <!-- 作成日 -->
+            <div class="mt-3">
+              <fa-icon class="mr-1" :icon="['far', 'clock']" />
+              {{ article.date }}
+            </div>
+
+            <!-- タグ -->
+            <div class="mt-2">
+              <fa-icon class="mr-1" :icon="['fas', 'tag']" />
+              <nuxt-link
+                v-for="(tag, i) in article.tags"
+                :key="tag.id"
+                :to="{ name: 'tags-id', params: { id: tag.id } }"
+                :class="{ 'ml-2': i > 0 }"
+              >
+                {{ tag.name }}
+              </nuxt-link>
+            </div>
           </div>
-          <div class="mt-2">
-            <fa-icon class="mr-1" :icon="['fas', 'tag']" />
-            <!-- NOTE: 二個目のタグからマージンを設定する -->
-            <nuxt-link
-              v-for="(tag, i) in article.tags"
-              :key="tag.id"
-              :to="{ name: 'tags-id', params: { id: tag.id } }"
-              :class="{ 'ml-2': i > 0 }"
-            >
-              {{ tag.name }}
-            </nuxt-link>
+        </div>
+        <!-- TOC -->
+        <!-- <div class="row pt-5">
+          <div class="col-l2">
+            <ArticleToc :toc="article.toc" />
           </div>
-          <h1 class="mt-5">
-            {{ article.title }}
-          </h1>
+        </div> -->
+        <!-- 本文 -->
+        <div class="row pt-5">
+          <div class="col-12">
+            <nuxt-content :document="article" />
+          </div>
         </div>
-      </div>
-      <!-- TOC -->
-      <div class="row pt-5 bg-white">
-        <div class="col-l2 col-sm-5 mx-sm-auto">
-          <ArticleToc :toc="article.toc" />
+        <!-- コメント -->
+        <div class="row pt-5">
+          <div class="col-12">
+            <Disqus lang="ja" />
+          </div>
         </div>
-      </div>
-      <!-- 本文 -->
-      <div class="row py-5 bg-white">
-        <div class="col-12 col-sm-5 mx-sm-auto">
-          <nuxt-content :document="article" />
-        </div>
-      </div>
-      <!-- コメント -->
-      <div class="row py-5">
-        <div class="col-12 col-sm-5 mx-sm-auto">
-          <Disqus lang="ja" />
-        </div>
-      </div>
-      <!-- ページャー -->
-      <div class="row py-5 bg-white">
-        <div class="col-12 col-sm-5 mx-sm-auto">
-          <ArticlePager :next="next" :prev="prev" />
+        <!-- ページャー -->
+        <div class="row pt-5 pb-5">
+          <div class="col-12">
+            <ArticlePager :next="next" :prev="prev" />
+          </div>
         </div>
       </div>
     </template>

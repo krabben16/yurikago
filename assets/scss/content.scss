@@ -26,7 +26,14 @@
   }
 
   img {
-    width: 100%;
+    max-width: 100%;
+    // 画像を中央寄せする
+    display: block;
+    margin: 0 auto
+  }
+
+  p:has(img) {
+    text-align: center;
   }
 
   blockquote {

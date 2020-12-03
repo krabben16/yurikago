@@ -1,14 +1,14 @@
 <template>
-  <div class="container-fluid bg-white">
+  <div class="container px-5 bg-white rounded shadow-sm">
     <div class="row">
-      <div class="col-12 col-sm-9 mx-sm-auto">
+      <div class="col-12">
         <div
           class="min-vh-100 d-flex justify-content-center align-items-center"
         >
-          <h1 v-if="error.statusCode === 404">
+          <p v-if="error.statusCode === 404" class="display-4">
             {{ error.statusCode }} {{ error.message }}
-          </h1>
-          <h1 v-else>{{ error.statusCode }} Error</h1>
+          </p>
+          <p v-else class="display-4">{{ error.statusCode }} Error</p>
         </div>
       </div>
     </div>

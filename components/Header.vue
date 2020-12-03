@@ -1,25 +1,42 @@
 <template>
-  <div class="jumbotron jumbotron-fluid bg-white text-center">
-    <div class="container py-4">
-      <h2 class="jumbotron-heading">{{ title }}</h2>
-      <p class="lead text-muted">{{ subTitle }}</p>
+  <nav class="navbar navbar-expand-sm navbar-light pb-4">
+    <nuxt-link :to="{ name: 'index' }" class="navbar-brand">
+      {{ siteName }}
+    </nuxt-link>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navmenu"
+      aria-controls="navmenu"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon" />
+    </button>
+    <div id="navmenu" class="collapse navbar-collapse">
+      <div class="navbar-nav">
+        <a
+          class="nav-item nav-link"
+          :href="githubUrl"
+          target="_blank"
+          @click="$ga.event('view', 'click', 'github')"
+          >GitHub</a
+        >
+      </div>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    subTitle: {
-      type: String,
-      required: true,
-    },
+  setup() {
+    return {
+      githubUrl: process.env.GITHUB_URL,
+      siteName: process.env.SITE_NAME,
+    }
   },
 })
 </script>
