@@ -16,10 +16,10 @@
       <div class="mt-1">
         <fa-icon class="mr-1" :icon="['fas', 'tag']" />
         <nuxt-link
-          v-for="(tag, i) in article.tags"
+          v-for="(tag, j) in article.tags"
           :key="tag.id"
           :to="{ name: 'tags-id', params: { id: tag.id } }"
-          :class="{ 'ml-2': i > 0 }"
+          :class="{ 'ml-2': j > 0 }"
         >
           {{ tag.name }}
         </nuxt-link>
