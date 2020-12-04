@@ -1,11 +1,13 @@
 import { contentFunc } from '@nuxt/content/types/content'
 import { ContentArticle, ContentSurround } from '~/interfaces/Content'
 
+// 合計
 async function fetchTotalArticleCount($content: contentFunc) {
-  const articleIds = await $content('articles').only(['id']).fetch()
-  return (articleIds as ContentArticle[]).length
+  const articles = await $content('articles').fetch()
+  return (articles as ContentArticle[]).length
 }
 
+// 最新
 async function fetchRecentlyArticles(
   $content: contentFunc,
   limitCount: number
@@ -14,9 +16,11 @@ async function fetchRecentlyArticles(
     .sortBy('id', 'desc')
     .limit(limitCount)
     .fetch()
+
   return articles as ContentArticle[]
 }
 
+// ページ番号
 async function fetchArticlesByPage(
   $content: contentFunc,
   skipCount: number,
@@ -27,31 +31,30 @@ async function fetchArticlesByPage(
     .skip(skipCount)
     .limit(limitCount)
     .fetch()
+
   return articles as ContentArticle[]
 }
 
+// タグID
 async function fetchArticlesByTagId($content: contentFunc, tagId: number) {
   const articles = await $content('articles')
     .where({ 'tags.id': { $contains: tagId } })
     .sortBy('id', 'desc')
     .fetch()
-  return articles as ContentArticle[]
-}
-
-async function fetchArticlesById($content: contentFunc, id: string) {
-  const articles = await $content('articles')
-    .where({ id: parseInt(id) })
-    .fetch()
 
   return articles as ContentArticle[]
 }
 
-async function fetchSurround($content: contentFunc, id: string) {
+// 記事ID
+async function fetchArticlesById($content: contentFunc, id: number) {
+  const articles = await $content('articles').where({ id }).fetch()
+  return articles as ContentArticle[]
+}
+
+async function fetchSurround($content: contentFunc, id: number) {
   const surround = await $content('articles')
-    .only(['id'])
     .sortBy('id')
     // articles以下のファイル名を指定する
-    // CSRの場合はparams.idの型がnumberになるのでstringに変換する
     .surround(id.toString())
     .fetch()
 

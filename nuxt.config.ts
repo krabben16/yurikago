@@ -87,7 +87,22 @@ const config: NuxtConfig = {
   },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: ['@nuxtjs/google-analytics', '@nuxtjs/sitemap', '@nuxt/content'],
+  modules: [
+    '@nuxt/content',
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/dayjs',
+  ],
+
+  content: {
+    nestedProperties: ['tags.id'],
+    markdown: {
+      prism: {
+        theme: 'prism-themes/themes/prism-nord.css',
+      },
+      rehypePlugins: ['rehype-plugin-image-native-lazy-loading'],
+    },
+  },
 
   // NOTE: 動作確認する際はyarn startする
   googleAnalytics: {
@@ -126,13 +141,9 @@ const config: NuxtConfig = {
     },
   },
 
-  content: {
-    nestedProperties: ['tags.id'],
-    markdown: {
-      prism: {
-        theme: 'prism-themes/themes/prism-nord.css',
-      },
-    },
+  dayjs: {
+    locales: ['ja'],
+    defaultLocale: 'ja',
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

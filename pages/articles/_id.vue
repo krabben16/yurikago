@@ -13,7 +13,7 @@
             <!-- 作成日 -->
             <div class="mt-3">
               <fa-icon class="mr-1" :icon="['far', 'clock']" />
-              {{ article.date }}
+              {{ $dayjs(article.date).format('YYYY/MM/DD') }}
             </div>
 
             <!-- タグ -->
@@ -82,7 +82,8 @@ export default defineComponent({
     const prevRef = ref<ContentSurround>()
 
     useFetch(async () => {
-      const articles = await fetchArticlesById($content, params.value.id)
+      const articleId = parseInt(params.value.id)
+      const articles = await fetchArticlesById($content, articleId)
 
       // 記事データが存在しない場合はエラー
       // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
@@ -94,7 +95,7 @@ export default defineComponent({
 
       // 前後の記事
       // https://content.nuxtjs.org/ja/examples#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3
-      const surround = await fetchSurround($content, params.value.id)
+      const surround = await fetchSurround($content, articleId)
       const [prev, next] = surround
 
       articleRef.value = articles[0]
