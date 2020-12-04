@@ -9,7 +9,7 @@
       <!-- 作成日 -->
       <div class="mt-1">
         <fa-icon class="mr-1" :icon="['far', 'clock']" />
-        {{ article.date }}
+        {{ $dayjs(article.date).format('YYYY/MM/DD') }}
       </div>
 
       <!-- タグ -->
