@@ -5,7 +5,7 @@
     </template>
     <template v-else>
       <div class="container min-vh-100 px-sm-5 bg-white rounded shadow-sm">
-        <div class="row py-5">
+        <div class="row pt-5">
           <div class="col-12">
             <ArticleList :articles="articles" />
           </div>
