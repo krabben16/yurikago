@@ -100,9 +100,7 @@ const config: NuxtConfig = {
       prism: {
         theme: 'prism-themes/themes/prism-nord.css',
       },
-      rehypePlugins: [
-        'rehype-plugin-image-native-lazy-loading'
-      ],
+      rehypePlugins: ['rehype-plugin-image-native-lazy-loading'],
     },
   },
 
