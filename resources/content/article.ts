@@ -46,9 +46,9 @@ async function fetchArticlesByTagId($content: contentFunc, tagId: number) {
 }
 
 // 記事ID
-async function fetchArticlesById($content: contentFunc, id: number) {
-  const articles = await $content('articles').where({ id }).fetch()
-  return articles as ContentArticle[]
+async function fetchArticleById($content: contentFunc, id: number) {
+  const article = await $content(`articles/${id}`).fetch()
+  return article as ContentArticle
 }
 
 async function fetchSurround($content: contentFunc, id: number) {
@@ -61,11 +61,22 @@ async function fetchSurround($content: contentFunc, id: number) {
   return surround as ContentSurround[]
 }
 
+// 記事存在チェック
+async function existsArticleById($content: contentFunc, id: number) {
+  try {
+    await $content(`articles/${id}`).fetch()
+    return true
+  } catch {
+    return false
+  }
+}
+
 export {
   fetchTotalArticleCount,
   fetchRecentlyArticles,
   fetchArticlesByPage,
   fetchArticlesByTagId,
-  fetchArticlesById,
+  fetchArticleById,
   fetchSurround,
+  existsArticleById,
 }

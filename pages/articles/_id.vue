@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="$fetchState.pending || $fetchState.error">
+    <template v-if="!article || !surround">
       <Placeholder />
     </template>
     <template v-else>
@@ -51,7 +51,7 @@
         <!-- ページャー -->
         <div class="row pt-5 pb-5">
           <div class="col-12">
-            <ArticlePager :next="next" :prev="prev" />
+            <ArticlePager :next="surround[1]" :prev="surround[0]" />
           </div>
         </div>
       </div>
@@ -62,54 +62,50 @@
 <script lang="ts">
 import {
   defineComponent,
-  ref,
+  useAsync,
   useContext,
-  useFetch,
   useMeta,
 } from '@nuxtjs/composition-api'
-import { ContentArticle, ContentSurround } from '~/interfaces/Content'
 import { createHeadObject } from '~/resources/head/article'
-import { fetchArticlesById, fetchSurround } from '~/resources/content/article'
+import {
+  fetchArticleById,
+  fetchSurround,
+  existsArticleById,
+} from '~/resources/content/article'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
   head: {},
   setup() {
-    const { $content, error, params, route } = useContext()
+    const { $content, $dayjs, error, params, route } = useContext()
+    const articleId = parseInt(params.value.id)
 
-    const articleRef = ref<ContentArticle>()
-    const nextRef = ref<ContentSurround>()
-    const prevRef = ref<ContentSurround>()
+    const articleRef = useAsync(async () => {
+      const existsArticle = await existsArticleById($content, articleId)
 
-    useFetch(async () => {
-      const articleId = parseInt(params.value.id)
-      const articles = await fetchArticlesById($content, articleId)
-
-      // 記事データが存在しない場合はエラー
-      // https://ja.nuxtjs.org/api/context/#-code-error-code-em-function-em-
-      if (articles.length === 0) {
+      if (!existsArticle) {
         error({ statusCode: 404, message: 'Not Found' })
-        // $fetchState.error
-        throw new Error('Not Found')
+        return null
       }
 
-      // 前後の記事
-      // https://content.nuxtjs.org/ja/examples#%E3%83%9A%E3%83%BC%E3%82%B8%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3
+      return await fetchArticleById($content, articleId)
+    })
+
+    const surroundRef = useAsync(async () => {
       const surround = await fetchSurround($content, articleId)
       const [prev, next] = surround
 
-      articleRef.value = articles[0]
-      prevRef.value = prev
-      nextRef.value = next
+      return {
+        next,
+        prev,
+      }
     })
 
     useMeta(() => {
       if (!articleRef.value) return {}
 
-      const joinedTagsName = articleRef.value.tags.map((t) => t.name).join(',')
-
       const title = articleRef.value.title
-      const description = `「${articleRef.value.title}」についてまとめた記事です。この記事は以下のキーワード「${joinedTagsName}」を含みます。`
+      const description = `「${title}」についてまとめた記事です。`
       const path = route.value.path
 
       const breadcrumbSchema = {
@@ -120,7 +116,7 @@ export default defineComponent({
           },
           {
             name: title,
-            path: `/articles/${articleRef.value.id}`,
+            path: route.value.path,
           },
         ],
       }
@@ -128,8 +124,12 @@ export default defineComponent({
       const articleSchema = {
         articleId: articleRef.value.id,
         headlineValue: title,
-        datePublishedValue: `${articleRef.value.date}T00:00:00+09:00`,
-        dateModifiedValue: `${articleRef.value.date}T00:00:00+09:00`,
+        datePublishedValue: $dayjs(articleRef.value.date).format(
+          'YYYY-MM-DDTHH:mm:ssZ'
+        ),
+        dateModifiedValue: $dayjs(articleRef.value.date).format(
+          'YYYY-MM-DDTHH:mm:ssZ'
+        ),
       }
 
       return createHeadObject({
@@ -143,8 +143,7 @@ export default defineComponent({
 
     return {
       article: articleRef,
-      next: nextRef,
-      prev: prevRef,
+      surround: surroundRef,
     }
   },
 })
