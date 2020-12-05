@@ -1,14 +1,18 @@
-import { contentFunc } from '@nuxt/content/types/content'
-import { ContentArticle, ContentSurround } from '~/interfaces/Content'
+import { contentFunc, IContentDocument } from '@nuxt/content/types/content'
+import {
+  ContentArticle,
+  ContentSurround,
+  ContentArticleTag,
+} from '~/interfaces/Content'
 
-// 合計
-async function fetchTotalArticleCount($content: contentFunc) {
+// 記事の合計数を取得する
+export async function fetchTotalArticleCount($content: contentFunc) {
   const articles = await $content('articles').fetch()
   return (articles as ContentArticle[]).length
 }
 
-// 最新
-async function fetchRecentlyArticles(
+// 直近の記事データを取得する
+export async function fetchRecentlyArticles(
   $content: contentFunc,
   limitCount: number
 ) {
@@ -20,8 +24,8 @@ async function fetchRecentlyArticles(
   return articles as ContentArticle[]
 }
 
-// ページ番号
-async function fetchArticlesByPage(
+// ページ番号から記事データを取得する
+export async function fetchArticlesByPage(
   $content: contentFunc,
   skipCount: number,
   limitCount: number
@@ -35,8 +39,11 @@ async function fetchArticlesByPage(
   return articles as ContentArticle[]
 }
 
-// タグID
-async function fetchArticlesByTagId($content: contentFunc, tagId: number) {
+// タグIDから記事データを取得する
+export async function fetchArticlesByTagId(
+  $content: contentFunc,
+  tagId: number
+) {
   const articles = await $content('articles')
     .where({ 'tags.id': { $contains: tagId } })
     .sortBy('id', 'desc')
@@ -45,13 +52,14 @@ async function fetchArticlesByTagId($content: contentFunc, tagId: number) {
   return articles as ContentArticle[]
 }
 
-// 記事ID
-async function fetchArticlesById($content: contentFunc, id: number) {
-  const articles = await $content('articles').where({ id }).fetch()
-  return articles as ContentArticle[]
+// 記事IDから記事データを取得する
+export async function fetchArticleById($content: contentFunc, id: number) {
+  const article = await $content(`articles/${id}`).fetch()
+  return article as ContentArticle
 }
 
-async function fetchSurround($content: contentFunc, id: number) {
+// 両隣の記事データを取得する
+export async function fetchSurround($content: contentFunc, id: number) {
   const surround = await $content('articles')
     .sortBy('id')
     // articles以下のファイル名を指定する
@@ -61,11 +69,31 @@ async function fetchSurround($content: contentFunc, id: number) {
   return surround as ContentSurround[]
 }
 
-export {
-  fetchTotalArticleCount,
-  fetchRecentlyArticles,
-  fetchArticlesByPage,
-  fetchArticlesByTagId,
-  fetchArticlesById,
-  fetchSurround,
+// 記事IDから記事データの存在をチェックする
+export async function existsArticleById($content: contentFunc, id: number) {
+  try {
+    await $content(`articles/${id}`).fetch()
+    return true
+  } catch {
+    return false
+  }
+}
+
+// タグIDからタグデータを取得する
+export async function fetchTagById($content: contentFunc, id: number) {
+  const articles = (await $content('articles')
+    .only(['tags'])
+    .fetch()) as IContentDocument[]
+
+  for (let i = 0; i < articles.length; i++) {
+    const article = articles[i]
+    for (let j = 0; j < article.tags.length; j++) {
+      const tag = article.tags[j]
+      if (tag.id === id) {
+        return tag as ContentArticleTag
+      }
+    }
+  }
+
+  return null
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="$fetchState.pending || $fetchState.error">
+    <template v-if="!totalArticleCount || !articles">
       <Placeholder />
     </template>
     <template v-else>
@@ -26,12 +26,10 @@
 <script lang="ts">
 import {
   defineComponent,
-  ref,
+  useAsync,
   useContext,
-  useFetch,
   useMeta,
 } from '@nuxtjs/composition-api'
-import { ContentArticle } from '~/interfaces/Content'
 import { createHeadObject } from '~/resources/head/common'
 import {
   fetchTotalArticleCount,
@@ -44,24 +42,18 @@ export default defineComponent({
   setup() {
     const { $content, route } = useContext()
 
-    const activePageRef = ref()
-    const totalArticleCountRef = ref()
-    const articlesRef = ref<ContentArticle[]>()
+    const activePage = 1
 
-    useFetch(async () => {
-      const activePage = 1
+    const totalArticleCount = useAsync(async () => {
+      return await fetchTotalArticleCount($content)
+    })
 
-      const totalArticleCount = await fetchTotalArticleCount($content)
-
+    const articles = useAsync(async () => {
       const limitCount = parseInt(
         process.env.MAX_ARTICLE_COUNT_IN_LIST as string
       )
 
-      const articles = await fetchRecentlyArticles($content, limitCount)
-
-      activePageRef.value = activePage
-      totalArticleCountRef.value = totalArticleCount
-      articlesRef.value = articles
+      return await fetchRecentlyArticles($content, limitCount)
     })
 
     useMeta(() => {
@@ -87,9 +79,9 @@ export default defineComponent({
     })
 
     return {
-      activePage: activePageRef,
-      totalArticleCount: totalArticleCountRef,
-      articles: articlesRef,
+      activePage,
+      totalArticleCount,
+      articles,
     }
   },
 })

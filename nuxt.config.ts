@@ -1,4 +1,5 @@
 import type { NuxtConfig } from '@nuxt/types'
+import { contentFunc, IContentDocument } from '@nuxt/content/types/content'
 
 const frontUrl = 'https://www.yurikago-blog.com'
 const githubUrl = 'https://github.com/krabben16/yurikago'
@@ -115,8 +116,10 @@ const config: NuxtConfig = {
       const routeList = []
 
       // https://content.nuxtjs.org/ja/advanced#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%E3%81%AA%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95
-      const { $content } = require('@nuxt/content')
-      const articles = await $content('articles').only(['id', 'tags']).fetch()
+      const { $content }: { $content: contentFunc } = require('@nuxt/content')
+      const articles = (await $content('articles')
+        .only(['id', 'tags'])
+        .fetch()) as IContentDocument[]
 
       for (let i = 0; i < articles.length; i++) {
         const article = articles[i]
