@@ -1,17 +1,16 @@
 <template>
-  <div>
-    <template v-if="!articles || !tag">
-      <Placeholder />
-    </template>
-    <template v-else>
-      <div class="container min-vh-100 px-sm-5 bg-white rounded shadow-sm">
-        <div class="row pt-5">
-          <div class="col-12">
-            <ArticleList :articles="articles" />
-          </div>
-        </div>
+  <div class="container min-vh-100 px-sm-5 bg-white rounded shadow-sm">
+    <!-- パンくず -->
+    <div v-if="meta" class="row pt-5">
+      <div class="col-12">
+        <Breadcrumb :items="meta.breadcrumbSchema.items" />
       </div>
-    </template>
+    </div>
+    <div v-if="articles" class="row pt-5">
+      <div class="col-12">
+        <ArticleList :articles="articles" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -22,6 +21,7 @@ import {
   useContext,
   useMeta,
 } from '@nuxtjs/composition-api'
+import { BreadcrumbSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/resources/head/common'
 import { fetchArticlesByTagId, fetchTagById } from '~/resources/content/article'
 
@@ -55,14 +55,19 @@ export default defineComponent({
       return tag
     })
 
-    useMeta(() => {
-      if (!tag.value) return {}
+    const meta = useAsync(async () => {
+      const tagId = parseInt(params.value.id)
+      const tag = await fetchTagById($content, tagId)
 
-      const title = tag.value.name
-      const description = `タグ「${tag.value.name}」を含む記事の一覧です。`
+      if (!tag) {
+        return null
+      }
+
+      const title = `タグ(${tag.name})`
+      const description = `タグ「${tag.name}」を含む記事の一覧です。`
       const path = route.value.path
 
-      const breadcrumbSchema = {
+      const breadcrumbSchema: BreadcrumbSchema = {
         items: [
           {
             name: 'トップページ',
@@ -75,15 +80,27 @@ export default defineComponent({
         ],
       }
 
-      return createHeadObject({
+      return {
         title,
         description,
         path,
         breadcrumbSchema,
+      }
+    })
+
+    useMeta(() => {
+      if (!meta.value) return {}
+
+      return createHeadObject({
+        title: meta.value.title,
+        description: meta.value.description,
+        path: meta.value.path,
+        breadcrumbSchema: meta.value.breadcrumbSchema,
       })
     })
 
     return {
+      meta,
       articles,
       tag,
     }

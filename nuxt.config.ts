@@ -72,10 +72,7 @@ const config: NuxtConfig = {
   components: true,
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: [
-    '@nuxt/typescript-build',
-    '@nuxtjs/composition-api',
-  ],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api'],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [

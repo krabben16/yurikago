@@ -1,25 +1,24 @@
 <template>
-  <div>
-    <template v-if="!totalArticleCount || !articles">
-      <Placeholder />
-    </template>
-    <template v-else>
-      <div class="container min-vh-100 px-sm-5 bg-white rounded shadow-sm">
-        <div class="row pt-5">
-          <div class="col-12">
-            <ArticleList :articles="articles" />
-          </div>
-        </div>
-        <div class="row pt-5 pb-5">
-          <div class="col-12">
-            <Pagenation
-              :active-page="activePage"
-              :total-article-count="totalArticleCount"
-            />
-          </div>
-        </div>
+  <div class="container min-vh-100 px-sm-5 bg-white rounded shadow-sm">
+    <!-- パンくず -->
+    <div v-if="meta" class="row pt-5">
+      <div class="col-12">
+        <Breadcrumb :items="meta.breadcrumbSchema.items" />
       </div>
-    </template>
+    </div>
+    <div v-if="articles" class="row pt-5">
+      <div class="col-12">
+        <ArticleList :articles="articles" />
+      </div>
+    </div>
+    <div v-if="activePage && totalArticleCount" class="row pt-5 pb-5">
+      <div class="col-12">
+        <Pagenation
+          :active-page="activePage"
+          :total-article-count="totalArticleCount"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -30,6 +29,7 @@ import {
   useContext,
   useMeta,
 } from '@nuxtjs/composition-api'
+import { BreadcrumbSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/resources/head/common'
 import {
   fetchTotalArticleCount,
@@ -56,32 +56,54 @@ export default defineComponent({
       return await fetchRecentlyArticles($content, limitCount)
     })
 
-    useMeta(() => {
+    const breadcrumbItems = useAsync(() => {
+      return [
+        {
+          name: 'トップページ',
+          path: route.value.path,
+        },
+      ]
+    })
+
+    const meta = useAsync(() => {
       const title = 'トップページ'
       const description = `${process.env.SITE_OWNER}の技術ブログです。`
       const path = route.value.path
 
-      const breadcrumbSchema = {
+      const breadcrumbSchema: BreadcrumbSchema = {
         items: [
           {
             name: title,
-            path: '/',
+            path: route.value.path,
           },
         ],
       }
 
-      return createHeadObject({
+      return {
         title,
         description,
         path,
         breadcrumbSchema,
+      }
+    })
+
+    useMeta(() => {
+      if (!meta.value) return {}
+
+      return createHeadObject({
+        title: meta.value.title,
+        description: meta.value.description,
+        path: meta.value.path,
+        breadcrumbSchema: meta.value.breadcrumbSchema,
       })
     })
 
     return {
+      meta,
       activePage,
       totalArticleCount,
       articles,
+      breadcrumbItems,
     }
   },
 })
