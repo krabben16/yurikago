@@ -51,7 +51,7 @@
         <!-- ページャー -->
         <div class="row pt-5 pb-5">
           <div class="col-12">
-            <ArticlePager :next="surround[1]" :prev="surround[0]" />
+            <ArticlePager :next="surround.next" :prev="surround.prev" />
           </div>
         </div>
       </div>
@@ -78,9 +78,9 @@ export default defineComponent({
   head: {},
   setup() {
     const { $content, $dayjs, error, params, route } = useContext()
-    const articleId = parseInt(params.value.id)
 
     const articleRef = useAsync(async () => {
+      const articleId = parseInt(params.value.id)
       const existsArticle = await existsArticleById($content, articleId)
 
       if (!existsArticle) {
@@ -92,6 +92,7 @@ export default defineComponent({
     })
 
     const surroundRef = useAsync(async () => {
+      const articleId = parseInt(params.value.id)
       const surround = await fetchSurround($content, articleId)
       const [prev, next] = surround
 

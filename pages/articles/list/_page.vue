@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="$fetchState.pending || $fetchState.error">
+    <template v-if="!totalArticleCount || !articles">
       <Placeholder />
     </template>
     <template v-else>
@@ -26,12 +26,10 @@
 <script lang="ts">
 import {
   defineComponent,
-  ref,
+  useAsync,
   useContext,
-  useFetch,
   useMeta,
 } from '@nuxtjs/composition-api'
-import { ContentArticle } from '~/interfaces/Content'
 import { createHeadObject } from '~/resources/head/common'
 import {
   fetchTotalArticleCount,
@@ -44,14 +42,14 @@ export default defineComponent({
   setup() {
     const { $content, error, params, route } = useContext()
 
-    const activePageRef = ref()
-    const totalArticleCountRef = ref()
-    const articlesRef = ref<ContentArticle[]>()
+    const activePage = useAsync(() => parseInt(params.value.page))
 
-    useFetch(async () => {
+    const totalArticleCount = useAsync(async () => {
+      return await fetchTotalArticleCount($content)
+    })
+
+    const articles = useAsync(async () => {
       const activePage = parseInt(params.value.page)
-
-      const totalArticleCount = await fetchTotalArticleCount($content)
 
       const maxArticleCountInList = parseInt(
         process.env.MAX_ARTICLE_COUNT_IN_LIST as string
@@ -70,23 +68,19 @@ export default defineComponent({
         limitCount
       )
 
-      // 記事データが存在しない場合はエラー
       if (articles.length === 0) {
         error({ statusCode: 404, message: 'Not Found' })
-        // $fetchState.error
-        throw new Error('Not Found')
+        return null
       }
 
-      activePageRef.value = activePage
-      totalArticleCountRef.value = totalArticleCount
-      articlesRef.value = articles
+      return articles
     })
 
     useMeta(() => {
-      if (!activePageRef.value) return {}
+      if (!activePage.value) return {}
 
-      const title = `記事一覧${activePageRef.value}`
-      const description = `記事一覧の${activePageRef.value}ページ目です。`
+      const title = `記事一覧${activePage.value}`
+      const description = `記事一覧の${activePage.value}ページ目です。`
       const path = route.value.path
 
       const breadcrumbSchema = {
@@ -97,7 +91,7 @@ export default defineComponent({
           },
           {
             name: title,
-            path: `/articles/list/${activePageRef.value}`,
+            path: route.value.path,
           },
         ],
       }
@@ -111,9 +105,9 @@ export default defineComponent({
     })
 
     return {
-      activePage: activePageRef,
-      totalArticleCount: totalArticleCountRef,
-      articles: articlesRef,
+      activePage,
+      totalArticleCount,
+      articles,
     }
   },
 })

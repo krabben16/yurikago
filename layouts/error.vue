@@ -8,7 +8,7 @@
           <p v-if="error.statusCode === 404" class="display-4">
             {{ error.statusCode }} {{ error.message }}
           </p>
-          <p v-else class="display-4">{{ error.statusCode }} Error</p>
+          <p v-else class="display-4">{{ error.message }}</p>
         </div>
       </div>
     </div>

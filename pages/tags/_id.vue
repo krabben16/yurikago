@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="$fetchState.pending || $fetchState.error">
+    <template v-if="!articles || !tag">
       <Placeholder />
     </template>
     <template v-else>
@@ -8,14 +8,6 @@
         <div class="row pt-5">
           <div class="col-12">
             <ArticleList :articles="articles" />
-          </div>
-        </div>
-        <div class="row pt-5 pb-5">
-          <div class="col-12">
-            <Pagenation
-              :active-page="activePage"
-              :total-article-count="totalArticleCount"
-            />
           </div>
         </div>
       </div>
@@ -26,33 +18,12 @@
 <script lang="ts">
 import {
   defineComponent,
-  ref,
+  useAsync,
   useContext,
-  useFetch,
   useMeta,
 } from '@nuxtjs/composition-api'
-import { ContentArticle, ContentArticleTag } from '~/interfaces/Content'
 import { createHeadObject } from '~/resources/head/common'
-import { fetchArticlesByTagId } from '~/resources/content/article'
-
-/**
- * tagIdと一致するオブジェクトを取得する
- */
-function searchTagObject(tagId: number, articleList: ContentArticle[]) {
-  for (let i = 0; i < articleList.length; i++) {
-    const article = articleList[i]
-    for (let j = 0; j < article.tags.length; j++) {
-      const tag = article.tags[j]
-      if (tag.id === tagId) {
-        return tag
-      }
-    }
-  }
-  return {
-    id: -1,
-    name: '',
-  }
-}
+import { fetchArticlesByTagId, fetchTagById } from '~/resources/content/article'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
@@ -60,32 +31,35 @@ export default defineComponent({
   setup() {
     const { $content, error, params, route } = useContext()
 
-    const articlesRef = ref<ContentArticle[]>()
-    const tagRef = ref<ContentArticleTag>()
-
-    useFetch(async () => {
+    const articles = useAsync(async () => {
       const tagId = parseInt(params.value.id)
-
       const articles = await fetchArticlesByTagId($content, tagId)
 
-      // 記事データが存在しない場合はエラー
       if (articles.length === 0) {
         error({ statusCode: 404, message: 'Not Found' })
-        // $fetchState.error
-        throw new Error('Not Found')
+        return null
       }
 
-      const tag = searchTagObject(tagId, articles)
+      return articles
+    })
 
-      articlesRef.value = articles
-      tagRef.value = tag
+    const tag = useAsync(async () => {
+      const tagId = parseInt(params.value.id)
+      const tag = await fetchTagById($content, tagId)
+
+      if (!tag) {
+        error({ statusCode: 404, message: 'Not Found' })
+        return null
+      }
+
+      return tag
     })
 
     useMeta(() => {
-      if (!tagRef.value) return {}
+      if (!tag.value) return {}
 
-      const title = tagRef.value.name
-      const description = `タグ「${tagRef.value.name}」を含む記事の一覧です。`
+      const title = tag.value.name
+      const description = `タグ「${tag.value.name}」を含む記事の一覧です。`
       const path = route.value.path
 
       const breadcrumbSchema = {
@@ -96,7 +70,7 @@ export default defineComponent({
           },
           {
             name: title,
-            path: `/tags/${tagRef.value.id}`,
+            path: route.value.path,
           },
         ],
       }
@@ -110,8 +84,8 @@ export default defineComponent({
     })
 
     return {
-      articles: articlesRef,
-      tag: tagRef,
+      articles,
+      tag,
     }
   },
 })
