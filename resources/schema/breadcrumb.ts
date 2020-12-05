@@ -7,7 +7,7 @@ import { BreadcrumbSchema } from '~/interfaces/Schema'
 export const createBreadcrumbSchemaObject = (
   breadcrumbSchema: BreadcrumbSchema
 ) => {
-  const itemList = breadcrumbSchema.breadcrumbItemList.map((v, k) => {
+  const itemList = breadcrumbSchema.items.map((v, k) => {
     return {
       '@type': 'ListItem',
       'position': k + 1,

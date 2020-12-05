@@ -12,13 +12,10 @@
     "analyze": "nuxt-ts build --analyze"
   },
   "dependencies": {
-    "@fortawesome/free-regular-svg-icons": "^5.15.1",
-    "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@nuxt/content": "^1.10.0",
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/composition-api": "^0.15.0",
     "@nuxtjs/dayjs": "^1.2.1",
-    "@nuxtjs/fontawesome": "^1.1.2",
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/sitemap": "^2.4.0",
     "nuxt": "^2.14.7",
