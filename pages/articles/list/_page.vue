@@ -84,7 +84,7 @@ export default defineComponent({
       const path = route.value.path
 
       const breadcrumbSchema = {
-        breadcrumbItemList: [
+        items: [
           {
             name: 'トップページ',
             path: '/',

@@ -16,12 +16,12 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { BreadcrumbSchemaItem } from '~/interfaces/Schema'
+import { BreadcrumbItem } from '~/interfaces/Schema'
 
 export default defineComponent({
   props: {
     items: {
-      type: Array as () => BreadcrumbSchemaItem[],
+      type: Array as () => BreadcrumbItem[],
       required: true,
     },
   },

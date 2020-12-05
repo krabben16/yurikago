@@ -1,10 +1,10 @@
-export interface BreadcrumbSchemaItem {
+export interface BreadcrumbItem {
   name: string
   path: string
 }
 
 export interface BreadcrumbSchema {
-  breadcrumbItemList: BreadcrumbSchemaItem[]
+  items: BreadcrumbItem[]
 }
 
 export interface ArticleSchema {
