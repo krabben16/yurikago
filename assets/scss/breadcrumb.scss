@@ -1,0 +1,33 @@
+.custom-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.75rem 0;
+  list-style: none;
+
+  // bootstrapのスタイルを上書きする
+  margin-bottom: 0;
+
+  .custom-breadcrumb-item {
+    display: flex;
+  }
+
+  .custom-breadcrumb-item:nth-child(n+2) {
+    padding-left: 0.5rem;
+  }
+
+  .custom-breadcrumb-item:nth-child(1)::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    content: '\1F35E';
+  }
+
+  .custom-breadcrumb-item:nth-child(n+2)::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    content: '/';
+  }
+
+  .active {
+    color: $textMuted;
+  }
+}

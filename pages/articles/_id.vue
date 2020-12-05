@@ -1,10 +1,16 @@
 <template>
   <div>
-    <template v-if="!article || !surround">
+    <template v-if="!article || !surround || !breadcrumbItems">
       <Placeholder />
     </template>
     <template v-else>
       <div class="container min-vh-100 px-sm-5 bg-white rounded shadow-sm">
+        <!-- パンくず -->
+        <div class="row pt-5">
+          <div class="col-12">
+            <Breadcrumb :items="breadcrumbItems" />
+          </div>
+        </div>
         <div class="row pt-5">
           <div class="col-12">
             <!-- 記事タイトル -->
@@ -102,6 +108,19 @@ export default defineComponent({
       }
     })
 
+    const breadcrumbItemsRef = useAsync(() => {
+      return [
+        {
+          name: 'トップページ',
+          path: '/',
+        },
+        {
+          name: '記事詳細',
+          path: route.value.path,
+        },
+      ]
+    })
+
     useMeta(() => {
       if (!articleRef.value) return {}
 
@@ -145,6 +164,7 @@ export default defineComponent({
     return {
       article: articleRef,
       surround: surroundRef,
+      breadcrumbItems: breadcrumbItemsRef,
     }
   },
 })
