@@ -2,18 +2,21 @@
   <div>
     <div v-for="(article, i) in articles" :key="article.id">
       <!-- 記事タイトル -->
-      <nuxt-link :to="{ name: 'articles-id', params: { id: article.id } }">
-        <strong>{{ article.title }}</strong>
+      <nuxt-link
+        :to="{ name: 'articles-id', params: { id: article.id } }"
+        class="article-list-item"
+      >
+        {{ article.title }}
       </nuxt-link>
 
       <!-- 作成日 -->
-      <div class="mt-1">
+      <div class="mt-2">
         <span class="mr-1">Created: </span>
         {{ $dayjs(article.date).format('YYYY/MM/DD') }}
       </div>
 
       <!-- タグ -->
-      <div class="mt-1">
+      <div>
         <span class="mr-1">Tags: </span>
         <nuxt-link
           v-for="(tag, j) in article.tags"
