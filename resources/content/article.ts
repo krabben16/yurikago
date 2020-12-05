@@ -1,4 +1,4 @@
-import { contentFunc } from '@nuxt/content/types/content'
+import { contentFunc, IContentDocument } from '@nuxt/content/types/content'
 import {
   ContentArticle,
   ContentSurround,
@@ -81,7 +81,9 @@ export async function existsArticleById($content: contentFunc, id: number) {
 
 // タグIDからタグデータを取得する
 export async function fetchTagById($content: contentFunc, id: number) {
-  const articles = await $content('articles').fetch()
+  const articles = (await $content('articles')
+    .only(['tags'])
+    .fetch()) as IContentDocument[]
 
   for (let i = 0; i < articles.length; i++) {
     const article = articles[i]
