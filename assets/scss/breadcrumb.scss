@@ -1,11 +1,7 @@
 .custom-breadcrumb {
   display: flex;
   flex-wrap: wrap;
-  padding: 0.75rem 0;
-  list-style: none;
-
-  // bootstrapのスタイルを上書きする
-  margin-bottom: 0;
+  color: $textMuted;
 
   .custom-breadcrumb-item {
     display: flex;
@@ -15,7 +11,6 @@
     display: inline-block;
     padding-right: 0.5rem;
     content: '▶';
-    color: $textMuted;
   }
 
   .custom-breadcrumb-item:nth-child(n+2) {
@@ -26,9 +21,5 @@
     display: inline-block;
     padding-right: 0.5rem;
     content: '/';
-  }
-
-  .active {
-    color: $textMuted;
   }
 }

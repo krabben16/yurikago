@@ -19,7 +19,7 @@
         </div>
 
         <!-- タグ -->
-        <div class="mt-1">
+        <div>
           <span class="mr-1">Tags: </span>
           <nuxt-link
             v-for="(tag, i) in article.tags"
