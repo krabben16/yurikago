@@ -1,6 +1,6 @@
 <template>
-  <ol class="custom-breadcrumb">
-    <li
+  <div class="custom-breadcrumb">
+    <span
       v-for="(v, k) in items"
       :key="k"
       class="custom-breadcrumb-item"
@@ -10,8 +10,8 @@
         v.name
       }}</nuxt-link>
       <template v-else>{{ v.name }}</template>
-    </li>
-  </ol>
+    </span>
+  </div>
 </template>
 
 <script lang="ts">
