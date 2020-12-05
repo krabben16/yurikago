@@ -2,27 +2,29 @@
 
 .nuxt-content {
   h1, h2, h3, h4, h5, h6 {
-    margin: 1.5rem 0rem;
+    margin: 1.5rem 0;
   }
 
   ul, pre {
-    margin: 1rem 0rem;
+    margin: 1rem 0
   }
 
   li {
-    margin: 0.8rem 0rem;
+    margin: 0.8rem 0;
+    line-height: $lineHeight;
   }
 
   // 文中のコードの色を変更する
   :not(pre) > code {
-    background-color: $bgLight;
-    color: $textDark;
-    padding: 0.2rem 0.5rem;
+    background-color: $bgNord;
+    color: $textNord;
+    padding: 0.2rem 0.4rem;
+    border-radius: 6px;
   }
 
   p {
-    margin: 1rem 0rem;
-    line-height: 1.8rem;
+    margin: 1rem 0;
+    line-height: $lineHeight;
   }
 
   img {
@@ -30,10 +32,6 @@
     // 画像を中央寄せする
     display: block;
     margin: 0 auto
-  }
-
-  p:has(img) {
-    text-align: center;
   }
 
   blockquote {
