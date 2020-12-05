@@ -8,13 +8,13 @@
 
       <!-- 作成日 -->
       <div class="mt-1">
-        <fa-icon class="mr-1" :icon="['far', 'clock']" />
+        <span class="mr-1">Created: </span>
         {{ $dayjs(article.date).format('YYYY/MM/DD') }}
       </div>
 
       <!-- タグ -->
       <div class="mt-1">
-        <fa-icon class="mr-1" :icon="['fas', 'tag']" />
+        <span class="mr-1">Tags: </span>
         <nuxt-link
           v-for="(tag, j) in article.tags"
           :key="tag.id"
