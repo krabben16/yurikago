@@ -1,18 +1,21 @@
 <template>
-  <div class="container px-5 bg-white rounded shadow-sm">
+  <div class="container px-sm-5 py-5 bg-white rounded shadow-sm">
     <!-- パンくず -->
-    <div v-if="meta" class="row pt-5">
+    <div v-if="meta" class="row">
       <div class="col-12">
         <Breadcrumb :items="meta.breadcrumbSchema.items" />
       </div>
     </div>
-    <div class="row pt-5 pb-5">
+    <div class="row pt-5">
       <div class="col-12">
-        <div class="py-5 d-flex justify-content-center align-items-center">
-          <p v-if="error.statusCode === 404" class="display-4">
+        <div
+          class="d-flex justify-content-center align-items-center"
+          style="height: 500px"
+        >
+          <span v-if="error.statusCode === 404" class="display-4">
             {{ error.statusCode }} {{ error.message }}
-          </p>
-          <p v-else class="display-4">{{ error.statusCode }}</p>
+          </span>
+          <span v-else class="display-4">{{ error.statusCode }}</span>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <template>
-  <div class="container min-vh-100 px-sm-5 bg-white rounded shadow-sm">
+  <div class="container min-vh-100 px-sm-5 py-5 bg-white rounded shadow-sm">
     <!-- パンくず -->
-    <div v-if="meta" class="row pt-5">
+    <div v-if="meta" class="row">
       <div class="col-12">
         <Breadcrumb :items="meta.breadcrumbSchema.items" />
       </div>
@@ -11,7 +11,7 @@
         <ArticleList :articles="articles" />
       </div>
     </div>
-    <div v-if="activePage && totalArticleCount" class="row pt-5 pb-5">
+    <div v-if="activePage && totalArticleCount" class="row pt-5">
       <div class="col-12">
         <Pagenation
           :active-page="activePage"
