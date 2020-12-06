@@ -149,6 +149,9 @@ const config: NuxtConfig = {
           test: /\.(ts|js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
+          options: {
+            fix: true,
+          },
         })
       }
     },
