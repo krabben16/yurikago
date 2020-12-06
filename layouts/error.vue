@@ -25,11 +25,12 @@
 <script lang="ts">
 import {
   defineComponent,
-  useAsync,
+  ref,
   useContext,
   useMeta,
 } from '@nuxtjs/composition-api'
 import { NuxtError } from '@nuxt/types'
+import { CommonHead } from '~/interfaces/Head'
 import { BreadcrumbSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/resources/head/common'
 
@@ -45,7 +46,9 @@ export default defineComponent({
   setup() {
     const { route } = useContext()
 
-    const meta = useAsync(() => {
+    const meta = ref<CommonHead | null>(null)
+
+    function fetchMeta() {
       const title = 'エラー'
       const description = 'エラーページです！'
       const path = route.value.path
@@ -69,17 +72,13 @@ export default defineComponent({
         path,
         breadcrumbSchema,
       }
-    })
+    }
+
+    meta.value = fetchMeta()
 
     useMeta(() => {
       if (!meta.value) return {}
-
-      return createHeadObject({
-        title: meta.value.title,
-        description: meta.value.description,
-        path: meta.value.path,
-        breadcrumbSchema: meta.value.breadcrumbSchema,
-      })
+      return createHeadObject(meta.value)
     })
 
     return {
