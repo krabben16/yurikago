@@ -12,7 +12,7 @@
     "analyze": "nuxt-ts build --analyze"
   },
   "dependencies": {
-    "@nuxt/content": "^1.10.0",
+    "@nuxt/content": "^1.11.1",
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/composition-api": "^0.16.4",
     "@nuxtjs/dayjs": "^1.2.1",
