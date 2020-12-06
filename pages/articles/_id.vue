@@ -1,7 +1,7 @@
 <template>
-  <div class="container min-vh-100 px-sm-5 bg-white rounded shadow-sm">
+  <div class="container min-vh-100 px-sm-5 py-5 bg-white rounded shadow-sm">
     <!-- パンくず -->
-    <div v-if="meta" class="row pt-5">
+    <div v-if="meta" class="row">
       <div class="col-12">
         <Breadcrumb :items="meta.breadcrumbSchema.items" />
       </div>
@@ -34,7 +34,7 @@
     </div>
     <!-- TOC -->
     <!-- <div v-if="article" class="row pt-5">
-      <div class="col-l2">
+      <div class="col-12">
         <ArticleToc :toc="article.toc" />
       </div>
     </div> -->
@@ -51,7 +51,7 @@
       </div>
     </div>
     <!-- ページャー -->
-    <div v-if="surround" class="row pt-5 pb-5">
+    <div v-if="surround" class="row pt-5">
       <div class="col-12">
         <ArticlePager :next="surround.next" :prev="surround.prev" />
       </div>

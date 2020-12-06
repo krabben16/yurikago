@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <p><strong>TOC</strong></p>
+  <div class="article-toc">
+    <span>TOC:</span>
     <div v-for="(v, k) in toc" :key="k">
       <nuxt-link
         :to="`#${v.id}`"
-        :class="`article-toc-item-${v.depth}`"
+        class="article-toc-item"
         @click.native="$ga.event('view', 'click', 'toc')"
       >
         {{ v.text }}
