@@ -6,13 +6,13 @@
     <template v-else>
       <div class="container min-vh-100 px-sm-5 py-5 bg-white rounded shadow-sm">
         <!-- パンくず -->
-        <div v-if="meta" class="row">
+        <div class="row">
           <div class="col-12">
             <Breadcrumb :items="meta.breadcrumbSchema.items" />
           </div>
         </div>
         <!-- 記事ヘッダー -->
-        <div v-if="article" class="row pt-5">
+        <div class="row pt-5">
           <div class="col-12">
             <!-- タイトル -->
             <h1>{{ article.title }}</h1>
@@ -38,19 +38,19 @@
           </div>
         </div>
         <!-- TOC -->
-        <!-- <div v-if="article" class="row pt-5">
+        <!-- <div class="row pt-5">
           <div class="col-12">
             <ArticleToc :toc="article.toc" />
           </div>
         </div> -->
         <!-- 本文 -->
-        <div v-if="article" class="row pt-5">
+        <div class="row pt-5">
           <div class="col-12">
             <nuxt-content :document="article" />
           </div>
         </div>
         <!-- コメント -->
-        <div v-if="article" class="row pt-5">
+        <div class="row pt-5">
           <div class="col-12">
             <Disqus lang="ja" />
           </div>
@@ -86,9 +86,9 @@ export default defineComponent({
   setup() {
     const { $content, $dayjs, error, params, route } = useContext()
 
-    const article = ref<ContentArticle | null>(null)
-    const surround = ref<ContentSurround[] | null>(null)
-    const meta = ref<ArticleHead | null>(null)
+    const article = ref<ContentArticle>()
+    const surround = ref<ContentSurround[]>()
+    const meta = ref<ArticleHead>()
 
     useFetch(async () => {
       async function fetchArticle() {
@@ -100,7 +100,7 @@ export default defineComponent({
 
         if (!existsArticle) {
           error({ statusCode: 404, message: 'Not Found' })
-          return null
+          throw new Error('Not Found')
         }
 
         return await ContentFunctions.fetchArticleById($content, articleId)
@@ -111,7 +111,7 @@ export default defineComponent({
         return await ContentFunctions.fetchSurroundById($content, articleId)
       }
 
-      async function fetchMeta(): Promise<ArticleHead | null> {
+      async function fetchMeta(): Promise<ArticleHead> {
         const articleId = parseInt(params.value.id)
         const existsArticle = await ContentFunctions.existsArticleById(
           $content,
@@ -119,7 +119,8 @@ export default defineComponent({
         )
 
         if (!existsArticle) {
-          return null
+          error({ statusCode: 404, message: 'Not Found' })
+          throw new Error('Not Found')
         }
 
         const article = await ContentFunctions.fetchArticleById(

@@ -11,7 +11,7 @@
             <Breadcrumb :items="meta.breadcrumbSchema.items" />
           </div>
         </div>
-        <div v-if="articles" class="row pt-5">
+        <div class="row pt-5">
           <div class="col-12">
             <ArticleList :articles="articles" />
           </div>
@@ -51,9 +51,9 @@ export default defineComponent({
     const { $content, error, params, route } = useContext()
 
     const activePage = computed(() => parseInt(params.value.page))
-    const totalArticleCount = ref<number | null>(null)
-    const articles = ref<ContentArticle[] | null>(null)
-    const meta = ref<CommonHead | null>(null)
+    const totalArticleCount = ref<number>()
+    const articles = ref<ContentArticle[]>()
+    const meta = ref<CommonHead>()
 
     useFetch(async () => {
       async function fetchTotalArticleCount() {
@@ -82,7 +82,7 @@ export default defineComponent({
 
         if (articles.length === 0) {
           error({ statusCode: 404, message: 'Not Found' })
-          return null
+          throw new Error('Not Found')
         }
 
         return articles

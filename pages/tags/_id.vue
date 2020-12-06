@@ -6,12 +6,12 @@
     <template v-else>
       <div class="container min-vh-100 px-sm-5 py-5 bg-white rounded shadow-sm">
         <!-- パンくず -->
-        <div v-if="meta" class="row">
+        <div class="row">
           <div class="col-12">
             <Breadcrumb :items="meta.breadcrumbSchema.items" />
           </div>
         </div>
-        <div v-if="articles" class="row pt-5">
+        <div class="row pt-5">
           <div class="col-12">
             <ArticleList :articles="articles" />
           </div>
@@ -41,8 +41,8 @@ export default defineComponent({
   setup() {
     const { $content, error, params, route } = useContext()
 
-    const articles = ref<ContentArticle[] | null>(null)
-    const meta = ref<CommonHead | null>(null)
+    const articles = ref<ContentArticle[]>()
+    const meta = ref<CommonHead>()
 
     useFetch(async () => {
       async function fetchArticles() {
@@ -54,18 +54,19 @@ export default defineComponent({
 
         if (articles.length === 0) {
           error({ statusCode: 404, message: 'Not Found' })
-          return null
+          throw new Error('Not Found')
         }
 
         return articles
       }
 
-      async function fetchMeta(): Promise<CommonHead | null> {
+      async function fetchMeta(): Promise<CommonHead> {
         const tagId = parseInt(params.value.id)
         const tag = await ContentFunctions.fetchTagById($content, tagId)
 
         if (!tag) {
-          return null
+          error({ statusCode: 404, message: 'Not Found' })
+          throw new Error('Not Found')
         }
 
         const title = `タグ(${tag.name})`
