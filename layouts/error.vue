@@ -46,7 +46,7 @@ export default defineComponent({
   setup() {
     const { route } = useContext()
 
-    const meta = ref<CommonHead | null>(null)
+    const meta = ref<CommonHead>()
 
     function fetchMeta() {
       const title = 'エラー'

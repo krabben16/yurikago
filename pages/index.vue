@@ -50,9 +50,9 @@ export default defineComponent({
     const { $content, route } = useContext()
 
     const activePage = 1
-    const totalArticleCount = ref<number | null>(null)
-    const articles = ref<ContentArticle[] | null>(null)
-    const meta = ref<CommonHead | null>(null)
+    const totalArticleCount = ref<number>()
+    const articles = ref<ContentArticle[]>()
+    const meta = ref<CommonHead>()
 
     useFetch(async () => {
       async function fetchTotalArticleCount() {
