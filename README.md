@@ -9,4 +9,4 @@ Gitのブランチモデルは git-flow です。
 
 ## システム構成
 
-- 修正をmasterブランチにマージするとCircleCIがFirebaseにデプロイします。このとき `nuxt generate` を実行して生成した静的ファイルをFirebaseにアップロードします。
+- 修正をmasterブランチにマージするとGitHub ActionsがFirebaseにデプロイします。このとき `nuxt generate` を実行して生成した静的ファイルをFirebaseにアップロードします。
