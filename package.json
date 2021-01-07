@@ -18,13 +18,13 @@
     "@nuxtjs/dayjs": "1.2.1",
     "@nuxtjs/google-analytics": "2.4.0",
     "@nuxtjs/sitemap": "2.4.0",
-    "nuxt": "2.14.7",
+    "nuxt": "2.14.12",
     "prism-themes": "1.5.0",
     "rehype-plugin-image-native-lazy-loading": "1.1.0",
     "vue-disqus": "4.0.1"
   },
   "devDependencies": {
-    "@nuxt/types": "2.14.7",
+    "@nuxt/types": "2.14.12",
     "@nuxt/typescript-build": "2.0.3",
     "@nuxtjs/eslint-config": "4.0.0",
     "@nuxtjs/eslint-config-typescript": "3.0.0",
