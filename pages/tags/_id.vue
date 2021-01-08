@@ -33,7 +33,7 @@ import { CommonHead } from '~/interfaces/Head'
 import { BreadcrumbSchema } from '~/interfaces/Schema'
 import { ContentArticle } from '~/interfaces/Content'
 import { createHeadObject } from '~/resources/head/common'
-import { ContentFunctions } from '~/resources/content/article'
+import { ContentFunctions as cf } from '~/resources/content/article'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
@@ -47,10 +47,7 @@ export default defineComponent({
     useFetch(async () => {
       async function fetchArticles() {
         const tagId = parseInt(params.value.id)
-        const articles = await ContentFunctions.fetchArticlesByTagId(
-          $content,
-          tagId
-        )
+        const articles = await cf.fetchArticlesByTagId($content, tagId)
 
         if (articles.length === 0) {
           error({ statusCode: 404, message: 'Not Found' })
@@ -62,7 +59,7 @@ export default defineComponent({
 
       async function fetchMeta(): Promise<CommonHead> {
         const tagId = parseInt(params.value.id)
-        const tag = await ContentFunctions.fetchTagById($content, tagId)
+        const tag = await cf.fetchTagById($content, tagId)
 
         if (!tag) {
           error({ statusCode: 404, message: 'Not Found' })

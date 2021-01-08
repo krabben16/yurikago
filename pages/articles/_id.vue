@@ -78,7 +78,7 @@ import { ArticleHead } from '~/interfaces/Head'
 import { BreadcrumbSchema, ArticleSchema } from '~/interfaces/Schema'
 import { ContentArticle, ContentSurround } from '~/interfaces/Content'
 import { createHeadObject } from '~/resources/head/article'
-import { ContentFunctions } from '~/resources/content/article'
+import { ContentFunctions as cf } from '~/resources/content/article'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
@@ -93,40 +93,31 @@ export default defineComponent({
     useFetch(async () => {
       async function fetchArticle() {
         const articleId = parseInt(params.value.id)
-        const existsArticle = await ContentFunctions.existsArticleById(
-          $content,
-          articleId
-        )
+        const existsArticle = await cf.existsArticleById($content, articleId)
 
         if (!existsArticle) {
           error({ statusCode: 404, message: 'Not Found' })
           throw new Error('Not Found')
         }
 
-        return await ContentFunctions.fetchArticleById($content, articleId)
+        return await cf.fetchArticleById($content, articleId)
       }
 
       async function fetchSurround() {
         const articleId = parseInt(params.value.id)
-        return await ContentFunctions.fetchSurroundById($content, articleId)
+        return await cf.fetchSurroundById($content, articleId)
       }
 
       async function fetchMeta(): Promise<ArticleHead> {
         const articleId = parseInt(params.value.id)
-        const existsArticle = await ContentFunctions.existsArticleById(
-          $content,
-          articleId
-        )
+        const existsArticle = await cf.existsArticleById($content, articleId)
 
         if (!existsArticle) {
           error({ statusCode: 404, message: 'Not Found' })
           throw new Error('Not Found')
         }
 
-        const article = await ContentFunctions.fetchArticleById(
-          $content,
-          articleId
-        )
+        const article = await cf.fetchArticleById($content, articleId)
 
         const title = article.title
         const description = `「${title}」についてまとめた記事です。`

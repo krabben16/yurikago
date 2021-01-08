@@ -38,7 +38,7 @@ import { CommonHead } from '~/interfaces/Head'
 import { BreadcrumbSchema } from '~/interfaces/Schema'
 import { ContentArticle } from '~/interfaces/Content'
 import { createHeadObject } from '~/resources/head/common'
-import { ContentFunctions } from '~/resources/content/article'
+import { ContentFunctions as cf } from '~/resources/content/article'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
@@ -56,10 +56,7 @@ export default defineComponent({
           process.env.MAX_ARTICLE_COUNT_IN_LIST as string
         )
 
-        return await ContentFunctions.fetchRecentlyArticles(
-          $content,
-          limitCount
-        )
+        return await cf.fetchRecentlyArticles($content, limitCount)
       }
 
       function fetchMeta(): CommonHead {
