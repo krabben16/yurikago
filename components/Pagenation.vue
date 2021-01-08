@@ -20,7 +20,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  useContext,
+  useFetch,
+} from '@nuxtjs/composition-api'
+import { ContentFunctions as cf } from '~/resources/content/article'
 
 export default defineComponent({
   props: {
@@ -28,31 +34,41 @@ export default defineComponent({
       type: Number as () => number,
       required: true,
     },
-    totalArticleCount: {
-      type: Number as () => number,
-      required: true,
-    },
   },
   setup(props) {
-    // 2ページ目以降を表示中の場合はNextを表示する
-    const existsNextPage = computed(() => props.activePage > 1)
-    const nextPage = computed(() => props.activePage - 1)
+    const { $content } = useContext()
 
-    // 2ページ目以降が存在する場合はPrevを表示する
-    const maxArticleCountInList = parseInt(
-      process.env.MAX_ARTICLE_COUNT_IN_LIST as string
-    )
-    const maxPageCount = computed(() =>
-      Math.ceil(props.totalArticleCount / maxArticleCountInList)
-    )
-    const existsPrevPage = computed(() => props.activePage < maxPageCount.value)
-    const prevPage = computed(() => props.activePage + 1)
+    const existsNextPageRef = ref<boolean>()
+    const nextPageRef = ref<number | null>()
+    const existsPrevPageRef = ref<boolean>()
+    const prevPageRef = ref<number | null>()
+
+    useFetch(async () => {
+      const totalArticleCount = await cf.fetchTotalArticleCount($content)
+
+      // 2ページ目以降を表示中の場合はNextを表示する
+      const existsNextPage = props.activePage > 1
+      const nextPage = existsNextPage ? props.activePage - 1 : null
+
+      // 2ページ目以降が存在する場合はPrevを表示する
+      const maxArticleCountInList = parseInt(
+        process.env.MAX_ARTICLE_COUNT_IN_LIST as string
+      )
+      const maxPageCount = Math.ceil(totalArticleCount / maxArticleCountInList)
+      const existsPrevPage = props.activePage < maxPageCount
+      const prevPage = existsPrevPage ? props.activePage + 1 : null
+
+      existsNextPageRef.value = existsNextPage
+      nextPageRef.value = nextPage
+      existsPrevPageRef.value = existsPrevPage
+      prevPageRef.value = prevPage
+    })
 
     return {
-      existsNextPage,
-      nextPage,
-      existsPrevPage,
-      prevPage,
+      existsNextPage: existsNextPageRef,
+      nextPage: nextPageRef,
+      existsPrevPage: existsPrevPageRef,
+      prevPage: prevPageRef,
     }
   },
 })
