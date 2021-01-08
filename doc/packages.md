@@ -60,3 +60,7 @@ for p in `cat packages`; do cat node_modules/${p}/package.json | grep \"version\
 |sass-loader|^9.0.3|9.0.3|
 
 [semver | npm Docs](https://docs.npmjs.com/cli/v6/using-npm/semver#caret-ranges-123-025-004)
+
+> ^1.2.3 ：= >=1.2.3 <2.0.0
+> ^0.2.3 ：= >=0.2.3 <0.3.0
+> ^0.0.3 ：= >=0.0.3 <0.0.4
