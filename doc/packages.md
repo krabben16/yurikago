@@ -36,7 +36,7 @@ for p in `cat packages`; do cat node_modules/${p}/package.json | grep \"version\
 |---|---|---|
 |@nuxt/content|^1.9.0|1.11.1|
 |@nuxt/typescript-runtime|^2.0.0|2.0.0|
-|@nuxtjs/composition-api|^0.16.4|0.16.4|
+|@nuxtjs/composition-api|^0.18.0|0.18.0|
 |@nuxtjs/dayjs|^1.2.1|1.3.0|
 |@nuxtjs/google-analytics|^2.4.0|2.4.0|
 |@nuxtjs/sitemap|^2.4.0|2.4.0|
