@@ -58,3 +58,5 @@ for p in `cat packages`; do cat node_modules/${p}/package.json | grep \"version\
 |node-sass|^4.14.1|4.14.1|
 |prettier|^2.1.2|2.2.1|
 |sass-loader|^9.0.3|9.0.3|
+
+[semver | npm Docs](https://docs.npmjs.com/cli/v6/using-npm/semver#caret-ranges-123-025-004)
