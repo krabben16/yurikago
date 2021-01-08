@@ -1,21 +1,26 @@
 <template>
-  <div>
-    <nuxt-link
-      v-if="existsNextPage"
-      class="btn btn-outline-dark float-left"
-      :to="{ name: 'articles-list-page', params: { page: nextPage } }"
-      role="button"
-    >
-      &larr; Next
-    </nuxt-link>
-    <nuxt-link
-      v-if="existsPrevPage"
-      class="btn btn-outline-dark float-right"
-      :to="{ name: 'articles-list-page', params: { page: prevPage } }"
-      role="button"
-    >
-      Prev &rarr;
-    </nuxt-link>
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <nuxt-link
+        v-if="existsNextPage"
+        class="btn btn-outline-dark"
+        :to="{ name: 'articles-list-page', params: { page: nextPage } }"
+        role="button"
+      >
+        &larr; Next
+      </nuxt-link>
+    </div>
+    <div>{{ activePage }} / {{ maxPageCount }}</div>
+    <div>
+      <nuxt-link
+        v-if="existsPrevPage"
+        class="btn btn-outline-dark"
+        :to="{ name: 'articles-list-page', params: { page: prevPage } }"
+        role="button"
+      >
+        Prev &rarr;
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -38,6 +43,7 @@ export default defineComponent({
   setup(props) {
     const { $content } = useContext()
 
+    const maxPageCountRef = ref<number>()
     const existsNextPageRef = ref<boolean>()
     const nextPageRef = ref<number | null>()
     const existsPrevPageRef = ref<boolean>()
@@ -46,18 +52,21 @@ export default defineComponent({
     useFetch(async () => {
       const totalArticleCount = await cf.fetchTotalArticleCount($content)
 
+      // 最大ページ数
+      const maxArticleCountInList = parseInt(
+        process.env.MAX_ARTICLE_COUNT_IN_LIST as string
+      )
+      const maxPageCount = Math.ceil(totalArticleCount / maxArticleCountInList)
+
       // 2ページ目以降を表示中の場合はNextを表示する
       const existsNextPage = props.activePage > 1
       const nextPage = existsNextPage ? props.activePage - 1 : null
 
       // 2ページ目以降が存在する場合はPrevを表示する
-      const maxArticleCountInList = parseInt(
-        process.env.MAX_ARTICLE_COUNT_IN_LIST as string
-      )
-      const maxPageCount = Math.ceil(totalArticleCount / maxArticleCountInList)
       const existsPrevPage = props.activePage < maxPageCount
       const prevPage = existsPrevPage ? props.activePage + 1 : null
 
+      maxPageCountRef.value = maxPageCount
       existsNextPageRef.value = existsNextPage
       nextPageRef.value = nextPage
       existsPrevPageRef.value = existsPrevPage
@@ -65,6 +74,7 @@ export default defineComponent({
     })
 
     return {
+      maxPageCount: maxPageCountRef,
       existsNextPage: existsNextPageRef,
       nextPage: nextPageRef,
       existsPrevPage: existsPrevPageRef,
