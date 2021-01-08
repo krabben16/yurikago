@@ -18,10 +18,7 @@
         </div>
         <div class="row pt-5">
           <div class="col-12">
-            <Pagenation
-              :active-page="activePage"
-              :total-article-count="totalArticleCount"
-            />
+            <Pagenation :active-page="activePage" />
           </div>
         </div>
       </div>
@@ -51,15 +48,10 @@ export default defineComponent({
     const { $content, error, params, route } = useContext()
 
     const activePage = computed(() => parseInt(params.value.page))
-    const totalArticleCount = ref<number>()
     const articles = ref<ContentArticle[]>()
     const meta = ref<CommonHead>()
 
     useFetch(async () => {
-      async function fetchTotalArticleCount() {
-        return await ContentFunctions.fetchTotalArticleCount($content)
-      }
-
       async function fetchArticles() {
         const activePage = parseInt(params.value.page)
 
@@ -116,7 +108,6 @@ export default defineComponent({
         }
       }
 
-      totalArticleCount.value = await fetchTotalArticleCount()
       articles.value = await fetchArticles()
       meta.value = fetchMeta()
     })
@@ -128,7 +119,6 @@ export default defineComponent({
 
     return {
       activePage,
-      totalArticleCount,
       articles,
       meta,
     }
