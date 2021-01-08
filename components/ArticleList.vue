@@ -36,12 +36,12 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { ContentArticle } from '~/interfaces/Content'
+import { ContentArticleListItem } from '~/interfaces/Content'
 
 export default defineComponent({
   props: {
     articles: {
-      type: Array as () => ContentArticle[],
+      type: Array as () => ContentArticleListItem[],
       required: true,
     },
   },

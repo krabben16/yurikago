@@ -2,6 +2,7 @@ import { contentFunc, IContentDocument } from '@nuxt/content/types/content'
 import {
   ContentArticle,
   ContentSurround,
+  ContentArticleListItem,
   ContentArticleTag,
 } from '~/interfaces/Content'
 
@@ -18,11 +19,12 @@ export class ContentFunctions {
     limitCount: number
   ) {
     const articles = await $content('articles')
+      .only(['id', 'title', 'date', 'tags'])
       .sortBy('id', 'desc')
       .limit(limitCount)
       .fetch()
 
-    return articles as ContentArticle[]
+    return articles as ContentArticleListItem[]
   }
 
   // ページ番号から記事データを取得する
@@ -32,12 +34,13 @@ export class ContentFunctions {
     limitCount: number
   ) {
     const articles = await $content('articles')
+      .only(['id', 'title', 'date', 'tags'])
       .sortBy('id', 'desc')
       .skip(skipCount)
       .limit(limitCount)
       .fetch()
 
-    return articles as ContentArticle[]
+    return articles as ContentArticleListItem[]
   }
 
   // タグIDから記事データを取得する
@@ -46,11 +49,12 @@ export class ContentFunctions {
     tagId: number
   ) {
     const articles = await $content('articles')
+      .only(['id', 'title', 'date', 'tags'])
       .where({ 'tags.id': { $contains: tagId } })
       .sortBy('id', 'desc')
       .fetch()
 
-    return articles as ContentArticle[]
+    return articles as ContentArticleListItem[]
   }
 
   // 記事IDから記事データの存在をチェックする

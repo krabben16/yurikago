@@ -22,3 +22,10 @@ export interface ContentArticle extends IContentDocument {
 export interface ContentSurround extends IContentDocument {
   id: number
 }
+
+export interface ContentArticleListItem extends IContentDocument {
+  id: number
+  title: string
+  date: string
+  tags: ContentArticleTag[]
+}

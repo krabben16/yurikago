@@ -31,7 +31,7 @@ import {
 } from '@nuxtjs/composition-api'
 import { CommonHead } from '~/interfaces/Head'
 import { BreadcrumbSchema } from '~/interfaces/Schema'
-import { ContentArticle } from '~/interfaces/Content'
+import { ContentArticleListItem } from '~/interfaces/Content'
 import { createHeadObject } from '~/resources/head/common'
 import { ContentFunctions as cf } from '~/resources/content/article'
 
@@ -41,7 +41,7 @@ export default defineComponent({
   setup() {
     const { $content, error, params, route } = useContext()
 
-    const articles = ref<ContentArticle[]>()
+    const articles = ref<ContentArticleListItem[]>()
     const meta = ref<CommonHead>()
 
     useFetch(async () => {
