@@ -1,26 +1,15 @@
 <template>
-  <div class="px-sm-5 py-5 bg-white rounded">
-    <div
-      class="d-flex justify-content-center align-items-center"
-      style="height: 500px"
-    >
-      <span v-if="error.statusCode === 404" class="display-4">
-        {{ error.statusCode }} {{ error.message }}
-      </span>
-      <span v-else class="display-4">{{ error.statusCode }}</span>
-    </div>
+  <div class="text-center text-light">
+    <span v-if="error.statusCode === 404" class="h4">
+      {{ error.statusCode }} {{ error.message }}
+    </span>
+    <span v-else class="h4">{{ error.statusCode }}</span>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  useContext,
-  useMeta,
-} from '@nuxtjs/composition-api'
+import { defineComponent, useContext, useMeta } from '@nuxtjs/composition-api'
 import { NuxtError } from '@nuxt/types'
-import { CommonHead } from '~/interfaces/Head'
 import { BreadcrumbSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/resources/head/common'
 
@@ -35,8 +24,6 @@ export default defineComponent({
   },
   setup() {
     const { route } = useContext()
-
-    const meta = ref<CommonHead>()
 
     function fetchMeta() {
       const title = 'エラー'
@@ -64,16 +51,11 @@ export default defineComponent({
       }
     }
 
-    meta.value = fetchMeta()
-
     useMeta(() => {
-      if (!meta.value) return {}
-      return createHeadObject(meta.value)
+      return createHeadObject(fetchMeta())
     })
 
-    return {
-      meta,
-    }
+    return {}
   },
 })
 </script>
