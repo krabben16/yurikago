@@ -2,7 +2,8 @@ import type { NuxtConfig } from '@nuxt/types'
 import { contentFunc, IContentDocument } from '@nuxt/content/types/content'
 
 const frontUrl = 'https://www.yurikago-blog.com'
-const githubUrl = 'https://github.com/krabben16/yurikago'
+const githubId = 'krabben16'
+const githubUrl = `https://github.com/${githubId}/yurikago`
 const maxArticleCountInList = 10
 const articleAuthor = 'Hiroki Kawaguchi'
 const articleOrganization = 'Yurikago Blog'
@@ -40,30 +41,10 @@ const config: NuxtConfig = {
         crossorigin: 'anonymous',
       },
     ],
-    script: [
-      /**
-       * jQuery CDN
-       * https://code.jquery.com/
-       */
-      {
-        src: 'https://code.jquery.com/jquery-3.5.1.slim.min.js',
-        integrity: 'sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=',
-        crossorigin: 'anonymous',
-        body: true,
-      },
-      {
-        src:
-          'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js',
-        integrity:
-          'sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI',
-        crossorigin: 'anonymous',
-        body: true,
-      },
-    ],
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['~/assets/scss/app.scss'],
+  css: ['~/assets/scss/app.scss', 'github-markdown-css'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: ['~/plugins/disqus'],
@@ -85,9 +66,6 @@ const config: NuxtConfig = {
   content: {
     nestedProperties: ['tags.id'],
     markdown: {
-      prism: {
-        theme: 'prism-themes/themes/prism-nord.css',
-      },
       rehypePlugins: ['rehype-plugin-image-native-lazy-loading'],
     },
   },
@@ -163,6 +141,7 @@ const config: NuxtConfig = {
   // NOTE: クライアントサイドで使用できる環境変数を定義する
   env: {
     FRONT_URL: frontUrl,
+    GITHUB_ID: githubId,
     GITHUB_URL: githubUrl,
     MAX_ARTICLE_COUNT_IN_LIST: maxArticleCountInList.toString(),
     ARTICLE_AUTHOR: articleAuthor,

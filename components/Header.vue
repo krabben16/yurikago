@@ -1,30 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-light pb-4">
-    <nuxt-link :to="{ name: 'index' }" class="navbar-brand">
+  <nav class="navbar navbar-dark py-4">
+    <nuxt-link to="/" class="navbar-brand">
       {{ siteName }}
     </nuxt-link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navmenu"
-      aria-controls="navmenu"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon" />
-    </button>
-    <div id="navmenu" class="collapse navbar-collapse">
-      <div class="navbar-nav">
-        <a
-          class="nav-item nav-link"
-          :href="githubUrl"
-          target="_blank"
-          @click="$ga.event('view', 'click', 'github')"
-          >GitHub</a
-        >
-      </div>
-    </div>
   </nav>
 </template>
 
@@ -34,7 +12,6 @@ import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   setup() {
     return {
-      githubUrl: process.env.GITHUB_URL,
       siteName: process.env.SITE_NAME,
     }
   },

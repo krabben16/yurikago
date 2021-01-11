@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-between">
     <nuxt-link
       v-if="next"
-      class="btn btn-outline-dark float-left"
+      class="btn btn-outline-dark"
       :to="{ name: 'articles-id', params: { id: next.id } }"
       role="button"
     >
@@ -10,7 +10,7 @@
     </nuxt-link>
     <nuxt-link
       v-if="prev"
-      class="btn btn-outline-dark float-right"
+      class="btn btn-outline-dark"
       :to="{ name: 'articles-id', params: { id: prev.id } }"
       role="button"
     >

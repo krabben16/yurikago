@@ -4,7 +4,7 @@
       <!-- 記事タイトル -->
       <nuxt-link
         :to="{ name: 'articles-id', params: { id: article.id } }"
-        class="article-list-item"
+        class="h5"
       >
         {{ article.title }}
       </nuxt-link>
