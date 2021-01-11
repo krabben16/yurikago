@@ -4,23 +4,9 @@
       <Placeholder />
     </template>
     <template v-else>
-      <div class="container min-vh-100 px-sm-5 py-5 bg-white rounded shadow-sm">
-        <!-- パンくず -->
-        <div class="row">
-          <div class="col-12">
-            <Breadcrumb :items="meta.breadcrumbSchema.items" />
-          </div>
-        </div>
-        <div class="row pt-5">
-          <div class="col-12">
-            <ArticleList :articles="articles" />
-          </div>
-        </div>
-        <div class="row pt-5">
-          <div class="col-12">
-            <Pagenation :active-page="activePage" />
-          </div>
-        </div>
+      <div class="min-vh-100 px-sm-5 py-5 bg-white rounded">
+        <ArticleList :articles="articles" />
+        <Pagenation class="mt-5" :active-page="activePage" />
       </div>
     </template>
   </div>

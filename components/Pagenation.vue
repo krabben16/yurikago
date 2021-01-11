@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="d-flex justify-content-between">
     <nuxt-link
       v-if="existsNextPage"
-      class="btn btn-outline-dark float-left"
+      class="btn btn-outline-dark"
       :to="{ name: 'articles-list-page', params: { page: nextPage } }"
       role="button"
     >
@@ -10,7 +10,7 @@
     </nuxt-link>
     <nuxt-link
       v-if="existsPrevPage"
-      class="btn btn-outline-dark float-right"
+      class="btn btn-outline-dark"
       :to="{ name: 'articles-list-page', params: { page: prevPage } }"
       role="button"
     >

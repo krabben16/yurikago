@@ -4,63 +4,12 @@
       <Placeholder />
     </template>
     <template v-else>
-      <div class="container min-vh-100 px-sm-5 py-5 bg-white rounded shadow-sm">
-        <!-- パンくず -->
-        <div class="row">
-          <div class="col-12">
-            <Breadcrumb :items="meta.breadcrumbSchema.items" />
-          </div>
-        </div>
-        <!-- 記事ヘッダー -->
-        <div class="row pt-5">
-          <div class="col-12">
-            <!-- タイトル -->
-            <h1>{{ article.title }}</h1>
-
-            <!-- 作成日 -->
-            <div class="mt-3">
-              <span class="mr-1">Created: </span>
-              {{ $dayjs(article.date).format('YYYY/MM/DD') }}
-            </div>
-
-            <!-- タグ -->
-            <div>
-              <span class="mr-1">Tags: </span>
-              <nuxt-link
-                v-for="(tag, i) in article.tags"
-                :key="tag.id"
-                :to="{ name: 'tags-id', params: { id: tag.id } }"
-                :class="{ 'ml-2': i > 0 }"
-              >
-                {{ tag.name }}
-              </nuxt-link>
-            </div>
-          </div>
-        </div>
-        <!-- TOC -->
-        <!-- <div class="row pt-5">
-          <div class="col-12">
-            <ArticleToc :toc="article.toc" />
-          </div>
-        </div> -->
-        <!-- 本文 -->
-        <div class="row pt-5">
-          <div class="col-12">
-            <nuxt-content :document="article" />
-          </div>
-        </div>
-        <!-- コメント -->
-        <div class="row pt-5">
-          <div class="col-12">
-            <Disqus lang="ja" />
-          </div>
-        </div>
-        <!-- ページャー -->
-        <div class="row pt-5">
-          <div class="col-12">
-            <ArticlePager :next="surround[1]" :prev="surround[0]" />
-          </div>
-        </div>
+      <div class="min-vh-100 px-sm-5 py-5 bg-white rounded">
+        <ArticleHeader :article="article" />
+        <!-- <ArticleToc class="mt-5" :toc="article.toc" /> -->
+        <nuxt-content class="markdown-body mt-5" :document="article" />
+        <Disqus class="mt-5" lang="ja" />
+        <ArticlePager class="mt-5" :next="surround[1]" :prev="surround[0]" />
       </div>
     </template>
   </div>
