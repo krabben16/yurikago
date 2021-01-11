@@ -4,7 +4,7 @@
       <Placeholder />
     </template>
     <template v-else>
-      <div class="min-vh-100 px-sm-5 py-5 bg-white rounded">
+      <div class="min-vh-100 px-3 px-sm-5 py-5 bg-white rounded">
         <ArticleHeader :article="article" />
         <!-- <ArticleToc class="mt-5" :toc="article.toc" /> -->
         <nuxt-content class="markdown-body mt-5" :document="article" />

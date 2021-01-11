@@ -4,7 +4,7 @@
       <Placeholder />
     </template>
     <template v-else>
-      <div class="min-vh-100 px-sm-5 py-5 bg-white rounded">
+      <div class="min-vh-100 px-3 px-sm-5 py-5 bg-white rounded">
         <ArticleList :articles="articles" />
         <Pagenation class="mt-5" :active-page="activePage" />
       </div>
