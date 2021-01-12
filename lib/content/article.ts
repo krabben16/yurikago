@@ -7,12 +7,6 @@ import {
 } from '~/interfaces/Content'
 
 export class ContentFunctions {
-  // 記事の合計数を取得する
-  public static async fetchTotalArticleCount($content: contentFunc) {
-    const articles = await $content('articles').fetch()
-    return (articles as ContentArticle[]).length
-  }
-
   // 全ての記事データを取得する
   public static async fetchAllArticles($content: contentFunc) {
     const articles = await $content('articles')
