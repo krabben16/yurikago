@@ -37,17 +37,19 @@ export default defineComponent({
 
     const articles = useAsync(async () => {
       const tagId = parseInt(params.value.id)
+
       const data = await $content('articles')
         .only(['id', 'title', 'date', 'tags'])
         .where({ 'tags.id': { $contains: tagId } })
         .sortBy('id', 'desc')
         .fetch()
+
       return Array.isArray(data) ? data : [data]
     }, `useAsync_${params.value.id}`)
 
     watchEffect(() => {
       // console.info(articles.value)
-      if (articles.value?.length === 0) {
+      if (articles.value && articles.value.length === 0) {
         error({ statusCode: 404, message: 'Not Found' })
       }
     })

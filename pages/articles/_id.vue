@@ -1,19 +1,14 @@
 <template>
   <div class="min-vh-100 px-3 px-sm-5 py-5 bg-white rounded">
-    <ArticleHeader v-if="article" :article="article" />
-    <!-- <ArticleToc v-if="article" class="mt-5" :toc="article.toc" /> -->
+    <ArticleHeader v-if="res && res.article" :article="res.article" />
+    <!-- <ArticleToc v-if="res && res.article" class="mt-5" :toc="res.article.toc" /> -->
     <nuxt-content
-      v-if="article"
+      v-if="res && res.article"
       class="markdown-body mt-5"
-      :document="article"
+      :document="res.article"
     />
-    <Disqus v-if="article" class="mt-5" lang="ja" />
-    <ArticlePager
-      v-if="surround"
-      class="mt-5"
-      :next="surround[1]"
-      :prev="surround[0]"
-    />
+    <Disqus v-if="res && res.article" class="mt-5" lang="ja" />
+    <ArticlePager v-if="res" class="mt-5" :surround="res.surround" />
   </div>
 </template>
 
@@ -34,34 +29,39 @@ export default defineComponent({
   setup() {
     const { $content, $dayjs, error, params, route } = useContext()
 
-    const article = useAsync(async () => {
-      const articleId = parseInt(params.value.id)
-      const data = await $content('articles').where({ id: articleId }).fetch()
-      return Array.isArray(data) ? data[0] : data
-    }, `fetchArticle_${params.value.id}`)
-
-    watchEffect(() => {
-      // console.info(article.value)
-      if (article.value?.length === 0) {
-        error({ statusCode: 404, message: 'Not Found' })
-      }
-    })
-
-    const surround = useAsync(async () => {
+    const res = useAsync(async () => {
       const slug = params.value.id
-      const data = await $content('articles')
+
+      const article = await $content('articles')
+        .where({ id: parseInt(slug) })
+        .fetch()
+
+      const surround = await $content('articles')
         .only('id')
         .sortBy('id')
         .surround(slug)
         .fetch()
-      return Array.isArray(data) ? data : [data]
-    }, `fetchSurround_${params.value.id}`)
+
+      return {
+        article:
+          Array.isArray(article) && article.length > 0 ? article[0] : null,
+        surround: Array.isArray(surround)
+          ? { prev: surround[0], next: surround[1] }
+          : { prev: surround, next: null },
+      }
+    }, `useAsync_${params.value.id}`)
+
+    watchEffect(() => {
+      // console.info(res.value)
+      if (res.value && !res.value.article) {
+        error({ statusCode: 404, message: 'Not Found' })
+      }
+    })
 
     useMeta(() => {
-      const refVal = article.value
+      const refVal = res.value ? res.value.article : null
       const data = refVal || {
         title: '',
-        id: -1,
         date: '',
       }
 
@@ -83,7 +83,7 @@ export default defineComponent({
       }
 
       const articleSchema: ArticleSchema = {
-        articleId: data.id,
+        articleId: parseInt(params.value.id),
         headlineValue: title,
         datePublishedValue: $dayjs(data.date).format('YYYY-MM-DDTHH:mm:ssZ'),
         dateModifiedValue: $dayjs(data.date).format('YYYY-MM-DDTHH:mm:ssZ'),
@@ -99,8 +99,7 @@ export default defineComponent({
     })
 
     return {
-      article,
-      surround,
+      res,
     }
   },
 })
