@@ -6,7 +6,6 @@
     <template v-else>
       <div class="min-vh-100 px-3 px-sm-5 py-5 bg-white rounded">
         <ArticleList :articles="articles" />
-        <Pagenation class="mt-5" :active-page="activePage" />
       </div>
     </template>
   </div>
@@ -32,17 +31,12 @@ export default defineComponent({
   setup() {
     const { $content, route } = useContext()
 
-    const activePage = 1
     const articles = ref<ContentArticleListItem[]>()
     const meta = ref<CommonHead>()
 
     useFetch(async () => {
       async function fetchArticles() {
-        const limitCount = parseInt(
-          process.env.MAX_ARTICLE_COUNT_IN_LIST as string
-        )
-
-        return await cf.fetchRecentlyArticles($content, limitCount)
+        return await cf.fetchAllArticles($content)
       }
 
       function fetchMeta(): CommonHead {
@@ -77,7 +71,6 @@ export default defineComponent({
     })
 
     return {
-      activePage,
       articles,
       meta,
     }

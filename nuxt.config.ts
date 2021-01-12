@@ -4,7 +4,6 @@ import { contentFunc, IContentDocument } from '@nuxt/content/types/content'
 const frontUrl = 'https://www.yurikago-blog.com'
 const githubId = 'krabben16'
 const githubUrl = `https://github.com/${githubId}/yurikago`
-const maxArticleCountInList = 10
 const articleAuthor = 'Hiroki Kawaguchi'
 const articleOrganization = 'Yurikago Blog'
 const siteOwner = 'Hiroki Kawaguchi'
@@ -98,13 +97,6 @@ const config: NuxtConfig = {
         }
       }
 
-      // 記事一覧 ページ
-      const maxPageCount = Math.ceil(articles.length / maxArticleCountInList)
-
-      for (let i = 0; i < maxPageCount; i++) {
-        routeList.push(`/articles/list/${i + 1}`)
-      }
-
       return routeList
     },
   },
@@ -143,7 +135,6 @@ const config: NuxtConfig = {
     FRONT_URL: frontUrl,
     GITHUB_ID: githubId,
     GITHUB_URL: githubUrl,
-    MAX_ARTICLE_COUNT_IN_LIST: maxArticleCountInList.toString(),
     ARTICLE_AUTHOR: articleAuthor,
     ARTICLE_ORGANIZATION: articleOrganization,
     SITE_OWNER: siteOwner,

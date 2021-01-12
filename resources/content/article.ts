@@ -13,31 +13,11 @@ export class ContentFunctions {
     return (articles as ContentArticle[]).length
   }
 
-  // 直近の記事データを取得する
-  public static async fetchRecentlyArticles(
-    $content: contentFunc,
-    limitCount: number
-  ) {
+  // 全ての記事データを取得する
+  public static async fetchAllArticles($content: contentFunc) {
     const articles = await $content('articles')
       .only(['id', 'title', 'date', 'tags'])
       .sortBy('id', 'desc')
-      .limit(limitCount)
-      .fetch()
-
-    return articles as ContentArticleListItem[]
-  }
-
-  // ページ番号から記事データを取得する
-  public static async fetchArticlesByPage(
-    $content: contentFunc,
-    skipCount: number,
-    limitCount: number
-  ) {
-    const articles = await $content('articles')
-      .only(['id', 'title', 'date', 'tags'])
-      .sortBy('id', 'desc')
-      .skip(skipCount)
-      .limit(limitCount)
       .fetch()
 
     return articles as ContentArticleListItem[]
