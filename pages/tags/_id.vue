@@ -1,29 +1,33 @@
 <template>
-  <div>
-    <template v-if="$fetchState.pending || $fetchState.error">
-      <Placeholder />
-    </template>
-    <template v-else>
-      <div class="min-vh-100 px-3 px-sm-5 py-5 bg-white rounded">
-        <ArticleList :articles="articles" />
-      </div>
-    </template>
+  <div class="min-vh-100 px-3 px-sm-5 py-5 bg-white rounded">
+    <ArticleList v-if="articles" :articles="articles" />
   </div>
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
-  ref,
+  useAsync,
   useContext,
-  useFetch,
   useMeta,
+  watchEffect,
 } from '@nuxtjs/composition-api'
-import { CommonHead } from '~/interfaces/Head'
+import { IContentDocument } from '@nuxt/content/types/content'
 import { BreadcrumbSchema } from '~/interfaces/Schema'
-import { ContentArticleListItem } from '~/interfaces/Content'
 import { createHeadObject } from '~/lib/head/common'
-import { ContentFunctions as cf } from '~/lib/content/article'
+import { ContentArticleTag } from '~/interfaces/Content'
+
+function searchTag(articles: IContentDocument[] | null, tagId: number) {
+  let tag: ContentArticleTag | null = null
+  for (const article of articles || []) {
+    for (const target of article.tags) {
+      if (target.id === tagId) {
+        tag = target
+      }
+    }
+  }
+  return tag
+}
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
@@ -31,68 +35,54 @@ export default defineComponent({
   setup() {
     const { $content, error, params, route } = useContext()
 
-    const articles = ref<ContentArticleListItem[]>()
-    const meta = ref<CommonHead>()
+    const articles = useAsync(async () => {
+      const tagId = parseInt(params.value.id)
+      const data = await $content('articles')
+        .only(['id', 'title', 'date', 'tags'])
+        .where({ 'tags.id': { $contains: tagId } })
+        .sortBy('id', 'desc')
+        .fetch()
+      return Array.isArray(data) ? data : [data]
+    }, `useAsync_${params.value.id}`)
 
-    useFetch(async () => {
-      async function fetchArticles() {
-        const tagId = parseInt(params.value.id)
-        const articles = await cf.fetchArticlesByTagId($content, tagId)
-
-        if (articles.length === 0) {
-          error({ statusCode: 404, message: 'Not Found' })
-          throw new Error('Not Found')
-        }
-
-        return articles
+    watchEffect(() => {
+      // console.info(articles.value)
+      if (articles.value?.length === 0) {
+        error({ statusCode: 404, message: 'Not Found' })
       }
-
-      async function fetchMeta(): Promise<CommonHead> {
-        const tagId = parseInt(params.value.id)
-        const tag = await cf.fetchTagById($content, tagId)
-
-        if (!tag) {
-          error({ statusCode: 404, message: 'Not Found' })
-          throw new Error('Not Found')
-        }
-
-        const title = `タグ(${tag.name})`
-        const description = `タグ「${tag.name}」を含む記事の一覧です。`
-        const path = route.value.path
-
-        const breadcrumbSchema: BreadcrumbSchema = {
-          items: [
-            {
-              name: 'トップページ',
-              path: '/',
-            },
-            {
-              name: title,
-              path: route.value.path,
-            },
-          ],
-        }
-
-        return {
-          title,
-          description,
-          path,
-          breadcrumbSchema,
-        }
-      }
-
-      articles.value = await fetchArticles()
-      meta.value = await fetchMeta()
     })
 
     useMeta(() => {
-      if (!meta.value) return {}
-      return createHeadObject(meta.value)
+      const tagId = parseInt(params.value.id)
+      const tag = searchTag(articles.value, tagId)
+
+      const title = `タグ(${tag ? tag.name : ''})`
+      const description = `タグ「${tag ? tag.name : ''}」を含む記事の一覧です。`
+      const path = route.value.path
+
+      const breadcrumbSchema: BreadcrumbSchema = {
+        items: [
+          {
+            name: 'トップページ',
+            path: '/',
+          },
+          {
+            name: title,
+            path: route.value.path,
+          },
+        ],
+      }
+
+      return createHeadObject({
+        title,
+        description,
+        path,
+        breadcrumbSchema,
+      })
     })
 
     return {
       articles,
-      meta,
     }
   },
 })
