@@ -1,33 +1,32 @@
 <template>
-  <div>
-    <template v-if="$fetchState.pending || $fetchState.error">
-      <Placeholder />
-    </template>
-    <template v-else>
-      <div class="min-vh-100 px-3 px-sm-5 py-5 bg-white rounded">
-        <ArticleHeader :article="article" />
-        <!-- <ArticleToc class="mt-5" :toc="article.toc" /> -->
-        <nuxt-content class="markdown-body mt-5" :document="article" />
-        <Disqus class="mt-5" lang="ja" />
-        <ArticlePager class="mt-5" :next="surround[1]" :prev="surround[0]" />
-      </div>
-    </template>
+  <div class="min-vh-100 px-3 px-sm-5 py-5 bg-white rounded">
+    <ArticleHeader v-if="article" :article="article" />
+    <!-- <ArticleToc v-if="article" class="mt-5" :toc="article.toc" /> -->
+    <nuxt-content
+      v-if="article"
+      class="markdown-body mt-5"
+      :document="article"
+    />
+    <Disqus v-if="article" class="mt-5" lang="ja" />
+    <ArticlePager
+      v-if="surround"
+      class="mt-5"
+      :next="surround[1]"
+      :prev="surround[0]"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
-  ref,
+  useAsync,
   useContext,
-  useFetch,
   useMeta,
+  watchEffect,
 } from '@nuxtjs/composition-api'
-import { ArticleHead } from '~/interfaces/Head'
 import { BreadcrumbSchema, ArticleSchema } from '~/interfaces/Schema'
-import { ContentArticle, ContentSurround } from '~/interfaces/Content'
 import { createHeadObject } from '~/lib/head/article'
-import { ContentFunctions as cf } from '~/lib/content/article'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
@@ -35,90 +34,73 @@ export default defineComponent({
   setup() {
     const { $content, $dayjs, error, params, route } = useContext()
 
-    const article = ref<ContentArticle>()
-    const surround = ref<ContentSurround[]>()
-    const meta = ref<ArticleHead>()
+    const article = useAsync(async () => {
+      const articleId = parseInt(params.value.id)
+      const data = await $content('articles').where({ id: articleId }).fetch()
+      return Array.isArray(data) ? data[0] : data
+    }, `fetchArticle_${params.value.id}`)
 
-    useFetch(async () => {
-      async function fetchArticle() {
-        const articleId = parseInt(params.value.id)
-        const existsArticle = await cf.existsArticleById($content, articleId)
-
-        if (!existsArticle) {
-          error({ statusCode: 404, message: 'Not Found' })
-          throw new Error('Not Found')
-        }
-
-        return await cf.fetchArticleById($content, articleId)
+    watchEffect(() => {
+      // console.info(article.value)
+      if (article.value?.length === 0) {
+        error({ statusCode: 404, message: 'Not Found' })
       }
-
-      async function fetchSurround() {
-        const articleId = parseInt(params.value.id)
-        return await cf.fetchSurroundById($content, articleId)
-      }
-
-      async function fetchMeta(): Promise<ArticleHead> {
-        const articleId = parseInt(params.value.id)
-        const existsArticle = await cf.existsArticleById($content, articleId)
-
-        if (!existsArticle) {
-          error({ statusCode: 404, message: 'Not Found' })
-          throw new Error('Not Found')
-        }
-
-        const article = await cf.fetchArticleById($content, articleId)
-
-        const title = article.title
-        const description = `「${title}」についてまとめた記事です。`
-        const path = route.value.path
-
-        const breadcrumbSchema: BreadcrumbSchema = {
-          items: [
-            {
-              name: 'トップページ',
-              path: '/',
-            },
-            {
-              name: title,
-              path: route.value.path,
-            },
-          ],
-        }
-
-        const articleSchema: ArticleSchema = {
-          articleId: article.id,
-          headlineValue: title,
-          datePublishedValue: $dayjs(article.date).format(
-            'YYYY-MM-DDTHH:mm:ssZ'
-          ),
-          dateModifiedValue: $dayjs(article.date).format(
-            'YYYY-MM-DDTHH:mm:ssZ'
-          ),
-        }
-
-        return {
-          title,
-          description,
-          path,
-          breadcrumbSchema,
-          articleSchema,
-        }
-      }
-
-      article.value = await fetchArticle()
-      surround.value = await fetchSurround()
-      meta.value = await fetchMeta()
     })
 
+    const surround = useAsync(async () => {
+      const slug = params.value.id
+      const data = await $content('articles')
+        .only('id')
+        .sortBy('id')
+        .surround(slug)
+        .fetch()
+      return Array.isArray(data) ? data : [data]
+    }, `fetchSurround_${params.value.id}`)
+
     useMeta(() => {
-      if (!meta.value) return {}
-      return createHeadObject(meta.value)
+      const refVal = article.value
+      const data = refVal || {
+        title: '',
+        id: -1,
+        date: '',
+      }
+
+      const title = data.title
+      const description = `「${title}」についてまとめた記事です。`
+      const path = route.value.path
+
+      const breadcrumbSchema: BreadcrumbSchema = {
+        items: [
+          {
+            name: 'トップページ',
+            path: '/',
+          },
+          {
+            name: title,
+            path: route.value.path,
+          },
+        ],
+      }
+
+      const articleSchema: ArticleSchema = {
+        articleId: data.id,
+        headlineValue: title,
+        datePublishedValue: $dayjs(data.date).format('YYYY-MM-DDTHH:mm:ssZ'),
+        dateModifiedValue: $dayjs(data.date).format('YYYY-MM-DDTHH:mm:ssZ'),
+      }
+
+      return createHeadObject({
+        title,
+        description,
+        path,
+        breadcrumbSchema,
+        articleSchema,
+      })
     })
 
     return {
       article,
       surround,
-      meta,
     }
   },
 })
