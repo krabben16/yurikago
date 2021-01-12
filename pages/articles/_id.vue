@@ -26,8 +26,8 @@ import {
 import { ArticleHead } from '~/interfaces/Head'
 import { BreadcrumbSchema, ArticleSchema } from '~/interfaces/Schema'
 import { ContentArticle, ContentSurround } from '~/interfaces/Content'
-import { createHeadObject } from '~/resources/head/article'
-import { ContentFunctions as cf } from '~/resources/content/article'
+import { createHeadObject } from '~/lib/head/article'
+import { ContentFunctions as cf } from '~/lib/content/article'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality

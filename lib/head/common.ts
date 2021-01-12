@@ -1,4 +1,4 @@
-import { createBreadcrumbSchemaObject } from '~/resources/schema/breadcrumb'
+import { createBreadcrumbSchemaObject } from '~/lib/schema/breadcrumb'
 import { CommonHead } from '~/interfaces/Head'
 
 export function createHeadObject(head: CommonHead) {

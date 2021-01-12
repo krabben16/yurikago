@@ -11,7 +11,7 @@
 import { defineComponent, useContext, useMeta } from '@nuxtjs/composition-api'
 import { NuxtError } from '@nuxt/types'
 import { BreadcrumbSchema } from '~/interfaces/Schema'
-import { createHeadObject } from '~/resources/head/common'
+import { createHeadObject } from '~/lib/head/common'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
