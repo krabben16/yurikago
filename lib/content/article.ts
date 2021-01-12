@@ -7,16 +7,6 @@ import {
 } from '~/interfaces/Content'
 
 export class ContentFunctions {
-  // 全ての記事データを取得する
-  public static async fetchAllArticles($content: contentFunc) {
-    const articles = await $content('articles')
-      .only(['id', 'title', 'date', 'tags'])
-      .sortBy('id', 'desc')
-      .fetch()
-
-    return articles as ContentArticleListItem[]
-  }
-
   // タグIDから記事データを取得する
   public static async fetchArticlesByTagId(
     $content: contentFunc,
