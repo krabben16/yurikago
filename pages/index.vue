@@ -1,6 +1,6 @@
 <template>
   <div class="min-vh-100 px-3 px-sm-5 py-5 bg-white rounded">
-    <ArticleList :articles="articles" />
+    <ArticleList v-if="articles" :articles="articles" />
   </div>
 </template>
 
