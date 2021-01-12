@@ -67,6 +67,7 @@ const config: NuxtConfig = {
     markdown: {
       rehypePlugins: ['rehype-plugin-image-native-lazy-loading'],
     },
+    liveEdit: false,
   },
 
   // NOTE: 動作確認する際はyarn startする
