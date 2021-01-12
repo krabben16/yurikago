@@ -18,14 +18,12 @@
       <!-- タグ -->
       <div>
         <span class="mr-1">Tags: </span>
-        <nuxt-link
+        <TagListItem
           v-for="(tag, j) in article.tags"
           :key="tag.id"
-          :to="{ name: 'tags-id', params: { id: tag.id } }"
+          :tag="tag"
           :class="{ 'ml-2': j > 0 }"
-        >
-          {{ tag.name }}
-        </nuxt-link>
+        />
       </div>
 
       <!-- 区切り -->
