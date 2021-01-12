@@ -1,5 +1,5 @@
-import { createBreadcrumbSchemaObject } from '~/resources/schema/breadcrumb'
-import { createArticleSchemaObject } from '~/resources/schema/article'
+import { createBreadcrumbSchemaObject } from '~/lib/schema/breadcrumb'
+import { createArticleSchemaObject } from '~/lib/schema/article'
 import { ArticleHead } from '~/interfaces/Head'
 
 export function createHeadObject(head: ArticleHead) {

@@ -11,6 +11,7 @@
           height="64"
           width="64"
           class="rounded-pill"
+          loading="lazy"
       /></a>
     </div>
     <div class="text-light mt-3">

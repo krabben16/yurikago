@@ -11,7 +11,7 @@
 import { defineComponent, useContext, useMeta } from '@nuxtjs/composition-api'
 import { NuxtError } from '@nuxt/types'
 import { BreadcrumbSchema } from '~/interfaces/Schema'
-import { createHeadObject } from '~/resources/head/common'
+import { createHeadObject } from '~/lib/head/common'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
@@ -25,7 +25,7 @@ export default defineComponent({
   setup() {
     const { route } = useContext()
 
-    function fetchMeta() {
+    useMeta(() => {
       const title = 'エラー'
       const description = 'エラーページです！'
       const path = route.value.path
@@ -43,16 +43,12 @@ export default defineComponent({
         ],
       }
 
-      return {
+      return createHeadObject({
         title,
         description,
         path,
         breadcrumbSchema,
-      }
-    }
-
-    useMeta(() => {
-      return createHeadObject(fetchMeta())
+      })
     })
 
     return {}

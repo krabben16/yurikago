@@ -1,10 +1,12 @@
 <template>
   <div>
-    <!-- タイトル -->
-    <h1>{{ article.title }}</h1>
+    <!-- 記事タイトル -->
+    <nuxt-link :to="`/articles/${article.id}`" class="h5">
+      {{ article.title }}
+    </nuxt-link>
 
     <!-- 作成日 -->
-    <div class="mt-3">
+    <div class="mt-2">
       <span class="mr-1">Created: </span>
       {{ $dayjs(article.date).format('YYYY/MM/DD') }}
     </div>
@@ -12,26 +14,24 @@
     <!-- タグ -->
     <div>
       <span class="mr-1">Tags: </span>
-      <nuxt-link
-        v-for="(tag, i) in article.tags"
+      <TagListItem
+        v-for="(tag, j) in article.tags"
         :key="tag.id"
-        :to="{ name: 'tags-id', params: { id: tag.id } }"
-        :class="{ 'ml-2': i > 0 }"
-      >
-        {{ tag.name }}
-      </nuxt-link>
+        :tag="tag"
+        :class="{ 'ml-2': j > 0 }"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { ContentArticle } from '~/interfaces/Content'
+import { ContentArticleListItem } from '~/interfaces/Content'
 
 export default defineComponent({
   props: {
     article: {
-      type: Object as () => ContentArticle,
+      type: Object as () => ContentArticleListItem,
       required: true,
     },
   },
