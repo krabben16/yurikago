@@ -17,9 +17,9 @@ import { BreadcrumbSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/lib/head/common'
 import { ContentArticleTag } from '~/interfaces/Content'
 
-function searchTag(articles: IContentDocument[] | null, tagId: number) {
+function searchTag(articles: IContentDocument[], tagId: number) {
   let tag: ContentArticleTag | null = null
-  for (const article of articles || []) {
+  for (const article of articles) {
     for (const target of article.tags) {
       if (target.id === tagId) {
         tag = target
@@ -54,10 +54,13 @@ export default defineComponent({
 
     useMeta(() => {
       const tagId = parseInt(params.value.id)
-      const tag = searchTag(articles.value, tagId)
+      const refVal = articles.value || []
+      const data = searchTag(refVal, tagId) || {
+        name: '',
+      }
 
-      const title = `タグ(${tag ? tag.name : ''})`
-      const description = `タグ「${tag ? tag.name : ''}」を含む記事の一覧です。`
+      const title = `タグ(${data.name})`
+      const description = `タグ「${data.name}」を含む記事の一覧です。`
       const path = route.value.path
 
       const breadcrumbSchema: BreadcrumbSchema = {
