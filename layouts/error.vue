@@ -25,7 +25,7 @@ export default defineComponent({
   setup() {
     const { route } = useContext()
 
-    function fetchMeta() {
+    useMeta(() => {
       const title = 'エラー'
       const description = 'エラーページです！'
       const path = route.value.path
@@ -43,16 +43,12 @@ export default defineComponent({
         ],
       }
 
-      return {
+      return createHeadObject({
         title,
         description,
         path,
         breadcrumbSchema,
-      }
-    }
-
-    useMeta(() => {
-      return createHeadObject(fetchMeta())
+      })
     })
 
     return {}
