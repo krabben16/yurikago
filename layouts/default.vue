@@ -1,11 +1,13 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-sm-10 mx-sm-auto">
-        <Nav />
-        <nuxt />
-        <Footer />
+  <div>
+    <Nav />
+    <main class="container">
+      <div class="row">
+        <div class="col-12 col-sm-10 mx-sm-auto">
+          <nuxt />
+        </div>
       </div>
-    </div>
+    </main>
+    <Footer />
   </div>
 </template>

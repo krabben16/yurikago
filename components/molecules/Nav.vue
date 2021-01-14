@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-dark py-4">
+  <nav class="navbar bg-dark navbar-dark fixed-top">
     <nuxt-link to="/" class="navbar-brand">
       {{ siteName }}
     </nuxt-link>
