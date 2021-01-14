@@ -14,7 +14,7 @@
           loading="lazy"
       /></a>
     </div>
-    <div class="text-light mt-3">
+    <div class="text-dark mt-3">
       <div>
         &copy; {{ new Date().getFullYear() }} {{ siteOwner }}, Built with
         Nuxt.js
