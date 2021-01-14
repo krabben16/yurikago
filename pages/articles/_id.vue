@@ -22,6 +22,7 @@ import {
 } from '@nuxtjs/composition-api'
 import { BreadcrumbSchema, ArticleSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/lib/head/article'
+import { findBreadcrumb } from '~/lib/breadcrumb'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
@@ -71,10 +72,7 @@ export default defineComponent({
 
       const breadcrumbSchema: BreadcrumbSchema = {
         items: [
-          {
-            name: 'トップページ',
-            path: '/',
-          },
+          findBreadcrumb('/'),
           {
             name: title,
             path: route.value.path,

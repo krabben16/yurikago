@@ -16,6 +16,7 @@ import { IContentDocument } from '@nuxt/content/types/content'
 import { BreadcrumbSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/lib/head/common'
 import { ContentArticleTag } from '~/interfaces/Content'
+import { findBreadcrumb } from '~/lib/breadcrumb'
 
 function searchTag(articles: IContentDocument[], tagId: number) {
   let tag: ContentArticleTag | null = null
@@ -67,10 +68,7 @@ export default defineComponent({
 
       const breadcrumbSchema: BreadcrumbSchema = {
         items: [
-          {
-            name: 'トップページ',
-            path: '/',
-          },
+          findBreadcrumb('/'),
           {
             name: title,
             path: route.value.path,
