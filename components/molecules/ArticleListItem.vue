@@ -7,13 +7,13 @@
 
     <!-- 作成日 -->
     <div class="mt-2">
-      <span class="mr-1">Created: </span>
+      <span class="mr-1">Created:</span>
       {{ $dayjs(article.date).format('YYYY/MM/DD') }}
     </div>
 
     <!-- タグ -->
     <div>
-      <span class="mr-1">Tags: </span>
+      <span class="mr-1">Tags:</span>
       <TagListItem
         v-for="(tag, j) in article.tags"
         :key="tag.id"
