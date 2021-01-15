@@ -1,16 +1,16 @@
 <template>
-  <div class="flex justify-between text-gray-600">
+  <div class="flex flex-col">
     <nuxt-link
       v-if="surround.next"
       :to="`/articles/${surround.next.id}`"
-      class="underline"
+      class="github-anchor mx-auto"
     >
       &larr; {{ surround.next.title }}
     </nuxt-link>
     <nuxt-link
       v-if="surround.prev"
       :to="`/articles/${surround.prev.id}`"
-      class="underline"
+      class="github-anchor mx-auto"
     >
       {{ surround.prev.title }} &rarr;
     </nuxt-link>

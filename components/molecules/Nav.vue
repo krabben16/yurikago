@@ -1,7 +1,7 @@
 <template>
-  <nuxt-link to="/" class="flex flex-row disableDecolation">
+  <nuxt-link to="/" class="flex flex-row">
     <img
-      class="rounded-full h-12 w-12 flex items-center justify-center mr-4"
+      class="rounded-full h-12 w-12 mr-4"
       :src="`https://github.com/${githubId}.png`"
     />
     <div class="text-3xl">

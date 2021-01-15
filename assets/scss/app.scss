@@ -9,3 +9,12 @@ body {
   color: var(--github-text-color);
   font-family: var(--github-font-family);
 }
+
+a.github-anchor {
+  color: var(--github-anchor-color);
+  text-decoration: none;
+}
+
+a:hover.github-anchor {
+  text-decoration: underline;
+}

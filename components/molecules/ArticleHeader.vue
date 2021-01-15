@@ -19,7 +19,7 @@
         :key="tag.id"
         :class="{ 'ml-2': j > 0 }"
       >
-        <nuxt-link :to="`/tags/${tag.id}`" class="underline">
+        <nuxt-link :to="`/tags/${tag.id}`" class="github-anchor">
           {{ tag.name }}
         </nuxt-link>
       </div>
