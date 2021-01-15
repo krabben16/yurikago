@@ -1,13 +1,7 @@
 <template>
-  <div>
-    <Nav />
-    <main class="container">
-      <div class="row">
-        <div class="col-12 col-sm-10 mx-sm-auto">
-          <nuxt />
-        </div>
-      </div>
-    </main>
-    <Footer />
+  <div class="container max-w-screen-md px-4">
+    <Nav class="py-8" />
+    <nuxt />
+    <Footer class="py-8" />
   </div>
 </template>

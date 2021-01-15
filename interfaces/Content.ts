@@ -21,6 +21,7 @@ export interface ContentArticle extends IContentDocument {
 
 export interface ContentSurround extends IContentDocument {
   id: number
+  title: string
 }
 
 export interface ContentArticleListItem extends IContentDocument {

@@ -1,9 +1,10 @@
 <template>
-  <div>
-    <div v-for="(article, i) in articles" :key="article.id">
-      <ArticleListItem :article="article" />
-      <hr v-if="i < articles.length - 1" />
-    </div>
+  <div class="grid grid-cols-1 gap-10 py-4">
+    <ArticleListItem
+      v-for="article in articles"
+      :key="article.id"
+      :article="article"
+    />
   </div>
 </template>
 
