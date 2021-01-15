@@ -1,23 +1,19 @@
 <template>
-  <div>
-    <div class="flex justify-start">
-      <nuxt-link
-        v-if="surround.next"
-        :to="`/articles/${surround.next.id}`"
-        class="github-anchor"
-      >
-        &larr; {{ surround.next.title }}
-      </nuxt-link>
-    </div>
-    <div class="flex justify-end">
-      <nuxt-link
-        v-if="surround.prev"
-        :to="`/articles/${surround.prev.id}`"
-        class="github-anchor"
-      >
-        {{ surround.prev.title }} &rarr;
-      </nuxt-link>
-    </div>
+  <div class="flex flex-col">
+    <nuxt-link
+      v-if="surround.next"
+      :to="`/articles/${surround.next.id}`"
+      class="github-anchor mx-auto"
+    >
+      &larr; {{ surround.next.title }}
+    </nuxt-link>
+    <nuxt-link
+      v-if="surround.prev"
+      :to="`/articles/${surround.prev.id}`"
+      class="github-anchor mx-auto"
+    >
+      {{ surround.prev.title }} &rarr;
+    </nuxt-link>
   </div>
 </template>
 
