@@ -1,23 +1,28 @@
 <template>
   <div>
     <!-- タイトル -->
-    <h1>{{ article.title }}</h1>
+    <h1 class="text-4xl">{{ article.title }}</h1>
 
     <!-- 作成日 -->
-    <div class="mt-3">
-      <span class="mr-1">Created:</span>
-      {{ $dayjs(article.date).format('YYYY/MM/DD') }}
+    <div class="flex flex-row text-gray-600 mt-4">
+      <div class="mr-2">Created:</div>
+      <time :datetime="$dayjs(article.date).format('YYYY-MM-DD')">{{
+        $dayjs(article.date).format('YYYY/MM/DD')
+      }}</time>
     </div>
 
     <!-- タグ -->
-    <div>
-      <span class="mr-1">Tags:</span>
-      <TagListItem
+    <div class="flex flex-row text-gray-600">
+      <div class="mr-2">Tags:</div>
+      <div
         v-for="(tag, j) in article.tags"
         :key="tag.id"
-        :tag="tag"
-        :class="{ 'ml-1': j > 0 }"
-      />
+        :class="{ 'ml-2': j > 0 }"
+      >
+        <nuxt-link :to="`/tags/${tag.id}`" class="underline">
+          {{ tag.name }}
+        </nuxt-link>
+      </div>
     </div>
   </div>
 </template>

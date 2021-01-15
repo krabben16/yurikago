@@ -1,20 +1,18 @@
 <template>
-  <div class="d-flex justify-content-between">
+  <div class="flex justify-between text-gray-600">
     <nuxt-link
       v-if="surround.next"
-      class="btn btn-outline-dark"
       :to="`/articles/${surround.next.id}`"
-      role="button"
+      class="underline"
     >
-      &larr; 次の記事
+      &larr; {{ surround.next.title }}
     </nuxt-link>
     <nuxt-link
       v-if="surround.prev"
-      class="btn btn-outline-dark"
       :to="`/articles/${surround.prev.id}`"
-      role="button"
+      class="underline"
     >
-      前の記事 &rarr;
+      {{ surround.prev.title }} &rarr;
     </nuxt-link>
   </div>
 </template>

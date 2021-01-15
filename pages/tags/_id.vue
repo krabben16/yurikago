@@ -1,7 +1,5 @@
 <template>
-  <div class="min-vh-100 px-3 px-sm-5 py-5 bg-white rounded">
-    <ArticleList v-if="articles" :articles="articles" />
-  </div>
+  <ArticleList v-if="articles" :articles="articles" />
 </template>
 
 <script lang="ts">
