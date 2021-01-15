@@ -18,7 +18,7 @@
         v-for="(tag, j) in article.tags"
         :key="tag.id"
         :tag="tag"
-        :class="{ 'ml-2': j > 0 }"
+        :class="{ 'ml-1': j > 0 }"
       />
     </div>
   </div>
