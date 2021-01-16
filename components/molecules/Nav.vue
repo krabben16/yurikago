@@ -4,7 +4,7 @@
       class="rounded-full h-12 w-12 mr-4"
       :src="`https://github.com/${githubId}.png`"
     />
-    <nuxt-link to="/" class="text-3xl my-auto">
+    <nuxt-link to="/" class="text-2xl my-auto">
       {{ siteName }}
     </nuxt-link>
   </div>

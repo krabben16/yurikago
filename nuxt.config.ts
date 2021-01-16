@@ -54,6 +54,9 @@ const config: NuxtConfig = {
     nestedProperties: ['tags.id'],
     markdown: {
       rehypePlugins: ['rehype-plugin-image-native-lazy-loading'],
+      prism: {
+        theme: 'prism-themes/themes/prism-vsc-dark-plus.css'
+      },
     },
     liveEdit: false,
   },
