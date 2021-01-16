@@ -2,7 +2,7 @@
   <article>
     <ArticleHeader v-if="res && res.article" :article="res.article" />
     <!-- <ArticleToc v-if="res && res.article" class="mt-8" :toc="res.article.toc" /> -->
-    <nuxt-content
+    <ArticleContent
       v-if="res && res.article"
       class="mt-8"
       :document="res.article"
