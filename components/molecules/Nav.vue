@@ -1,13 +1,13 @@
 <template>
-  <nuxt-link to="/" class="flex flex-row">
+  <div class="flex flex-row">
     <img
       class="rounded-full h-12 w-12 mr-4"
       :src="`https://github.com/${githubId}.png`"
     />
-    <div class="text-3xl">
+    <nuxt-link to="/" class="text-3xl my-auto">
       {{ siteName }}
-    </div>
-  </nuxt-link>
+    </nuxt-link>
+  </div>
 </template>
 
 <script lang="ts">
@@ -22,3 +22,9 @@ export default defineComponent({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+a {
+  text-decoration: none;
+}
+</style>
