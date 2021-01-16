@@ -3,14 +3,14 @@
     <nuxt-link
       v-if="surround.next"
       :to="`/articles/${surround.next.id}`"
-      class="github-anchor mx-auto"
+      class="mx-auto"
     >
       &larr; {{ surround.next.title }}
     </nuxt-link>
     <nuxt-link
       v-if="surround.prev"
       :to="`/articles/${surround.prev.id}`"
-      class="github-anchor mx-auto"
+      class="mx-auto"
     >
       {{ surround.prev.title }} &rarr;
     </nuxt-link>

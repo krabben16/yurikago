@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center text-light">
+  <div class="text-center">
     <span v-if="error.statusCode === 404" class="h4">
       {{ error.statusCode }} {{ error.message }}
     </span>

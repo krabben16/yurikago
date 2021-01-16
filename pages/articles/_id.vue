@@ -4,7 +4,7 @@
     <!-- <ArticleToc v-if="res && res.article" class="mt-8" :toc="res.article.toc" /> -->
     <nuxt-content
       v-if="res && res.article"
-      class="markdown-body mt-8"
+      class="mt-8"
       :document="res.article"
     />
     <Disqus v-if="res && res.article" class="mt-8" lang="ja" />
