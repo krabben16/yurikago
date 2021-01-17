@@ -36,8 +36,10 @@ a {
   text-decoration: none;
 }
 
+// text-gray-700 => rgba(74, 85, 104, var(--text-opacity)) => #4a5568
 a > div:nth-child(n + 2) {
   @apply text-sm;
+  @apply text-gray-700;
   @apply font-normal;
 }
 </style>
