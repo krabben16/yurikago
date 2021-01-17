@@ -1,15 +1,18 @@
 <template>
   <nuxt-link :to="`/articles/${article.id}`">
     <!-- 記事タイトル -->
-    <div class="text-xl">
+    <div class="text-lg">
       {{ article.title }}
     </div>
     <!-- 作成日 -->
     <div class="flex flex-row">
-      <span class="mr-2">Created:</span>
       <time :datetime="$dayjs(article.date).format('YYYY-MM-DD')">{{
         $dayjs(article.date).format('YYYY/MM/DD')
       }}</time>
+    </div>
+    <!-- 概要 -->
+    <div>
+      {{ article.description }}
     </div>
   </nuxt-link>
 </template>
@@ -33,9 +36,8 @@ a {
   text-decoration: none;
 }
 
-span,
-time {
-  color: #4a5568;
-  font-weight: initial;
+a > div:nth-child(n + 2) {
+  @apply text-sm;
+  @apply font-normal;
 }
 </style>
