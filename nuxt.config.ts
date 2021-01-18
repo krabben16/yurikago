@@ -1,5 +1,5 @@
 import type { NuxtConfig } from '@nuxt/types'
-import { contentFunc, IContentDocument } from '@nuxt/content/types/content'
+import { contentFunc } from '@nuxt/content/types/content'
 
 const frontUrl = 'https://www.yurikago-blog.com'
 const githubId = 'krabben16'
@@ -9,6 +9,13 @@ const articleOrganization = 'Yurikago Blog'
 const siteOwner = 'Hiroki Kawaguchi'
 const siteName = 'Yurikago Blog'
 const disqusShortname = 'yurikago-blog'
+
+async function fetchContent() {
+  // https://content.nuxtjs.org/ja/advanced#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%E3%81%AA%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95
+  const { $content }: { $content: contentFunc } = require('@nuxt/content')
+  const res = await $content('articles').fetch()
+  return Array.isArray(res) ? res : [res]
+}
 
 const config: NuxtConfig = {
   // Target (https://go.nuxtjs.dev/config-target)
@@ -70,22 +77,19 @@ const config: NuxtConfig = {
     hostname: frontUrl,
     routes: async () => {
       const routeList = []
+      const articles = await fetchContent()
 
-      // https://content.nuxtjs.org/ja/advanced#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%E3%81%AA%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95
-      const { $content }: { $content: contentFunc } = require('@nuxt/content')
-      const articles = (await $content('articles')
-        .only(['id', 'tags'])
-        .fetch()) as IContentDocument[]
-
-      for (let i = 0; i < articles.length; i++) {
-        const article = articles[i]
-
+      for (const article of articles) {
         // 記事詳細
-        routeList.push(`/articles/${article.id}`)
+        const articleRoute = `/articles/${article.id}`
+        routeList.push(articleRoute)
 
-        for (let j = 0; j < article.tags.length; j++) {
+        for (const tag of article.tags) {
           // 記事一覧 タグ
-          routeList.push(`/tags/${article.tags[j].id}`)
+          const tagRoute = `/tags/${tag.id}`
+          if (!routeList.includes(tagRoute)) {
+            routeList.push(tagRoute)
+          }
         }
       }
 
