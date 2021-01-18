@@ -1,6 +1,5 @@
 import type { NuxtConfig } from '@nuxt/types'
 import { contentFunc } from '@nuxt/content/types/content'
-import { ContentArticleTag } from './interfaces/Content'
 
 const frontUrl = 'https://www.yurikago-blog.com'
 const githubId = 'krabben16'
@@ -56,7 +55,6 @@ const config: NuxtConfig = {
     '@nuxtjs/google-analytics',
     '@nuxtjs/sitemap',
     '@nuxtjs/dayjs',
-    '@nuxtjs/feed',
   ],
 
   content: {
@@ -103,47 +101,6 @@ const config: NuxtConfig = {
     locales: ['ja'],
     defaultLocale: 'ja',
   },
-
-  feed: [
-    {
-      path: '/feed.xml',
-      async create(feed: any) {
-        feed.options = {
-          title: siteName,
-          link: frontUrl + '/feed.xml',
-          description: `${siteName} Feed`
-        }
-  
-        const articles = await fetchContent()
-        const tagList: ContentArticleTag[] = []
-
-        for (const article of articles) {
-          feed.addItem({
-            title: article.title,
-            id: article.id,
-            link: `${frontUrl}/articles/${article.id}`,
-            description: article.description,
-            date: new Date(article.date),
-            published: new Date(article.date),
-          })
-
-          for (const tag of article.tags) {
-            if (!tagList.includes(tag)) {
-              feed.addItem({
-                title: tag.name,
-                id: tag.id,
-                link: `${frontUrl}/tags/${tag.id}`,
-                description: tag.name,
-              })
-              tagList.push(tag)
-            }
-          }
-        }
-      },
-      cacheTime: 1000 * 60 * 15,
-      type: 'rss2',
-    }
-  ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
