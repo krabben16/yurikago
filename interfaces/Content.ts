@@ -1,5 +1,10 @@
 import { IContentDocument } from '@nuxt/content/types/content'
 
+export interface ContentArticleCategory {
+  id: number
+  name: string
+}
+
 export interface ContentArticleTag {
   id: number
   name: string
@@ -28,5 +33,6 @@ export interface ContentArticleListItem extends IContentDocument {
   id: number
   title: string
   date: string
+  category: ContentArticleCategory
   tags: ContentArticleTag[]
 }

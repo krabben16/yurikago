@@ -38,7 +38,7 @@ export default defineComponent({
       const tagId = parseInt(params.value.id)
 
       const data = await $content('articles')
-        .only(['id', 'title', 'date', 'tags', 'description'])
+        .only(['id', 'title', 'date', 'category', 'tags', 'description'])
         .where({ 'tags.id': { $contains: tagId } })
         .sortBy('id', 'desc')
         .fetch()
