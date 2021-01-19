@@ -11,6 +11,14 @@
       }}</time>
     </div>
 
+    <!-- カテゴリ -->
+    <div class="flex flex-row">
+      <span class="mr-2">Category:</span>
+      <spna>
+        {{ article.category.name }}
+      </spna>
+    </div>
+
     <!-- タグ -->
     <div class="flex flex-row">
       <span class="mr-2">Tags:</span>

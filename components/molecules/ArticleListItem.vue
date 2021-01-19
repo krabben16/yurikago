@@ -4,11 +4,15 @@
     <div class="text-lg">
       {{ article.title }}
     </div>
-    <!-- 作成日 -->
     <div class="flex flex-row">
+      <!-- 作成日 -->
       <time :datetime="$dayjs(article.date).format('YYYY-MM-DD')">{{
         $dayjs(article.date).format('YYYY/MM/DD')
       }}</time>
+      <!-- カテゴリ -->
+      <spna class="ml-2">
+        {{ article.category.name }}
+      </spna>
     </div>
     <!-- 概要 -->
     <div>
