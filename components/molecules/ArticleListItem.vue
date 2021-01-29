@@ -41,12 +41,12 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 a {
   text-decoration: none;
 }
 
-// text-gray-700 => rgba(74, 85, 104, var(--text-opacity)) => #4a5568
+/* text-gray-700 => rgba(74, 85, 104, var(--text-opacity)) => #4a5568 */
 a > div:nth-child(n + 2) {
   @apply text-sm text-gray-700 font-normal;
 }
