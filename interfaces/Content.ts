@@ -10,7 +10,6 @@ export interface IContentArticle extends IContentDocument {
   id: number
   title: string
   date: string
-  toc: IContentArticleToc[]
 }
 
 export interface IContentSurround extends IContentDocument {

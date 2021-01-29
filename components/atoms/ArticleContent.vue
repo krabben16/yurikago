@@ -16,8 +16,19 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 blockquote {
   overflow-wrap: break-word;
+}
+
+code {
+  font-weight: initial;
+  font-size: initial;
+  @apply bg-gray-200 border-2 border-gray-400 border-dashed rounded px-1;
+}
+
+code::before,
+code::after {
+  content: initial;
 }
 </style>

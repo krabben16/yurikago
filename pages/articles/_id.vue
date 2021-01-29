@@ -33,11 +33,11 @@ export default defineComponent({
     const res = useAsync(async () => {
       const slug = params.value.id
 
-      const article = await $content('articles')
+      const article = await $content()
         .where({ id: parseInt(slug) })
         .fetch()
 
-      const surround = await $content('articles')
+      const surround = await $content()
         .only(['id', 'title'])
         .sortBy('id')
         .surround(slug)

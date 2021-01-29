@@ -14,7 +14,7 @@ const disqusShortname = 'yurikago-blog'
 async function fetchContent() {
   // https://content.nuxtjs.org/ja/advanced#%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%E3%81%AA%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95
   const { $content }: { $content: contentFunc } = require('@nuxt/content')
-  const res = await $content('articles').fetch()
+  const res = await $content().fetch()
   return Array.isArray(res) ? res : [res]
 }
 
