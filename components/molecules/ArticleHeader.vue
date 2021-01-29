@@ -15,7 +15,7 @@
     <div class="flex flex-row">
       <span class="mr-2">Category:</span>
       <spna>
-        {{ article.category.name }}
+        {{ category.name }}
       </spna>
     </div>
 
@@ -34,6 +34,7 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { IContentArticle } from '~/interfaces/Content'
+import { createCategory } from '~/lib/category'
 import { createTags } from '~/lib/tags'
 
 export default defineComponent({
@@ -45,6 +46,7 @@ export default defineComponent({
   },
   setup({ article }) {
     return {
+      category: createCategory(article.id),
       tags: createTags(article.id),
     }
   },

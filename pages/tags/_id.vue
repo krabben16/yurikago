@@ -26,7 +26,7 @@ export default defineComponent({
       const articleIds = createArticleIds(tagId)
 
       const data = await $content('articles')
-        .only(['id', 'title', 'date', 'category', 'description'])
+        .only(['id', 'title', 'date', 'description'])
         .where({ id: { $in: articleIds } })
         .sortBy('id', 'desc')
         .fetch()
