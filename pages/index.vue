@@ -21,7 +21,7 @@ export default defineComponent({
 
     const articles = useAsync(async () => {
       const data = await $content('articles')
-        .only(['id', 'title', 'date', 'category', 'tags', 'description'])
+        .only(['id', 'title', 'date', 'category', 'description'])
         .sortBy('id', 'desc')
         .fetch()
       return Array.isArray(data) ? data : [data]

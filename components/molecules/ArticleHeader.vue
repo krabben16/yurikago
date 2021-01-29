@@ -22,11 +22,7 @@
     <!-- タグ -->
     <div class="flex flex-row">
       <span class="mr-2">Tags:</span>
-      <span
-        v-for="(tag, j) in article.tags"
-        :key="tag.id"
-        :class="{ 'ml-2': j > 0 }"
-      >
+      <span v-for="(tag, j) in tags" :key="tag.id" :class="{ 'ml-2': j > 0 }">
         <nuxt-link :to="`/tags/${tag.id}`">
           {{ tag.name }}
         </nuxt-link>
@@ -38,6 +34,7 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { ContentArticle } from '~/interfaces/Content'
+import { createTags } from '~/lib/tags'
 
 export default defineComponent({
   props: {
@@ -45,6 +42,11 @@ export default defineComponent({
       type: Object as () => ContentArticle,
       required: true,
     },
+  },
+  setup({ article }) {
+    return {
+      tags: createTags(article.id),
+    }
   },
 })
 </script>

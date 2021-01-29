@@ -1,5 +1,6 @@
 import type { NuxtConfig } from '@nuxt/types'
 import { contentFunc } from '@nuxt/content/types/content'
+import { createTags } from './lib/tags'
 
 const frontUrl = 'https://www.yurikago-blog.com'
 const githubId = 'krabben16'
@@ -58,7 +59,6 @@ const config: NuxtConfig = {
   ],
 
   content: {
-    nestedProperties: ['tags.id'],
     markdown: {
       rehypePlugins: ['rehype-plugin-image-native-lazy-loading'],
       prism: {
@@ -84,7 +84,8 @@ const config: NuxtConfig = {
         const articleRoute = `/articles/${article.id}`
         routeList.push(articleRoute)
 
-        for (const tag of article.tags) {
+        const tags = createTags(article.id)
+        for (const tag of tags) {
           // 記事一覧 タグ
           const tagRoute = `/tags/${tag.id}`
           if (!routeList.includes(tagRoute)) {

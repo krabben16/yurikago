@@ -5,11 +5,6 @@ export interface ContentArticleCategory {
   name: string
 }
 
-export interface ContentArticleTag {
-  id: number
-  name: string
-}
-
 export interface ContentArticleToc {
   id: string
   depth: number
@@ -20,7 +15,6 @@ export interface ContentArticle extends IContentDocument {
   id: number
   title: string
   date: string
-  tags: ContentArticleTag[]
   toc: ContentArticleToc[]
 }
 
@@ -34,5 +28,4 @@ export interface ContentArticleListItem extends IContentDocument {
   title: string
   date: string
   category: ContentArticleCategory
-  tags: ContentArticleTag[]
 }
