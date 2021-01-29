@@ -20,7 +20,7 @@ export default defineComponent({
     const { $content, route } = useContext()
 
     const articles = useAsync(async () => {
-      const data = await $content('articles')
+      const data = await $content()
         .only(['id', 'title', 'date', 'description'])
         .sortBy('id', 'desc')
         .fetch()
