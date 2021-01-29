@@ -10,7 +10,7 @@ import {
   useMeta,
   watchEffect,
 } from '@nuxtjs/composition-api'
-import { BreadcrumbSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/lib/head/common'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 import { createArticleIds, createTag } from '~/lib/tags'
@@ -49,7 +49,7 @@ export default defineComponent({
       const description = `タグ「${data.name}」を含む記事の一覧です。`
       const path = route.value.path
 
-      const breadcrumbSchema: BreadcrumbSchema = {
+      const breadcrumbSchema: IBreadcrumbSchema = {
         items: [
           findBreadcrumb('/'),
           {

@@ -1,11 +1,11 @@
-import { BreadcrumbSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema } from '~/interfaces/Schema'
 
 /**
  * パンくずの構造化データを作成する
  * https://developers.google.com/search/docs/data-types/breadcrumb?hl=ja
  */
 export const createBreadcrumbSchemaObject = (
-  breadcrumbSchema: BreadcrumbSchema
+  breadcrumbSchema: IBreadcrumbSchema
 ) => {
   const itemList = breadcrumbSchema.items.map((v, k) => {
     return {

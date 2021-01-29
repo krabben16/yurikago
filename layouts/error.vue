@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, useContext, useMeta } from '@nuxtjs/composition-api'
 import { NuxtError } from '@nuxt/types'
-import { BreadcrumbSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/lib/head/common'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 
@@ -31,7 +31,7 @@ export default defineComponent({
       const description = 'エラーページです！'
       const path = route.value.path
 
-      const breadcrumbSchema: BreadcrumbSchema = {
+      const breadcrumbSchema: IBreadcrumbSchema = {
         items: [
           findBreadcrumb('/'),
           {

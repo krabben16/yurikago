@@ -33,13 +33,13 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { ContentArticle } from '~/interfaces/Content'
+import { IContentArticle } from '~/interfaces/Content'
 import { createTags } from '~/lib/tags'
 
 export default defineComponent({
   props: {
     article: {
-      type: Object as () => ContentArticle,
+      type: Object as () => IContentArticle,
       required: true,
     },
   },

@@ -1,31 +1,31 @@
 import { IContentDocument } from '@nuxt/content/types/content'
 
-export interface ContentArticleCategory {
+export interface IContentArticleCategory {
   id: number
   name: string
 }
 
-export interface ContentArticleToc {
+export interface IContentArticleToc {
   id: string
   depth: number
   text: string
 }
 
-export interface ContentArticle extends IContentDocument {
+export interface IContentArticle extends IContentDocument {
   id: number
   title: string
   date: string
-  toc: ContentArticleToc[]
+  toc: IContentArticleToc[]
 }
 
-export interface ContentSurround extends IContentDocument {
+export interface IContentSurround extends IContentDocument {
   id: number
   title: string
 }
 
-export interface ContentArticleListItem extends IContentDocument {
+export interface IContentArticleListItem extends IContentDocument {
   id: number
   title: string
   date: string
-  category: ContentArticleCategory
+  category: IContentArticleCategory
 }

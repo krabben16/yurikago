@@ -10,12 +10,12 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { ContentArticleListItem } from '~/interfaces/Content'
+import { IContentArticleListItem } from '~/interfaces/Content'
 
 export default defineComponent({
   props: {
     articles: {
-      type: Array as () => ContentArticleListItem[],
+      type: Array as () => IContentArticleListItem[],
       required: true,
     },
   },

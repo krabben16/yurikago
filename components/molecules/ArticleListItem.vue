@@ -23,12 +23,12 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { ContentArticleListItem } from '~/interfaces/Content'
+import { IContentArticleListItem } from '~/interfaces/Content'
 
 export default defineComponent({
   props: {
     article: {
-      type: Object as () => ContentArticleListItem,
+      type: Object as () => IContentArticleListItem,
       required: true,
     },
   },

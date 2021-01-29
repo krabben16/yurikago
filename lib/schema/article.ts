@@ -1,11 +1,11 @@
-import { ArticleSchema } from '~/interfaces/Schema'
+import { IArticleSchema } from '~/interfaces/Schema'
 
 /**
  * 記事の構造化データを作成する
  * https://developers.google.com/search/docs/data-types/article?hl=ja
  * https://developers.google.com/search/docs/data-types/logo?hl=ja
  */
-export const createArticleSchemaObject = (articleSchema: ArticleSchema) => {
+export const createArticleSchemaObject = (articleSchema: IArticleSchema) => {
   return {
     '@context': 'http://schema.org',
     '@type': 'Article',

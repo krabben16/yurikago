@@ -1,7 +1,7 @@
 import { createBreadcrumbSchemaObject } from '~/lib/schema/breadcrumb'
-import { CommonHead } from '~/interfaces/Head'
+import { ICommonHead } from '~/interfaces/Head'
 
-export function createHeadObject(head: CommonHead) {
+export function createHeadObject(head: ICommonHead) {
   const breadcrumbSchema = JSON.stringify(
     createBreadcrumbSchemaObject(head.breadcrumbSchema)
   )
