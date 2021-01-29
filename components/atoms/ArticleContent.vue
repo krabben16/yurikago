@@ -20,4 +20,15 @@ export default defineComponent({
 blockquote {
   overflow-wrap: break-word;
 }
+
+code {
+  font-weight: initial;
+  font-size: initial;
+  @apply bg-gray-200 border-2 border-gray-400 border-dashed rounded px-1;
+}
+
+code::before,
+code::after {
+  content: initial;
+}
 </style>
