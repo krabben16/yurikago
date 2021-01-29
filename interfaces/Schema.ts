@@ -1,13 +1,13 @@
-export interface BreadcrumbItem {
+export interface IBreadcrumbItem {
   name: string
   path: string
 }
 
-export interface BreadcrumbSchema {
-  items: BreadcrumbItem[]
+export interface IBreadcrumbSchema {
+  items: IBreadcrumbItem[]
 }
 
-export interface ArticleSchema {
+export interface IArticleSchema {
   articleId: number
   headlineValue: string
   datePublishedValue: string

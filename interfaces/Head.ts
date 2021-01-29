@@ -1,12 +1,12 @@
-import { BreadcrumbSchema, ArticleSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema, IArticleSchema } from '~/interfaces/Schema'
 
-export interface CommonHead {
+export interface ICommonHead {
   title: string
   description: string
   path: string
-  breadcrumbSchema: BreadcrumbSchema
+  breadcrumbSchema: IBreadcrumbSchema
 }
 
-export interface ArticleHead extends CommonHead {
-  articleSchema: ArticleSchema
+export interface IArticleHead extends ICommonHead {
+  articleSchema: IArticleSchema
 }

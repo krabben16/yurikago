@@ -15,12 +15,12 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { ContentArticleToc } from '~/interfaces/Content'
+import { IContentArticleToc } from '~/interfaces/Content'
 
 export default defineComponent({
   props: {
     toc: {
-      type: Array as () => ContentArticleToc[],
+      type: Array as () => IContentArticleToc[],
       required: true,
     },
   },

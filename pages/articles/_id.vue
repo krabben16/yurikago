@@ -20,7 +20,7 @@ import {
   useMeta,
   watchEffect,
 } from '@nuxtjs/composition-api'
-import { BreadcrumbSchema, ArticleSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema, IArticleSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/lib/head/article'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 
@@ -70,7 +70,7 @@ export default defineComponent({
       const description = `「${title}」についてまとめた記事です。`
       const path = route.value.path
 
-      const breadcrumbSchema: BreadcrumbSchema = {
+      const breadcrumbSchema: IBreadcrumbSchema = {
         items: [
           findBreadcrumb('/'),
           {
@@ -80,7 +80,7 @@ export default defineComponent({
         ],
       }
 
-      const articleSchema: ArticleSchema = {
+      const articleSchema: IArticleSchema = {
         articleId: parseInt(params.value.id),
         headlineValue: title,
         datePublishedValue: $dayjs(data.date).format('YYYY-MM-DDTHH:mm:ssZ'),

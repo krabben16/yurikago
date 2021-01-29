@@ -10,23 +10,10 @@ import {
   useMeta,
   watchEffect,
 } from '@nuxtjs/composition-api'
-import { IContentDocument } from '@nuxt/content/types/content'
-import { BreadcrumbSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/lib/head/common'
-import { ContentArticleTag } from '~/interfaces/Content'
 import { findBreadcrumb } from '~/lib/breadcrumb'
-
-function searchTag(articles: IContentDocument[], tagId: number) {
-  let tag: ContentArticleTag | null = null
-  for (const article of articles) {
-    for (const target of article.tags) {
-      if (target.id === tagId) {
-        tag = target
-      }
-    }
-  }
-  return tag
-}
+import { createArticleIds, createTag } from '~/lib/tags'
 
 export default defineComponent({
   // You need to define an empty head to activate this functionality
@@ -36,10 +23,11 @@ export default defineComponent({
 
     const articles = useAsync(async () => {
       const tagId = parseInt(params.value.id)
+      const articleIds = createArticleIds(tagId)
 
       const data = await $content('articles')
-        .only(['id', 'title', 'date', 'category', 'tags', 'description'])
-        .where({ 'tags.id': { $contains: tagId } })
+        .only(['id', 'title', 'date', 'description'])
+        .where({ id: { $in: articleIds } })
         .sortBy('id', 'desc')
         .fetch()
 
@@ -55,16 +43,13 @@ export default defineComponent({
 
     useMeta(() => {
       const tagId = parseInt(params.value.id)
-      const refVal = articles.value || []
-      const data = searchTag(refVal, tagId) || {
-        name: '',
-      }
+      const data = createTag(tagId)
 
       const title = `タグ(${data.name})`
       const description = `タグ「${data.name}」を含む記事の一覧です。`
       const path = route.value.path
 
-      const breadcrumbSchema: BreadcrumbSchema = {
+      const breadcrumbSchema: IBreadcrumbSchema = {
         items: [
           findBreadcrumb('/'),
           {

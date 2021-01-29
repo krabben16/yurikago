@@ -9,7 +9,7 @@ import {
   useContext,
   useMeta,
 } from '@nuxtjs/composition-api'
-import { BreadcrumbSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema } from '~/interfaces/Schema'
 import { createHeadObject } from '~/lib/head/common'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 
@@ -21,7 +21,7 @@ export default defineComponent({
 
     const articles = useAsync(async () => {
       const data = await $content('articles')
-        .only(['id', 'title', 'date', 'category', 'tags', 'description'])
+        .only(['id', 'title', 'date', 'description'])
         .sortBy('id', 'desc')
         .fetch()
       return Array.isArray(data) ? data : [data]
@@ -32,7 +32,7 @@ export default defineComponent({
       const description = `${process.env.SITE_OWNER}の技術ブログです。`
       const path = route.value.path
 
-      const breadcrumbSchema: BreadcrumbSchema = {
+      const breadcrumbSchema: IBreadcrumbSchema = {
         items: [findBreadcrumb('/')],
       }
 

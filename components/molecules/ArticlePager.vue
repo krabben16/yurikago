@@ -19,14 +19,14 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { ContentSurround } from '~/interfaces/Content'
+import { IContentSurround } from '~/interfaces/Content'
 
 export default defineComponent({
   props: {
     surround: {
       type: Object as () => {
-        prev: ContentSurround | null
-        next: ContentSurround | null
+        prev: IContentSurround | null
+        next: IContentSurround | null
       },
       required: true,
     },

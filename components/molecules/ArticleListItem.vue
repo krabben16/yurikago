@@ -11,7 +11,7 @@
       }}</time>
       <!-- カテゴリ -->
       <spna class="ml-2">
-        {{ article.category.name }}
+        {{ category.name }}
       </spna>
     </div>
     <!-- 概要 -->
@@ -23,14 +23,20 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { ContentArticleListItem } from '~/interfaces/Content'
+import { IContentArticleListItem } from '~/interfaces/Content'
+import { createCategory } from '~/lib/category'
 
 export default defineComponent({
   props: {
     article: {
-      type: Object as () => ContentArticleListItem,
+      type: Object as () => IContentArticleListItem,
       required: true,
     },
+  },
+  setup({ article }) {
+    return {
+      category: createCategory(article.id),
+    }
   },
 })
 </script>
