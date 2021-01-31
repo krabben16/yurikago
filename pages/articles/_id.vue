@@ -1,6 +1,6 @@
 <template>
   <article>
-    <ArticleHeader v-if="res && res.article" :article="res.article" />
+    <ArticleHeader v-if="res && res.article" :document="res.article" />
     <!-- <ArticleToc v-if="res && res.article" class="mt-8" :toc="res.article.toc" /> -->
     <ArticleContent
       v-if="res && res.article"
