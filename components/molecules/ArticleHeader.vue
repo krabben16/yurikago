@@ -14,9 +14,9 @@
     <!-- カテゴリ -->
     <div class="flex flex-row">
       <span class="mr-2">Category:</span>
-      <spna>
+      <span>
         {{ category.name }}
-      </spna>
+      </span>
     </div>
 
     <!-- タグ -->
