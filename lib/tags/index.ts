@@ -4,11 +4,11 @@ interface IArticleTag {
 }
 
 interface ITags {
-  [key: number]: string
+  [tagId: number]: string
 }
 
 interface IRelations {
-  [key: number]: number[]
+  [articleId: number]: number[]
 }
 
 const tags: ITags = {
@@ -77,7 +77,7 @@ const relations: IRelations = {
  * 記事IDからタグ一覧を生成する
  * @param articleId
  */
-export function createTags(articleId: number): IArticleTag[] {
+export function createTags(articleId: number) {
   const relationKey: keyof IRelations = articleId
 
   if (!Object.keys(relations).includes(articleId.toString())) {

@@ -4,11 +4,11 @@ interface IArticleCategory {
 }
 
 interface ICategories {
-  [key: number]: string
+  [categoryId: number]: string
 }
 
 interface IRelations {
-  [key: number]: number
+  [articleId: number]: number
 }
 
 const categories: ICategories = {
