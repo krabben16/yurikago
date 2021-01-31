@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { IContentArticle } from '~/interfaces/Content'
+import { IContentArticle } from '~/interfaces/content'
 
 export default defineComponent({
   props: {

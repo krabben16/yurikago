@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, useContext, useMeta } from '@nuxtjs/composition-api'
 import { NuxtError } from '@nuxt/types'
-import { IBreadcrumbSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema } from '~/interfaces/schema'
 import { createHeadObject } from '~/lib/head/common'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 

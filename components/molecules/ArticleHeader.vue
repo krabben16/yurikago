@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { IContentArticle } from '~/interfaces/Content'
+import { IContentArticle } from '~/interfaces/content'
 import { createCategory } from '~/lib/category'
 import { createTags } from '~/lib/tags'
 

@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { IContentSurround } from '~/interfaces/Content'
+import { IContentSurround } from '~/interfaces/content'
 
 export default defineComponent({
   props: {

@@ -1,4 +1,4 @@
-import { IArticleSchema } from '~/interfaces/Schema'
+import { IArticleSchema } from '~/interfaces/schema'
 
 /**
  * 記事の構造化データを作成する

@@ -9,7 +9,7 @@ import {
   useContext,
   useMeta,
 } from '@nuxtjs/composition-api'
-import { IBreadcrumbSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema } from '~/interfaces/schema'
 import { createHeadObject } from '~/lib/head/common'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 

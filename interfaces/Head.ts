@@ -1,4 +1,4 @@
-import { IBreadcrumbSchema, IArticleSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema, IArticleSchema } from '~/interfaces/schema'
 
 export interface ICommonHead {
   title: string
