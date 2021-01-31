@@ -1,5 +1,5 @@
 <template>
-  <Disqus lang="ja" :lazy-config="lazyConfig" />
+  <Disqus :lang="lang" :lazy-config="lazyConfig" />
 </template>
 
 <script lang="ts">
@@ -15,6 +15,7 @@ export default defineComponent({
   },
   setup() {
     return {
+      lang: 'ja',
       // default: { root: null, rootMargin: '300px', threshold: 0.5 }
       lazyConfig: {
         root: null,
