@@ -1,5 +1,5 @@
 <template>
-  <nuxt-content :document="document" />
+  <Disqus :lang="lang" :lazy-config="lazyConfig" />
 </template>
 
 <script lang="ts">
@@ -13,22 +13,16 @@ export default defineComponent({
       required: true,
     },
   },
+  setup() {
+    return {
+      lang: 'ja',
+      // default: { root: null, rootMargin: '300px', threshold: 0.5 }
+      lazyConfig: {
+        root: null,
+        rootMargin: '0px 0px 900px 0px',
+        threshold: 0.5,
+      },
+    }
+  },
 })
 </script>
-
-<style scoped>
-blockquote {
-  overflow-wrap: break-word;
-}
-
-code {
-  font-weight: initial;
-  font-size: initial;
-  @apply bg-gray-200 border-2 border-gray-400 border-dashed rounded px-1;
-}
-
-code::before,
-code::after {
-  content: initial;
-}
-</style>

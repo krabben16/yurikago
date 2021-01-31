@@ -10,7 +10,7 @@ import {
   useMeta,
   watchEffect,
 } from '@nuxtjs/composition-api'
-import { IBreadcrumbSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema } from '~/interfaces/schema'
 import { createHeadObject } from '~/lib/head/common'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 import { createArticleIds, createTag } from '~/lib/tags'

@@ -1,6 +1,6 @@
 import { createBreadcrumbSchemaObject } from '~/lib/schema/breadcrumb'
 import { createArticleSchemaObject } from '~/lib/schema/article'
-import { IArticleHead } from '~/interfaces/Head'
+import { IArticleHead } from '~/interfaces/head'
 
 export function createHeadObject(head: IArticleHead) {
   const breadcrumbSchema = JSON.stringify(

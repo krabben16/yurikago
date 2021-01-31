@@ -1,4 +1,4 @@
-import { IBreadcrumbSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema } from '~/interfaces/schema'
 
 /**
  * パンくずの構造化データを作成する

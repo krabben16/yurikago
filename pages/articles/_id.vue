@@ -1,13 +1,17 @@
 <template>
   <article>
-    <ArticleHeader v-if="res && res.article" :article="res.article" />
+    <ArticleHeader v-if="res && res.article" :document="res.article" />
     <!-- <ArticleToc v-if="res && res.article" class="mt-8" :toc="res.article.toc" /> -->
     <ArticleContent
       v-if="res && res.article"
       class="mt-8"
       :document="res.article"
     />
-    <Disqus v-if="res && res.article" class="mt-8" lang="ja" />
+    <ArticleComment
+      v-if="res && res.article"
+      class="mt-8"
+      :document="res.article"
+    />
     <ArticlePager v-if="res" class="mt-8" :surround="res.surround" />
   </article>
 </template>
@@ -20,7 +24,7 @@ import {
   useMeta,
   watchEffect,
 } from '@nuxtjs/composition-api'
-import { IBreadcrumbSchema, IArticleSchema } from '~/interfaces/Schema'
+import { IBreadcrumbSchema, IArticleSchema } from '~/interfaces/schema'
 import { createHeadObject } from '~/lib/head/article'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 

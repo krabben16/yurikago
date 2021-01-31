@@ -1,22 +1,22 @@
 <template>
   <div>
     <!-- タイトル -->
-    <h1 class="text-4xl">{{ article.title }}</h1>
+    <h1 class="text-4xl">{{ document.title }}</h1>
 
     <!-- 作成日 -->
     <div class="flex flex-row">
       <span class="mr-2">Created:</span>
-      <time :datetime="$dayjs(article.date).format('YYYY-MM-DD')">{{
-        $dayjs(article.date).format('YYYY/MM/DD')
+      <time :datetime="$dayjs(document.date).format('YYYY-MM-DD')">{{
+        $dayjs(document.date).format('YYYY/MM/DD')
       }}</time>
     </div>
 
     <!-- カテゴリ -->
     <div class="flex flex-row">
       <span class="mr-2">Category:</span>
-      <spna>
+      <span>
         {{ category.name }}
-      </spna>
+      </span>
     </div>
 
     <!-- タグ -->
@@ -33,21 +33,21 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { IContentArticle } from '~/interfaces/Content'
+import { IContentArticle } from '~/interfaces/content'
 import { createCategory } from '~/lib/category'
 import { createTags } from '~/lib/tags'
 
 export default defineComponent({
   props: {
-    article: {
+    document: {
       type: Object as () => IContentArticle,
       required: true,
     },
   },
-  setup({ article }) {
+  setup({ document }) {
     return {
-      category: createCategory(article.id),
-      tags: createTags(article.id),
+      category: createCategory(document.id),
+      tags: createTags(document.id),
     }
   },
 })

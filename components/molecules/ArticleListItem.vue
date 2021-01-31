@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { IContentArticleListItem } from '~/interfaces/Content'
+import { IContentArticleListItem } from '~/interfaces/content'
 import { createCategory } from '~/lib/category'
 
 export default defineComponent({
