@@ -7,7 +7,11 @@
       class="mt-8"
       :document="res.article"
     />
-    <Disqus v-if="res && res.article" class="mt-8" lang="ja" />
+    <ArticleComment
+      v-if="res && res.article"
+      class="mt-8"
+      :document="res.article"
+    />
     <ArticlePager v-if="res" class="mt-8" :surround="res.surround" />
   </article>
 </template>
