@@ -39,6 +39,9 @@ jobs:
 
       - name: Install dependencies 👨🏻‍💻
         run: yarn
+      
+      - name: Copy env file
+        run: cp .env.dist .env
 
       - name: Generate Nuxt
         run: yarn generate
