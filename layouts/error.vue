@@ -15,8 +15,6 @@ import { createHeadObject } from '~/lib/head/common'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 
 export default defineComponent({
-  // You need to define an empty head to activate this functionality
-  head: {},
   props: {
     error: {
       type: Object as () => NuxtError,
@@ -51,5 +49,7 @@ export default defineComponent({
 
     return {}
   },
+  // You need to define an empty head to activate this functionality
+  head: {},
 })
 </script>

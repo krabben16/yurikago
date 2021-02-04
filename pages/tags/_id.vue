@@ -16,8 +16,6 @@ import { findBreadcrumb } from '~/lib/breadcrumb'
 import { createArticleIds, createTag } from '~/lib/tags'
 
 export default defineComponent({
-  // You need to define an empty head to activate this functionality
-  head: {},
   setup() {
     const { $content, error, params, route } = useContext()
 
@@ -71,5 +69,7 @@ export default defineComponent({
       articles,
     }
   },
+  // You need to define an empty head to activate this functionality
+  head: {},
 })
 </script>

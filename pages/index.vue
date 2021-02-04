@@ -14,8 +14,6 @@ import { createHeadObject } from '~/lib/head/common'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 
 export default defineComponent({
-  // You need to define an empty head to activate this functionality
-  head: {},
   setup() {
     const { $content, route } = useContext()
 
@@ -48,5 +46,7 @@ export default defineComponent({
       articles,
     }
   },
+  // You need to define an empty head to activate this functionality
+  head: {},
 })
 </script>
