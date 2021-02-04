@@ -98,7 +98,7 @@ export function createTags(articleId: number) {
  */
 export function createArticleIds(tagId: number) {
   const ret: number[] = []
-  Object.keys(relations).map((k) => {
+  Object.keys(relations).forEach((k) => {
     const articleId = parseInt(k)
     const relationKey: keyof IRelations = articleId
     if (relations[relationKey].includes(tagId)) {
