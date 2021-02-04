@@ -1,8 +1,5 @@
-import dotenv from 'dotenv'
 import { createBreadcrumbSchemaObject } from '~/lib/schema/breadcrumb'
 import { IBreadcrumbSchema } from '~/interfaces/schema'
-
-dotenv.config()
 
 describe('lib/schema', () => {
   test('breadcrumb', () => {
