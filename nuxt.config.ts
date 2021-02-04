@@ -55,6 +55,7 @@ const config: NuxtConfig = {
     '@nuxtjs/google-analytics',
     '@nuxtjs/sitemap',
     '@nuxtjs/dayjs',
+    '@nuxtjs/dotenv',
   ],
 
   content: {
