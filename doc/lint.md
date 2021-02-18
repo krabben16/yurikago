@@ -1,11 +1,5 @@
 # devDependencies
 
-## @nuxtjs/eslint-config
-
-Nuxt.jsに使用されるESlint構成
-
-https://github.com/nuxt/eslint-config/tree/master/packages/eslint-config
-
 ## @nuxtjs/eslint-config-typescript
 
 Nuxt.jsに使用されるESlint構成
@@ -49,3 +43,9 @@ eslintrcに `plugins: ['prettier']` を設定したとき
 rulesの `prettier/prettier` は以下を指す
 
 https://github.com/prettier/eslint-plugin-prettier/blob/master/eslint-plugin-prettier.js#L118-L145
+
+## eslint-plugin-vue
+
+Vue.jsの公式ESLintプラグイン
+
+https://github.com/vuejs/eslint-plugin-vue
