@@ -43,6 +43,7 @@ const relations: IRelations = {
   23: 2,
   24: 3,
   25: 2,
+  26: 2,
 }
 
 /**

@@ -43,6 +43,7 @@ const tags: ITags = {
   29: 'Docker',
   30: 'Nginx',
   31: 'Jest',
+  32: 'Playwright',
 }
 
 const relations: IRelations = {
@@ -71,6 +72,7 @@ const relations: IRelations = {
   23: [19, 25],
   24: [6, 8],
   25: [5, 25, 31],
+  26: [3, 25, 31, 32],
 }
 
 /**
