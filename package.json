@@ -22,7 +22,7 @@
     "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/tailwindcss": "^3.4.2",
     "@tailwindcss/typography": "^0.4.0",
-    "nuxt": "^2.14.12",
+    "nuxt": "^2.15.1",
     "prism-themes": "^1.5.0",
     "rehype-plugin-image-native-lazy-loading": "^1.1.0",
     "vue-disqus": "^4.0.1"
