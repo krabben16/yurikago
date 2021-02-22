@@ -28,7 +28,7 @@
     "vue-disqus": "^4.0.1"
   },
   "devDependencies": {
-    "@nuxt/types": "^2.14.12",
+    "@nuxt/types": "^2.15.1",
     "@nuxt/typescript-build": "^2.0.4",
     "@nuxtjs/eslint-config-typescript": "^5.0.0",
     "@types/jest": "^26.0.20",
