@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@nuxt/content": "^1.14.0",
-    "@nuxt/typescript-runtime": "^2.0.1",
+    "@nuxt/typescript-runtime": "^2.1.0",
     "@nuxtjs/composition-api": "^0.19.1",
     "@nuxtjs/dayjs": "^1.4.0",
     "@nuxtjs/dotenv": "^1.4.1",
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.7",
-    "@nuxt/typescript-build": "^2.0.4",
+    "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^5.0.0",
     "@types/jest": "^26.0.20",
     "babel-eslint": "^10.1.0",
