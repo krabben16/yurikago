@@ -5,25 +5,20 @@
 <script lang="ts">
 import {
   defineComponent,
-  useAsync,
+  inject,
   useContext,
   useMeta,
 } from '@nuxtjs/composition-api'
 import { IBreadcrumbSchema } from '~/interfaces/schema'
 import { createHeadObject } from '~/lib/head/common'
 import { findBreadcrumb } from '~/lib/breadcrumb'
+import { ArticlesStoreKey, ArticlesStoreType } from '~/compositions/useArticles'
 
 export default defineComponent({
   setup() {
-    const { $content, route } = useContext()
+    const { route } = useContext()
 
-    const articles = useAsync(async () => {
-      const data = await $content()
-        .only(['id', 'title', 'date', 'description'])
-        .sortBy('id', 'desc')
-        .fetch()
-      return Array.isArray(data) ? data : [data]
-    })
+    const store = inject(ArticlesStoreKey) as ArticlesStoreType
 
     useMeta(() => {
       const title = 'トップページ'
@@ -43,7 +38,7 @@ export default defineComponent({
     })
 
     return {
-      articles,
+      articles: store.articles,
     }
   },
   // You need to define an empty head to activate this functionality
