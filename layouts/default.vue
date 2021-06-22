@@ -9,8 +9,14 @@
 <script lang="ts">
 import { defineComponent } from "@nuxtjs/composition-api";
 import ArticlesSetup from '~/setups/articles'
+import Nav from '~/components/molecules/Nav.vue'
+import Footer from '~/components/molecules/Footer.vue'
 
 export default defineComponent({
+  components: {
+    Nav,
+    Footer,
+  },
   setup() {
     ArticlesSetup()
   }
