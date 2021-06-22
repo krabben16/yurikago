@@ -10,9 +10,9 @@
         $dayjs(article.date).format('YYYY/MM/DD')
       }}</time>
       <!-- カテゴリ -->
-      <spna class="ml-2">
+      <span class="ml-2">
         {{ category.name }}
-      </spna>
+      </span>
     </div>
     <!-- 概要 -->
     <div>

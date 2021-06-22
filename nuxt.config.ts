@@ -39,9 +39,6 @@ const config: NuxtConfig = {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: ['~/plugins/disqus'],
 
-  // Auto import components (https://go.nuxtjs.dev/config-components)
-  components: true,
-
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     '@nuxt/typescript-build',
@@ -108,26 +105,12 @@ const config: NuxtConfig = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {
-      // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module?.rules.push({
-          enforce: 'pre',
-          test: /\.(ts|js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/,
-          options: {
-            fix: true,
-          },
-        })
-      }
-    },
+    extend(config, ctx) {},
   },
 
   // Customize the progress-bar color
   loading: { color: '#0366d6' },
 
-  // NOTE: v2.13 から内部クローラーが実装されたのでroutesプロパティは不要
   generate: {
     // https://github.com/nuxt-community/composition-api/issues/44
     interval: 2000,

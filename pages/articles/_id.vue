@@ -27,8 +27,18 @@ import {
 import { IBreadcrumbSchema, IArticleSchema } from '~/interfaces/schema'
 import { createHeadObject } from '~/lib/head/article'
 import { findBreadcrumb } from '~/lib/breadcrumb'
+import ArticleHeader from '~/components/molecules/ArticleHeader.vue'
+import ArticlePager from '~/components/molecules/ArticlePager.vue'
+import ArticleContent from '~/components/atoms/ArticleContent.vue'
+import ArticleComment from '~/components/atoms/ArticleComment.vue'
 
 export default defineComponent({
+  components: {
+    ArticleHeader,
+    ArticleContent,
+    ArticleComment,
+    ArticlePager,
+  },
   setup() {
     const { $content, $dayjs, error, params, route } = useContext()
 

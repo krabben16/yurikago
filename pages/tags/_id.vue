@@ -14,8 +14,12 @@ import { IBreadcrumbSchema } from '~/interfaces/schema'
 import { createHeadObject } from '~/lib/head/common'
 import { findBreadcrumb } from '~/lib/breadcrumb'
 import { createArticleIds, createTag } from '~/lib/tags'
+import ArticleList from '~/components/organisms/ArticleList.vue'
 
 export default defineComponent({
+  components: {
+    ArticleList,
+  },
   setup() {
     const { $content, error, params, route } = useContext()
 

@@ -11,8 +11,12 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import { IContentArticleListItem } from '~/interfaces/content'
+import ArticleListItem from '~/components/molecules/ArticleListItem.vue'
 
 export default defineComponent({
+  components: {
+    ArticleListItem
+  },
   props: {
     articles: {
       type: Array as () => IContentArticleListItem[],
