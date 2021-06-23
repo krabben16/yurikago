@@ -44,6 +44,7 @@ const relations: IRelations = {
   24: 3,
   25: 2,
   26: 2,
+  27: 1,
 }
 
 /**
